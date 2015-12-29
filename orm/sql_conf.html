@@ -1,0 +1,843 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>sql配置 | Sample GitBook</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.5.1">
+        <meta name="author" content="kael &lt;penghj@bingosoft.net&gt;">
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-disqus/plugin.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../orm/dynamic_sql.html" />
+    
+    
+    <link rel="prev" href="../orm/dao_interface.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="7.6" data-chapter-title="sql配置" data-filepath="orm/sql_conf.md" data-basepath=".." data-revision="Mon Dec 28 2015 16:29:24 GMT+0800 (中国标准时间)">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        前言
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="getting-start/index.html">
+            
+                
+                    <a href="../getting-start/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        快速开始
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="getting-start/construction.html">
+            
+                
+                    <a href="../getting-start/construction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        快速环境搭建
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="getting-start/introduce.html">
+            
+                
+                    <a href="../getting-start/introduce.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        示例工程说明
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="getting-start/first_action.html">
+            
+                
+                    <a href="../getting-start/first_action.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        自定义第一个action
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="created-project/index.html">
+            
+                
+                    <a href="../created-project/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        新建WEB工程
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="leap-context/index.html">
+            
+                
+                    <a href="../leap-context/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        控制反转和依赖注入
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="app-init/index.html">
+            
+                
+                    <a href="../app-init/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        应用初始化
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1" data-path="app-init/global.html">
+            
+                
+                    <a href="../app-init/global.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.1.</b>
+                        
+                        Global使用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="app-init/applistener.html">
+            
+                
+                    <a href="../app-init/applistener.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.2.</b>
+                        
+                        应用监听器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="mvc/index.html">
+            
+                
+                    <a href="../mvc/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        MVC
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="mvc/route_rule.html">
+            
+                
+                    <a href="../mvc/route_rule.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        路由规则
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="mvc/leap_controller.html">
+            
+                
+                    <a href="../mvc/leap_controller.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        controller和action的使用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="mvc/binding_params.html">
+            
+                
+                    <a href="../mvc/binding_params.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        智能参数绑定
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="mvc/filter.html">
+            
+                
+                    <a href="../mvc/filter.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.4.</b>
+                        
+                        拦截器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="template/index.html">
+            
+                
+                    <a href="../template/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        模板引擎
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.1" data-path="template/conception.html">
+            
+                
+                    <a href="../template/conception.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.1.</b>
+                        
+                        基础概念
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="template/syntax.html">
+            
+                
+                    <a href="../template/syntax.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.2.</b>
+                        
+                        基础语法
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="template/directive.html">
+            
+                
+                    <a href="../template/directive.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.3.</b>
+                        
+                        指令集
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="template/directive_used.html">
+            
+                
+                    <a href="../template/directive_used.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.4.</b>
+                        
+                        指令应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="template/development.html">
+            
+                
+                    <a href="../template/development.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.5.</b>
+                        
+                        htpl开发优化
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7" data-path="orm/index.html">
+            
+                
+                    <a href="../orm/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.</b>
+                        
+                        ORM
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.1" data-path="orm/datasource_conf.html">
+            
+                
+                    <a href="../orm/datasource_conf.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.1.</b>
+                        
+                        数据源配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="orm/model_used.html">
+            
+                
+                    <a href="../orm/model_used.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.2.</b>
+                        
+                        Model应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="orm/dao_and_transaction.html">
+            
+                
+                    <a href="../orm/dao_and_transaction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.3.</b>
+                        
+                        dao对象和事务控制
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="orm/multiple_data_sources.html">
+            
+                
+                    <a href="../orm/multiple_data_sources.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.4.</b>
+                        
+                        多数据源应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="orm/interface.html">
+            
+                
+                    <a href="../orm/interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.</b>
+                        
+                        ORM接口说明
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.5.1" data-path="orm/model_interface.html">
+            
+                
+                    <a href="../orm/model_interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.1.</b>
+                        
+                        Model接口
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5.2" data-path="orm/dao_interface.html">
+            
+                
+                    <a href="../orm/dao_interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.2.</b>
+                        
+                        DAO接口
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="7.6" data-path="orm/sql_conf.html">
+            
+                
+                    <a href="../orm/sql_conf.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.6.</b>
+                        
+                        sql配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.7" data-path="orm/dynamic_sql.html">
+            
+                
+                    <a href="../orm/dynamic_sql.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.7.</b>
+                        
+                        动态sql应用
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8" data-path="security/index.html">
+            
+                
+                    <a href="../security/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.</b>
+                        
+                        安全模块
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.1" data-path="security/login_validate.html">
+            
+                
+                    <a href="../security/login_validate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.1.</b>
+                        
+                        登录校验
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="security/csrf_validate.html">
+            
+                
+                    <a href="../security/csrf_validate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.2.</b>
+                        
+                        CSRF校验
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="security/xss_defense.html">
+            
+                
+                    <a href="../security/xss_defense.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.3.</b>
+                        
+                        XSS攻击防御
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.4" data-path="security/cors_support.html">
+            
+                
+                    <a href="../security/cors_support.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.4.</b>
+                        
+                        CORS支持
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >Sample GitBook</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="sql&#x914D;&#x7F6E;">sql&#x914D;&#x7F6E;</h1>
+<p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x4E86;&#x89E3;ActiveRecord&#x7684;&#x4E00;&#x4E9B;&#x57FA;&#x672C;&#x7528;&#x6CD5;&#x4E86;,&#x4F46;&#x662F;ActiveRecord&#x7684;&#x4F18;&#x52BF;&#x5728;&#x4E8E;&#x5355;&#x8868;&#x67E5;&#x8BE2;&#x548C;&#x64CD;&#x4F5C;,&#x8054;&#x8868;&#x67E5;&#x8BE2;&#x76EE;&#x524D;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x901A;&#x8FC7;ActiveRecord&#x8FDB;&#x884C;,leap-orm&#x63D0;&#x4F9B;&#x4E86;sql&#x914D;&#x7F6E;&#x7684;&#x65B9;&#x5F0F;&#x8FDB;&#x884C;&#x8054;&#x8868;&#x67E5;&#x8BE2;.</p>
+<h3 id="sql&#x914D;&#x7F6E;&#x548C;&#x4F7F;&#x7528;">sql&#x914D;&#x7F6E;&#x548C;&#x4F7F;&#x7528;</h3>
+<p>&#x5728;<code>conf</code>&#x76EE;&#x5F55;&#x4E0B;&#x6DFB;&#x52A0;<code>sqls.xml</code>,&#x4E5F;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;<code>sqls</code>&#x76EE;&#x5F55;,&#x5E76;&#x5728;&#x76EE;&#x5F55;&#x4E0B;&#x6DFB;&#x52A0;&#x4EFB;&#x610F;&#x540D;&#x79F0;&#x7684;&apos;.xml&apos;&#x6587;&#x4EF6;:</p>
+<pre><code>src/main/resources
+      &#x2514;&#x3000;conf
+          &#x251C;&#x3000;sqls
+          &#x2502;   &#x251C;&#x3000;user.xml
+          &#x2502;   &#x2514;&#x3000;post.xml
+          &#x251C;&#x3000;beans.xml
+          &#x251C;&#x3000;config.xml
+          &#x2514;&#x3000;sqls.xml
+</code></pre><p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E86;<code>sqls.xml</code>&#x7528;&#x6765;&#x4FDD;&#x5B58;&#x914D;&#x7F6E;&#x7684;sql,&#x540C;&#x65F6;&#x4E3A;&#x4E86;&#x9884;&#x9632;&#x672A;&#x6765;sql&#x914D;&#x7F6E;&#x6BD4;&#x8F83;&#x591A;,&#x5728;<code>sqls</code>&#x76EE;&#x5F55;&#x4E0B;&#x521B;&#x5EFA;&#x4E86;<code>user.xml</code>&#x548C;<code>post.xml</code>,&#x6309;&#x7167;&#x6A21;&#x5757;&#x5212;&#x5206;sql&#x914D;&#x7F6E;.</p>
+<blockquote>
+<p>leap&#x626B;&#x63CF;sql&#x7684;&#x65F6;&#x5019;,&#x4F1A;&#x540C;&#x65F6;&#x626B;&#x63CF;<code>sqls.xml</code>&#x548C;<code>sqls</code>&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x6240;&#x6709;<code>.xml</code>&#x6587;&#x4EF6;</p>
+</blockquote>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5148;&#x770B;&#x770B;<code>sqls.xml</code>&#x7684;&#x5185;&#x5BB9;:</p>
+<pre><code class="lang-xml"><span class="hljs-pi">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">sqls</span> <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">&quot;http://www.leapframework.org/schema/sqls&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">command</span> <span class="hljs-attribute">key</span>=<span class="hljs-value">&quot;user-post-list&quot;</span>&gt;</span>
+        SELECT 
+          u.*,
+          p.`name` pname,
+          p.`descript` 
+        FROM
+          leap_user u 
+          JOIN leap_user_post up 
+            ON up.`user_id` = u.id 
+          JOIN leap_post p 
+            ON up.`post_id` = p.`id`
+    <span class="hljs-tag">&lt;/<span class="hljs-title">command</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">sqls</span>&gt;</span>
+</code></pre>
+<p><code>sqls.xml</code>&#x914D;&#x7F6E;&#x7684;&#x6839;&#x8282;&#x70B9;&#x662F;<code>sqls</code>&#x6807;&#x7B7E;,&#x8FD9;&#x4E2A;&#x6807;&#x7B7E;&#x4E0B;&#x6BCF;&#x4E00;&#x4E2A;sql&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;<code>command</code>&#x6807;&#x7B7E;,<code>command</code>&#x6807;&#x7B7E;&#x7684;<code>key</code>&#x5C5E;&#x6027;&#x662F;&#x8FD9;&#x4E2A;sql&#x7684;&#x552F;&#x4E00;&#x6807;&#x793A;,&#x4E0D;&#x80FD;&#x5305;&#x542B;&#x7A7A;&#x683C;.</p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5728;<code>UserController</code>&#x4E0B;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;action:</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;User&gt; <span class="hljs-title">userPost</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">return</span> User.&lt;User&gt;query(<span class="hljs-string">&quot;user-post-list&quot;</span>)
+            .orderBy(<span class="hljs-string">&quot;name&quot;</span>).list();
+}
+</code></pre>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6D4B;&#x8BD5;&#x8BF7;&#x6C42;&#x4E86;:</p>
+<pre><code>http&#x8BF7;&#x6C42;:
+url:
+   http://localhost:8080/leap/user_controller/user_post
+
+&#x8FD4;&#x56DE;&#x7ED3;&#x679C;:
+[
+  {
+    &quot;id&quot;: &quot;990104a3-d47e-472d-86c0-5d6e13a02b4f&quot;,
+    &quot;descript&quot;: &quot;&#x8F6F;&#x4EF6;&#x5DE5;&#x7A0B;&#x5E08;&#x5C97;&#x4F4D;&quot;,
+    &quot;name&quot;: &quot;&#x5F20;&#x4E09;&quot;,
+    &quot;age&quot;: 20,
+    &quot;password&quot;: &quot;123123&quot;,
+    &quot;createdAt&quot;: 1447125740000,
+    &quot;pname&quot;: &quot;&#x8F6F;&#x4EF6;&#x5DE5;&#x7A0B;&#x5E08;&quot;,
+    &quot;loginId&quot;: &quot;zhangsan&quot;
+  },
+  {
+    &quot;id&quot;: &quot;15583768-8b55-475f-87e0-6ddaee3cb910&quot;,
+    &quot;descript&quot;: &quot;&#x8F6F;&#x4EF6;&#x5DE5;&#x7A0B;&#x5E08;&#x5C97;&#x4F4D;&quot;,
+    &quot;name&quot;: &quot;&#x738B;&#x4E94;&quot;,
+    &quot;age&quot;: 32,
+    &quot;password&quot;: &quot;123123&quot;,
+    &quot;createdAt&quot;: 1447134433000,
+    &quot;pname&quot;: &quot;&#x8F6F;&#x4EF6;&#x5DE5;&#x7A0B;&#x5E08;&quot;,
+    &quot;loginId&quot;: &quot;wangwu&quot;
+  },
+  {
+    &quot;id&quot;: &quot;8bcaa593-fddd-4c6f-8443-b5091cae4388&quot;,
+    &quot;descript&quot;: &quot;&#x90E8;&#x95E8;&#x7ECF;&#x7406;&#x7684;&#x5C97;&#x4F4D;&quot;,
+    &quot;name&quot;: &quot;&#x8D75;&#x516D;&quot;,
+    &quot;age&quot;: 19,
+    &quot;password&quot;: &quot;123123&quot;,
+    &quot;createdAt&quot;: 1447134462000,
+    &quot;pname&quot;: &quot;&#x90E8;&#x95E8;&#x7ECF;&#x7406;&quot;,
+    &quot;loginId&quot;: &quot;zhaoliu&quot;
+  }
+]
+</code></pre><p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8054;&#x8868;&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x4E86;.</p>
+<blockquote>
+<p><strong>&#x6CE8;&#x610F;:</strong></p>
+<ol>
+<li>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x7528;User&#x7684;&#x5217;&#x8868;&#x63A5;&#x6536;&#x53C2;&#x6570;&#x7ED3;&#x679C;,&#x4F46;&#x5B9E;&#x9645;&#x4E0A;User&#x5E76;&#x6CA1;&#x6709;pname&#x548C;descript&#x8FD9;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;.&#x4E0D;&#x8FC7;&#x8FD9;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;&#x4E5F;&#x4F1A;&#x4FDD;&#x5B58;&#x5728;User&#x5BF9;&#x8C61;&#x4E2D;,<br>&#x5728;java&#x4E2D;&#x53EF;&#x4EE5;&#x7528;&#x8FC7;<code>user.get(&quot;pname&quot;)</code>&#x7684;&#x65B9;&#x5F0F;&#x83B7;&#x53D6;&#x5230;&#x8FD9;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;&#x503C;.</li>
+</ol>
+</blockquote>
+<h3 id="sql&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;">sql&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;</h3>
+<p>&#x5728;<a href="model_used.html">Model&#x5E94;&#x7528;</a>&#x7684;&#x7AE0;&#x8282;&#x91CC;,&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>?</code>&#x6765;&#x8BBE;&#x7F6E;sql&#x7684;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;,&#x5BF9;&#x5E94;&#x7684;&#x53C2;&#x6570;&#x6309;&#x7167;&#x987A;&#x5E8F;&#x4F20;&#x5165;&#x5373;&#x53EF;,&#x8FD9;&#x662F;&#x4E00;&#x79CD;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x5F0F;,&#x5E76;&#x4E0D;&#x80FD;&#x6EE1;&#x8DB3;&#x6240;&#x6709;&#x7684;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7684;&#x9700;&#x6C42;,leap-orm&#x63D0;&#x4F9B;&#x4E86;&#x53E6;&#x4E00;&#x79CD;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7684;&#x65B9;&#x5F0F;.</p>
+<p>&#x5728;sql&#x4E2D;,&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>:paramName</code>&#x505A;&#x4E3A;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;.&#x4F20;&#x5165;&#x53C2;&#x6570;&#x7684;&#x65F6;&#x5019;,&#x6309;&#x7167;<code>paramName:paramValue</code>&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x5165;&#x5373;&#x53EF;.&#x6BD4;&#x5982;&#x6709;&#x5982;&#x4E0B;&#x7684;sql:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> *&#x3000;<span class="hljs-keyword">FROM</span> leap_user <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span> = :userName
+</span></code></pre>
+<p>&#x8C03;&#x7528;&#x4F20;&#x53C2;&#x7684;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;:</p>
+<pre><code class="lang-java"><span class="hljs-comment">//&#x65B9;&#x6CD5;&#x4E00;</span>
+User.query(sqlKey).param(<span class="hljs-string">&quot;userName&quot;</span>, <span class="hljs-string">&quot;&#x5F20;&#x4E09;&quot;</span>).list();
+<span class="hljs-comment">//&#x65B9;&#x6CD5;&#x4E8C;</span>
+Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> HashMap&lt;String,Object&gt;();
+params.put(<span class="hljs-string">&quot;userName&quot;</span>, <span class="hljs-string">&quot;&#x5F20;&#x4E09;&quot;</span>);
+User.query(sqlKey).params(params).list();
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code> SQL  : select t.* from leap_user t where name = ?
+ ARGS : [&apos;&#x5F20;&#x4E09;&apos;,]
+</code></pre><p>&#x5F53;&#x7136;,&#x5B9E;&#x9645;&#x4E0A;&#x5BF9;&#x4E8E;&#x5982;&#x6B64;&#x7B80;&#x5355;&#x7684;sql,&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x5199;&#x5728;sql&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x91CC;,&#x800C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x67E5;&#x8BE2;:</p>
+<pre><code class="lang-java">User.query(<span class="hljs-string">&quot;SELECT *&#x3000;FROM leap_user WHERE name = :userName&quot;</span>).param(<span class="hljs-string">&quot;userName&quot;</span>, <span class="hljs-string">&quot;&#x5F20;&#x4E09;&quot;</span>).list();
+</code></pre>
+<p>sql&#x7684;&#x914D;&#x7F6E;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x63D0;&#x4F9B;&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x90E8;&#x7F72;&#x73AF;&#x5883;&#x914D;&#x7F6E;sql&#x7684;&#x529F;&#x80FD;,leap&#x7684;sql&#x914D;&#x7F6E;&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x52A0;&#x5F3A;&#x5927;&#x7684;&#x52A8;&#x6001;sql&#x529F;&#x80FD;,&#x6211;&#x4EEC;&#x5728;&#x4E0B;&#x4E00;&#x8282;&#x8FDB;&#x884C;&#x8BE6;&#x7EC6;&#x7684;&#x4ECB;&#x7ECD;.</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../orm/dao_interface.html" class="navigation navigation-prev " aria-label="Previous page: DAO接口"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../orm/dynamic_sql.html" class="navigation navigation-next " aria-label="Next page: 动态sql应用"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-disqus/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"disqus":{"shortName":"introducetogitbook","useIdentifier":false},"highlight":{},"search":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

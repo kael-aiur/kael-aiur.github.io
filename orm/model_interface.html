@@ -1,0 +1,1918 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Model接口 | Sample GitBook</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.5.1">
+        <meta name="author" content="kael &lt;penghj@bingosoft.net&gt;">
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-disqus/plugin.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../orm/dao_interface.html" />
+    
+    
+    <link rel="prev" href="../orm/interface.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="7.5.1" data-chapter-title="Model接口" data-filepath="orm/model_interface.md" data-basepath=".." data-revision="Mon Dec 28 2015 16:29:24 GMT+0800 (中国标准时间)">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        前言
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="getting-start/index.html">
+            
+                
+                    <a href="../getting-start/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        快速开始
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="getting-start/construction.html">
+            
+                
+                    <a href="../getting-start/construction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        快速环境搭建
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="getting-start/introduce.html">
+            
+                
+                    <a href="../getting-start/introduce.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        示例工程说明
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="getting-start/first_action.html">
+            
+                
+                    <a href="../getting-start/first_action.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        自定义第一个action
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="created-project/index.html">
+            
+                
+                    <a href="../created-project/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        新建WEB工程
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="leap-context/index.html">
+            
+                
+                    <a href="../leap-context/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        控制反转和依赖注入
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="app-init/index.html">
+            
+                
+                    <a href="../app-init/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        应用初始化
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1" data-path="app-init/global.html">
+            
+                
+                    <a href="../app-init/global.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.1.</b>
+                        
+                        Global使用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="app-init/applistener.html">
+            
+                
+                    <a href="../app-init/applistener.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.2.</b>
+                        
+                        应用监听器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="mvc/index.html">
+            
+                
+                    <a href="../mvc/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        MVC
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="mvc/route_rule.html">
+            
+                
+                    <a href="../mvc/route_rule.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        路由规则
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="mvc/leap_controller.html">
+            
+                
+                    <a href="../mvc/leap_controller.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        controller和action的使用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="mvc/binding_params.html">
+            
+                
+                    <a href="../mvc/binding_params.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        智能参数绑定
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="mvc/filter.html">
+            
+                
+                    <a href="../mvc/filter.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.4.</b>
+                        
+                        拦截器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="template/index.html">
+            
+                
+                    <a href="../template/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        模板引擎
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.1" data-path="template/conception.html">
+            
+                
+                    <a href="../template/conception.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.1.</b>
+                        
+                        基础概念
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="template/syntax.html">
+            
+                
+                    <a href="../template/syntax.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.2.</b>
+                        
+                        基础语法
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="template/directive.html">
+            
+                
+                    <a href="../template/directive.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.3.</b>
+                        
+                        指令集
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="template/directive_used.html">
+            
+                
+                    <a href="../template/directive_used.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.4.</b>
+                        
+                        指令应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="template/development.html">
+            
+                
+                    <a href="../template/development.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.5.</b>
+                        
+                        htpl开发优化
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7" data-path="orm/index.html">
+            
+                
+                    <a href="../orm/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.</b>
+                        
+                        ORM
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.1" data-path="orm/datasource_conf.html">
+            
+                
+                    <a href="../orm/datasource_conf.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.1.</b>
+                        
+                        数据源配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="orm/model_used.html">
+            
+                
+                    <a href="../orm/model_used.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.2.</b>
+                        
+                        Model应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="orm/dao_and_transaction.html">
+            
+                
+                    <a href="../orm/dao_and_transaction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.3.</b>
+                        
+                        dao对象和事务控制
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="orm/multiple_data_sources.html">
+            
+                
+                    <a href="../orm/multiple_data_sources.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.4.</b>
+                        
+                        多数据源应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="orm/interface.html">
+            
+                
+                    <a href="../orm/interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.</b>
+                        
+                        ORM接口说明
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="7.5.1" data-path="orm/model_interface.html">
+            
+                
+                    <a href="../orm/model_interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.1.</b>
+                        
+                        Model接口
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5.2" data-path="orm/dao_interface.html">
+            
+                
+                    <a href="../orm/dao_interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.2.</b>
+                        
+                        DAO接口
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="orm/sql_conf.html">
+            
+                
+                    <a href="../orm/sql_conf.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.6.</b>
+                        
+                        sql配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.7" data-path="orm/dynamic_sql.html">
+            
+                
+                    <a href="../orm/dynamic_sql.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.7.</b>
+                        
+                        动态sql应用
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8" data-path="security/index.html">
+            
+                
+                    <a href="../security/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.</b>
+                        
+                        安全模块
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.1" data-path="security/login_validate.html">
+            
+                
+                    <a href="../security/login_validate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.1.</b>
+                        
+                        登录校验
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="security/csrf_validate.html">
+            
+                
+                    <a href="../security/csrf_validate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.2.</b>
+                        
+                        CSRF校验
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="security/xss_defense.html">
+            
+                
+                    <a href="../security/xss_defense.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.3.</b>
+                        
+                        XSS攻击防御
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.4" data-path="security/cors_support.html">
+            
+                
+                    <a href="../security/cors_support.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.4.</b>
+                        
+                        CORS支持
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >Sample GitBook</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="model&#x63A5;&#x53E3;">Model&#x63A5;&#x53E3;</h1>
+<p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;,Model&#x662F;ActiveRecord&#x6A21;&#x5F0F;&#x7684;&#x91CD;&#x8981;&#x5BF9;&#x8C61;,&#x4F5C;&#x4E3A;&#x5B83;&#x4F5C;&#x4E3A;&#x6865;&#x6881;&#x8FDE;&#x63A5;&#x4E86;java&#x5BF9;&#x8C61;&#x548C;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;,&#x5728;leap&#x7684;Model&#x7C7B;&#x4E2D;&#x5305;&#x542B;&#x4E86;&#x8BB8;&#x591A;&#x5E38;&#x7528;&#x5E76;&#x4E14;&#x529F;&#x80FD;&#x5F3A;&#x5927;&#x7684;&#x65B9;&#x6CD5;,&#x672C;&#x8282;&#x6211;&#x4EEC;&#x5C06;&#x5BF9;Model&#x7C7B;&#x63D0;&#x4F9B;&#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;&#x505A;&#x8BE6;&#x7EC6;&#x7684;&#x8BF4;&#x660E;.</p>
+<h2 id="&#x5BFC;&#x822A;">&#x5BFC;&#x822A;</h2>
+<ul>
+<li><a href="#query">&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;</a><ul>
+<li><a href="#single_query">&#x5355;&#x884C;&#x67E5;&#x8BE2;</a></li>
+<li><a href="#multi_query">&#x591A;&#x884C;&#x67E5;&#x8BE2;</a></li>
+</ul>
+</li>
+<li><a href="#create">&#x65B0;&#x589E;&#x65B9;&#x6CD5;</a><ul>
+<li><a href="#single_create">&#x5355;&#x884C;&#x65B0;&#x589E;</a></li>
+<li><a href="#multi_create">&#x591A;&#x884C;&#x65B0;&#x589E;</a></li>
+</ul>
+</li>
+<li><a href="#update">&#x66F4;&#x65B0;&#x65B9;&#x6CD5;</a><ul>
+<li><a href="#single_update">&#x5355;&#x884C;&#x66F4;&#x65B0;</a></li>
+<li><a href="#multi_update">&#x591A;&#x884C;&#x66F4;&#x65B0;</a></li>
+</ul>
+</li>
+<li><a href="#delete">&#x5220;&#x9664;&#x65B9;&#x6CD5;</a><ul>
+<li><a href="#single_delete">&#x5355;&#x884C;&#x5220;&#x9664;</a></li>
+<li><a href="#multi_delete">&#x591A;&#x884C;&#x5220;&#x9664;</a></li>
+</ul>
+</li>
+<li><a href="#object_query">&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;</a><ul>
+<li><a href="#entity_query">EntityQuery&#x67E5;&#x8BE2;</a></li>
+<li><a href="#criteria_query">CriteriaQuery&#x67E5;&#x8BE2;</a></li>
+</ul>
+</li>
+<li><a href="#transaction">&#x4E8B;&#x52A1;&#x63A7;&#x5236;&#x65B9;&#x6CD5;</a></li>
+<li><a href="#cmd">&#x6307;&#x4EE4;&#x65B9;&#x6CD5;</a></li>
+<li><a href="#other">&#x5176;&#x4ED6;&#x65B9;&#x6CD5;</a><ul>
+<li><a href="#newinstance">&#x5B9E;&#x4F8B;&#x521B;&#x5EFA;&#x65B9;&#x6CD5;</a></li>
+<li><a href="#database">&#x6570;&#x636E;&#x5E93;&#x76F8;&#x5173;&#x65B9;&#x6CD5;</a></li>
+<li><a href="#operate">&#x666E;&#x901A;&#x64CD;&#x4F5C;&#x76F8;&#x5173;&#x65B9;&#x6CD5;</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;"><a id="query"></a>&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;</h2>
+<h3 id="&#x5355;&#x884C;&#x67E5;&#x8BE2;"><a id="single_query"></a>&#x5355;&#x884C;&#x67E5;&#x8BE2;</h3>
+<p>&#x5355;&#x884C;&#x67E5;&#x8BE2;&#x7684;&#x65B9;&#x6CD5;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java">find(Object id);
+findOrNull(Object id);
+first();
+firstOrNull();
+last();
+lastOrNull();
+findBy(String field,Object value);
+</code></pre>
+<h6 id="t-extends-model-t-findobject-id"><code>&lt;T extends Model&gt; T find(Object id)</code></h6>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x662F;&#x4F20;&#x5165;&#x4E00;&#x4E2A;id&#x67E5;&#x627E;&#x8BB0;&#x5F55;&#x5E76;&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>id : &#x67E5;&#x627E;&#x8BB0;&#x5F55;&#x7684;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;,&#x4E0D;&#x4F1A;&#x4E3A;null</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalArgumentException</code>:id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;  </li>
+<li><code>RecordNotFoundException</code>:&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x4E3A;&#x7A7A;&#x65F6;&#x629B;&#x51FA;  </li>
+<li><code>IllegalStateException</code>:&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5305;&#x542B;&#x591A;&#x6761;&#x8BB0;&#x5F55;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h6 id="t-extends-model-t-findornullobject-id"><code>&lt;T extends Model&gt; T findOrNull(Object id)</code></h6>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x662F;&#x4F20;&#x5165;&#x4E00;&#x4E2A;id&#x67E5;&#x627E;&#x8BB0;&#x5F55;&#x5E76;&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>id : &#x67E5;&#x627E;&#x8BB0;&#x5F55;&#x7684;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;,&#x67E5;&#x627E;&#x4E0D;&#x5230;&#x8BB0;&#x5F55;&#x65F6;&#x8FD4;&#x56DE;null</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong>  </p>
+<ul>
+<li><code>IllegalArgumentException</code>:id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;  </li>
+<li><code>IllegalStateException</code>:&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5305;&#x542B;&#x591A;&#x6761;&#x8BB0;&#x5F55;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-t-first"><code>&lt;T extends Model&gt; T first()</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x6839;&#x636E;id&#x6392;&#x5E8F;&#x4E4B;&#x540E;&#x67E5;&#x8BE2;&#x7B2C;&#x4E00;&#x6761;&#x8BB0;&#x5F55;.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;,&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x4E0D;&#x4F1A;&#x4E3A;null</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>EmptyRecordsException</code>:&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x4E3A;&#x7A7A;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-t-firstornull"><code>&lt;T extends Model&gt; T firstOrNull()</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x6839;&#x636E;id&#x6392;&#x5E8F;&#x4E4B;&#x540E;&#x67E5;&#x8BE2;&#x7B2C;&#x4E00;&#x6761;&#x8BB0;&#x5F55;.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;,&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x4E3A;&#x7A7A;&#x65F6;&#x8FD4;&#x56DE;null</li>
+</ul>
+<h5 id="t-extends-model-t-last"><code>&lt;T extends Model&gt; T last()</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x6839;&#x636E;id&#x5012;&#x5E8F;&#x6392;&#x5E8F;&#x5E76;&#x53BB;&#x7B2C;&#x4E00;&#x6761;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;,&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x4E0D;&#x4F1A;&#x4E3A;null</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>EmptyRecordsException</code>:&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x4E3A;&#x7A7A;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-t-lastornull"><code>&lt;T extends Model&gt; T lastOrNull()</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x6839;&#x636E;id&#x5012;&#x5E8F;&#x6392;&#x5E8F;&#x4E4B;&#x540E;&#x67E5;&#x8BE2;&#x7B2C;&#x4E00;&#x6761;&#x8BB0;&#x5F55;.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;,&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x4E3A;&#x7A7A;&#x65F6;&#x8FD4;&#x56DE;null</li>
+</ul>
+<h5 id="t-extends-model-t-findbystring-fieldobject-value"><code>&lt;T extends Model&gt; T findBy(String field,Object value)</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x6839;&#x636E;&#x4F20;&#x5165;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x521B;&#x5EFA;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;&#x5E76;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;,&#x6BD4;&#x5982;&#x4F20;&#x5165;(&quot;name&quot;,&quot;tomcat&quot;),&#x76F8;&#x5F53;&#x4E8E;&#x521B;&#x5EFA;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;:WHERE name=&apos;tomcat&apos;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>field : &#x8981;&#x67E5;&#x627E;&#x7684;&#x5C5E;&#x6027;&#x540D;</li>
+<li>value : &#x8981;&#x67E5;&#x627E;&#x7684;&#x5C5E;&#x6027;&#x503C;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;,&#x6709;&#x53EF;&#x80FD;&#x4E3A;null.</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong>  </p>
+<ul>
+<li><code>TooManyRecordsException</code>:&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5230;&#x4E24;&#x6761;&#x4EE5;&#x4E0A;&#x7684;&#x7ED3;&#x679C;&#x65F6;&#x4F1A;&#x629B;&#x51FA;</li>
+</ul>
+<hr>
+<h3 id="&#x591A;&#x884C;&#x67E5;&#x8BE2;"><a id="multi_query"></a>&#x591A;&#x884C;&#x67E5;&#x8BE2;</h3>
+<p>&#x591A;&#x884C;&#x67E5;&#x8BE2;&#x7684;&#x65B9;&#x6CD5;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java">findList(Object[] ids);
+findListIfExists(Object[] ids);
+findAll()/all();
+first(<span class="hljs-keyword">int</span> num);
+last(<span class="hljs-keyword">int</span> num);
+lastCreated(<span class="hljs-keyword">int</span> num);
+lastUpdated(<span class="hljs-keyword">int</span> num);
+</code></pre>
+<h5 id="t-extends-model-listt-findlistobject-ids"><code>&lt;T extends Model&gt; List&lt;T&gt; findList(Object[] ids)</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x901A;&#x8FC7;&#x4F20;&#x5165;id&#x6570;&#x7EC4;&#x67E5;&#x8BE2;&#x591A;&#x884C;&#x8BB0;&#x5F55;&#x5E76;&#x8FD4;&#x56DE;&#x5217;&#x8868;&#x5BF9;&#x8C61;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>ids : &#x67E5;&#x627E;&#x8BB0;&#x5F55;&#x7684;id&#x6570;&#x7EC4;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;&#x5217;&#x8868;,&#x5982;&#x679C;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;&#x5217;&#x8868;&#x7684;&#x957F;&#x5EA6;&#x4E0D;&#x7B49;&#x4E8E;ids&#x6570;&#x7EC4;&#x7684;&#x957F;&#x5EA6;,&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong>  </p>
+<ul>
+<li><code>IllegalArgumentException</code>:ids&#x4E3A;null&#x65F6;&#x629B;&#x51FA;  </li>
+<li><code>TooManyRecordsException</code>:&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x957F;&#x5EA6;&#x5927;&#x4E8E;ids&#x6570;&#x7EC4;&#x7684;&#x957F;&#x5EA6;&#x65F6;&#x629B;&#x51FA;  </li>
+<li><code>RecordNotFoundException</code>:&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x957F;&#x5EA6;&#x5C0F;&#x4E8E;ids&#x6570;&#x7EC4;&#x7684;&#x957F;&#x5EA6;&#x65F6;&#x629B;</li>
+</ul>
+<h5 id="t-extends-model-listt-findlistifexistsobject-ids"><code>&lt;T extends Model&gt; List&lt;T&gt; findListIfExists(Object[] ids)</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x901A;&#x8FC7;&#x4F20;&#x5165;id&#x6570;&#x7EC4;&#x67E5;&#x8BE2;&#x591A;&#x884C;&#x8BB0;&#x5F55;&#x5E76;&#x8FD4;&#x56DE;&#x5217;&#x8868;&#x5BF9;&#x8C61;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>ids : &#x67E5;&#x627E;&#x8BB0;&#x5F55;&#x7684;id&#x6570;&#x7EC4;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;&#x5217;&#x8868;,&#x5728;ids&#x6570;&#x7EC4;&#x4E2D;,&#x80FD;&#x67E5;&#x5230;&#x51E0;&#x6761;&#x8BB0;&#x5F55;&#x5C31;&#x8FD4;&#x56DE;&#x51E0;&#x6761;&#x8BB0;&#x5F55;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong>  </p>
+<ul>
+<li><code>IllegalArgumentException</code>:ids&#x4E3A;null&#x65F6;&#x629B;&#x51FA;    </li>
+<li><code>TooManyRecordsException</code>:&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x957F;&#x5EA6;&#x5927;&#x4E8E;ids&#x6570;&#x7EC4;&#x7684;&#x957F;&#x5EA6;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-listt-findall&#x548C;t-extends-model-listt-all"><code>&lt;T extends Model&gt; List&lt;T&gt; findAll()&#x548C;&lt;T extends Model&gt; List&lt;T&gt; all()</code></h5>
+<p>&#x8FD9;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x5B8C;&#x5168;&#x76F8;&#x540C;&#x7684;,&#x4F1A;&#x76F4;&#x63A5;&#x67E5;&#x8BE2;&#x6574;&#x4E2A;&#x8868;&#x7684;&#x5168;&#x90E8;&#x6570;&#x636E;&#x5E76;&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#x5217;&#x8868;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;&#x5217;&#x8868;</li>
+</ul>
+<h5 id="t-extends-model-listt-firstint-num"><code>&lt;T extends Model&gt; List&lt;T&gt; first(int num)</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x6309;&#x7167;id&#x6392;&#x5E8F;&#x4E4B;&#x540E;&#x67E5;&#x627E;&#x524D;num&#x884C;&#x6570;&#x636E;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>num : &#x8981;&#x67E5;&#x627E;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;&#x5217;&#x8868;,&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5C0F;&#x4E8E;num&#x4E5F;&#x4E0D;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalArgumentException</code>:&#x5F53;&#x4F20;&#x5165;&#x7684;num&#x503C;&#x4E0D;&#x5927;&#x4E8E;0&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-listt-lastint-num"><code>&lt;T extends Model&gt; List&lt;T&gt; last(int num)</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x6309;&#x7167;id&#x5012;&#x5E8F;&#x6392;&#x5E8F;&#x4E4B;&#x540E;&#x67E5;&#x627E;&#x524D;num&#x884C;&#x6570;&#x636E;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>num : &#x8981;&#x67E5;&#x627E;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;&#x5217;&#x8868;,&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5C0F;&#x4E8E;num&#x4E5F;&#x4E0D;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalArgumentException</code>:&#x5F53;&#x4F20;&#x5165;&#x7684;num&#x503C;&#x4E0D;&#x5927;&#x4E8E;0&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-listt-lastcreatedint-num"><code>&lt;T extends Model&gt; List&lt;T&gt; lastCreated(int num)</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x67E5;&#x8BE2;&#x6700;&#x540E;&#x521B;&#x5EFA;&#x7684;&#x51E0;&#x884C;&#x8BB0;&#x5F55;&#x5E76;&#x8FD4;&#x56DE;,&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x6839;&#x636E;<code>createdAt</code>&#x5B57;&#x6BB5;&#x5012;&#x5E8F;&#x6392;&#x5E8F;&#x67E5;&#x8BE2;&#x7684;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>num : &#x8981;&#x67E5;&#x627E;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;&#x5217;&#x8868;,&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5C0F;&#x4E8E;num&#x4E5F;&#x4E0D;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalArgumentException</code>:&#x5F53;&#x4F20;&#x5165;&#x7684;num&#x503C;&#x4E0D;&#x5927;&#x4E8E;0&#x65F6;&#x629B;&#x51FA;</li>
+<li><code>ObjectNotFoundExceptiony</code>:&#x627E;&#x4E0D;&#x5230;<code>createdAt</code>&#x5C5E;&#x6027;&#x65F6;&#x4F1A;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-listt-lastupdatedint-num"><code>&lt;T extends Model&gt; List&lt;T&gt; lastUpdated(int num)</code></h5>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x67E5;&#x8BE2;&#x6700;&#x540E;&#x4FEE;&#x6539;&#x7684;&#x51E0;&#x884C;&#x8BB0;&#x5F55;&#x5E76;&#x8FD4;&#x56DE;,&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x6839;&#x636E;<code>updatedAt</code>&#x5B57;&#x6BB5;&#x5012;&#x5E8F;&#x6392;&#x5E8F;&#x67E5;&#x8BE2;&#x7684;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>num : &#x8981;&#x67E5;&#x627E;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;&#x5217;&#x8868;,&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5C0F;&#x4E8E;num&#x4E5F;&#x4E0D;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalArgumentException</code>:&#x5F53;&#x4F20;&#x5165;&#x7684;num&#x503C;&#x4E0D;&#x5927;&#x4E8E;0&#x65F6;&#x629B;&#x51FA;</li>
+<li><code>ObjectNotFoundExceptiony</code>:&#x627E;&#x4E0D;&#x5230;<code>updatedAt</code>&#x5C5E;&#x6027;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<hr>
+<h2 id="&#x65B0;&#x589E;&#x65B9;&#x6CD5;"><a id="create"></a>&#x65B0;&#x589E;&#x65B9;&#x6CD5;</h2>
+<h3 id="&#x5355;&#x884C;&#x65B0;&#x589E;"><a id="single_create"></a>&#x5355;&#x884C;&#x65B0;&#x589E;</h3>
+<pre><code class="lang-java">create(Map&lt;String, Object&gt; fields);
+save();
+trySave();
+create()/insert();
+create(CreateCallback&lt;T&gt; callback);
+create(PostCreateCallback&lt;T&gt; callback);
+tryCreate();
+tryCreate(CreateCallback&lt;T&gt; callback);
+</code></pre>
+<h5 id="t-extends-model-t-createmapstring-object-fields"><code>&lt;T extends Model&gt; T create(Map&lt;String, Object&gt; fields)</code></h5>
+<p>&#x6839;&#x636E;&#x4F20;&#x5165;&#x7684;map&#x5C5E;&#x6027;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Model&#x5BF9;&#x8C61;&#x5E76;&#x63D2;&#x5165;&#x5230;&#x6570;&#x636E;&#x5E93;&#x4E2D;,fields&#x7684;key/value&#x5206;&#x522B;&#x5BF9;&#x5E94;model&#x7684;&#x5C5E;&#x6027;&#x548C;&#x503C;,&#x76F8;&#x5F53;&#x4E8E;</p>
+<pre><code class="lang-java">T t = <span class="hljs-keyword">new</span> T();
+t.setKey(fields.get(<span class="hljs-string">&quot;key&quot;</span>));
+t.create();
+</code></pre>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>fields : Model&#x5BF9;&#x5E94;&#x7684;&#x5C5E;&#x6027;&#x548C;&#x503C;.</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x521B;&#x5EFA;&#x5E76;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x540E;&#x7684;&#x5BF9;&#x8C61;.</li>
+</ul>
+<h5 id="t-extends-model-t-save"><code>&lt;T extends Model&gt; T save()</code></h5>
+<p>&#x4FDD;&#x5B58;Model&#x5BF9;&#x8C61;,&#x8FD9;&#x91CC;&#x7684;&#x4FDD;&#x5B58;&#x6709;&#x53EF;&#x80FD;&#x662F;insert&#x4E5F;&#x6709;&#x53EF;&#x80FD;&#x662F;update,&#x6839;&#x636E;model&#x7684;id&#x5224;&#x65AD;,&#x5982;&#x679C;id&#x5B58;&#x5728;,&#x5219;&#x6267;&#x884C;update,&#x5982;&#x679C;id&#x4E0D;&#x5B58;&#x5728;,&#x5219;&#x6267;&#x884C;insert.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x4FDD;&#x5B58;&#x540E;&#x7684;&#x5BF9;&#x8C61;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>RecordNotSavedException</code>:&#x4FDD;&#x5B58;&#x8BB0;&#x5F55;&#x5931;&#x8D25;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="boolean-trysave"><code>boolean trySave()</code></h5>
+<p>&#x4FDD;&#x5B58;Model&#x5BF9;&#x8C61;,&#x8FD9;&#x91CC;&#x7684;&#x4FDD;&#x5B58;&#x6709;&#x53EF;&#x80FD;&#x662F;insert&#x4E5F;&#x6709;&#x53EF;&#x80FD;&#x662F;update,&#x6839;&#x636E;model&#x7684;id&#x5224;&#x65AD;,&#x5982;&#x679C;id&#x5B58;&#x5728;,&#x5219;&#x6267;&#x884C;update,&#x5982;&#x679C;id&#x4E0D;&#x5B58;&#x5728;,&#x5219;&#x6267;&#x884C;insert.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x4FDD;&#x5B58;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;true,&#x4FDD;&#x5B58;&#x5931;&#x8D25;&#x5219;&#x8FD4;&#x56DE;false</li>
+</ul>
+<h5 id="t-extends-model-t-create&#x548C;t-extends-model-t-insert"><code>&lt;T extends Model&gt; T create()</code>&#x548C;<code>&lt;T extends Model&gt; T insert()</code></h5>
+<p>&#x5C06;Model&#x5BF9;&#x8C61;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;,&#x5982;&#x679C;&#x6CA1;&#x6709;id&#x5219;&#x6839;&#x636E;&#x9ED8;&#x8BA4;&#x89C4;&#x5219;&#x81EA;&#x52A8;&#x751F;&#x6210;id.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x540E;&#x7684;&#x5BF9;&#x8C61;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>RecordNotSavedException</code>:&#x63D2;&#x5165;&#x8BB0;&#x5F55;&#x5931;&#x8D25;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-void-createcreatecallbackt-callback"><code>&lt;T extends Model&gt; void create(CreateCallback&lt;T&gt; callback)</code></h5>
+<p>&#x5C06;Model&#x5BF9;&#x8C61;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;,&#x5728;&#x63D2;&#x5165;&#x524D;&#x8FDB;&#x884C;&#x56DE;&#x8C03;&#x64CD;&#x4F5C;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>callback:CreateCallback&#x7684;&#x5B9E;&#x4F8B;,&#x5728;Model&#x5BF9;&#x8C61;&#x4FDD;&#x5B58;&#x4E4B;&#x524D;&#x4F1A;&#x8C03;&#x7528;<code>callback.preCreate()</code>,&#x4FDD;&#x5B58;&#x4E4B;&#x540E;&#x4F1A;&#x8C03;&#x7528;<code>callback.postCreate()</code>,&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x53D7;&#x4E8B;&#x52A1;&#x63A7;&#x5236;,&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x56DE;&#x6EDA;&#x4FDD;&#x5B58;.</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>RecordNotSavedException</code>:&#x63D2;&#x5165;&#x8BB0;&#x5F55;&#x5931;&#x8D25;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-void-createpostcreatecallbackt-callback"><code>&lt;T extends Model&gt; void create(PostCreateCallback&lt;T&gt; callback)</code></h5>
+<p>&#x5C06;Model&#x5BF9;&#x8C61;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;,&#x5728;&#x63D2;&#x5165;&#x524D;&#x8FDB;&#x884C;&#x56DE;&#x8C03;&#x64CD;&#x4F5C;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>callback:PostCreateCallback&#x7684;&#x5B9E;&#x4F8B;,PostCreateCallback&#x662F;CreateCallback&#x7684;&#x5B50;&#x63A5;&#x53E3;,&#x63D0;&#x4F9B;&#x4E86;<code>preCreate(T record, TransactionStatus s)</code>&#x7684;&#x9ED8;&#x8BA4;&#x5B9E;&#x73B0;,&#x56E0;&#x6B64;&#x53EA;&#x9700;&#x8981;&#x5B9E;&#x73B0;<code>postCreate(T record, TransactionStatus s)</code>&#x5373;&#x53EF;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>RecordNotSavedException</code>:&#x63D2;&#x5165;&#x8BB0;&#x5F55;&#x5931;&#x8D25;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="boolean-trycreate"><code>boolean tryCreate()</code></h5>
+<p>&#x5C06;Model&#x5BF9;&#x8C61;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;,&#x5982;&#x679C;&#x6CA1;&#x6709;id&#x5219;&#x6839;&#x636E;&#x9ED8;&#x8BA4;&#x89C4;&#x5219;&#x81EA;&#x52A8;&#x751F;&#x6210;id.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x63D2;&#x5165;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;true,&#x5931;&#x8D25;&#x5219;&#x8FD4;&#x56DE;false</li>
+</ul>
+<h5 id="t-extends-model-boolean-trycreatecreatecallbackt-callback"><code>&lt;T extends Model&gt; boolean tryCreate(CreateCallback&lt;T&gt; callback)</code></h5>
+<p>&#x5C06;Model&#x5BF9;&#x8C61;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;,&#x5728;&#x63D2;&#x5165;&#x524D;&#x8FDB;&#x884C;&#x56DE;&#x8C03;&#x64CD;&#x4F5C;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>callback:CreateCallback&#x7684;&#x5B9E;&#x4F8B;,&#x5728;Model&#x5BF9;&#x8C61;&#x4FDD;&#x5B58;&#x4E4B;&#x524D;&#x4F1A;&#x8C03;&#x7528;<code>callback.preCreate()</code>,&#x4FDD;&#x5B58;&#x4E4B;&#x540E;&#x4F1A;&#x8C03;&#x7528;<code>callback.postCreate()</code>,&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x53D7;&#x4E8B;&#x52A1;&#x63A7;&#x5236;,&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x56DE;&#x6EDA;&#x4FDD;&#x5B58;.</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x63D2;&#x5165;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;true,&#x5931;&#x8D25;&#x5219;&#x8FD4;&#x56DE;false</li>
+</ul>
+<hr>
+<h3 id="&#x591A;&#x884C;&#x65B0;&#x589E;"><a id="multi_create"></a>&#x591A;&#x884C;&#x65B0;&#x589E;</h3>
+<pre><code class="lang-java">createAll(Object[] records);
+</code></pre>
+<h5 id="int-createallobject-records"><code>int[] createAll(Object[] records)</code></h5>
+<p>&#x6279;&#x91CF;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>records:&#x9700;&#x8981;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x7684;Model&#x5BF9;&#x8C61;&#x6570;&#x7EC4;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x63D2;&#x5165;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;&#x6BCF;&#x4E00;&#x884C;&#x6267;&#x884C;&#x7ED3;&#x679C;&#x7684;&#x5F71;&#x54CD;&#x884C;&#x6570;(&#x6570;&#x636E;&#x5E93;&#x7684;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;),&#x5931;&#x8D25;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;.</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalArgumentException</code>:&#x63D2;&#x5165;records&#x4E3A;null&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h2 id="&#x66F4;&#x65B0;&#x65B9;&#x6CD5;"><a id="update"></a>&#x66F4;&#x65B0;&#x65B9;&#x6CD5;</h2>
+<h3 id="&#x5355;&#x884C;&#x66F4;&#x65B0;"><a id="single_update"></a>&#x5355;&#x884C;&#x66F4;&#x65B0;</h3>
+<pre><code class="lang-java">update(Object id,Map&lt;String, Object&gt; fields);
+update(Object id,String field,Object value);
+update();
+update(UpdateCallback&lt;T&gt; callback);
+update(PostUpdateCallback&lt;T&gt; callback);
+tryUpdate();
+tryUpdate(UpdateCallback&lt;T&gt; callback);
+</code></pre>
+<h5 id="boolean-updateobject-idmapstring-object-fields"><code>boolean update(Object id,Map&lt;String, Object&gt; fields)</code></h5>
+<p>&#x66F4;&#x65B0;&#x6307;&#x5B9A;id&#x7684;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;,fields&#x8868;&#x793A;&#x7684;&#x662F;&#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x5B57;&#x6BB5;,Key/Value&#x8868;&#x793A;field/value,&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">Map kv = <span class="hljs-keyword">new</span> HashMap();
+kv.put(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;jim&quot;</span>);
+kv.put(<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-string">&quot;3&quot;</span>);
+Model.update(<span class="hljs-string">&quot;a&quot;</span>,kv);
+</code></pre>
+<p>&#x90A3;&#x4E48;&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">SET</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;jim&apos;</span>, age=<span class="hljs-number">3</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">id</span> = <span class="hljs-string">&apos;a&apos;</span>
+</span></code></pre>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>id : &#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x8BB0;&#x5F55;id</li>
+<li>fields : &#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x8BB0;&#x5F55;&#x5BF9;&#x5E94;&#x7684;&#x5C5E;&#x6027;&#x548C;&#x503C;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x6709;&#x8BB0;&#x5F55;&#x88AB;&#x66F4;&#x65B0;&#x5219;&#x8FD4;&#x56DE;true,&#x6CA1;&#x6709;&#x8BB0;&#x5F55;&#x88AB;&#x66F4;&#x65B0;&#x5219;&#x8FD4;&#x56DE;false</li>
+</ul>
+<h5 id="boolean-updateobject-idstring-fieldobject-value"><code>boolean update(Object id,String field,Object value)</code></h5>
+<p>&#x66F4;&#x65B0;&#x6307;&#x5B9A;id&#x7684;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;,field&#x8868;&#x793A;&#x7684;&#x662F;&#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x5B57;&#x6BB5;,value&#x8868;&#x793A;&#x76EE;&#x6807;&#x503C;,&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x76F8;&#x5F53;&#x4E8E;<code>boolean update(Object id,Map&lt;String, Object&gt; fields)</code>&#x4EC5;&#x8BBE;&#x7F6E;&#x4E00;&#x7EC4;key/value&#x65F6;&#x7684;&#x6548;&#x679C;&#x4E00;&#x81F4;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>id : &#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x8BB0;&#x5F55;id</li>
+<li>field : &#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x8BB0;&#x5F55;&#x5BF9;&#x5E94;&#x7684;&#x5C5E;&#x6027;</li>
+<li>value : &#x9700;&#x8981;&#x5C06;&#x5C5E;&#x6027;&#x4FEE;&#x6539;&#x7684;&#x76EE;&#x6807;&#x503C;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x6709;&#x8BB0;&#x5F55;&#x88AB;&#x66F4;&#x65B0;&#x5219;&#x8FD4;&#x56DE;true,&#x6CA1;&#x6709;&#x8BB0;&#x5F55;&#x88AB;&#x66F4;&#x65B0;&#x5219;&#x8FD4;&#x56DE;false</li>
+</ul>
+<h5 id="t-extends-model-t-update"><code>&lt;T extends Model&gt; T update()</code></h5>
+<p>&#x6839;&#x636E;id&#x66F4;&#x65B0;&#x5F53;&#x524D;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;,&#x5E76;&#x4E14;&#x5305;&#x542B;&#x6240;&#x6709;&#x4E3A;null&#x7684;&#x5C5E;&#x6027;,&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">Model model = <span class="hljs-keyword">new</span> Model();
+model.setId(<span class="hljs-string">&quot;id&quot;</span>);
+model.update();
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x6700;&#x7EC8;&#x4F1A;&#x6267;&#x884C;&#x5982;&#x4E0B;sql:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">SET</span> field1 = <span class="hljs-literal">null</span>, field2 = <span class="hljs-literal">null</span> ,... <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">id</span>=<span class="hljs-string">&apos;id&apos;</span>
+</span></code></pre>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x66F4;&#x65B0;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;&#x88AB;&#x66F4;&#x65B0;&#x7684;&#x5BF9;&#x8C61;,&#x66F4;&#x65B0;&#x5931;&#x8D25;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalArgumentException</code>:&#x5F53;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;</li>
+<li><code>RecordNotSavedException</code>:&#x66F4;&#x65B0;&#x8BB0;&#x5F55;&#x5931;&#x8D25;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-t-updateupdatecallbackt-callback"><code>&lt;T extends Model&gt; T update(UpdateCallback&lt;T&gt; callback)</code></h5>
+<p>&#x66F4;&#x65B0;Model&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;,&#x5728;&#x66F4;&#x65B0;&#x524D;&#x8FDB;&#x884C;&#x56DE;&#x8C03;&#x64CD;&#x4F5C;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>callback:UpdateCallback&#x7684;&#x5B9E;&#x4F8B;,&#x5728;Model&#x5BF9;&#x8C61;&#x4FDD;&#x5B58;&#x4E4B;&#x524D;&#x4F1A;&#x8C03;&#x7528;<code>callback.preCreate()</code>,&#x4FDD;&#x5B58;&#x4E4B;&#x540E;&#x4F1A;&#x8C03;&#x7528;<code>callback.postCreate()</code>,&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x53D7;&#x4E8B;&#x52A1;&#x63A7;&#x5236;,&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x56DE;&#x6EDA;&#x4FDD;&#x5B58;.</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x66F4;&#x65B0;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;&#x88AB;&#x66F4;&#x65B0;&#x7684;&#x5BF9;&#x8C61;,&#x5931;&#x8D25;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalStateException</code>:&#x5F53;&#x88AB;&#x66F4;&#x65B0;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;</li>
+<li><code>RecordNotSavedException</code>:&#x66F4;&#x65B0;&#x8BB0;&#x5F55;&#x5931;&#x8D25;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-t-updatepostupdatecallbackt-callback"><code>&lt;T extends Model&gt; T update(PostUpdateCallback&lt;T&gt; callback)</code></h5>
+<p>&#x66F4;&#x65B0;Model&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;,&#x5728;&#x66F4;&#x65B0;&#x524D;&#x8FDB;&#x884C;&#x56DE;&#x8C03;&#x64CD;&#x4F5C;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>callback:PostUpdateCallback&#x7684;&#x5B9E;&#x4F8B;,&#x5728;Model&#x5BF9;&#x8C61;&#x4FDD;&#x5B58;&#x4E4B;&#x524D;&#x4F1A;&#x8C03;&#x7528;<code>callback.preCreate()</code>,&#x4FDD;&#x5B58;&#x4E4B;&#x540E;&#x4F1A;&#x8C03;&#x7528;<code>callback.postCreate()</code>,&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x53D7;&#x4E8B;&#x52A1;&#x63A7;&#x5236;,&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x56DE;&#x6EDA;&#x4FDD;&#x5B58;.<br><code>callback.preCreate()</code>&#x5DF2;&#x7ECF;&#x63D0;&#x4F9B;&#x4E86;&#x9ED8;&#x8BA4;&#x5B9E;&#x73B0;,&#x56E0;&#x6B64;&#x53EA;&#x9700;&#x8981;&#x5B9E;&#x73B0;<code>callback.postCreate()</code>&#x5373;&#x53EF;.</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x66F4;&#x65B0;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;&#x88AB;&#x66F4;&#x65B0;&#x7684;&#x5BF9;&#x8C61;,&#x5931;&#x8D25;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalStateException</code>:&#x5F53;&#x88AB;&#x66F4;&#x65B0;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;</li>
+<li><code>RecordNotSavedException</code>:&#x66F4;&#x65B0;&#x8BB0;&#x5F55;&#x5931;&#x8D25;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="boolean-tryupdate"><code>boolean tryUpdate()</code></h5>
+<p>&#x66F4;&#x65B0;Model&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x6709;&#x8BB0;&#x5F55;&#x88AB;&#x66F4;&#x65B0;&#x5219;&#x8FD4;&#x56DE;true,&#x6CA1;&#x6709;&#x8BB0;&#x5F55;&#x88AB;&#x66F4;&#x65B0;&#x5219;&#x8FD4;&#x56DE;false</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalStateException</code>:&#x5F53;&#x88AB;&#x66F4;&#x65B0;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-extends-model-boolean-tryupdateupdatecallbackt-callback"><code>&lt;T extends Model&gt; boolean tryUpdate(UpdateCallback&lt;T&gt; callback)</code></h5>
+<p>&#x66F4;&#x65B0;Model&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;,&#x5728;&#x66F4;&#x65B0;&#x524D;&#x8FDB;&#x884C;&#x56DE;&#x8C03;&#x64CD;&#x4F5C;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>callback:UpdateCallback&#x7684;&#x5B9E;&#x4F8B;,&#x5728;Model&#x5BF9;&#x8C61;&#x4FDD;&#x5B58;&#x4E4B;&#x524D;&#x4F1A;&#x8C03;&#x7528;<code>callback.preCreate()</code>,&#x4FDD;&#x5B58;&#x4E4B;&#x540E;&#x4F1A;&#x8C03;&#x7528;<code>callback.postCreate()</code>,&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x53D7;&#x4E8B;&#x52A1;&#x63A7;&#x5236;,&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x56DE;&#x6EDA;&#x4FDD;&#x5B58;.  </li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x6709;&#x8BB0;&#x5F55;&#x88AB;&#x66F4;&#x65B0;&#x5219;&#x8FD4;&#x56DE;true,&#x6CA1;&#x6709;&#x8BB0;&#x5F55;&#x88AB;&#x66F4;&#x65B0;&#x5219;&#x8FD4;&#x56DE;false</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalStateException</code>:&#x5F53;&#x88AB;&#x66F4;&#x65B0;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<hr>
+<h3 id="&#x591A;&#x884C;&#x66F4;&#x65B0;"><a id="multi_update"></a>&#x591A;&#x884C;&#x66F4;&#x65B0;</h3>
+<pre><code class="lang-java">updateAll(Object[] records);
+updateAll(Condition&lt;T&gt; condition);
+updateAll(String whereExpression);
+updateAll(String whereExpression,Object... args);
+updateAll(String whereExpression,Map&lt;String, Object&gt; params);
+updateAll(Map&lt;String, Object&gt; fields, String whereExpression, Object... args);
+</code></pre>
+<h5 id="int-updateallobject-records"><code>int[] updateAll(Object[] records)</code></h5>
+<p>&#x540C;&#x65F6;&#x66F4;&#x65B0;&#x591A;&#x4E2A;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>records:&#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x6570;&#x7EC4;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x6BCF;&#x4E2A;&#x5BF9;&#x8C61;&#x66F4;&#x65B0;&#x540E;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;&#x7684;&#x6570;&#x7EC4;`</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalStateException</code>:&#x5F53;&#x88AB;&#x66F4;&#x65B0;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x4E2D;&#x5305;&#x542B;</li>
+</ul>
+<h5 id="t-extends-model-int-updateallconditiont-condition"><code>&lt;T extends Model&gt; int updateAll(Condition&lt;T&gt; condition)</code></h5>
+<p>// &#x9884;&#x7559;&#x63A5;&#x53E3;,&#x6682;&#x4E0D;&#x53EF;&#x7528;</p>
+<h5 id="int-updateallstring-whereexpression"><code>int updateAll(String whereExpression)</code></h5>
+<p>&#x6839;&#x636E;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#x66F4;&#x65B0;&#x8BB0;&#x5F55;,&#x66F4;&#x65B0;&#x7684;&#x5C5E;&#x6027;&#x662F;&#x5F53;&#x524D;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;,&#x4F46;&#x662F;id(&#x4E3B;&#x952E;&#x5C5E;&#x6027;)&#x4E0D;&#x4F1A;&#x88AB;&#x66F4;&#x65B0;,&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">Model model = <span class="hljs-keyword">new</span> Model();
+model.setField1(<span class="hljs-string">&quot;field1&quot;</span>);
+model.setField2(<span class="hljs-string">&quot;field2&quot;</span>);
+model.updateAll(<span class="hljs-string">&quot;name=&apos;modelname&apos;&quot;</span>);
+</code></pre>
+<p>&#x90A3;&#x4E48;&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">SET</span> field1 = <span class="hljs-string">&apos;field1&apos;</span>, field2=<span class="hljs-string">&apos;field2&apos;</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;modelname&apos;</span>
+</span></code></pre>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>whereExpression:&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;,&#x53EF;&#x4EE5;&#x5305;&#x542B;WHERE&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x5305;&#x542B;WHERE,&#x4F46;&#x662F;&#x9700;&#x8981;&#x6309;&#x7167;sql&#x7684;&#x8BED;&#x6CD5;.</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="int-updateallstring-whereexpressionobject-args"><code>int updateAll(String whereExpression,Object... args)</code></h5>
+<p>&#x6839;&#x636E;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#x66F4;&#x65B0;&#x8BB0;&#x5F55;,&#x66F4;&#x65B0;&#x7684;&#x5C5E;&#x6027;&#x662F;&#x5F53;&#x524D;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;,&#x4F46;&#x662F;id(&#x4E3B;&#x952E;&#x5C5E;&#x6027;)&#x4E0D;&#x4F1A;&#x88AB;&#x66F4;&#x65B0;,&#x8FD9;&#x91CC;&#x7684;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#x5141;&#x8BB8;&#x5E26;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;,&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">Model model = <span class="hljs-keyword">new</span> Model();
+model.setField1(<span class="hljs-string">&quot;field1&quot;</span>);
+model.setField2(<span class="hljs-string">&quot;field2&quot;</span>);
+model.updateAll(<span class="hljs-string">&quot;name=?&quot;</span>,<span class="hljs-string">&quot;modelname&quot;</span>);
+</code></pre>
+<p>&#x90A3;&#x4E48;&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">SET</span> field1 = <span class="hljs-string">&apos;field1&apos;</span>, field2=<span class="hljs-string">&apos;field2&apos;</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;modelname&apos;</span>
+</span></code></pre>
+<p>&#x8FD9;&#x91CC;&#x6709;&#x4E00;&#x70B9;&#x9700;&#x8981;&#x7279;&#x522B;&#x6CE8;&#x610F;&#x7684;:  </p>
+<p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;leapQL&#x5BF9;IN&#x5173;&#x952E;&#x5B57;&#x7684;&#x7279;&#x6B8A;&#x5904;&#x7406;,&#x5982;&#x679C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x4EE3;&#x7801;:</p>
+<pre><code class="lang-java">String names = <span class="hljs-keyword">new</span> String[]{<span class="hljs-string">&quot;name1&quot;</span>,<span class="hljs-string">&quot;name2&quot;</span>,<span class="hljs-string">&quot;name3&quot;</span>};
+model.updateAll(<span class="hljs-string">&quot;name IN ?&quot;</span>,names);
+</code></pre>
+<p>&#x6267;&#x884C;&#x65F6;&#x4F1A;&#x53D1;&#x73B0;sql&#x89E3;&#x6790;&#x5931;&#x8D25;&#x4E86;,&#x5E76;&#x4E14;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#x662F;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;&#x7684;&#x6570;&#x91CF;&#x548C;&#x53C2;&#x6570;&#x503C;&#x4E0D;&#x5BF9;&#x5E94;,&#x8FD9;&#x662F;&#x56E0;&#x4E3A;java&#x672C;&#x8EAB;&#x5BF9;&#x53EF;&#x53D8;&#x4F20;&#x53C2;&#x7684;&#x5904;&#x7406;&#x5BFC;&#x81F4;&#x7684;&#x95EE;&#x9898;.</p>
+<p>java&#x4E2D;,&#x53EF;&#x53D8;&#x4F20;&#x53C2;&#x662F;&#x5DF2;&#x6570;&#x7EC4;&#x7684;&#x65B9;&#x5F0F;&#x63A5;&#x6536;&#x7684;,&#x8FD9;&#x6837;&#x4F1A;&#x5BFC;&#x81F4;&#x6211;&#x4EEC;&#x7684;&#x6570;&#x7EC4;&#x4F20;&#x8FDB;&#x53BB;&#x540E;,&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x90FD;&#x88AB;&#x5F53;&#x6210;&#x53EF;&#x53D8;&#x4F20;&#x53C2;&#x7684;&#x5355;&#x72EC;&#x53C2;&#x6570;&#x4E86;,&#x56E0;&#x6B64;&#x4F1A;&#x5BFC;&#x81F4;&#x53C2;&#x6570;&#x6570;&#x91CF;&#x548C;&#x5360;&#x4F4D;&#x7B26;&#x6570;&#x91CF;&#x4E0D;&#x540C;&#x7684;&#x5F02;&#x5E38;,&#x89E3;&#x51B3;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Object[]&#x6570;&#x7EC4;,&#x5E76;&#x5C06;&#x6211;&#x4EEC;&#x7684;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;&#x4F5C;&#x4E3A;Object[]&#x6570;&#x7EC4;&#x7684;&#x5143;&#x7D20;&#x5373;&#x53EF;,&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java">String names = <span class="hljs-keyword">new</span> String[]{<span class="hljs-string">&quot;name1&quot;</span>,<span class="hljs-string">&quot;name2&quot;</span>,<span class="hljs-string">&quot;name3&quot;</span>};
+model.updateAll(<span class="hljs-string">&quot;name IN ?&quot;</span>,<span class="hljs-keyword">new</span> Object[]{names});
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">SET</span> <span class="hljs-keyword">name</span>=xxx <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span> <span class="hljs-keyword">IN</span> (<span class="hljs-string">&quot;name1&quot;</span>,<span class="hljs-string">&quot;name2&quot;</span>,<span class="hljs-string">&quot;name3&quot;</span>)
+</span></code></pre>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>whereExpression:&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;,&#x53EF;&#x4EE5;&#x5305;&#x542B;WHERE&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x5305;&#x542B;WHERE,&#x4F46;&#x662F;&#x9700;&#x8981;&#x6309;&#x7167;sql&#x7684;&#x8BED;&#x6CD5;.</li>
+<li>args:&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;&#x5BF9;&#x5E94;&#x7684;&#x53C2;&#x6570;&#x503C;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="int-updateallstring-whereexpressionmapstring-object-params"><code>int updateAll(String whereExpression,Map&lt;String, Object&gt; params)</code></h5>
+<p>&#x6839;&#x636E;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#x66F4;&#x65B0;&#x8BB0;&#x5F55;,&#x66F4;&#x65B0;&#x7684;&#x5C5E;&#x6027;&#x662F;&#x5F53;&#x524D;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;,&#x4F46;&#x662F;id(&#x4E3B;&#x952E;&#x5C5E;&#x6027;)&#x4E0D;&#x4F1A;&#x88AB;&#x66F4;&#x65B0;,&#x8FD9;&#x91CC;&#x7684;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#x5141;&#x8BB8;&#x5E26;&#x547D;&#x540D;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;,&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">Model model = <span class="hljs-keyword">new</span> Model();
+model.setField1(<span class="hljs-string">&quot;field1&quot;</span>);
+model.setField2(<span class="hljs-string">&quot;field2&quot;</span>);
+Map map = <span class="hljs-keyword">new</span> HashMap();
+map.put(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;modelname&quot;</span>);
+model.updateAll(<span class="hljs-string">&quot;name=:name&quot;</span>,map);
+</code></pre>
+<p>&#x90A3;&#x4E48;&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">SET</span> field1 = <span class="hljs-string">&apos;field1&apos;</span>, field2=<span class="hljs-string">&apos;field2&apos;</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;modelname&apos;</span>
+</span></code></pre>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>whereExpression:&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;,&#x53EF;&#x4EE5;&#x5305;&#x542B;WHERE&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x5305;&#x542B;WHERE,&#x4F46;&#x662F;&#x9700;&#x8981;&#x6309;&#x7167;sql&#x7684;&#x8BED;&#x6CD5;.</li>
+<li>params:&#x547D;&#x540D;&#x53C2;&#x6570;&#x7684;&#x53C2;&#x6570;&#x540D;&#x548C;&#x503C;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="int-updateallmapstring-object-fields-string-whereexpression-object-args"><code>int updateAll(Map&lt;String, Object&gt; fields, String whereExpression, Object... args)</code></h5>
+<p>&#x5C06;&#x7B26;&#x5408;where&#x6761;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x66F4;&#x65B0;&#x6210;fields&#x4E2D;&#x7684;value,&#x8FD9;&#x91CC;&#x7684;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#x5141;&#x8BB8;&#x5E26;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;,&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">Map kv = <span class="hljs-keyword">new</span> HashMap();
+kv.put(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;jim&quot;</span>);
+kv.put(<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-string">&quot;3&quot;</span>);
+Model.updateAll(kv,<span class="hljs-string">&quot;name=?&quot;</span>,<span class="hljs-string">&quot;lucy&quot;</span>);
+</code></pre>
+<p>&#x90A3;&#x4E48;&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">SET</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;jim&apos;</span>, age=<span class="hljs-number">3</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span> = <span class="hljs-string">&apos;lucy&apos;</span>
+</span></code></pre>
+<p>&#x8FD9;&#x91CC;&#x7684;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#x5305;&#x542B;IN&#x5173;&#x952E;&#x5B57;&#x7684;&#x53C2;&#x6570;&#x65F6;,&#x53EF;&#x4EE5;&#x53C2;&#x8003;<code>int updateAll(String whereExpression,Object... args)</code>&#x7684;&#x8BF4;&#x660E;&#x5904;&#x7406;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>fields : &#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x8BB0;&#x5F55;&#x5BF9;&#x5E94;&#x7684;&#x5C5E;&#x6027;&#x548C;&#x503C;</li>
+<li>whereExpression : sql&#x7684;where&#x8868;&#x8FBE;&#x5F0F;,&#x53EF;&#x4EE5;&#x5305;&#x542B;where&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x5199;where,&#x901A;&#x8FC7;&#x5360;&#x4F4D;&#x7B26;<code>?</code>&#x8868;&#x793A;&#x53C2;&#x6570;</li>
+<li>args : where&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x53C2;&#x6570;&#x5217;&#x8868;,&#x6309;&#x7167;&#x987A;&#x5E8F;&#x8BBE;&#x5165;where&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x5360;&#x4F4D;&#x7B26;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x4E3A;int,&#x8868;&#x793A;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<hr>
+<h2 id="&#x5220;&#x9664;&#x65B9;&#x6CD5;"><a id="delete"></a>&#x5220;&#x9664;&#x65B9;&#x6CD5;</h2>
+<h3 id="&#x5355;&#x884C;&#x5220;&#x9664;"><a id="single_delete"></a>&#x5355;&#x884C;&#x5220;&#x9664;</h3>
+<pre><code class="lang-java">delete(Object id);
+tryDelete(Object id);
+delete();
+tryDelete();
+</code></pre>
+<h5 id="void-deleteobject-id"><code>void delete(Object id)</code></h5>
+<p>&#x6839;&#x636E;id&#x5220;&#x9664;&#x6307;&#x5B9A;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>id:&#x9700;&#x8981;&#x5220;&#x9664;&#x7684;&#x8BB0;&#x5F55;id</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalStateException</code>:&#x5F53;id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+<li><code>RecordNotDeletedException</code>:&#x5F53;&#x5220;&#x9664;&#x5931;&#x8D25;(&#x5305;&#x62EC;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x6307;&#x5B9A;id&#x7684;&#x8BB0;&#x5F55;)&#x65F6;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<h5 id="boolean-trydeleteobject-id"><code>boolean tryDelete(Object id)</code></h5>
+<p>&#x6839;&#x636E;id&#x5220;&#x9664;&#x6307;&#x5B9A;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>id:&#x9700;&#x8981;&#x5220;&#x9664;&#x7684;&#x8BB0;&#x5F55;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x5220;&#x9664;&#x6210;&#x529F;&#x8FD4;&#x56DE;true,&#x6CA1;&#x6709;&#x5220;&#x9664;&#x8BB0;&#x5F55;&#x6216;&#x8005;&#x5220;&#x9664;&#x8BB0;&#x5F55;&#x5931;&#x8D25;&#x8FD4;&#x56DE;false</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalStateException</code>:&#x5F53;id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+<li><code>RecordNotDeletedException</code>:&#x5F53;&#x5220;&#x9664;&#x5931;&#x8D25;&#x8FC7;&#x7A0B;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="void-delete"><code>void delete()</code></h5>
+<p>&#x6839;&#x636E;model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;id&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5BF9;&#x5E94;&#x5F53;&#x524D;model&#x5BF9;&#x8C61;&#x7684;&#x8BB0;&#x5F55;.</p>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalStateException</code>:&#x5F53;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;</li>
+<li><code>RecordNotDeletedException</code>:&#x5F53;&#x5220;&#x9664;&#x5931;&#x8D25;&#x6216;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x6CA1;&#x6709;&#x5BF9;&#x5E94;model&#x5B9E;&#x4F8B;&#x7684;&#x8BB0;&#x5F55;&#x662F;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="boolean-trydelete"><code>boolean tryDelete()</code></h5>
+<p>&#x6839;&#x636E;model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;id&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5BF9;&#x5E94;&#x5F53;&#x524D;model&#x5BF9;&#x8C61;&#x7684;&#x8BB0;&#x5F55;.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x6210;&#x529F;&#x5220;&#x9664;&#x5219;&#x8FD4;&#x56DE;true,&#x6CA1;&#x6709;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;&#x5219;&#x8FD4;&#x56DE;false</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li><code>IllegalStateException</code>:&#x5F53;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;id&#x4E3A;null&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<hr>
+<h3 id="&#x591A;&#x884C;&#x5220;&#x9664;"><a id="multi_delete"></a>&#x591A;&#x884C;&#x5220;&#x9664;</h3>
+<pre><code class="lang-java">deleteAll();
+deleteAll(Object[] ids);
+deleteAll(Condition&lt;T&gt; condition);
+deleteAll(String whereExpression);
+deleteAll(String whereExpression,Object... args);
+deleteAll(String whereExpression,Map&lt;String, Object&gt; params);
+deleteBy(String field,Object value);
+</code></pre>
+<h5 id="int-deleteall"><code>int deleteAll()</code></h5>
+<p>&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x5168;&#x90E8;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="int-deleteallobject-ids"><code>int[] deleteAll(Object[] ids)</code></h5>
+<p>&#x6839;&#x636E;id&#x6570;&#x7EC4;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>ids : &#x9700;&#x8981;&#x5220;&#x9664;&#x7684;&#x8BB0;&#x5F55;&#x7684;id&#x6570;&#x7EC4;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="t-extends-model-int-deleteallconditiont-condition"><code>&lt;T extends Model&gt; int deleteAll(Condition&lt;T&gt; condition)</code></h5>
+<p>// &#x9884;&#x7559;&#x63A5;&#x53E3;,&#x6682;&#x4E0D;&#x53EF;&#x7528;</p>
+<h5 id="int-deleteallstring-whereexpression"><code>int deleteAll(String whereExpression)</code></h5>
+<p>&#x6839;&#x636E;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;,&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">Model.deleteAll(<span class="hljs-string">&quot;name=&apos;a&apos;&quot;</span>);
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;a&apos;</span>
+</span></code></pre>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>whereExpression : &#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="int-deleteallstring-whereexpressionobject-args"><code>int deleteAll(String whereExpression,Object... args)</code></h5>
+<p>&#x6839;&#x636E;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;(&#x5E26;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;)&#x548C;&#x53C2;&#x6570;&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;,&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">Model.deleteAll(<span class="hljs-string">&quot;name=?&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>);
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;a&apos;</span>
+</span></code></pre>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>whereExpression : &#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;</li>
+<li>args : &#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;&#x7684;&#x503C;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="int-deleteallstring-whereexpressionmapstring-object-params"><code>int deleteAll(String whereExpression,Map&lt;String, Object&gt; params)</code></h5>
+<p>&#x6839;&#x636E;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#x548C;&#x547D;&#x540D;&#x53C2;&#x6570;&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;,&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">Map map = <span class="hljs-keyword">new</span> HashMap();
+map.put(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>);
+Model.deleteAll(<span class="hljs-string">&quot;name=:name&quot;</span>,map);
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;a&apos;</span>
+</span></code></pre>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>whereExpression : &#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;</li>
+<li>params : &#x547D;&#x540D;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;&#x7684;key&#x548C;value</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="int-deletebystring-fieldobject-value"><code>int deleteBy(String field,Object value)</code></h5>
+<p>&#x6839;&#x636E;&#x5C5E;&#x6027;&#x7684;&#x503C;&#x5220;&#x9664;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;,&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">Model.deleteBy(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>);
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;a&apos;</span>
+</span></code></pre>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>field : &#x5C5E;&#x6027;&#x540D;</li>
+<li>value : &#x5C5E;&#x6027;&#x503C;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<hr>
+<h2 id="&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;"><a id="object_query"></a>&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;</h2>
+<h3 id="entityquery&#x67E5;&#x8BE2;"><a id="entity_query"></a><code>EntityQuery</code>&#x67E5;&#x8BE2;</h3>
+<pre><code class="lang-java">query(String sqlOrKey);
+</code></pre>
+<p>&#x901A;&#x8FC7;Model&#x7684;<code>&lt;T extends Model&gt; EntityQuery&lt;T&gt; query(String sqlOrKey)</code>&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Model&#x7C7B;&#x7684;<code>EntityQuery</code>&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;.</p>
+<h5 id="t-extends-model-entityqueryt-querystring-sqlorkey"><code>&lt;T extends Model&gt; EntityQuery&lt;T&gt; query(String sqlOrKey)</code></h5>
+<p>&#x521B;&#x5EFA;&#x5F53;&#x524D;Model&#x7C7B;&#x7684;EntityQuery&#x5BF9;&#x8C61;&#x5E76;&#x8FD4;&#x56DE;,&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;&#x914D;&#x7F6E;&#x5728;xml&#x7684;sql,&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x53E5;&#x7B80;&#x5355;&#x7684;sql&#x67E5;&#x8BE2;,&#x5982;:</p>
+<p>&#x5047;&#x8BBE;xml&#x4E2D;&#x914D;&#x7F6E;&#x4E86;&#x5982;&#x4E0B;sql:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">command</span> <span class="hljs-attribute">key</span>=<span class="hljs-value">&quot;sqlkey&quot;</span>&gt;</span>
+    SELECT * FROM model
+<span class="hljs-tag">&lt;/<span class="hljs-title">command</span>&gt;</span>
+</code></pre>
+<p>&#x90A3;&#x4E48;&#x4EE5;&#x4E0B;&#x4E24;&#x53E5;&#x4EE3;&#x7801;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x7B49;&#x6548;&#x7684;:</p>
+<pre><code class="lang-java">Model.query(<span class="hljs-string">&quot;sqlkey&quot;</span>);
+Model.query(<span class="hljs-string">&quot;SELECT * FROM model&quot;</span>);
+</code></pre>
+<p>&#x8FD9;&#x91CC;Model&#x4F1A;&#x81EA;&#x52A8;&#x5224;&#x65AD;&#x4F20;&#x5165;&#x7684;&#x662F;sqlkey&#x8FD8;&#x662F;sql&#x67E5;&#x8BE2;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>sqlOrKey:&#x53EF;&#x4EE5;&#x662F;&#x914D;&#x7F6E;&#x5728;sqls.xml&#x4E2D;&#x7684;sqlkey,&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x76F4;&#x63A5;&#x5199;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x7684;sql&#x67E5;&#x8BE2;&#x8BED;&#x53E5;.</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x521B;&#x5EFA;&#x7684;EntityQuery&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="entityquery&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;"><code>EntityQuery</code>&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;</h5>
+<p><code>EntityQuery</code>&#x5BF9;&#x8C61;&#x662F;&#x4E00;&#x4E2A;&#x5B9E;&#x4F53;&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;&#x63A5;&#x53E3;,&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x5BF9;&#x8C61;&#x5141;&#x8BB8;&#x6211;&#x4EEC;&#x5728;&#x771F;&#x6B63;&#x67E5;&#x8BE2;&#x524D;&#x505A;&#x4E00;&#x7CFB;&#x5217;&#x7684;sql&#x914D;&#x7F6E;,&#x5305;&#x62EC;:&#x8BBE;&#x7F6E;&#x53C2;&#x6570;&#x503C;,&#x6392;&#x5E8F;,&#x7B49;&#x7B49;&#x64CD;&#x4F5C;.</p>
+<p>&#x5BF9;&#x8C61;&#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;&#x53CA;&#x7B80;&#x5355;&#x8BF4;&#x660E;&#x5982;&#x4E0B;:</p>
+<p><strong>&#x53C2;&#x6570;&#x8BBE;&#x7F6E;:</strong></p>
+<p>&#x8BBE;&#x7F6E;&#x547D;&#x540D;&#x53C2;&#x6570;&#x503C;&#x7684;&#x65B9;&#x6CD5;:</p>
+<ul>
+<li><code>Query&lt;T&gt; param(String name,Object value)</code></li>
+<li><code>Query&lt;T&gt; params(@Nullable Map&lt;String, Object&gt; map)</code></li>
+<li><code>Query&lt;T&gt; params(@Nullable DynaBean bean)</code></li>
+</ul>
+<p>&#x4EE5;&#x4E0A;&#x65B9;&#x6CD5;&#x6700;&#x7EC8;&#x90FD;&#x4F1A;&#x8F6C;&#x5316;&#x4E3A;key/value&#x5F62;&#x5F0F;&#x7684;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7ED9;&#x67E5;&#x8BE2;sql,&#x5E76;&#x5BF9;&#x5E94;&#x8BBE;&#x7F6E;&#x5230;&#x547D;&#x540D;&#x53C2;&#x6570;&#x4E2D;&#x53BB;.</p>
+<p>&#x8BBE;&#x7F6E;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;&#x7684;&#x53C2;&#x6570;&#x503C;:</p>
+<ul>
+<li><code>Query&lt;T&gt; param(Object arg)</code></li>
+<li><code>Query&lt;T&gt; params(Object[] args)</code></li>
+</ul>
+<p>&#x4EE5;&#x4E0A;&#x65B9;&#x6CD5;&#x76F8;&#x5F53;&#x4E8E;&#x5BF9;&#x547D;&#x540D;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;&#x4E3A;<code>$0</code>&#x7684;&#x53C2;&#x6570;&#x8BBE;&#x7F6E;&#x503C;,&#x6BD4;&#x5982;</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span> = :$<span class="hljs-number">0</span>
+</span></code></pre>
+<p><strong>&#x67E5;&#x8BE2;&#x884C;&#x6570;:</strong></p>
+<ul>
+<li><code>Query&lt;T&gt; limit(Integer rows)</code></li>
+<li><code>Query&lt;T&gt; limit(int startRows,int endRows)</code></li>
+<li><code>Query&lt;T&gt; limit(Limit limit)</code></li>
+<li><code>QueryResult&lt;T&gt; result(Limit limit)</code></li>
+</ul>
+<p>&#x4EE5;&#x4E0A;&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x5728;&#x67E5;&#x8BE2;&#x524D;&#x8BBE;&#x7F6E;&#x67E5;&#x8BE2;&#x884C;&#x6570;,&#x7C7B;&#x4F3C;&#x4E8E;mysql&#x6570;&#x636E;&#x5E93;&#x7684;<code>limit</code>&#x5173;&#x952E;&#x5B57;,&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;<code>result(Limit limit)</code>&#x65B9;&#x6CD5;&#x662F;&#x7ACB;&#x5373;&#x6267;&#x884C;sql,&#x5E76;&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;,&#x5176;&#x4ED6;&#x7684;&#x65B9;&#x6CD5;&#x90FD;&#x662F;&#x8BBE;&#x7F6E;&#x53C2;&#x6570;&#x800C;&#x6682;&#x65F6;&#x4E0D;&#x6267;&#x884C;sql.</p>
+<p><strong>&#x5206;&#x9875;&#x67E5;&#x8BE2;:</strong></p>
+<ul>
+<li><code>PageResult&lt;T&gt; pageResult(Page page)</code></li>
+<li><code>PageResult&lt;T&gt; pageResult(int index,int size)</code></li>
+</ul>
+<p>&#x4EE5;&#x4E0A;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x8BBE;&#x7F6E;&#x5206;&#x9875;&#x67E5;&#x8BE2;</p>
+<p><strong>&#x6392;&#x5E8F;:</strong></p>
+<ul>
+<li><code>Query&lt;T&gt; orderBy(String expression)</code></li>
+</ul>
+<p>&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x67E5;&#x8BE2;&#x7684;&#x6392;&#x5E8F;&#x53C2;&#x6570;.&#x53C2;&#x6570;&#x503C;&#x793A;&#x4F8B;:<code>Model.query(sqlkey).orderBy(&quot;id ASC&quot;)</code></p>
+<p><strong>&#x6267;&#x884C;&#x67E5;&#x8BE2;:</strong></p>
+<ul>
+<li><code>long count()</code></li>
+<li><code>T first()</code></li>
+<li><code>T firstOrNull()</code></li>
+<li><code>T single()</code></li>
+<li><code>T singleOrNull()</code></li>
+</ul>
+<p>&#x4EE5;&#x4E0A;&#x63A5;&#x53E3;&#x53EF;&#x4EE5;&#x53C2;&#x8003;Model&#x5BF9;&#x5E94;&#x7684;&#x63A5;&#x53E3;&#x8BF4;&#x660E;.</p>
+<ul>
+<li><code>List&lt;T&gt; list()</code></li>
+</ul>
+<p>&#x6267;&#x884C;&#x67E5;&#x8BE2;&#x5E76;&#x5C06;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5305;&#x88C5;&#x6210;&#x5217;&#x8868;&#x8FD4;&#x56DE;.</p>
+<p><strong>Scalar&#x548C;Scalars:</strong></p>
+<ul>
+<li><code>Scalar scalar()</code></li>
+<li><code>Scalar scalarOrNull()</code></li>
+<li><code>Scalars scalars()</code></li>
+</ul>
+<p>&#x4EE5;&#x4E0A;&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;&#x90FD;&#x662F;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;Scalar&#x5BF9;&#x8C61;,&#x6709;&#x4E9B;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x53EF;&#x80FD;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x67E5;&#x8BE2;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6240;&#x6709;&#x5C5E;&#x6027;,&#x53EA;&#x9700;&#x8981;&#x5176;&#x4E2D;&#x67D0;&#x4E2A;&#x5C5E;&#x6027;(&#x5982;:id),&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5982;&#x679C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;Model&#x5BF9;&#x8C61;&#x5217;&#x8868;,&#x6211;&#x4EEC;&#x518D;&#x8F6C;&#x6362;&#x4E00;&#x6B21;&#x662F;&#x975E;&#x5E38;&#x9EBB;&#x70E6;&#x7684;,&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;Scalar&#x5BF9;&#x8C61;&#x4E86;.</p>
+<p>&#x6BD4;&#x5982;:</p>
+<pre><code class="lang-java">String id = Model.query(<span class="hljs-string">&quot;SELECT id FROM model&quot;</span>).scalar().get(String.class);
+</code></pre>
+<p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;,<code>scalar()</code>&#x76F8;&#x5F53;&#x4E8E;<code>Model.single()</code>,&#x5F53;&#x6CA1;&#x6709;&#x67E5;&#x627E;&#x5230;&#x8BB0;&#x5F55;&#x6216;&#x8005;&#x67E5;&#x627E;&#x5230;&#x7684;&#x8BB0;&#x5F55;&#x591A;&#x4E8E;&#x4E00;&#x884C;&#x90FD;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;,<code>scalarOrNull()</code>&#x7C7B;&#x4F3C;<code>Model.singleOrNull()</code>.<br>&#x5728;&#x6211;&#x4EEC;&#x4E0D;&#x786E;&#x5B9A;&#x884C;&#x6570;&#x7684;&#x60C5;&#x51B5;&#x4E0B;,&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>scalars()</code>,Scalars&#x7684;&#x7528;&#x6CD5;&#x548C;<code>Scalar</code>&#x7C7B;&#x4F3C;,&#x53EA;&#x4E0D;&#x8FC7;&#x662F;&#x9488;&#x5BF9;&#x591A;&#x884C;&#x8BB0;&#x5F55;&#x7684;&#x800C;&#x5DF2;.</p>
+<p><strong>&#x4F7F;&#x7528;&#x793A;&#x4F8B;:</strong></p>
+<ul>
+<li>&#x547D;&#x540D;&#x53C2;&#x6570;&#x3001;&#x67E5;&#x8BE2;&#x884C;&#x6570;&#x3001;&#x6392;&#x5E8F;&#x3001;&#x5217;&#x8868;&#x7ED3;&#x679C;&#x4F7F;&#x7528;&#x793A;&#x4F8B;</li>
+</ul>
+<pre><code class="lang-java">Map map = <span class="hljs-keyword">new</span> Map();
+map.put(<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-number">3</span>);
+
+List&lt;User&gt; list = User.&lt;User&gt;query(<span class="hljs-string">&quot;SELECT * FROM user WHERE name=:name AND age &gt; :age&quot;</span>).param(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;jim&quot;</span>).param(map)
+.limit(<span class="hljs-number">2</span>).orderBy(<span class="hljs-string">&quot;id DESC&quot;</span>).list();
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;jim&apos;</span> <span class="hljs-keyword">AND</span> age &gt; <span class="hljs-number">3</span> <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">id</span> <span class="hljs-keyword">DESC</span> <span class="hljs-keyword">limit</span> <span class="hljs-number">0</span>,<span class="hljs-number">2</span>
+</span></code></pre>
+<blockquote>
+<p>query(sqlOrKey)&#x9ED8;&#x8BA4;&#x8FD4;&#x56DE;&#x7684;&#x662F;EntityQuery<Model>,&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x6211;&#x4EEC;&#x6307;&#x5B9A;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;,&#x6240;&#x4EE5;&#x4F7F;&#x7528;<User>query(sqlOrKey)&#x6307;&#x5B9A;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;.</User></Model></p>
+</blockquote>
+<hr>
+<h3 id="criteriaquery&#x67E5;&#x8BE2;"><a id="criteria_query"></a><code>CriteriaQuery</code>&#x67E5;&#x8BE2;</h3>
+<pre><code class="lang-java">query();
+where();
+where(Condition&lt;T&gt; condition);
+where(String expression);
+where(String expression,Object... args);
+</code></pre>
+<h5 id="t-extends-model-criteriaqueryt-query"><code>&lt;T extends Model&gt; CriteriaQuery&lt;T&gt; query()</code></h5>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65E0;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;&#x7684;CriteriaQuery&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;</p>
+<h5 id="t-extends-model-criteriawheret-where"><code>&lt;T extends Model&gt; CriteriaWhere&lt;T&gt; where()</code></h5>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65E0;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;&#x7684;CriteriaQuery&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;,&#x548C;<code>&lt;T extends Model&gt; CriteriaQuery&lt;T&gt; query()</code>&#x6548;&#x679C;&#x76F8;&#x540C;</p>
+<h5 id="t-extends-model-criteriaqueryt-whereconditiont-condition"><code>&lt;T extends Model&gt; CriteriaQuery&lt;T&gt; where(Condition&lt;T&gt; condition)</code></h5>
+<p>// &#x9884;&#x7559;&#x63A5;&#x53E3;,&#x6682;&#x4E0D;&#x53EF;&#x7528;</p>
+<h5 id="t-extends-model-criteriaqueryt-wherestring-expression"><code>&lt;T extends Model&gt; CriteriaQuery&lt;T&gt; where(String expression)</code></h5>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;CriteriaQuery&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;&#x5E76;&#x6DFB;&#x52A0;&#x53C2;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;expression</p>
+<h5 id="t-extends-model-criteriaqueryt-wherestring-expressionobject-args"><code>&lt;T extends Model&gt; CriteriaQuery&lt;T&gt; where(String expression,Object... args)</code></h5>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;CriteriaQuery&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;&#x5E76;&#x6DFB;&#x52A0;&#x5305;&#x542B;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;&#x7684;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;,args&#x8868;&#x793A;&#x53C2;&#x6570;&#x503C;</p>
+<h5 id="criteriaquery&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;"><code>CriteriaQuery</code>&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;</h5>
+<p>&#x4E0E;<code>EntityQuery</code>&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;&#x7684;&#x7528;&#x6CD5;&#x7C7B;&#x4F3C;,&#x53EA;&#x662F;&#x591A;&#x4E86;where&#x7684;&#x591A;&#x4E2A;&#x91CD;&#x8F7D;&#x65B9;&#x6CD5;&#x63D0;&#x4F9B;&#x8BBE;&#x7F6E;where&#x6761;&#x4EF6;,&#x4E3E;&#x4F8B;&#x5982;&#x4E0B;:</p>
+<pre><code>User.where(&quot;name=? AND age = :age&quot;,&quot;jim&quot;,3).list();
+</code></pre><p>&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;jim&apos;</span> <span class="hljs-keyword">AND</span> age = <span class="hljs-number">3</span>
+</span></code></pre>
+<p>&#x8FD9;&#x91CC;&#x8981;&#x6CE8;&#x610F;,&#x4F7F;&#x7528;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;CriteriaQuery&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;,&#x53C2;&#x6570;&#x6570;&#x91CF;(&#x4E0D;&#x7BA1;&#x662F;&#x5360;&#x4F4D;&#x7B26;&#x8FD8;&#x662F;&#x547D;&#x540D;&#x5360;&#x4F4D;&#x7B26;)&#x5FC5;&#x987B;&#x4E0E;&#x53EF;&#x53D8;&#x4F20;&#x53C2;&#x7684;&#x53C2;&#x6570;&#x6570;&#x91CF;&#x4E00;&#x81F4;,&#x5426;&#x5219;&#x4F1A;&#x5BFC;&#x81F4;sql&#x89E3;&#x6790;&#x5F02;&#x5E38;.
+&#x5982;&#x679C;&#x4F7F;&#x7528;&#x547D;&#x540D;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;&#x67E5;&#x8BE2;&#x5BF9;&#x8C61;,&#x5219;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>param()</code>&#x65B9;&#x6CD5;&#x7ED9;&#x547D;&#x540D;&#x53C2;&#x6570;&#x5360;&#x4F4D;&#x7B26;&#x8BBE;&#x7F6E;&#x503C;</p>
+<hr>
+<h2 id="&#x4E8B;&#x52A1;&#x63A7;&#x5236;&#x65B9;&#x6CD5;"><a id="transaction"></a>&#x4E8B;&#x52A1;&#x63A7;&#x5236;&#x65B9;&#x6CD5;</h2>
+<pre><code class="lang-java">doTransaction(TransactionCallback callback);
+doTransaction(TransactionCallbackWithResult&lt;T&gt; callback);
+doTransaction(TransactionCallback callback, <span class="hljs-keyword">boolean</span> requiresNew);
+doTransaction(TransactionCallbackWithResult&lt;T&gt; callback, <span class="hljs-keyword">boolean</span> requiresNew);
+</code></pre>
+<h5 id="void-dotransactiontransactioncallback-callback"><code>void doTransaction(TransactionCallback callback)</code></h5>
+<p>&#x901A;&#x8FC7;&#x51FD;&#x6570;&#x63A5;&#x53E3;TransactionCallback&#x6267;&#x884C;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;,&#x4FDD;&#x8BC1;&#x6240;&#x6709;&#x64CD;&#x4F5C;&#x90FD;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x63A7;&#x5236;&#x4E0B;,&#x793A;&#x4F8B;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java">Model model1 = <span class="hljs-keyword">new</span> Model();
+Model model2 = <span class="hljs-keyword">new</span> Model();
+Model.doTransaction((TransactionStatus s)-&gt;{
+    model1.create();
+    model2.create();
+});
+</code></pre>
+<p>&#x6B64;&#x65F6;model1&#x7684;&#x63D2;&#x5165;&#x548C;model2&#x7684;&#x63D2;&#x5165;&#x8BB0;&#x5F55;&#x5728;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x63A7;&#x5236;&#x4E2D;,&#x5982;&#x679C;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x8BED;&#x53E5;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x4E86;,&#x90FD;&#x4F1A;&#x5BFC;&#x81F4;&#x6574;&#x4E2A;&#x4E8B;&#x52A1;&#x56DE;&#x6EDA;.<br>&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>TransactionStatus.setRollbackOnly()</code>&#x8BBE;&#x7F6E;&#x56DE;&#x6EDA;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>callback:&#x4E8B;&#x52A1;&#x63A7;&#x5236;&#x56DE;&#x8C03;&#x5BF9;&#x8C61;,&#x662F;&#x51FD;&#x6570;&#x63A5;&#x53E3;TransactionCallback&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;,&#x5728;<code>callback.doInTransaction()</code>&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x90FD;&#x4F1A;&#x53D7;&#x4E8B;&#x52A1;&#x63A7;&#x5236;</li>
+</ul>
+<h5 id="static-t-t-dotransactiontransactioncallbackwithresultt-callback"><code>static &lt;T&gt; T doTransaction(TransactionCallbackWithResult&lt;T&gt; callback)</code></h5>
+<p>&#x548C;<code>void doTransaction(TransactionCallback callback)</code>&#x76F8;&#x4F3C;,&#x533A;&#x522B;&#x5728;&#x4E8E;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x503C;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>callback:&#x4E8B;&#x52A1;&#x63A7;&#x5236;&#x56DE;&#x8C03;&#x5BF9;&#x8C61;,&#x662F;&#x51FD;&#x6570;&#x63A5;&#x53E3;TransactionCallbackWithResult&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;,&#x5728;<code>callback.doInTransaction()</code>&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x90FD;&#x4F1A;&#x53D7;&#x4E8B;&#x52A1;&#x63A7;&#x5236;,&#x5E76;&#x4E14;<code>callback.doInTransaction()</code>&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5C06;&#x76F4;&#x63A5;&#x4F5C;&#x4E3A;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x8FD4;&#x56DE;&#x503C;.</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>callback&#x7684;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;.</li>
+</ul>
+<h5 id="void-dotransactiontransactioncallback-callback-boolean-requiresnew"><code>void doTransaction(TransactionCallback callback, boolean requiresNew)</code></h5>
+<p>&#x548C;<code>void doTransaction(TransactionCallback callback)</code>&#x76F8;&#x4F3C;,&#x533A;&#x522B;&#x53C2;&#x6570;<code>requiresNew</code>,&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x8868;&#x793A;&#x662F;&#x5426;&#x4F7F;&#x7528;&#x76EE;&#x524D;&#x751F;&#x5B58;&#x7684;&#x4E8B;&#x52A1;&#x5BF9;&#x8C61;&#x8FD8;&#x662F;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x5BF9;&#x8C61;.</p>
+<p><code>void doTransaction(TransactionCallback callback)</code>&#x76F8;&#x5F53;&#x4E8E;<code>void doTransaction(TransactionCallback callback, false)</code></p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>callback:&#x4E8B;&#x52A1;&#x63A7;&#x5236;&#x56DE;&#x8C03;&#x5BF9;&#x8C61;,&#x662F;&#x51FD;&#x6570;&#x63A5;&#x53E3;TransactionCallbackWithResult&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;,&#x5728;<code>callback.doInTransaction()</code>&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x90FD;&#x4F1A;&#x53D7;&#x4E8B;&#x52A1;&#x63A7;&#x5236;,&#x5E76;&#x4E14;<code>callback.doInTransaction()</code>&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5C06;&#x76F4;&#x63A5;&#x4F5C;&#x4E3A;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x8FD4;&#x56DE;&#x503C;.</li>
+<li>requiresNew:&#x662F;&#x5426;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4E8B;&#x52A1;&#x5BF9;&#x8C61;,true&#x8868;&#x793A;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x4E8B;&#x52A1;&#x5BF9;&#x8C61;,false&#x8868;&#x793A;&#x4E0D;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x4E8B;&#x52A1;&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="t-t-dotransactiontransactioncallbackwithresultt-callback-boolean-requiresnew"><code>&lt;T&gt; T doTransaction(TransactionCallbackWithResult&lt;T&gt; callback, boolean requiresNew)</code></h5>
+<p>&#x548C;<code>void doTransaction(TransactionCallback callback, boolean requiresNew)</code>&#x76F8;&#x4F3C;,&#x533A;&#x522B;&#x5728;&#x4E8E;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x503C;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>callback:&#x4E8B;&#x52A1;&#x63A7;&#x5236;&#x56DE;&#x8C03;&#x5BF9;&#x8C61;,&#x662F;&#x51FD;&#x6570;&#x63A5;&#x53E3;TransactionCallbackWithResult&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;,&#x5728;<code>callback.doInTransaction()</code>&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x90FD;&#x4F1A;&#x53D7;&#x4E8B;&#x52A1;&#x63A7;&#x5236;,&#x5E76;&#x4E14;<code>callback.doInTransaction()</code>&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5C06;&#x76F4;&#x63A5;&#x4F5C;&#x4E3A;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x8FD4;&#x56DE;&#x503C;.</li>
+<li>requiresNew:&#x662F;&#x5426;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4E8B;&#x52A1;&#x5BF9;&#x8C61;,true&#x8868;&#x793A;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x4E8B;&#x52A1;&#x5BF9;&#x8C61;,false&#x8868;&#x793A;&#x4E0D;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x4E8B;&#x52A1;&#x5BF9;&#x8C61;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>callback&#x7684;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;.</li>
+</ul>
+<hr>
+<h2 id="&#x6307;&#x4EE4;&#x65B9;&#x6CD5;"><a id="cmd"></a>&#x6307;&#x4EE4;&#x65B9;&#x6CD5;</h2>
+<pre><code class="lang-java">cmdInsert();
+cmdUpdate(Object id);
+</code></pre>
+<h5 id="insertcommand-cmdinsert"><code>InsertCommand cmdInsert()</code></h5>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x63D2;&#x5165;&#x6307;&#x4EE4;&#x5BF9;&#x8C61;,&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x94FE;&#x5F0F;&#x8C03;&#x7528;&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x5E76;&#x6700;&#x7EC8;&#x6267;&#x884C;&#x63D2;&#x5165;&#x8BB0;&#x5F55;&#x7684;sql.&#x793A;&#x4F8B;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java">Map map = <span class="hljs-keyword">new</span> HashMap();
+map.put(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>);
+Model.cmdInsert().setAll(map).set(<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-number">3</span>).execute();
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> <span class="hljs-keyword">model</span> (<span class="hljs-keyword">name</span>, age) <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-number">3</span>);</span>
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x63D2;&#x5165;&#x6307;&#x4EE4;&#x7684;&#x51E0;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x7B80;&#x5355;&#x8BF4;&#x660E;&#x5982;&#x4E0B;:</p>
+<ul>
+<li><code>getGeneratedId()</code>:&#x751F;&#x6210;&#x5E76;&#x8FD4;&#x56DE;id</li>
+<li><code>set(String name,Object value)</code>:&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x503C;</li>
+<li><code>setAll(Map&lt;String, Object&gt; map)</code>:&#x5C06;key/value&#x5BF9;&#x5E94;&#x4E3A;&#x5C5E;&#x6027;/&#x503C;&#x8BBE;&#x7F6E;&#x5230;&#x63D2;&#x5165;&#x6307;&#x4EE4;&#x4E2D;</li>
+<li><code>setAll(Object bean)</code>:&#x5C06;bean&#x7684;&#x5C5E;&#x6027;&#x540D;&#x548C;&#x5C5E;&#x6027;&#x503C;&#x6309;&#x7167;key/value&#x7684;&#x65B9;&#x5F0F;&#x8BBE;&#x7F6E;&#x5230;&#x6307;&#x4EE4;&#x4E2D;,&#x7C7B;&#x4F3C;<code>setAll(Map&lt;String, Object&gt; map)</code></li>
+<li><code>int execute()</code>:&#x6267;&#x884C;&#x6307;&#x4EE4;,&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x662F;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x521B;&#x5EFA;&#x7684;&#x63D2;&#x5165;&#x6307;&#x4EE4;&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="updatecommand-cmdupdateobject-id"><code>UpdateCommand cmdUpdate(Object id)</code></h5>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x66F4;&#x65B0;&#x6307;&#x4EE4;&#x5BF9;&#x8C61;,&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x94FE;&#x5F0F;&#x8C03;&#x7528;&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x5E76;&#x6700;&#x7EC8;&#x6267;&#x884C;&#x66F4;&#x65B0;&#x8BB0;&#x5F55;&#x7684;sql.&#x793A;&#x4F8B;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java">Map map = <span class="hljs-keyword">new</span> HashMap();
+map.put(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>);
+Model.cmdUpdate().id(<span class="hljs-string">&quot;id&quot;</span>).setAll(map).set(<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-number">3</span>).execute();
+</code></pre>
+<p>&#x6700;&#x7EC8;&#x6267;&#x884C;&#x7684;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">model</span> <span class="hljs-keyword">SET</span> <span class="hljs-keyword">name</span>=<span class="hljs-string">&apos;a&apos;</span>, age=<span class="hljs-number">3</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">id</span>=<span class="hljs-string">&apos;id&apos;</span>
+</span></code></pre>
+<p>&#x8FD9;&#x4E2A;&#x63D2;&#x5165;&#x6307;&#x4EE4;&#x7684;&#x51E0;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x7B80;&#x5355;&#x8BF4;&#x660E;&#x5982;&#x4E0B;:</p>
+<ul>
+<li><code>id(Object id)</code>:&#x8BBE;&#x7F6E;&#x66F4;&#x65B0;&#x8BB0;&#x5F55;&#x7684;id</li>
+<li><code>set(String name,Object value)</code>:&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x503C;</li>
+<li><code>setAll(Map&lt;String, Object&gt; map)</code>:&#x5C06;key/value&#x5BF9;&#x5E94;&#x4E3A;&#x5C5E;&#x6027;/&#x503C;&#x8BBE;&#x7F6E;&#x5230;&#x63D2;&#x5165;&#x6307;&#x4EE4;&#x4E2D;</li>
+<li><code>setAll(Object bean)</code>:&#x5C06;bean&#x7684;&#x5C5E;&#x6027;&#x540D;&#x548C;&#x5C5E;&#x6027;&#x503C;&#x6309;&#x7167;key/value&#x7684;&#x65B9;&#x5F0F;&#x8BBE;&#x7F6E;&#x5230;&#x6307;&#x4EE4;&#x4E2D;,&#x7C7B;&#x4F3C;<code>setAll(Map&lt;String, Object&gt; map)</code></li>
+<li><code>int execute()</code>:&#x6267;&#x884C;&#x6307;&#x4EE4;,&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x662F;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x521B;&#x5EFA;&#x7684;&#x66F4;&#x65B0;&#x6307;&#x4EE4;&#x5BF9;&#x8C61;</li>
+</ul>
+<hr>
+<h2 id="&#x5176;&#x4ED6;&#x65B9;&#x6CD5;"><a id="other"></a>&#x5176;&#x4ED6;&#x65B9;&#x6CD5;</h2>
+<h3 id="&#x5B9E;&#x4F8B;&#x521B;&#x5EFA;&#x65B9;&#x6CD5;"><a id="newinstance"></a>&#x5B9E;&#x4F8B;&#x521B;&#x5EFA;&#x65B9;&#x6CD5;</h3>
+<pre><code class="lang-java">newInstance();
+newInstance(Object id);
+</code></pre>
+<h5 id="t-extends-model-t-newinstance"><code>&lt;T extends Model&gt; T newInstance()</code></h5>
+<p>&#x521B;&#x5EFA;Model&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x521B;&#x5EFA;&#x7684;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="t-extends-model-t-newinstanceobject-id"><code>&lt;T extends Model&gt; T newInstance(Object id)</code></h5>
+<p>&#x521B;&#x5EFA;Model&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;,&#x5E76;&#x7ED9;&#x8BE5;&#x5BF9;&#x8C61;&#x7684;id&#x8BBE;&#x7F6E;&#x503C;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>id:&#x521B;&#x5EFA;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x521B;&#x5EFA;&#x7684;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;</li>
+</ul>
+<hr>
+<h3 id="&#x6570;&#x636E;&#x5E93;&#x76F8;&#x5173;&#x65B9;&#x6CD5;"><a id="database"></a>&#x6570;&#x636E;&#x5E93;&#x76F8;&#x5173;&#x65B9;&#x6CD5;</h3>
+<pre><code class="lang-java">dao();
+dmo();
+metamodel();
+db();
+count();
+</code></pre>
+<h5 id="dao-dao"><code>Dao dao()</code></h5>
+<p>&#x8FD4;&#x56DE;&#x5F53;&#x524D;Model&#x7C7B;&#x7684;dao&#x5BF9;&#x8C61;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x5F53;&#x524D;Model&#x7C7B;&#x7684;dao&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="dmo-dmo"><code>Dmo dmo()</code></h5>
+<p>&#x8FD4;&#x56DE;&#x5F53;&#x524D;Model&#x7C7B;&#x7684;dmo&#x5BF9;&#x8C61;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x5F53;&#x524D;Model&#x7C7B;&#x7684;dmo&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="entitymapping-metamodel"><code>EntityMapping metamodel()</code></h5>
+<p>&#x8FD4;&#x56DE;&#x5F53;&#x524D;Model&#x7C7B;&#x7684;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;,&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x7528;&#x4E8E;&#x8BB0;&#x5F55;Model&#x7C7B;&#x548C;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x5173;&#x7CFB;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x5F53;&#x524D;Model&#x7C7B;&#x7684;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="db-db"><code>Db db()</code></h5>
+<p>&#x8FD4;&#x56DE;&#x5F53;&#x524D;Model&#x7C7B;&#x7684;Db&#x5BF9;&#x8C61;,&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x8868;&#x793A;&#x7684;&#x662F;&#x6570;&#x636E;&#x5E93;&#x5BF9;&#x8C61;,&#x5305;&#x542B;&#x4E86;&#x6570;&#x636E;&#x5E93;&#x7684;&#x4FE1;&#x606F;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x5F53;&#x524D;Model&#x7C7B;&#x7684;Db&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="long-count"><code>long count()</code></h5>
+<p>&#x8FD4;&#x56DE;&#x5F53;&#x524D;Model&#x7C7B;&#x5BF9;&#x5E94;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x8BB0;&#x5F55;&#x6570;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x5F53;&#x524D;Model&#x7C7B;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x8BB0;&#x5F55;&#x884C;&#x6570;</li>
+</ul>
+<hr>
+<h3 id="&#x666E;&#x901A;&#x64CD;&#x4F5C;&#x76F8;&#x5173;&#x65B9;&#x6CD5;"><a id="operate"></a>&#x666E;&#x901A;&#x64CD;&#x4F5C;&#x76F8;&#x5173;&#x65B9;&#x6CD5;</h3>
+<pre><code class="lang-java">getEntityName();
+contains(String field);
+get(String field);
+get(Named field);
+getString(String field);
+getInteger(String field);
+fields();
+id();
+id(Object id);
+set(String field,Object value);
+createdAt();
+updatedAt();
+set(Named field,Object value);
+setAll(Map&lt;String,? extends Object&gt; fields);
+refresh();
+validate();
+errors();
+validate(<span class="hljs-keyword">int</span> maxErrors);
+getProperty(String name);
+setProperty(String name, Object value);
+getProperties();
+</code></pre>
+<h5 id="string-getentityname"><code>String getEntityName()</code></h5>
+<p>&#x83B7;&#x53D6;Model&#x7C7B;&#x7684;&#x7C7B;&#x540D;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;Model&#x7C7B;&#x540D;</li>
+</ul>
+<h5 id="boolean-containsstring-field"><code>boolean contains(String field)</code></h5>
+<p>&#x68C0;&#x9A8C;Model&#x7C7B;&#x662F;&#x5426;&#x5305;&#x542B;&#x6307;&#x5B9A;&#x5C5E;&#x6027;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>field:&#x9700;&#x8981;&#x6821;&#x9A8C;&#x7684;&#x5C5E;&#x6027;&#x540D;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x5982;&#x679C;Model&#x7C7B;&#x5305;&#x542B;&#x5C5E;&#x6027;<code>field</code>&#x5219;&#x8FD4;&#x56DE;true,&#x5426;&#x5219;&#x8FD4;&#x56DE;false</li>
+</ul>
+<h5 id="object-getstring-field"><code>Object get(String field)</code></h5>
+<p>&#x4ECE;model&#x5BF9;&#x8C61;&#x4E2D;&#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x5C5E;&#x6027;&#x540D;&#x7684;&#x5C5E;&#x6027;&#x503C;.</p>
+<p>&#x8FD9;&#x91CC;&#x8981;&#x7279;&#x522B;&#x6CE8;&#x610F;,&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x503C;&#x5E76;&#x4E0D;&#x4E00;&#x5B9A;&#x662F;Model&#x7C7B;&#x4E2D;&#x663E;&#x5F0F;&#x58F0;&#x660E;&#x7684;&#x5C5E;&#x6027;&#x503C;,&#x4E3E;&#x4F8B;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">model1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span></span>{
+    <span class="hljs-keyword">private</span> String id;
+    <span class="hljs-keyword">private</span> String name;
+
+    <span class="hljs-comment">// &#x7701;&#x7565;get&#x548C;set&#x65B9;&#x6CD5;</span>
+}
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">model2</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span></span>{
+    <span class="hljs-keyword">private</span> String id;
+    <span class="hljs-keyword">private</span> Integer age;
+
+    <span class="hljs-comment">// &#x7701;&#x7565;get&#x548C;set&#x65B9;&#x6CD5;</span>
+}
+</code></pre>
+<p>&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x6267;&#x884C;sql&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-sql"><span class="hljs-operator"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">m</span>.<span class="hljs-keyword">name</span>,<span class="hljs-keyword">m</span>.<span class="hljs-keyword">id</span>,<span class="hljs-keyword">n</span>.age <span class="hljs-keyword">FROM</span> model1 <span class="hljs-keyword">m</span> <span class="hljs-keyword">JOIN</span> model2 <span class="hljs-keyword">n</span> <span class="hljs-keyword">ON</span> <span class="hljs-keyword">m</span>.<span class="hljs-keyword">id</span>=<span class="hljs-keyword">n</span>.<span class="hljs-keyword">id</span>
+</span></code></pre>
+<p>&#x5C06;&#x6700;&#x7EC8;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x89E3;&#x6790;&#x5230;<code>List&lt;Model1&gt; list</code>&#x4E2D;&#x7684;&#x8BDD;,&#x6211;&#x4EEC;&#x4F1A;&#x53D1;&#x73B0;,<code>n.age</code>&#x7684;&#x5C5E;&#x6027;&#x901A;&#x8FC7;model1&#x7684;&#x5B9E;&#x4F8B;&#x5C5E;&#x6027;&#x662F;&#x65E0;&#x6CD5;&#x83B7;&#x53D6;&#x7684;,&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x6765;&#x83B7;&#x53D6;&#x4E86;:</p>
+<pre><code class="lang-java">model1.get(<span class="hljs-string">&quot;age&quot;</span>)
+</code></pre>
+<p>&#x6B64;&#x65F6;&#x5C31;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x8FD9;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x4E86;.</p>
+<p>&#x53E6;&#x5916;,&#x5982;&#x4E0B;&#x4E24;&#x4E2A;&#x65B9;&#x5F0F;&#x83B7;&#x53D6;&#x5B57;&#x6BB5;&#x503C;&#x7684;&#x7ED3;&#x679C;&#x662F;&#x7B49;&#x4EF7;&#x7684;:</p>
+<pre><code class="lang-java">model1.getName();
+model1.get(<span class="hljs-string">&quot;name&quot;</span>);
+</code></pre>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>field:&#x9700;&#x8981;&#x83B7;&#x53D6;&#x503C;&#x7684;&#x5C5E;&#x6027;&#x540D;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x5C5E;&#x6027;<code>field</code>&#x7684;&#x503C;</li>
+</ul>
+<h5 id="object-getnamed-field"><code>Object get(Named field)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>Object get(String field)</code>&#x4E00;&#x81F4;,&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x4E0D;&#x540C;&#x800C;&#x5DF2;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>field:Named&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;,Named&#x662F;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;,&#x8FD9;&#x4E2A;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;<code>field.getName()</code>&#x8FD4;&#x56DE;&#x5C5E;&#x6027;&#x540D;.</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x5C5E;&#x6027;<code>field</code>&#x7684;&#x503C;</li>
+</ul>
+<h5 id="string-getstringstring-field"><code>String getString(String field)</code></h5>
+<p>&#x83B7;&#x53D6;&#x5C5E;&#x6027;<code>field</code>&#x7684;&#x503C;&#x5E76;&#x8F6C;&#x6362;&#x6210;String&#x7C7B;&#x578B;&#x8FD4;&#x56DE;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>field:&#x5C5E;&#x6027;&#x540D;.</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x5C5E;&#x6027;<code>field</code>&#x7684;&#x503C;</li>
+</ul>
+<h5 id="integer-getintegerstring-field"><code>Integer getInteger(String field)</code></h5>
+<p>&#x83B7;&#x53D6;&#x5C5E;&#x6027;<code>field</code>&#x7684;&#x503C;&#x5E76;&#x8F6C;&#x6362;&#x6210;Integer&#x7C7B;&#x578B;&#x8FD4;&#x56DE;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>field:&#x5C5E;&#x6027;&#x540D;.</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x5C5E;&#x6027;<code>field</code>&#x7684;&#x503C;</li>
+</ul>
+<h5 id="mapstring-object-fields"><code>Map&lt;String, Object&gt; fields()</code></h5>
+<p>&#x4EE5;Map&#x7684;&#x65B9;&#x5F0F;&#x8FD4;&#x56DE;Model&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#x7684;&#x6240;&#x6709;&#x5C5E;&#x6027;&#x503C;(&#x5305;&#x62EC;&#x6CA1;&#x6709;&#x663E;&#x5F0F;&#x58F0;&#x660E;&#x4F46;&#x662F;&#x6709;&#x8BBE;&#x7F6E;&#x7684;&#x503C;),&#x8FD9;&#x91CC;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x5C5E;&#x6027;&#x526F;&#x672C;,&#x5BF9;&#x8FD9;&#x4E2A;&#x526F;&#x672C;&#x7684;&#x64CD;&#x4F5C;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;&#x6240;&#x6709;&#x5C5E;&#x6027;&#x503C;.</li>
+</ul>
+<h5 id="object-id"><code>Object id()</code></h5>
+<p>&#x8FD4;&#x56DE;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;id</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;id</li>
+</ul>
+<h5 id="t-extends-model-t-idobject-id"><code>&lt;T extends Model&gt; T id(Object id)</code></h5>
+<p>&#x8BBE;&#x7F6E;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;id</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x672C;&#x8EAB;</li>
+</ul>
+<h5 id="t-extends-model-t-setstring-fieldobject-value"><code>&lt;T extends Model&gt; T set(String field,Object value)</code></h5>
+<p>&#x8BBE;&#x7F6E;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;,&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x4E0D;&#x4E00;&#x5B9A;&#x662F;&#x8981;Model&#x7C7B;&#x663E;&#x5F0F;&#x58F0;&#x660E;&#x7684;&#x5C5E;&#x6027;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>field:&#x8981;&#x8BBE;&#x7F6E;&#x7684;&#x5C5E;&#x6027;&#x540D;</li>
+<li>value:&#x8981;&#x8BBE;&#x7F6E;&#x7684;&#x5C5E;&#x6027;&#x503C;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x672C;&#x8EAB;</li>
+</ul>
+<h5 id="timestamp-createdat"><code>Timestamp createdAt()</code></h5>
+<p>&#x8FD4;&#x56DE;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;&#x65F6;&#x95F4;,&#x5982;&#x679C;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x6CA1;&#x6709;<code>createdAt</code>&#x5C5E;&#x6027;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<p>&#x8FD4;&#x56DE;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;<code>createdAt</code>&#x5C5E;&#x6027;&#x503C;</p>
+<h5 id="timestamp-updatedat"><code>Timestamp updatedAt()</code></h5>
+<p>&#x8FD4;&#x56DE;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;&#x65F6;&#x95F4;,&#x5982;&#x679C;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x6CA1;&#x6709;<code>updatedAt</code>&#x5C5E;&#x6027;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;<code>updatedAt</code>&#x5C5E;&#x6027;&#x503C;</li>
+</ul>
+<h5 id="t-extends-model-t-setnamed-fieldobject-value"><code>&lt;T extends Model&gt; T set(Named field,Object value)</code></h5>
+<p>&#x4E0E;<code>&lt;T extends Model&gt; T set(String field,Object value)</code>&#x7C7B;&#x4F3C;</p>
+<h5 id="t-extends-model-t-setallmapstring-extends-object-fields"><code>&lt;T extends Model&gt; T setAll(Map&lt;String,? extends Object&gt; fields)</code></h5>
+<p>&#x540C;&#x65F6;&#x8BBE;&#x7F6E;&#x591A;&#x4E2A;&#x5C5E;&#x6027;&#x503C;&#x5230;Model&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x4E2D;,&#x6548;&#x679C;&#x4E0E;&#x591A;&#x6B21;&#x8C03;&#x7528;<code>&lt;T extends Model&gt; T set(String field,Object value)</code>&#x76F8;&#x540C;</p>
+<h5 id="boolean-refresh"><code>boolean refresh()</code></h5>
+<p>&#x5237;&#x65B0;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;,&#x91CD;&#x65B0;&#x4ECE;&#x6570;&#x636E;&#x5E93;&#x8BFB;&#x53D6;&#x5404;&#x5C5E;&#x6027;&#x7684;&#x503C;.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x5237;&#x65B0;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;true.</li>
+</ul>
+<h5 id="boolean-validate"><code>boolean validate()</code></h5>
+<p>&#x6839;&#x636E;Model&#x7C7B;&#x7684;&#x5B57;&#x6BB5;&#x9650;&#x5236;(@Column&#x6CE8;&#x89E3;&#x6216;&#x8005;&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;&#x7684;&#x5176;&#x4ED6;&#x9650;&#x5236;)&#x6821;&#x9A8C;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x6821;&#x9A8C;&#x4E0D;&#x901A;&#x8FC7;&#x5219;&#x8FD4;&#x56DE;false,&#x901A;&#x8FC7;&#x5219;&#x8FD4;&#x56DE;true</li>
+</ul>
+<h5 id="errors-errors"><code>Errors errors()</code></h5>
+<p>&#x8FD4;&#x56DE;Model&#x7684;&#x6821;&#x9A8C;&#x51FA;&#x9519;&#x7684;&#x7ED3;&#x679C;,&#x5F53;&#x8C03;&#x7528;<code>validate()</code>&#x7B49;&#x6821;&#x9A8C;&#x65B9;&#x6CD5;&#x65F6;,&#x5982;&#x679C;&#x6821;&#x9A8C;&#x5931;&#x8D25;,&#x5C31;&#x4F1A;&#x5C06;&#x6821;&#x9A8C;&#x5931;&#x8D25;&#x7684;&#x4FE1;&#x606F;&#x653E;&#x5230;&#x8FD9;&#x4E2A;error&#x5BF9;&#x8C61;&#x4E2D;.</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x6821;&#x9A8C;&#x5931;&#x8D25;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</li>
+</ul>
+<h5 id="boolean-validateint-maxerrors"><code>boolean validate(int maxErrors)</code></h5>
+<p>&#x6839;&#x636E;Model&#x7C7B;&#x7684;&#x5B57;&#x6BB5;&#x9650;&#x5236;(@Column&#x6CE8;&#x89E3;&#x6216;&#x8005;&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;&#x7684;&#x5176;&#x4ED6;&#x9650;&#x5236;)&#x6821;&#x9A8C;Model&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<p>maxErrors:&#x6700;&#x5927;&#x6821;&#x9A8C;&#x5931;&#x8D25;&#x6570;</p>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x6821;&#x9A8C;&#x4E0D;&#x901A;&#x8FC7;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x5927;&#x4E8E;<code>maxErrors</code>&#x65F6;&#x8FD4;&#x56DE;false,&#x53CD;&#x4E4B;&#x8FD9;&#x8FD4;&#x56DE;true</li>
+</ul>
+<h5 id="object-getpropertystring-name"><code>Object getProperty(String name)</code></h5>
+<p>&#x4E0E;<code>Object get(String field)</code>&#x6548;&#x679C;&#x76F8;&#x540C;</p>
+<h5 id="void-setpropertystring-name-object-value"><code>void setProperty(String name, Object value)</code></h5>
+<p>&#x4E0E;<code>&lt;T extends Model&gt; T set(String field,Object value)</code>&#x6548;&#x679C;&#x76F8;&#x540C;,&#x4F46;&#x662F;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;</p>
+<h5 id="mapstring-object-getproperties"><code>Map&lt;String, Object&gt; getProperties()</code></h5>
+<p>&#x4E0E;<code>Map&lt;String, Object&gt; fields()</code>&#x6548;&#x679C;&#x76F8;&#x540C;</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../orm/interface.html" class="navigation navigation-prev " aria-label="Previous page: ORM接口说明"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../orm/dao_interface.html" class="navigation navigation-next " aria-label="Next page: DAO接口"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-disqus/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"disqus":{"shortName":"introducetogitbook","useIdentifier":false},"highlight":{},"search":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

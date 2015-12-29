@@ -1,0 +1,1083 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Model应用 | Sample GitBook</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.5.1">
+        <meta name="author" content="kael &lt;penghj@bingosoft.net&gt;">
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-disqus/plugin.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../orm/dao_and_transaction.html" />
+    
+    
+    <link rel="prev" href="../orm/datasource_conf.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="7.2" data-chapter-title="Model应用" data-filepath="orm/model_used.md" data-basepath=".." data-revision="Mon Dec 28 2015 16:29:24 GMT+0800 (中国标准时间)">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        前言
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="getting-start/index.html">
+            
+                
+                    <a href="../getting-start/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        快速开始
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="getting-start/construction.html">
+            
+                
+                    <a href="../getting-start/construction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        快速环境搭建
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="getting-start/introduce.html">
+            
+                
+                    <a href="../getting-start/introduce.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        示例工程说明
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="getting-start/first_action.html">
+            
+                
+                    <a href="../getting-start/first_action.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        自定义第一个action
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="created-project/index.html">
+            
+                
+                    <a href="../created-project/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        新建WEB工程
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="leap-context/index.html">
+            
+                
+                    <a href="../leap-context/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        控制反转和依赖注入
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="app-init/index.html">
+            
+                
+                    <a href="../app-init/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        应用初始化
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1" data-path="app-init/global.html">
+            
+                
+                    <a href="../app-init/global.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.1.</b>
+                        
+                        Global使用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="app-init/applistener.html">
+            
+                
+                    <a href="../app-init/applistener.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.2.</b>
+                        
+                        应用监听器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="mvc/index.html">
+            
+                
+                    <a href="../mvc/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        MVC
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="mvc/route_rule.html">
+            
+                
+                    <a href="../mvc/route_rule.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        路由规则
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="mvc/leap_controller.html">
+            
+                
+                    <a href="../mvc/leap_controller.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        controller和action的使用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="mvc/binding_params.html">
+            
+                
+                    <a href="../mvc/binding_params.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        智能参数绑定
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="mvc/filter.html">
+            
+                
+                    <a href="../mvc/filter.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.4.</b>
+                        
+                        拦截器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="template/index.html">
+            
+                
+                    <a href="../template/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        模板引擎
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.1" data-path="template/conception.html">
+            
+                
+                    <a href="../template/conception.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.1.</b>
+                        
+                        基础概念
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="template/syntax.html">
+            
+                
+                    <a href="../template/syntax.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.2.</b>
+                        
+                        基础语法
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="template/directive.html">
+            
+                
+                    <a href="../template/directive.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.3.</b>
+                        
+                        指令集
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="template/directive_used.html">
+            
+                
+                    <a href="../template/directive_used.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.4.</b>
+                        
+                        指令应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="template/development.html">
+            
+                
+                    <a href="../template/development.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.5.</b>
+                        
+                        htpl开发优化
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7" data-path="orm/index.html">
+            
+                
+                    <a href="../orm/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.</b>
+                        
+                        ORM
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.1" data-path="orm/datasource_conf.html">
+            
+                
+                    <a href="../orm/datasource_conf.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.1.</b>
+                        
+                        数据源配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="7.2" data-path="orm/model_used.html">
+            
+                
+                    <a href="../orm/model_used.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.2.</b>
+                        
+                        Model应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="orm/dao_and_transaction.html">
+            
+                
+                    <a href="../orm/dao_and_transaction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.3.</b>
+                        
+                        dao对象和事务控制
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="orm/multiple_data_sources.html">
+            
+                
+                    <a href="../orm/multiple_data_sources.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.4.</b>
+                        
+                        多数据源应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="orm/interface.html">
+            
+                
+                    <a href="../orm/interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.</b>
+                        
+                        ORM接口说明
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.5.1" data-path="orm/model_interface.html">
+            
+                
+                    <a href="../orm/model_interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.1.</b>
+                        
+                        Model接口
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5.2" data-path="orm/dao_interface.html">
+            
+                
+                    <a href="../orm/dao_interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.2.</b>
+                        
+                        DAO接口
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="orm/sql_conf.html">
+            
+                
+                    <a href="../orm/sql_conf.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.6.</b>
+                        
+                        sql配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.7" data-path="orm/dynamic_sql.html">
+            
+                
+                    <a href="../orm/dynamic_sql.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.7.</b>
+                        
+                        动态sql应用
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8" data-path="security/index.html">
+            
+                
+                    <a href="../security/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.</b>
+                        
+                        安全模块
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.1" data-path="security/login_validate.html">
+            
+                
+                    <a href="../security/login_validate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.1.</b>
+                        
+                        登录校验
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="security/csrf_validate.html">
+            
+                
+                    <a href="../security/csrf_validate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.2.</b>
+                        
+                        CSRF校验
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="security/xss_defense.html">
+            
+                
+                    <a href="../security/xss_defense.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.3.</b>
+                        
+                        XSS攻击防御
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.4" data-path="security/cors_support.html">
+            
+                
+                    <a href="../security/cors_support.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.4.</b>
+                        
+                        CORS支持
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >Sample GitBook</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="model&#x5E94;&#x7528;">Model&#x5E94;&#x7528;</h1>
+<p>&#x73B0;&#x5728;&#x6570;&#x636E;&#x5E93;&#x521B;&#x5EFA;&#x548C;&#x6570;&#x636E;&#x6E90;&#x914D;&#x7F6E;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;,&#x6211;&#x4EEC;&#x7684;&#x5E94;&#x7528;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#x4E86;,&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5C06;&#x5F00;&#x59CB;&#x4F7F;&#x7528;leap-orm&#x6765;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;.
+leap-orm&#x652F;&#x6301;&#x4F7F;&#x7528;ActiveRecord&#x6A21;&#x5F0F;.ActiveRecord&#x662F;&#x7531;Rails&#x63D0;&#x51FA;&#x7684;&#x4E00;&#x79CD;ORM&#x6A21;&#x5F0F;,&#x5728;&#x5355;&#x8868;&#x7684;&#x6570;&#x636E;&#x64CD;&#x4F5C;&#x4E2D;&#x4F18;&#x52BF;&#x975E;&#x5E38;&#x660E;&#x663E;.
+&#x540C;&#x65F6;leap&#x4E5F;&#x652F;&#x6301;&#x4F7F;&#x7528;&#x4F20;&#x7EDF;&#x7684;dao&#x6A21;&#x5F0F;&#x7684;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#x65B9;&#x5F0F;,&#x5F25;&#x8865;&#x4E86;ActiveRecord&#x6A21;&#x5F0F;&#x5728;&#x591A;&#x8868;&#x67E5;&#x8BE2;&#x4E2D;&#x7684;&#x52A3;&#x52BF;.</p>
+<h3 id="&#x6570;&#x636E;&#x5E93;&#x8868;&#x548C;&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#x7684;&#x6620;&#x5C04;">&#x6570;&#x636E;&#x5E93;&#x8868;&#x548C;&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#x7684;&#x6620;&#x5C04;</h3>
+<p>&#x5728;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x5E93;&#x7684;&#x589E;&#x5220;&#x6539;&#x67E5;&#x4E4B;&#x524D;,&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5148;&#x521B;&#x5EFA;&#x5E94;&#x7528;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x8868;&#x6620;&#x5C04;&#x7684;&#x6A21;&#x578B;,&#x5728;<code>leap-project</code>&#x4E2D;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x5305;<code>leap.project.model</code>,&#x5E76;&#x5728;&#x8BE5;&#x5305;&#x4E0B;&#x521B;&#x5EFA;&#x5BF9;&#x5E94;&#x7684;&#x4E24;&#x4E2A;java&#x7C7B;,&#x5982;&#x4E0B;:</p>
+<pre><code>src/main/java
+    &#x2514;&#x3000;leap.project
+            &#x251C;&#x3000;controller
+            &#x251C;&#x3000;inteceptor
+            &#x251C;&#x3000;param
+            &#x2514;&#x3000;model
+                &#x251C;&#x3000;User.java
+                &#x2514;&#x3000;Post.java
+</code></pre><p>&#x8FD9;&#x4E24;&#x4E2A;&#x7C7B;&#x90FD;&#x5FC5;&#x987B;&#x7EE7;&#x627F;<code>leap.orm.model.Model</code>&#x7C7B;,&#x8FD9;&#x4E2A;&#x7C7B;&#x63D0;&#x4F9B;&#x4E86;&#x6240;&#x6709;ActiveRecord&#x6A21;&#x5F0F;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#x64CD;&#x4F5C;&#x63A5;&#x53E3;.<br>&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x6620;&#x5C04;&#x5173;&#x7CFB;,<code>User.java</code>&#x548C;<code>Post.java</code>&#x9700;&#x8981;&#x76F8;&#x5E94;&#x7684;&#x5C5E;&#x6027;&#x548C;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5B57;&#x6BB5;&#x5BF9;&#x5E94;,<code>User.java</code>&#x548C;<code>Post.java</code>&#x7684;&#x6E90;&#x4EE3;&#x7801;&#x5982;&#x4E0B;:</p>
+<p>User.java:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> leap.project.model;
+
+<span class="hljs-keyword">import</span> java.sql.Timestamp;
+
+<span class="hljs-keyword">import</span> leap.orm.annotation.Column;
+<span class="hljs-keyword">import</span> leap.orm.annotation.Id;
+<span class="hljs-keyword">import</span> leap.orm.annotation.Table;
+<span class="hljs-keyword">import</span> leap.orm.model.Model;
+<span class="hljs-annotation">@Table</span>(<span class="hljs-string">&quot;leap_user&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span> </span>{
+    <span class="hljs-annotation">@Id</span>
+    <span class="hljs-annotation">@Column</span>(name=<span class="hljs-string">&quot;id&quot;</span>)
+    <span class="hljs-keyword">private</span> String id;
+    <span class="hljs-annotation">@Column</span>(name=<span class="hljs-string">&quot;name&quot;</span>)
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-annotation">@Column</span>(name=<span class="hljs-string">&quot;age&quot;</span>)
+    <span class="hljs-keyword">private</span> Integer age;
+    <span class="hljs-keyword">private</span> String loginId;
+    <span class="hljs-annotation">@Column</span>(name=<span class="hljs-string">&quot;password&quot;</span>)
+    <span class="hljs-keyword">private</span> String password;
+    <span class="hljs-keyword">private</span> Timestamp createdAt;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> id;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setId</span><span class="hljs-params">(String id)</span> </span>{
+        <span class="hljs-keyword">this</span>.id = id;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> name;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>{
+        <span class="hljs-keyword">this</span>.name = name;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Integer <span class="hljs-title">getAge</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> age;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span><span class="hljs-params">(Integer age)</span> </span>{
+        <span class="hljs-keyword">this</span>.age = age;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getLoginId</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> loginId;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setLoginId</span><span class="hljs-params">(String loginId)</span> </span>{
+        <span class="hljs-keyword">this</span>.loginId = loginId;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getPassword</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> password;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setPassword</span><span class="hljs-params">(String password)</span> </span>{
+        <span class="hljs-keyword">this</span>.password = password;
+    }
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Timestamp <span class="hljs-title">getCreatedAt</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> createdAt;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCreatedAt</span><span class="hljs-params">(Timestamp createdAt)</span> </span>{
+        <span class="hljs-keyword">this</span>.createdAt = createdAt;
+    }
+}
+</code></pre>
+<p>Post.java:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> leap.project.model;
+
+<span class="hljs-keyword">import</span> java.sql.Timestamp;
+
+<span class="hljs-keyword">import</span> leap.orm.annotation.Column;
+<span class="hljs-keyword">import</span> leap.orm.annotation.Id;
+<span class="hljs-keyword">import</span> leap.orm.annotation.Table;
+<span class="hljs-keyword">import</span> leap.orm.model.Model;
+<span class="hljs-annotation">@Table</span>(<span class="hljs-string">&quot;leap_post&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Post</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span> </span>{
+    <span class="hljs-annotation">@Id</span>
+    <span class="hljs-annotation">@Column</span>(name=<span class="hljs-string">&quot;id&quot;</span>)
+    <span class="hljs-keyword">private</span> String id;
+    <span class="hljs-annotation">@Column</span>(name=<span class="hljs-string">&quot;name&quot;</span>)
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-annotation">@Column</span>(name=<span class="hljs-string">&quot;descript&quot;</span>)
+    <span class="hljs-keyword">private</span> String descript;
+    <span class="hljs-keyword">private</span> Timestamp createdAt;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> id;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setId</span><span class="hljs-params">(String id)</span> </span>{
+        <span class="hljs-keyword">this</span>.id = id;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> name;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>{
+        <span class="hljs-keyword">this</span>.name = name;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDescript</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> descript;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setDescript</span><span class="hljs-params">(String descript)</span> </span>{
+        <span class="hljs-keyword">this</span>.descript = descript;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Timestamp <span class="hljs-title">getCreatedAt</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> createdAt;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCreatedAt</span><span class="hljs-params">(Timestamp createdAt)</span> </span>{
+        <span class="hljs-keyword">this</span>.createdAt = createdAt;
+    }
+}
+</code></pre>
+<p>&#x4ECE;&#x6E90;&#x7801;&#x4E2D;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;,&#x5728;&#x7C7B;&#x540D;&#x4E0A;&#x6709;&#x4E00;&#x4E2A;<code>@Table</code>&#x7684;&#x6CE8;&#x89E3;,&#x5728;&#x5404;&#x4E2A;&#x5C5E;&#x6027;&#x4E0A;&#x4E5F;&#x6709;<code>@Column</code>&#x7684;&#x6CE8;&#x89E3;,&#x76F8;&#x4FE1;&#x8FD9;&#x91CC;&#x975E;&#x5E38;&#x597D;&#x7406;&#x89E3;&#x5404;&#x4E2A;&#x6CE8;&#x89E3;&#x7684;&#x610F;&#x601D;.<br>&#x9700;&#x8981;&#x8BF4;&#x660E;&#x7684;&#x662F;,&#x5B9E;&#x9645;&#x4E0A;&#x6CE8;&#x89E3;&#x5E76;&#x975E;&#x5FC5;&#x987B;&#x7684;,leap&#x4F1A;&#x626B;&#x63CF;&#x6240;&#x6709;&#x7684;Model&#x7C7B;&#x5E76;&#x81EA;&#x52A8;&#x548C;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;,&#x53EA;&#x662F;&#x5728;&#x6620;&#x5C04;&#x7684;&#x65F6;&#x5019;&#x9075;&#x5FAA;<a href="#orm_mapping_rule">ORM&#x9ED8;&#x8BA4;&#x6620;&#x5C04;&#x89C4;&#x5219;</a>,&#x8FD9;&#x91CC;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x6709;&#x524D;&#x7F00;<code>leap_</code>&#x56E0;&#x6B64;&#x4E0D;&#x80FD;&#x6309;&#x7167;&#x9ED8;&#x8BA4;&#x89C4;&#x5219;&#x6620;&#x5C04;,&#x6240;&#x4EE5;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x6CE8;&#x89E3;.</p>
+<p>&#x6839;&#x636E;&#x6570;&#x636E;&#x5E93;&#x6A21;&#x578B;&#x56FE;,User&#x548C;Post&#x662F;&#x591A;&#x5BF9;&#x591A;&#x5173;&#x7CFB;,&#x6211;&#x4EEC;&#x8FD8;&#x9700;&#x8981;&#x4E00;&#x4E2A;<code>UserPost.java</code>&#x7684;Model&#x6765;&#x6620;&#x5C04;&#x4E2D;&#x95F4;&#x8868;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> leap.project.model;
+
+<span class="hljs-keyword">import</span> java.sql.Timestamp;
+
+<span class="hljs-keyword">import</span> leap.orm.annotation.Id;
+<span class="hljs-keyword">import</span> leap.orm.annotation.Table;
+<span class="hljs-keyword">import</span> leap.orm.model.Model;
+<span class="hljs-annotation">@Table</span>(<span class="hljs-string">&quot;leap_user_post&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserPost</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span> </span>{
+    <span class="hljs-annotation">@Id</span>
+    <span class="hljs-keyword">private</span> String userId;
+    <span class="hljs-annotation">@Id</span>
+    <span class="hljs-keyword">private</span> String postId;
+
+    <span class="hljs-keyword">private</span> Timestamp createdAt;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getUserId</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> userId;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUserId</span><span class="hljs-params">(String userId)</span> </span>{
+        <span class="hljs-keyword">this</span>.userId = userId;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getPostId</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> postId;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setPostId</span><span class="hljs-params">(String postId)</span> </span>{
+        <span class="hljs-keyword">this</span>.postId = postId;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Timestamp <span class="hljs-title">getCreatedAt</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> createdAt;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCreatedAt</span><span class="hljs-params">(Timestamp createdAt)</span> </span>{
+        <span class="hljs-keyword">this</span>.createdAt = createdAt;
+    }
+}
+</code></pre>
+<blockquote>
+<ol>
+<li>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;,&#x6240;&#x6709;&#x7684;Model&#x5B50;&#x7C7B;&#x548C;&#x5C5E;&#x6027;&#x90FD;&#x4F1A;&#x88AB;&#x5BF9;&#x5E94;&#x6210;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8868;&#x6216;&#x8005;&#x5B57;&#x6BB5;</li>
+<li>&#x5982;&#x679C;&#x67D0;&#x4E9B;&#x7C7B;&#x6216;&#x8005;&#x5C5E;&#x6027;&#x4E0D;&#x5E0C;&#x671B;&#x88AB;&#x6620;&#x5C04;&#x5230;&#x6570;&#x636E;&#x5E93;&#x8868;&#x6216;&#x5B57;&#x6BB5;,&#x5219;&#x53EF;&#x4EE5;&#x7528;<code>@NonEntity</code>&#x548C;<code>@NonColumn</code>&#x6CE8;&#x89E3;&#x6765;&#x6807;&#x793A;&#x6307;&#x5B9A;&#x7684;&#x5B57;&#x6BB5;&#x6216;&#x7C7B;&#x4E0D;&#x505A;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;.</li>
+</ol>
+</blockquote>
+<h4 id="model&#x5C5E;&#x6027;&#x81EA;&#x52A8;&#x586B;&#x5145;">Model&#x5C5E;&#x6027;&#x81EA;&#x52A8;&#x586B;&#x5145;</h4>
+<p>&#x7EC6;&#x5FC3;&#x7684;&#x4F60;&#x53EF;&#x80FD;&#x5DF2;&#x7ECF;&#x6CE8;&#x610F;&#x5230;,&#x5728;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x7684;Model&#x7C7B;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4E2D;,&#x6709;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;:</p>
+<pre><code>created_at
+updated_at
+</code></pre><p>&#x5176;&#x4E2D;<code>created_at</code>&#x5B57;&#x6BB5;&#x662F;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x7684;<code>createdAt</code>&#x5B57;&#x6BB5;&#x7684;&#x6620;&#x5C04;,&#x90A3;&#x4E48;<code>updated_at</code>&#x5B57;&#x6BB5;&#x662F;&#x600E;&#x4E48;&#x6765;&#x7684;&#x5462;?  </p>
+<p>&#x5B9E;&#x9645;&#x4E0A;,&#x8FD9;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;&#x90FD;&#x662F;leap orm&#x9ED8;&#x8BA4;&#x751F;&#x6210;&#x7684;&#x5B57;&#x6BB5;,&#x5F53;&#x4E00;&#x4E2A;&#x975E;&#x62BD;&#x8C61;&#x7C7B;&#x7EE7;&#x627F;&#x4E86;Model&#x7C7B;&#x65F6;,&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6CE8;&#x89E3;&#x8BE5;&#x7C7B;&#x4E0D;&#x662F;&#x6570;&#x636E;&#x5E93;&#x5B9E;&#x4F53;(&#x901A;&#x8FC7;<code>@NonEntity</code>&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x8BE5;&#x7C7B;&#x4E0D;&#x662F;&#x6570;&#x636E;&#x5E93;&#x5B9E;&#x4F53;),&#x90A3;&#x4E48;leap&#x4F1A;&#x68C0;&#x67E5;&#x8FD9;&#x4E2A;&#x7C7B;&#x662F;&#x5426;&#x6709;<code>createdAt</code>&#x548C;<code>updatedAt</code>&#x5B57;&#x6BB5;,&#x5982;&#x679C;&#x6CA1;&#x6709;,&#x5219;&#x81EA;&#x52A8;&#x6DFB;&#x52A0;&#x8FD9;&#x4E24;&#x4E2A;&#x5C5E;&#x6027;,&#x8FD9;&#x4E24;&#x4E2A;&#x5C5E;&#x6027;&#x5206;&#x522B;&#x8868;&#x793A;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;&#x7684;&#x521B;&#x5EFA;&#x65F6;&#x95F4;&#x548C;&#x6700;&#x540E;&#x66F4;&#x65B0;&#x65F6;&#x95F4;.</p>
+<p>&#x5F53;&#x7136;&#x6709;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x5E76;&#x4E0D;&#x5E0C;&#x671B;leap&#x81EA;&#x52A8;&#x7ED9;&#x6211;&#x4EEC;&#x6DFB;&#x52A0;&#x8FD9;&#x4E24;&#x4E2A;&#x5C5E;&#x6027;,&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x91C7;&#x53D6;&#x5982;&#x4E0B;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x6765;&#x5173;&#x95ED;leap&#x7684;&#x5C5E;&#x6027;&#x81EA;&#x52A8;&#x751F;&#x6210;:</p>
+<ul>
+<li><strong><code>@AutoGenerateColumns</code>&#x6CE8;&#x89E3;</strong></li>
+</ul>
+<p>&#x5982;&#x679C;&#x67D0;&#x4E2A;Model&#x7684;&#x5B50;&#x7C7B;&#x4E0D;&#x5E0C;&#x671B;&#x81EA;&#x52A8;&#x751F;&#x6210;<code>createdAt</code>&#x548C;<code>updatedAt</code>&#x5B57;&#x6BB5;,&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x4E2A;&#x7C7B;&#x4E0A;&#x6DFB;&#x52A0;&#x6CE8;&#x89E3;<code>@AutoGenerateColumns(false)</code>,&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x53EA;&#x9488;&#x5BF9;&#x5355;&#x72EC;&#x67D0;&#x4E2A;&#x7C7B;&#x4E0D;&#x9700;&#x8981;&#x751F;&#x6210;&#x7684;,&#x5982;&#x679C;&#x5168;&#x5C40;&#x60C5;&#x51B5;&#x4E0B;&#x4E0D;&#x5E0C;&#x671B;&#x751F;&#x6210;&#x8FD9;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;,&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x7684;&#x65B9;&#x5F0F;.</p>
+<ul>
+<li><strong><code>orm.autoGeneateModelFields</code>&#x914D;&#x7F6E;</strong></li>
+</ul>
+<p>&#x5728;<code>config.xml</code>&#x4E2D;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x914D;&#x7F6E;:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">&quot;orm.autoGeneateModelFields&quot;</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-title">property</span>&gt;</span>
+</code></pre>
+<p>&#x6B64;&#x65F6;&#x5168;&#x5C40;&#x8303;&#x56F4;&#x5185;&#x6240;&#x6709;&#x7684;Model&#x5B50;&#x7C7B;&#x90FD;&#x4E0D;&#x518D;&#x81EA;&#x52A8;&#x751F;&#x6210;<code>createdAt</code>&#x548C;<code>updatedAt</code>&#x5B57;&#x6BB5;.</p>
+<blockquote>
+<p><strong><em>&#x6CE8;&#x610F;:</em></strong>  </p>
+<ol>
+<li>&#x914D;&#x7F6E;&#x4E86;&#x5168;&#x5C40;&#x4E0D;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x5B57;&#x6BB5;&#x540E;,&#x5373;&#x4F7F;&#x5BF9;&#x5355;&#x72EC;&#x67D0;&#x4E2A;&#x7C7B;&#x6CE8;&#x89E3;&#x4E86;<code>@AutoGenerateColumns(true)</code>,&#x4E5F;&#x4E0D;&#x4F1A;&#x81EA;&#x52A8;&#x751F;&#x6210;,&#x6B64;&#x65F6;&#x5EFA;&#x8BAE;&#x81EA;&#x5DF1;&#x5728;&#x7C7B;&#x4E2D;&#x663E;&#x5F0F;&#x58F0;&#x660E;&#x8FD9;&#x4E24;&#x4E2A;&#x5C5E;&#x6027;.  </li>
+<li>&#x5982;&#x679C;&#x5728;&#x5E94;&#x7528;&#x542F;&#x52A8;&#x4E4B;&#x524D;,&#x6570;&#x636E;&#x5E93;&#x7684;&#x6620;&#x5C04;&#x7684;&#x7269;&#x7406;&#x8868;&#x5DF2;&#x7ECF;&#x521B;&#x5EFA;&#x597D;&#x4E86;,&#x5E76;&#x4E14;&#x8BE5;&#x7269;&#x7406;&#x8868;&#x6CA1;&#x6709;&#x8FD9;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;,&#x90A3;&#x4E48;&#x4E5F;&#x4E0D;&#x4F1A;&#x81EA;&#x52A8;&#x751F;&#x6210;.</li>
+</ol>
+</blockquote>
+<h5 id="orm&#x9ED8;&#x8BA4;&#x6620;&#x5C04;&#x89C4;&#x5219;"><a id="orm_mapping_rule"></a>ORM&#x9ED8;&#x8BA4;&#x6620;&#x5C04;&#x89C4;&#x5219;</h5>
+<blockquote>
+<ol>
+<li>&#x5BF9;&#x4E8E;&#x5168;&#x5C0F;&#x5199;&#x7684;&#x5C5E;&#x6027;&#x540D;,&#x9ED8;&#x8BA4;&#x6620;&#x5C04;&#x5C5E;&#x6027;&#x540D;&#x548C;&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;&#x540D;&#x4E00;&#x81F4;;</li>
+<li>&#x5BF9;&#x4E8E;&#x9A7C;&#x5CF0;&#x5F0F;&#x547D;&#x540D;&#x7684;&#x5C5E;&#x6027;&#x540D;,&#x9ED8;&#x8BA4;&#x5C06;&#x5C5E;&#x6027;&#x540D;&#x8F6C;&#x5316;&#x4E3A;&#x4E0B;&#x5212;&#x7EBF;&#x5F0F;,&#x518D;&#x4E0E;&#x76F8;&#x540C;&#x7684;&#x6570;&#x636E;&#x5E93;&#x5B57;&#x6BB5;&#x540D;&#x4E00;&#x81F4;.<br>&#x6CE8;&#x610F;:&#x5C5E;&#x6027;&#x540D;&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x7279;&#x6B8A;&#x5B57;&#x7B26;.</li>
+</ol>
+</blockquote>
+<h3 id="model&#x5BF9;&#x8C61;&#x7684;&#x4F7F;&#x7528;">Model&#x5BF9;&#x8C61;&#x7684;&#x4F7F;&#x7528;</h3>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x521B;&#x5EFA;&#x597D;&#x5B9E;&#x4F53;&#x548C;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#x4E86;,&#x63A5;&#x4E0B;&#x6765;&#x8BA9;&#x6211;&#x4EEC;&#x770B;&#x770B;&#x5982;&#x4F55;&#x4F7F;&#x7528;leap&#x7684;ActiveRecord.
+&#x6211;&#x4EEC;&#x5148;&#x5728;<code>UserController</code>&#x4E2D;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;action:</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">create</span><span class="hljs-params">(String name,Integer age, String loginId, String password)</span></span>{
+    User user = <span class="hljs-keyword">new</span> User();
+    user.setName(name);
+    user.setAge(age);
+    user.setLoginId(loginId);
+    user.setPassword(password);
+    <span class="hljs-keyword">try</span> {
+      user.create();
+      <span class="hljs-keyword">return</span> user;
+  } <span class="hljs-keyword">catch</span> (RecordNotSavedException e) {
+      e.printStackTrace();
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+  }
+}
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x6211;&#x4EEC;&#x7528;&#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7528;&#x6237;,&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x542F;&#x52A8;&#x5E94;&#x7528;,&#x6D4B;&#x8BD5;&#x8BF7;&#x6C42;&#x5982;&#x4E0B;:</p>
+<pre><code>http&#x8BF7;&#x6C42;:
+url:
+  http://localhost:8080/leap/user_controller/create
+params:
+  name:&#x5F20;&#x4E09;
+  age:20
+  loginId:zhangsan
+  password:123123
+
+&#x8FD4;&#x56DE;&#x7ED3;&#x679C;:
+{
+  &quot;id&quot;: &quot;990104a3-d47e-472d-86c0-5d6e13a02b4f&quot;,
+  &quot;name&quot;: &quot;&#x5F20;&#x4E09;&quot;,
+  &quot;age&quot;: 20,
+  &quot;password&quot;: &quot;123123&quot;,
+  &quot;createdAt&quot;: 1447125740861,
+  &quot;loginId&quot;: &quot;zhangsan&quot;
+}
+</code></pre><p>&#x8FD9;&#x4E2A;&#x7ED3;&#x679C;&#x544A;&#x8BC9;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x6210;&#x529F;&#x4E86;.&#x5E76;&#x4E14;&#x5E2E;&#x6211;&#x4EEC;&#x81EA;&#x52A8;&#x586B;&#x5145;&#x4E86;id&#x548C;&#x521B;&#x5EFA;&#x65F6;&#x95F4;.</p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x56DE;&#x5934;&#x770B;&#x770B;,&#x5C06;&#x7528;&#x6237;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x7684;&#x64CD;&#x4F5C;,&#x5176;&#x5B9E;&#x53EA;&#x6709;&#x4E00;&#x53E5;&#x4EE3;&#x7801;:</p>
+<pre><code class="lang-java">user.create();
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x6839;&#x672C;&#x4E0D;&#x7528;&#x5173;&#x6CE8;&#x5982;&#x4F55;&#x83B7;&#x53D6;datasource,&#x4E5F;&#x4E0D;&#x7528;&#x5173;&#x6CE8;&#x5982;&#x4F55;&#x83B7;&#x53D6;dao&#x5BF9;&#x8C61;,&#x6BCF;&#x4E00;&#x4E2A;User&#x7684;&#x5B9E;&#x4F8B;&#x5C31;&#x5BF9;&#x5E94;&#x4E00;&#x884C;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;,&#x5E76;&#x4E14;&#x8BB0;&#x5F55;&#x81EA;&#x8EAB;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;,&#x975E;&#x5E38;&#x7B80;&#x5355;&#x65B9;&#x4FBF;.
+&#x53E6;&#x5916;,&#x8FD8;&#x6709;&#x5BF9;&#x5E94;&#x7684;&#x51E0;&#x4E2A;&#x63A5;&#x53E3;:</p>
+<pre><code class="lang-java">user.update();<span class="hljs-comment">//&#x66F4;&#x65B0;&#x8BB0;&#x5F55;</span>
+user.delete();<span class="hljs-comment">//&#x5220;&#x9664;&#x8BB0;&#x5F55;</span>
+user.save();<span class="hljs-comment">//&#x6839;&#x636E;user&#x7684;id&#x662F;&#x5426;&#x5B58;&#x5728;&#x5224;&#x65AD;&#x662F;&#x66F4;&#x65B0;&#x8FD8;&#x662F;&#x63D2;&#x5165;&#x8BB0;&#x5F55;</span>
+</code></pre>
+<p>&#x9664;&#x4E86;&#x4E0A;&#x9762;&#x57FA;&#x672C;&#x7684;&#x64CD;&#x4F5C;&#x4E4B;&#x5916;,leap&#x8FD8;&#x63D0;&#x4F9B;&#x4E86;&#x5F3A;&#x5927;&#x7684;&#x8BB0;&#x5F55;&#x67E5;&#x8BE2;&#x529F;&#x80FD;,&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5148;&#x5728;<code>UserController</code>&#x4E2D;&#x6DFB;&#x52A0;&#x53E6;&#x4E00;&#x4E2A;action:</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;User&gt; <span class="hljs-title">query</span><span class="hljs-params">(String name, Integer age, String loginId)</span></span>{
+    <span class="hljs-keyword">if</span>(name == <span class="hljs-keyword">null</span> &amp;&amp; age == <span class="hljs-keyword">null</span> &amp;&amp; loginId == <span class="hljs-keyword">null</span>){
+        <span class="hljs-keyword">return</span> User.all();
+    }
+    <span class="hljs-keyword">if</span>(name == <span class="hljs-keyword">null</span>){
+        name = <span class="hljs-string">&quot;&quot;</span>;
+    }
+    <span class="hljs-keyword">if</span>(loginId == <span class="hljs-keyword">null</span>){
+        loginId = <span class="hljs-string">&quot;&quot;</span>;
+    }
+    CriteriaQuery&lt;User&gt; cq = User.&lt;User&gt;query();
+    cq.where(<span class="hljs-string">&quot;name like ? and age like ? and loginId like ?&quot;</span>, 
+            <span class="hljs-string">&quot;%&quot;</span>+name+<span class="hljs-string">&quot;%&quot;</span>,age==<span class="hljs-keyword">null</span>?<span class="hljs-string">&quot;%%&quot;</span>:<span class="hljs-string">&quot;%&quot;</span>+age+<span class="hljs-string">&quot;%&quot;</span>,<span class="hljs-string">&quot;%&quot;</span>+loginId+<span class="hljs-string">&quot;%&quot;</span>);
+    <span class="hljs-keyword">return</span> cq.list();
+}
+</code></pre>
+<p>&#x542F;&#x52A8;&#x5E94;&#x7528;&#x540E;&#x53D1;http&#x8BF7;&#x6C42;&#x5982;&#x4E0B;:</p>
+<pre><code>http&#x8BF7;&#x6C42;:
+url:
+  http://localhost:8080/leap/user_controller/query
+params:
+
+&#x8FD4;&#x56DE;&#x7ED3;&#x679C;:
+[
+  {
+    &quot;id&quot;: &quot;15583768-8b55-475f-87e0-6ddaee3cb910&quot;,
+    &quot;name&quot;: &quot;&#x738B;&#x4E94;&quot;,
+    &quot;age&quot;: 32,
+    &quot;password&quot;: &quot;123123&quot;,
+    &quot;createdAt&quot;: 1447134433000,
+    &quot;loginId&quot;: &quot;wangwu&quot;
+  },
+  {
+    &quot;id&quot;: &quot;8bcaa593-fddd-4c6f-8443-b5091cae4388&quot;,
+    &quot;name&quot;: &quot;&#x8D75;&#x516D;&quot;,
+    &quot;age&quot;: 19,
+    &quot;password&quot;: &quot;123123&quot;,
+    &quot;createdAt&quot;: 1447134462000,
+    &quot;loginId&quot;: &quot;zhaoliu&quot;
+  },
+  {
+    &quot;id&quot;: &quot;990104a3-d47e-472d-86c0-5d6e13a02b4f&quot;,
+    &quot;name&quot;: &quot;&#x5F20;&#x4E09;&quot;,
+    &quot;age&quot;: 20,
+    &quot;password&quot;: &quot;123123&quot;,
+    &quot;createdAt&quot;: 1447125740000,
+    &quot;loginId&quot;: &quot;zhangsan&quot;
+  },
+  {
+    &quot;id&quot;: &quot;d8e4be73-e9f8-4c70-bb85-cbe06d2341e5&quot;,
+    &quot;name&quot;: &quot;&#x674E;&#x56DB;&quot;,
+    &quot;age&quot;: 21,
+    &quot;password&quot;: &quot;123123&quot;,
+    &quot;createdAt&quot;: 1447134405000,
+    &quot;loginId&quot;: &quot;lisi&quot;
+  }
+]
+</code></pre><p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x53C2;&#x6570;,&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x6240;&#x6709;&#x6570;&#x636E;,&#x5982;&#x679C;&#x518D;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;<code>name=&#x5F20;&#x4E09;</code>&#x7684;&#x53C2;&#x6570;,&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x5982;&#x4E0B;:</p>
+<pre><code>[
+  {
+    &quot;id&quot;: &quot;990104a3-d47e-472d-86c0-5d6e13a02b4f&quot;,
+    &quot;name&quot;: &quot;&#x5F20;&#x4E09;&quot;,
+    &quot;age&quot;: 20,
+    &quot;password&quot;: &quot;123123&quot;,
+    &quot;createdAt&quot;: 1447125740000,
+    &quot;loginId&quot;: &quot;zhangsan&quot;
+  }
+]
+</code></pre><p>&#x4ECE;&#x63A7;&#x5236;&#x53F0;&#x65E5;&#x5FD7;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6267;&#x884C;&#x7684;sql:</p>
+<pre><code>SQL  : select t.* from leap_user t where name like ? and age like ? and login_id like ?
+ARGS : [&apos;%&#x5F20;&#x4E09;%&apos;,&apos;%%&apos;,&apos;%%&apos;]
+</code></pre><p>&#x901A;&#x8FC7;&#x4EE3;&#x7801;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;,&#x67E5;&#x8BE2;&#x662F;&#x901A;&#x8FC7;Model&#x7684;<code>query()</code>&#x63A5;&#x53E3;&#x751F;&#x6210;&#x7684;<code>CriteriaQuery</code>&#x5BF9;&#x8C61;&#x6765;&#x5904;&#x7406;&#x7684;,&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x5305;&#x542B;&#x5F88;&#x591A;&#x67E5;&#x8BE2;&#x63A5;&#x53E3;:</p>
+<pre><code class="lang-java">cq.pageResult(page);<span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x5206;&#x9875;</span>
+cq.delete();<span class="hljs-comment">//&#x6279;&#x91CF;&#x5220;&#x9664;</span>
+cq.count();<span class="hljs-comment">//&#x67E5;&#x8BE2;&#x6570;&#x91CF;</span>
+</code></pre>
+<p>&#x9664;&#x4E86;&#x4E0A;&#x8FF0;&#x4F8B;&#x5B50;,&#x8FD8;&#x6709;&#x8BB8;&#x591A;&#x63A5;&#x53E3;,&#x53EF;&#x4EE5;&#x67E5;&#x8BE2;api&#x6587;&#x6863;.</p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x6309;&#x7167;&#x540C;&#x6837;&#x7684;&#x65B9;&#x5F0F;,<code>&#x5728;PostController</code>&#x4E2D;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;action:</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> Post <span class="hljs-title">create</span><span class="hljs-params">(String name, String descript)</span></span>{
+    Post post = <span class="hljs-keyword">new</span> Post();
+    post.setName(name);
+    post.setDescript(descript);
+    post.create();
+    <span class="hljs-keyword">return</span> post;
+}
+</code></pre>
+<p>&#x5728;<code>UserController</code>&#x4E2D;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;action:</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">addUserPost</span><span class="hljs-params">(String userId, String postId)</span></span>{
+    UserPost up = <span class="hljs-keyword">new</span> UserPost();
+    up.setUserId(userId);
+    up.setPostId(postId);
+    up.create();
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+}
+</code></pre>
+<p>&#x542F;&#x52A8;&#x5E94;&#x7528;,&#x8C03;&#x7528;&#x8FD9;&#x4E24;&#x4E2A;&#x63A5;&#x53E3;&#x521B;&#x5EFA;&#x4E00;&#x4E9B;&#x6D4B;&#x8BD5;&#x6570;&#x636E;.&#x4EE5;&#x4FBF;&#x540E;&#x7EED;&#x4F7F;&#x7528;.</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../orm/datasource_conf.html" class="navigation navigation-prev " aria-label="Previous page: 数据源配置"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../orm/dao_and_transaction.html" class="navigation navigation-next " aria-label="Next page: dao对象和事务控制"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-disqus/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"disqus":{"shortName":"introducetogitbook","useIdentifier":false},"highlight":{},"search":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

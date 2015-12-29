@@ -1,0 +1,794 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>CORS支持 | Sample GitBook</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.5.1">
+        <meta name="author" content="kael &lt;penghj@bingosoft.net&gt;">
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-disqus/plugin.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    
+    <link rel="prev" href="../security/xss_defense.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="8.4" data-chapter-title="CORS支持" data-filepath="security/cors_support.md" data-basepath=".." data-revision="Mon Dec 28 2015 16:29:24 GMT+0800 (中国标准时间)">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        前言
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="getting-start/index.html">
+            
+                
+                    <a href="../getting-start/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        快速开始
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="getting-start/construction.html">
+            
+                
+                    <a href="../getting-start/construction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        快速环境搭建
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="getting-start/introduce.html">
+            
+                
+                    <a href="../getting-start/introduce.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        示例工程说明
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="getting-start/first_action.html">
+            
+                
+                    <a href="../getting-start/first_action.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        自定义第一个action
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="created-project/index.html">
+            
+                
+                    <a href="../created-project/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        新建WEB工程
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="leap-context/index.html">
+            
+                
+                    <a href="../leap-context/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        控制反转和依赖注入
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="app-init/index.html">
+            
+                
+                    <a href="../app-init/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        应用初始化
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1" data-path="app-init/global.html">
+            
+                
+                    <a href="../app-init/global.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.1.</b>
+                        
+                        Global使用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="app-init/applistener.html">
+            
+                
+                    <a href="../app-init/applistener.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.2.</b>
+                        
+                        应用监听器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="mvc/index.html">
+            
+                
+                    <a href="../mvc/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        MVC
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="mvc/route_rule.html">
+            
+                
+                    <a href="../mvc/route_rule.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        路由规则
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="mvc/leap_controller.html">
+            
+                
+                    <a href="../mvc/leap_controller.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        controller和action的使用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="mvc/binding_params.html">
+            
+                
+                    <a href="../mvc/binding_params.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        智能参数绑定
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="mvc/filter.html">
+            
+                
+                    <a href="../mvc/filter.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.4.</b>
+                        
+                        拦截器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="template/index.html">
+            
+                
+                    <a href="../template/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        模板引擎
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.1" data-path="template/conception.html">
+            
+                
+                    <a href="../template/conception.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.1.</b>
+                        
+                        基础概念
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="template/syntax.html">
+            
+                
+                    <a href="../template/syntax.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.2.</b>
+                        
+                        基础语法
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="template/directive.html">
+            
+                
+                    <a href="../template/directive.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.3.</b>
+                        
+                        指令集
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="template/directive_used.html">
+            
+                
+                    <a href="../template/directive_used.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.4.</b>
+                        
+                        指令应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="template/development.html">
+            
+                
+                    <a href="../template/development.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.5.</b>
+                        
+                        htpl开发优化
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7" data-path="orm/index.html">
+            
+                
+                    <a href="../orm/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.</b>
+                        
+                        ORM
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.1" data-path="orm/datasource_conf.html">
+            
+                
+                    <a href="../orm/datasource_conf.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.1.</b>
+                        
+                        数据源配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="orm/model_used.html">
+            
+                
+                    <a href="../orm/model_used.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.2.</b>
+                        
+                        Model应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="orm/dao_and_transaction.html">
+            
+                
+                    <a href="../orm/dao_and_transaction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.3.</b>
+                        
+                        dao对象和事务控制
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="orm/multiple_data_sources.html">
+            
+                
+                    <a href="../orm/multiple_data_sources.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.4.</b>
+                        
+                        多数据源应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="orm/interface.html">
+            
+                
+                    <a href="../orm/interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.</b>
+                        
+                        ORM接口说明
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.5.1" data-path="orm/model_interface.html">
+            
+                
+                    <a href="../orm/model_interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.1.</b>
+                        
+                        Model接口
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5.2" data-path="orm/dao_interface.html">
+            
+                
+                    <a href="../orm/dao_interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.2.</b>
+                        
+                        DAO接口
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="orm/sql_conf.html">
+            
+                
+                    <a href="../orm/sql_conf.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.6.</b>
+                        
+                        sql配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.7" data-path="orm/dynamic_sql.html">
+            
+                
+                    <a href="../orm/dynamic_sql.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.7.</b>
+                        
+                        动态sql应用
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8" data-path="security/index.html">
+            
+                
+                    <a href="../security/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.</b>
+                        
+                        安全模块
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.1" data-path="security/login_validate.html">
+            
+                
+                    <a href="../security/login_validate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.1.</b>
+                        
+                        登录校验
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="security/csrf_validate.html">
+            
+                
+                    <a href="../security/csrf_validate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.2.</b>
+                        
+                        CSRF校验
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="security/xss_defense.html">
+            
+                
+                    <a href="../security/xss_defense.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.3.</b>
+                        
+                        XSS攻击防御
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="8.4" data-path="security/cors_support.html">
+            
+                
+                    <a href="../security/cors_support.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.4.</b>
+                        
+                        CORS支持
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >Sample GitBook</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="cors&#x652F;&#x6301;">CORS&#x652F;&#x6301;</h1>
+<p>&#x7EF4;&#x57FA;&#x767E;&#x79D1;&#x5BF9;CORS&#x7684;&#x5B9A;&#x4E49;&#x662F;:
+&#x8DE8;&#x57DF;&#x8D44;&#x6E90;&#x5171;&#x4EAB;&#xFF08;CORS &#xFF09;&#x662F;&#x4E00;&#x79CD;&#x7F51;&#x7EDC;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x6280;&#x672F;&#x89C4;&#x8303;&#xFF0C;&#x5B83;&#x4E3A;Web&#x670D;&#x52A1;&#x5668;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x5141;&#x8BB8;&#x7F51;&#x9875;&#x4ECE;&#x4E0D;&#x540C;&#x7684;&#x57DF;&#x8BBF;&#x95EE;&#x5176;&#x8D44;&#x6E90;&#x3002;&#x800C;&#x8FD9;&#x79CD;&#x8BBF;&#x95EE;&#x662F;&#x88AB;&#x540C;&#x6E90;&#x7B56;&#x7565;&#x6240;&#x7981;&#x6B62;&#x7684;&#x3002;CORS&#x7CFB;&#x7EDF;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x79CD;&#x6D4F;&#x89C8;&#x5668;&#x548C;&#x670D;&#x52A1;&#x5668;&#x4EA4;&#x4E92;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x786E;&#x5B9A;&#x662F;&#x5426;&#x5141;&#x8BB8;&#x8DE8;&#x57DF;&#x8BF7;&#x6C42;&#x3002; &#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x59A5;&#x534F;&#xFF0C;&#x6709;&#x66F4;&#x5927;&#x7684;&#x7075;&#x6D3B;&#x6027;&#xFF0C;&#x4F46;&#x6BD4;&#x8D77;&#x7B80;&#x5355;&#x5730;&#x5141;&#x8BB8;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x7684;&#x8981;&#x6C42;&#x6765;&#x8BF4;&#x66F4;&#x52A0;&#x5B89;&#x5168;&#x3002;</p>
+<p>&#x7B80;&#x5355;&#x5730;&#x8BF4;,CORS&#x5C31;&#x662F;&#x8BA9;AJAX&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x53EF;&#x63A7;&#x7684;&#x8DE8;&#x57DF;&#x8BBF;&#x95EE;&#x3002;</p>
+<p>&#x5176;&#x5B9E;&#x6211;&#x4EEC;&#x5F88;&#x65E9;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x5DF2;&#x7ECF;&#x63A5;&#x89E6;&#x8DE8;&#x57DF;&#x8D44;&#x6E90;&#x5171;&#x4EAB;&#x4E86;,&#x4E0D;&#x8FC7;&#x4E4B;&#x524D;&#x5E76;&#x6CA1;&#x6709;&#x6807;&#x51C6;,&#x6240;&#x4EE5;&#x4EE5;&#x5F80;&#x4E00;&#x822C;&#x6709;&#x4E09;&#x79CD;&#x89E3;&#x51B3;&#x65B9;&#x6848;:</p>
+<ol>
+<li>JSONP</li>
+<li>Flash</li>
+<li>&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x8F6C;</li>
+</ol>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#x65E0;&#x8BBA;&#x54EA;&#x79CD;&#x65B9;&#x5F0F;,&#x90FD;&#x6709;&#x5F88;&#x591A;&#x9650;&#x5236;,&#x5982;&#x4E0B;:</p>
+<ol>
+<li>JSONP&#x53EA;&#x80FD;&#x5B9E;&#x73B0;GET&#x8BF7;&#x6C42;,&#x5E76;&#x4E14;&#x9519;&#x8BEF;&#x65E0;&#x6CD5;&#x6355;&#x83B7;&#x5904;&#x7406;.</li>
+<li>Flash&#x8981;&#x6C42;&#x6D4F;&#x89C8;&#x5668;&#x5FC5;&#x987B;&#x5B89;&#x88C5;flash&#x63D2;&#x4EF6;.</li>
+<li>&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x8F6C;,&#x9700;&#x8981;&#x642D;&#x5EFA;&#x4E2D;&#x8F6C;&#x670D;&#x52A1;&#x5668;,&#x8D39;&#x65F6;&#x8D39;&#x529B;</li>
+</ol>
+<p>CORS&#x7684;&#x51FA;&#x73B0;&#x65E0;&#x7591;&#x89E3;&#x51B3;&#x4E86;&#x4E0A;&#x9762;&#x7684;&#x6240;&#x6709;&#x95EE;&#x9898;.</p>
+<p>&#x4E0D;&#x8FC7;&#x76EE;&#x524D;&#x56FD;&#x5185;&#x5BF9;CORS&#x63D0;&#x4F9B;&#x652F;&#x6301;&#x7684;&#x6846;&#x67B6;&#x51E0;&#x4E4E;&#x6CA1;&#x6709;,&#x56E0;&#x6B64;&#x5F53;&#x6211;&#x4EEC;&#x7684;&#x5E94;&#x7528;&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x524D;&#x7AEF;&#x8DE8;&#x57DF;&#x8D44;&#x6E90;&#x8BF7;&#x6C42;&#x7684;&#x652F;&#x6301;&#x7684;&#x65F6;&#x5019;,&#x53EA;&#x80FD;&#x81EA;&#x5DF1;&#x53BB;&#x5904;&#x7406;&#x8FD9;&#x79CD;&#x8BF7;&#x6C42;,&#x76F8;&#x5F53;&#x4E8E;&#x6BCF;&#x4E2A;&#x5E94;&#x7528;&#x5355;&#x72EC;&#x53BB;&#x5B9E;&#x73B0;cors&#x7684;&#x6807;&#x51C6;,&#x8FD9;&#x5BF9;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x6765;&#x8BF4;&#x662F;&#x5F88;&#x75DB;&#x82E6;&#x7684;,&#x4E5F;&#x4F1A;&#x589E;&#x52A0;&#x7EF4;&#x62A4;&#x7684;&#x6210;&#x672C;.</p>
+<p>leap&#x5DF2;&#x7ECF;&#x4E3A;&#x6211;&#x4EEC;&#x89E3;&#x51B3;&#x4E86;&#x8FD9;&#x4E2A;&#x9EBB;&#x70E6;.</p>
+<p>&#x5F53;&#x67D0;&#x4E2A;&#x63A5;&#x53E3;&#x9700;&#x8981;&#x63D0;&#x4F9B;CORS&#x652F;&#x6301;&#x7684;&#x65F6;&#x5019;,&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x5728;&#x63A5;&#x53E3;&#x4E0A;&#x6DFB;&#x52A0;<code>@leap.web.annotation.Cors</code>&#x6CE8;&#x89E3;&#x5373;&#x53EF;,&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> leap.web.annotation.Cors;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CorsTestController</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">normal</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;normal&quot;</span>;
+    }
+
+    <span class="hljs-annotation">@Cors</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">enabled</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;enabled&quot;</span>;
+    }
+
+    <span class="hljs-annotation">@Cors</span>(<span class="hljs-keyword">false</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">disabled</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;disabled&quot;</span>;
+    }
+
+}
+</code></pre>
+<blockquote>
+<p><code>@Cors</code>&#x4E2D;&#x6709;&#x4E00;&#x4E2A;<code>value</code>&#x5C5E;&#x6027;,&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x8868;&#x793A;&#x662F;&#x5426;&#x652F;&#x6301;CORS,&#x9ED8;&#x8BA4;&#x4E3A;true,&#x8BBE;&#x7F6E;&#x4E3A;false&#x65F6;&#x8868;&#x793A;&#x4E0D;&#x652F;&#x6301;CORS.<br>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6CE8;&#x89E3;<code>@Cors</code>&#x662F;&#x9ED8;&#x8BA4;&#x72B6;&#x6001;,&#x5373;&#x8DDF;&#x968F;&#x5168;&#x5C40;&#x914D;&#x7F6E;.</p>
+</blockquote>
+<p>&#x6709;&#x4E86;&#x4E0A;&#x8FF0;&#x6CE8;&#x89E3;&#x4E4B;&#x540E;,&#x6211;&#x4EEC;&#x7684;&#x63A5;&#x53E3;&#x5C31;&#x5141;&#x8BB8;&#x8DE8;&#x57DF;&#x8BBF;&#x95EE;&#x4E86;,&#x5BF9;&#x4E8E;&#x6CA1;&#x6709;&#x6CE8;&#x89E3;&#x7684;&#x63A5;&#x53E3;,&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#x662F;&#x8DDF;&#x968F;&#x5168;&#x5C40;&#x914D;&#x7F6E;&#x7684;,&#x5168;&#x5C40;&#x914D;&#x7F6E;&#x9ED8;&#x8BA4;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x662F;&#x4E0D;&#x5141;&#x8BB8;&#x8DE8;&#x57DF;&#x8BBF;&#x95EE;&#x7684;,&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x5168;&#x5C40;&#x6DFB;&#x52A0;&#x5141;&#x8BB8;&#x8DE8;&#x57DF;&#x7684;&#x914D;&#x7F6E;,&#x5728;<code>Global.java</code>&#x7684;<code>init()</code>&#x65B9;&#x6CD5;&#x4E2D;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x4EE3;&#x7801;:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Global</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">App</span> </span>{
+    <span class="hljs-annotation">@Inject</span>
+    <span class="hljs-keyword">private</span> CorsConfigurator cc;
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Throwable </span>{
+        cc.setAllowedMethods(<span class="hljs-keyword">new</span> String[]{<span class="hljs-string">&quot;*&quot;</span>});
+        cc.setAllowedHeaders(<span class="hljs-keyword">new</span> String[]{<span class="hljs-string">&quot;*&quot;</span>});
+        cc.setAllowedOrigins(<span class="hljs-keyword">new</span> String[]{<span class="hljs-string">&quot;*&quot;</span>});
+        <span class="hljs-keyword">super</span>.init();
+    }
+}
+</code></pre>
+<p>&#x8FD9;&#x91CC;<code>*</code>&#x8868;&#x793A;&#x5141;&#x8BB8;&#x6240;&#x6709;&#x7684;&#x65B9;&#x6CD5;,&#x8BF7;&#x6C42;&#x5934;&#x548C;&#x57DF;&#x540D;&#x8DE8;&#x57DF;&#x8BBF;&#x95EE;,&#x5F53;&#x7136;,&#x5982;&#x679C;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#x4E0D;&#x652F;&#x6301;&#x6240;&#x6709;&#x7684;&#x8BDD;,&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x4E3A;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x6307;&#x5B9A;&#x7684;&#x57DF;&#x540D;/&#x65B9;&#x6CD5;/&#x8BF7;&#x6C42;&#x5934;.</p>
+<blockquote>
+<p><strong>&#x6CE8;&#x610F;:</strong><br>&#x5982;&#x679C;&#x8981;&#x5141;&#x8BB8;&#x5168;&#x90E8;&#x57DF;&#x540D;/&#x8BF7;&#x6C42;&#x5934;/&#x65B9;&#x6CD5;,&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#x5FC5;&#x987B;&#x957F;&#x5EA6;&#x4E3A;1&#x4E14;&#x4E3A;<code>*</code>.<br>&#x5982;&#x679C;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x4E0D;&#x4E3A;1,&#x5373;&#x4F7F;&#x5305;&#x542B;<code>*</code>&#x4E5F;&#x4E0D;&#x4F1A;&#x5141;&#x8BB8;&#x5168;&#x90E8;&#x57DF;&#x540D;/&#x8BF7;&#x6C42;&#x5934;/&#x65B9;&#x6CD5;.</p>
+</blockquote>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../security/xss_defense.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: XSS攻击防御"><i class="fa fa-angle-left"></i></a>
+        
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-disqus/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"disqus":{"shortName":"introducetogitbook","useIdentifier":false},"highlight":{},"search":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

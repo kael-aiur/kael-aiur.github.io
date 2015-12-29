@@ -1,0 +1,1513 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>DAO接口 | Sample GitBook</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.5.1">
+        <meta name="author" content="kael &lt;penghj@bingosoft.net&gt;">
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-disqus/plugin.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../orm/sql_conf.html" />
+    
+    
+    <link rel="prev" href="../orm/model_interface.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="7.5.2" data-chapter-title="DAO接口" data-filepath="orm/dao_interface.md" data-basepath=".." data-revision="Mon Dec 28 2015 16:29:24 GMT+0800 (中国标准时间)">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        前言
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="getting-start/index.html">
+            
+                
+                    <a href="../getting-start/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        快速开始
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="getting-start/construction.html">
+            
+                
+                    <a href="../getting-start/construction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        快速环境搭建
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="getting-start/introduce.html">
+            
+                
+                    <a href="../getting-start/introduce.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.2.</b>
+                        
+                        示例工程说明
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="getting-start/first_action.html">
+            
+                
+                    <a href="../getting-start/first_action.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.3.</b>
+                        
+                        自定义第一个action
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="created-project/index.html">
+            
+                
+                    <a href="../created-project/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        新建WEB工程
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="leap-context/index.html">
+            
+                
+                    <a href="../leap-context/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        控制反转和依赖注入
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="app-init/index.html">
+            
+                
+                    <a href="../app-init/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        应用初始化
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1" data-path="app-init/global.html">
+            
+                
+                    <a href="../app-init/global.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.1.</b>
+                        
+                        Global使用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="app-init/applistener.html">
+            
+                
+                    <a href="../app-init/applistener.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.2.</b>
+                        
+                        应用监听器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="mvc/index.html">
+            
+                
+                    <a href="../mvc/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        MVC
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="mvc/route_rule.html">
+            
+                
+                    <a href="../mvc/route_rule.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        路由规则
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="mvc/leap_controller.html">
+            
+                
+                    <a href="../mvc/leap_controller.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        controller和action的使用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="mvc/binding_params.html">
+            
+                
+                    <a href="../mvc/binding_params.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        智能参数绑定
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="mvc/filter.html">
+            
+                
+                    <a href="../mvc/filter.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.4.</b>
+                        
+                        拦截器
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="template/index.html">
+            
+                
+                    <a href="../template/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        模板引擎
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.1" data-path="template/conception.html">
+            
+                
+                    <a href="../template/conception.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.1.</b>
+                        
+                        基础概念
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="template/syntax.html">
+            
+                
+                    <a href="../template/syntax.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.2.</b>
+                        
+                        基础语法
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="template/directive.html">
+            
+                
+                    <a href="../template/directive.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.3.</b>
+                        
+                        指令集
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="template/directive_used.html">
+            
+                
+                    <a href="../template/directive_used.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.4.</b>
+                        
+                        指令应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="template/development.html">
+            
+                
+                    <a href="../template/development.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.5.</b>
+                        
+                        htpl开发优化
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7" data-path="orm/index.html">
+            
+                
+                    <a href="../orm/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.</b>
+                        
+                        ORM
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.1" data-path="orm/datasource_conf.html">
+            
+                
+                    <a href="../orm/datasource_conf.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.1.</b>
+                        
+                        数据源配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="orm/model_used.html">
+            
+                
+                    <a href="../orm/model_used.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.2.</b>
+                        
+                        Model应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="orm/dao_and_transaction.html">
+            
+                
+                    <a href="../orm/dao_and_transaction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.3.</b>
+                        
+                        dao对象和事务控制
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="orm/multiple_data_sources.html">
+            
+                
+                    <a href="../orm/multiple_data_sources.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.4.</b>
+                        
+                        多数据源应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="orm/interface.html">
+            
+                
+                    <a href="../orm/interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.</b>
+                        
+                        ORM接口说明
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.5.1" data-path="orm/model_interface.html">
+            
+                
+                    <a href="../orm/model_interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.1.</b>
+                        
+                        Model接口
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="7.5.2" data-path="orm/dao_interface.html">
+            
+                
+                    <a href="../orm/dao_interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.2.</b>
+                        
+                        DAO接口
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="orm/sql_conf.html">
+            
+                
+                    <a href="../orm/sql_conf.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.6.</b>
+                        
+                        sql配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.7" data-path="orm/dynamic_sql.html">
+            
+                
+                    <a href="../orm/dynamic_sql.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.7.</b>
+                        
+                        动态sql应用
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8" data-path="security/index.html">
+            
+                
+                    <a href="../security/index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.</b>
+                        
+                        安全模块
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.1" data-path="security/login_validate.html">
+            
+                
+                    <a href="../security/login_validate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.1.</b>
+                        
+                        登录校验
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="security/csrf_validate.html">
+            
+                
+                    <a href="../security/csrf_validate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.2.</b>
+                        
+                        CSRF校验
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="security/xss_defense.html">
+            
+                
+                    <a href="../security/xss_defense.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.3.</b>
+                        
+                        XSS攻击防御
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.4" data-path="security/cors_support.html">
+            
+                
+                    <a href="../security/cors_support.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.4.</b>
+                        
+                        CORS支持
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >Sample GitBook</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="dao&#x63A5;&#x53E3;">dao&#x63A5;&#x53E3;</h1>
+<p>&#x524D;&#x9762;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x6E05;&#x695A;&#x4E86;Model&#x63A5;&#x53E3;&#x7684;&#x5F3A;&#x5927;&#x529F;&#x80FD;,&#x4E5F;&#x80FD;&#x6EE1;&#x8DB3;&#x5927;&#x591A;&#x6570;&#x7684;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#x4E86;,&#x4F46;&#x662F;Model&#x5BF9;&#x8C61;&#x7684;&#x529F;&#x80FD;&#x5B9E;&#x5728;&#x592A;&#x5F3A;&#x5927;&#x4E86;,&#x6709;&#x4E9B;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x4E0D;&#x5E0C;&#x671B;&#x66B4;&#x6F0F;&#x8FD9;&#x4E48;&#x5F3A;&#x5927;&#x7684;&#x6570;&#x636E;&#x64CD;&#x4F5C;&#x529F;&#x80FD;&#x7ED9;&#x4E1A;&#x52A1;&#x5C42;,&#x800C;&#x5E0C;&#x671B;&#x4E1A;&#x52A1;&#x5C42;&#x53EA;&#x80FD;&#x4F7F;&#x7528;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x7684;&#x6570;&#x636E;&#x64CD;&#x4F5C;&#x7ED3;&#x679C;.</p>
+<p>&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5982;&#x679C;&#x5C06;Model&#x5BF9;&#x8C61;&#x8FD4;&#x56DE;&#x7ED9;&#x4E1A;&#x52A1;&#x5C42;&#x90A3;&#x5C31;&#x65E0;&#x7591;&#x7ED9;&#x4E86;&#x4E1A;&#x52A1;&#x5C42;&#x5168;&#x90E8;&#x7684;&#x6570;&#x636E;&#x64CD;&#x4F5C;&#x529F;&#x80FD;&#x4E86;,&#x8FD9;&#x548C;&#x6211;&#x4EEC;&#x7684;&#x9700;&#x6C42;&#x4E0D;&#x7B26;.&#x56E0;&#x6B64;leap&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x4F20;&#x7EDF;&#x7684;dao&#x63A5;&#x53E3;&#x6765;&#x6EE1;&#x8DB3;&#x8FD9;&#x7C7B;&#x9700;&#x6C42;,&#x901A;&#x8FC7;dao&#x63A5;&#x53E3;,&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x6CA1;&#x6709;&#x7EE7;&#x627F;Model&#x7C7B;&#x7684;&#x7C7B;&#x4E5F;&#x548C;&#x6570;&#x636E;&#x5E93;&#x8868;&#x6620;&#x5C04;&#x8D77;&#x6765;,&#x5E76;&#x4E14;&#x901A;&#x8FC7;dao&#x5BF9;&#x8BE5;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;.</p>
+<blockquote>
+<p><strong>&#x6CE8;&#x610F;:</strong><br>&#x8981;&#x4F7F;&#x7528;dao&#x63A5;&#x53E3;&#x5C06;&#x7C7B;&#x548C;&#x6570;&#x636E;&#x5E93;&#x8868;&#x6620;&#x5C04;,&#x9700;&#x8981;&#x5728;&#x7C7B;&#x4E0A;&#x6CE8;&#x89E3;<code>@leap.orm.annotation.Entity</code></p>
+</blockquote>
+<h2 id="&#x5BFC;&#x822A;">&#x5BFC;&#x822A;</h2>
+<ul>
+<li><a href="#getdao">dao&#x5BF9;&#x8C61;&#x83B7;&#x53D6;</a></li>
+<li><a href="#create">&#x65B0;&#x589E;&#x65B9;&#x6CD5;</a><ul>
+<li><a href="#single_create">&#x5355;&#x884C;&#x65B0;&#x589E;</a></li>
+<li><a href="#multi_create">&#x591A;&#x884C;&#x65B0;&#x589E;</a></li>
+</ul>
+</li>
+<li><a href="#update">&#x66F4;&#x65B0;&#x65B9;&#x6CD5;</a><ul>
+<li><a href="#single_update">&#x5355;&#x884C;&#x66F4;&#x65B0;</a></li>
+<li><a href="#multi_update">&#x591A;&#x884C;&#x66F4;&#x65B0;</a></li>
+</ul>
+</li>
+<li><a href="#delete">&#x5220;&#x9664;&#x65B9;&#x6CD5;</a><ul>
+<li><a href="#single_delete">&#x5355;&#x884C;&#x5220;&#x9664;</a></li>
+<li><a href="#multi_delete">&#x591A;&#x884C;&#x5220;&#x9664;</a></li>
+</ul>
+</li>
+<li><a href="#query">&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;</a><ul>
+<li><a href="#single_query">&#x5355;&#x884C;&#x67E5;&#x8BE2;</a></li>
+<li><a href="#multi_query">&#x591A;&#x884C;&#x67E5;&#x8BE2;</a></li>
+</ul>
+</li>
+<li><a href="#query_object">Query&#x67E5;&#x8BE2;</a><ul>
+<li><a href="#entity_query">Query&#x5BF9;&#x8C61;&#x548C;EntityQuery&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;</a></li>
+<li><a href="#criteria_query">CriteriaQuery&#x5BF9;&#x8C61;&#x521B;&#x5EFA;</a></li>
+</ul>
+</li>
+<li><a href="#cmd">&#x6307;&#x4EE4;&#x5BF9;&#x8C61;</a></li>
+<li><a href="#transaction">&#x4E8B;&#x52A1;&#x63A7;&#x5236;</a></li>
+<li><a href="#validate">&#x6821;&#x9A8C;&#x65B9;&#x6CD5;</a></li>
+<li><a href="#execute">&#x6267;&#x884C;sql</a><ul>
+<li><a href="#sql_command">SqlCommand&#x5BF9;&#x8C61;</a></li>
+<li><a href="#sql_execute">sql&#x6267;&#x884C;&#x65B9;&#x6CD5;</a></li>
+</ul>
+</li>
+<li><a href="#test">&#x63A2;&#x6D4B;&#x65B9;&#x6CD5;</a></li>
+<li><a href="#other">&#x5176;&#x4ED6;&#x65B9;&#x6CD5;</a></li>
+</ul>
+<h3 id="dao&#x5BF9;&#x8C61;&#x83B7;&#x53D6;"><a id="getdao"></a>dao&#x5BF9;&#x8C61;&#x83B7;&#x53D6;</h3>
+<pre><code class="lang-java">get()
+get(String name)
+</code></pre>
+<h5 id="dao-get"><code>Dao get()</code></h5>
+<p>&#x83B7;&#x53D6;&#x9ED8;&#x8BA4;&#x7684;Dao&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x76F8;&#x5F53;&#x4E8E;<code>Dao.get(&quot;default&quot;)</code></p>
+<h5 id="dao-getstring-name"><code>Dao get(String name)</code></h5>
+<p>&#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x540D;&#x79F0;&#x7684;Dao&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;,&#x8FD9;&#x91CC;&#x4E3B;&#x8981;&#x662F;&#x7528;&#x4E8E;&#x591A;&#x6570;&#x636E;&#x6E90;&#x7684;&#x60C5;&#x51B5;&#x4E0B;.</p>
+<hr>
+<h3 id="&#x65B0;&#x589E;&#x65B9;&#x6CD5;"><a id="create"></a>&#x65B0;&#x589E;&#x65B9;&#x6CD5;</h3>
+<h4 id="&#x5355;&#x884C;&#x65B0;&#x589E;"><a id="single_create"></a>&#x5355;&#x884C;&#x65B0;&#x589E;</h4>
+<pre><code class="lang-java">insert(Object entity)
+</code></pre>
+<h5 id="int-insertobject-entity"><code>int insert(Object entity)</code></h5>
+<p>&#x63D2;&#x5165;&#x5355;&#x884C;&#x8BB0;&#x5F55;,&#x8FD9;&#x91CC;&#x7684;&#x53C2;&#x6570;&#x662F;&#x4E00;&#x4E2A;entity&#x7684;&#x5B9E;&#x4F8B;,&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x662F;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x8868;&#x6709;&#x6620;&#x5C04;&#x7684;&#x7C7B;&#x578B;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entity: &#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8BB0;&#x5F55;,&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x8868;&#x6709;&#x6620;&#x5C04;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<hr>
+<h4 id="&#x591A;&#x884C;&#x65B0;&#x589E;"><a id="multi_create"></a>&#x591A;&#x884C;&#x65B0;&#x589E;</h4>
+<pre><code class="lang-java">batchInsert(List&lt;?&gt; entities)
+batchInsert(Object[] entities)
+batchInsert(String entityName,List&lt;?&gt; records)
+batchInsert(String entityName,Object[] records)
+batchInsert(Class&lt;?&gt; entityClass,List&lt;?&gt; records)
+batchInsert(Class&lt;?&gt; entityClass,Object[] records)
+batchInsert(EntityMapping em,List&lt;?&gt; records)
+batchInsert(EntityMapping em,Object[] records)
+</code></pre>
+<h5 id="int-batchinsertlist-entities"><code>int[] batchInsert(List&lt;?&gt; entities)</code></h5>
+<p>&#x6279;&#x91CF;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entities : &#x9700;&#x8981;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8BB0;&#x5F55;&#x5217;&#x8868;,&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x662F;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5B58;&#x5728;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#x7684;&#x7C7B;&#x578B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x6BCF;&#x4E2A;&#x5BF9;&#x8C61;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x4E4B;&#x540E;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;&#x7684;&#x6570;&#x7EC4;</li>
+</ul>
+<h4 id="batchinsertobject-entities"><code>batchInsert(Object[] entities)</code></h4>
+<p>&#x4E0E;<code>int[] batchInsert(List&lt;?&gt; entities)</code>&#x7B49;&#x6548;,&#x53EA;&#x662F;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x4E0D;&#x540C;.</p>
+<h4 id="int-batchinsertstring-entitynamelist-records"><code>int[] batchInsert(String entityName,List&lt;?&gt; records)</code></h4>
+<p>&#x5C06;&#x5BF9;&#x8C61;&#x5217;&#x8868;&#x63D2;&#x5165;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x5BF9;&#x8C61;&#x6620;&#x5C04;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4E2D;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityName : &#x7C7B;&#x540D;,&#x5FC5;&#x987B;&#x662F;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x8868;&#x6620;&#x5C04;&#x7684;&#x7C7B;,&#x5FC5;&#x987B;&#x662F;&#x7B80;&#x5355;&#x7C7B;&#x540D;</li>
+<li>records : &#x9700;&#x8981;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8BB0;&#x5F55;&#x5217;&#x8868;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x6BCF;&#x884C;&#x8BB0;&#x5F55;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x540E;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;&#x7684;&#x6570;&#x7EC4;</li>
+</ul>
+<h5 id="int-batchinsertstring-entitynameobject-records"><code>int[] batchInsert(String entityName,Object[] records)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchInsert(String entityName,List&lt;?&gt; records)</code>&#x76F8;&#x540C;,&#x4EC5;&#x63D2;&#x5165;&#x7684;&#x8BB0;&#x5F55;&#x4EE5;&#x4E0D;&#x540C;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x9012;&#x800C;&#x5DF2;.</p>
+<h5 id="int-batchinsertclass-entityclasslist-records"><code>int[] batchInsert(Class&lt;?&gt; entityClass,List&lt;?&gt; records)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;&#x6548;&#x679C;&#x4E0E;<code>int[] batchInsert(String entityName,List&lt;?&gt; records)</code>&#x76F8;&#x540C;,&#x4F46;&#x662F;&#x6307;&#x5B9A;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x7684;&#x6620;&#x5C04;&#x7C7B;&#x4EE5;&#x7C7B;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x9012;.</p>
+<h5 id="int-batchinsertclass-entityclassobject-records"><code>int[] batchInsert(Class&lt;?&gt; entityClass,Object[] records)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchInsert(String entityName,Object[] records)</code>&#x76F8;&#x540C;,&#x4F46;&#x662F;&#x6307;&#x5B9A;&#x63D2;&#x5165;&#x6570;&#x636E;&#x5E93;&#x7684;&#x6620;&#x5C04;&#x7C7B;&#x4EE5;&#x7C7B;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x9012;.</p>
+<h5 id="int-batchinsertentitymapping-emlist-records"><code>int[] batchInsert(EntityMapping em,List&lt;?&gt; records)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchInsert(String entityName,Object[] records)</code>&#x76F8;&#x540C;,&#x4F46;&#x662F;&#x901A;&#x8FC7;&#x76F4;&#x63A5;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x9012;,EntityMapping&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x7528;&#x8FC7;<code>Dao.getOrmContext().getMetadata().getEntityMapping(entity.class)</code>&#x83B7;&#x53D6;</p>
+<h5 id="int-batchinsertentitymapping-emobject-records"><code>int[] batchInsert(EntityMapping em,Object[] records)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchInsert(String entityName,Object[] records)</code>&#x76F8;&#x540C;,&#x4F46;&#x662F;&#x901A;&#x8FC7;&#x76F4;&#x63A5;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x9012;.</p>
+<hr>
+<h3 id="&#x66F4;&#x65B0;&#x65B9;&#x6CD5;"><a id="update"></a>&#x66F4;&#x65B0;&#x65B9;&#x6CD5;</h3>
+<h4 id="&#x5355;&#x884C;&#x66F4;&#x65B0;"><a id="single_update"></a>&#x5355;&#x884C;&#x66F4;&#x65B0;</h4>
+<pre><code class="lang-java">update(Object entity)
+</code></pre>
+<h5 id="int-updateobject-entity"><code>int update(Object entity)</code></h5>
+<p>&#x66F4;&#x65B0;&#x5355;&#x4E2A;&#x5B9E;&#x4F53;,&#x5B9E;&#x4F53;&#x7684;&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5B58;&#x5728;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#x7684;&#x7C7B;&#x578B;,&#x5E76;&#x4E14;id&#x4E0D;&#x4E3A;null</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entity:&#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x8BB0;&#x5F55;&#x5BF9;&#x5E94;&#x7684;&#x5B9E;&#x4F53;,&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5B58;&#x5728;&#x6620;&#x5C04;&#x5173;&#x7CFB;,&#x5E76;&#x4E14;id&#x4E0D;&#x4E3A;null</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x8BB0;&#x5F55;&#x66F4;&#x65B0;&#x540E;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<hr>
+<h4 id="&#x591A;&#x884C;&#x66F4;&#x65B0;"><a id="multi_update"></a>&#x591A;&#x884C;&#x66F4;&#x65B0;</h4>
+<pre><code class="lang-java">batchUpdate(List&lt;?&gt; entities)
+batchUpdate(Object[] entities)
+batchUpdate(String entityName, List&lt;?&gt; records)
+batchUpdate(String entityName, Object[] records)
+batchUpdate(Class&lt;?&gt; entityClass, List&lt;?&gt; records)
+batchUpdate(Class&lt;?&gt; entityClass, Object[] records)
+batchUpdate(EntityMapping em, List&lt;?&gt; records)
+batchUpdate(EntityMapping em, Object[] records)
+</code></pre>
+<h5 id="int-batchupdatelist-entities"><code>int[] batchUpdate(List&lt;?&gt; entities)</code></h5>
+<p>&#x6279;&#x91CF;&#x66F4;&#x65B0;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entities : &#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;&#x5217;&#x8868;,&#x6BCF;&#x4E00;&#x4E2A;&#x7684;&#x7C7B;&#x578B;&#x90FD;&#x5FC5;&#x987B;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5B58;&#x5728;&#x6620;&#x5C04;&#x5173;&#x7CFB;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x6BCF;&#x4E00;&#x884C;&#x8BB0;&#x5F55;&#x66F4;&#x65B0;&#x540E;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;&#x7684;&#x6570;&#x7EC4;</li>
+</ul>
+<h5 id="int-batchupdateobject-entities"><code>int[] batchUpdate(Object[] entities)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchUpdate(List&lt;?&gt; entities)</code>&#x76F8;&#x540C;,&#x4EC5;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7684;&#x7C7B;&#x578B;&#x4E0D;&#x540C;.</p>
+<h5 id="int-batchupdatestring-entityname-list-records"><code>int[] batchUpdate(String entityName, List&lt;?&gt; records)</code></h5>
+<p>&#x5C06;&#x5BF9;&#x8C61;&#x5217;&#x8868;&#x7684;&#x6570;&#x636E;&#x66F4;&#x65B0;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4E2D;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityName : &#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x5B9E;&#x4F53;&#x7C7B;&#x540D;,&#x5FC5;&#x987B;&#x4E3A;&#x7B80;&#x5355;&#x7C7B;&#x540D;</li>
+<li>records : &#x9700;&#x8981;&#x66F4;&#x65B0;&#x7684;&#x8BB0;&#x5F55;,&#x6BCF;&#x4E00;&#x4E2A;&#x7684;id&#x90FD;&#x4E0D;&#x80FD;&#x4E3A;null</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x6BCF;&#x4E00;&#x884C;&#x8BB0;&#x5F55;&#x66F4;&#x65B0;&#x540E;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;&#x7684;&#x6570;&#x7EC4;</li>
+</ul>
+<h5 id="int-batchupdatestring-entityname-object-records"><code>int[] batchUpdate(String entityName, Object[] records)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchUpdate(String entityName, List&lt;?&gt; records)</code>&#x76F8;&#x540C;,&#x4EC5;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7684;&#x7C7B;&#x578B;&#x4E0D;&#x540C;</p>
+<h5 id="int-batchupdateclass-entityclass-list-records"><code>int[] batchUpdate(Class&lt;?&gt; entityClass, List&lt;?&gt; records)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchUpdate(String entityName, List&lt;?&gt; records)</code>&#x76F8;&#x540C;,&#x4F46;&#x662F;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x5B9E;&#x4F53;&#x7C7B;&#x901A;&#x8FC7;&#x7C7B;&#x5B9E;&#x4F8B;&#x4F20;&#x9012;</p>
+<h5 id="int-batchupdateclass-entityclass-object-records"><code>int[] batchUpdate(Class&lt;?&gt; entityClass, Object[] records)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchUpdate(String entityName, Object[] records)</code>&#x76F8;&#x540C;,&#x4F46;&#x662F;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x5B9E;&#x4F53;&#x7C7B;&#x901A;&#x8FC7;&#x7C7B;&#x5B9E;&#x4F8B;&#x4F20;&#x9012;</p>
+<h5 id="int-batchupdateentitymapping-em-list-records"><code>int[] batchUpdate(EntityMapping em, List&lt;?&gt; records)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchUpdate(String entityName, List&lt;?&gt; records)</code>&#x76F8;&#x540C;,&#x4F46;&#x662F;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4EE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x6307;&#x5B9A;,EntityMapping&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x7528;&#x8FC7;<code>Dao.getOrmContext().getMetadata().getEntityMapping(entity.class)</code>&#x83B7;&#x53D6;</p>
+<h5 id="batchupdateentitymapping-em-object-records"><code>batchUpdate(EntityMapping em, Object[] records)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchUpdate(String entityName, Object[] records)</code>&#x76F8;&#x540C;,&#x4F46;&#x662F;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4EE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x6307;&#x5B9A;.</p>
+<hr>
+<h3 id="&#x5220;&#x9664;&#x65B9;&#x6CD5;"><a id="delete"></a>&#x5220;&#x9664;&#x65B9;&#x6CD5;</h3>
+<h4 id="&#x5355;&#x884C;&#x5220;&#x9664;"><a id="single_delete"></a>&#x5355;&#x884C;&#x5220;&#x9664;</h4>
+<pre><code class="lang-java">delete(Class&lt;?&gt; entityClass,Object id)
+delete(String entityName,Object id)
+delete(EntityMapping em,Object id)
+</code></pre>
+<h5 id="int-deleteclass-entityclassobject-id"><code>int delete(Class&lt;?&gt; entityClass,Object id)</code></h5>
+<p>&#x6839;&#x636E;id&#x5220;&#x9664;entityClass&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x8BB0;&#x5F55;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass: &#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x5B9E;&#x4F53;&#x7C7B;</li>
+<li>id : &#x9700;&#x8981;&#x5220;&#x9664;&#x7684;&#x8BB0;&#x5F55;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x5220;&#x9664;&#x8BB0;&#x5F55;&#x540E;&#x6570;&#x636E;&#x5E93;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="int-deletestring-entitynameobject-id"><code>int delete(String entityName,Object id)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int delete(Class&lt;?&gt; entityClass,Object id)</code>&#x76F8;&#x540C;,&#x4EC5;&#x6570;&#x636E;&#x5E93;&#x5BF9;&#x5E94;&#x7684;&#x5B9E;&#x4F53;&#x8868;&#x4EE5;&#x7B80;&#x5355;&#x7C7B;&#x540D;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x9012;</p>
+<h5 id="int-deleteentitymapping-emobject-id"><code>int delete(EntityMapping em,Object id)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int delete(String entityName,Object id)</code>&#x76F8;&#x540C;,&#x4EC5;&#x6570;&#x636E;&#x5E93;&#x5BF9;&#x5E94;&#x7684;&#x5B9E;&#x4F53;&#x8868;&#x4EE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x4F20;&#x9012;</p>
+<hr>
+<h4 id="&#x591A;&#x884C;&#x5220;&#x9664;"><a id="multi_delete"></a>&#x591A;&#x884C;&#x5220;&#x9664;</h4>
+<pre><code class="lang-java">deleteAll(Class&lt;?&gt; entityClass)
+deleteAll(String entityName)
+deleteAll(EntityMapping em)
+batchDelete(String entityName,List&lt;?&gt; ids)
+batchDelete(String entityName,Object[] ids)
+batchDelete(Class&lt;?&gt; entityClass,List&lt;?&gt; ids)
+batchDelete(Class&lt;?&gt; entityClass,Object[] ids)
+batchDelete(EntityMapping em,List&lt;?&gt; ids)
+batchDelete(EntityMapping em,Object[] ids)
+</code></pre>
+<h5 id="int-deleteallclass-entityclass"><code>int deleteAll(Class&lt;?&gt; entityClass)</code></h5>
+<p>&#x5220;&#x9664;entityClass&#x7C7B;&#x5BF9;&#x5E94;&#x7684;&#x5B9E;&#x4F53;&#x8868;&#x7684;&#x6240;&#x6709;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x6570;&#x636E;&#x5E93;&#x8868;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x5B9E;&#x4F8B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="int-deleteallstring-entityname"><code>int deleteAll(String entityName)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int deleteAll(Class&lt;?&gt; entityClass)</code>&#x76F8;&#x540C;,&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x7C7B;&#x4EE5;&#x7B80;&#x5355;&#x7C7B;&#x540D;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x9012;</p>
+<h5 id="int-deleteallentitymapping-em"><code>int deleteAll(EntityMapping em)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int deleteAll(Class&lt;?&gt; entityClass)</code>&#x76F8;&#x540C;,&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x7C7B;&#x4EE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x4F20;&#x9012;</p>
+<h5 id="int-batchdeletestring-entitynamelist-ids"><code>int[] batchDelete(String entityName,List&lt;?&gt; ids)</code></h5>
+<p>&#x5220;&#x9664;&#x6307;&#x5B9A;&#x5B9E;&#x4F53;&#x7C7B;&#x6620;&#x5C04;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4E2D;id&#x4E3A;ids&#x5217;&#x8868;&#x4E2D;&#x7684;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityName : &#x5B9E;&#x4F53;&#x7C7B;&#x7684;&#x7C7B;&#x540D;,&#x5FC5;&#x987B;&#x662F;&#x7B80;&#x5355;&#x7C7B;&#x540D;</li>
+<li>ids:&#x9700;&#x8981;&#x5220;&#x9664;&#x7684;&#x8BB0;&#x5F55;id&#x5217;&#x8868;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x6BCF;&#x4E00;&#x4E2A;&#x8BB0;&#x5F55;&#x5220;&#x9664;&#x540E;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</li>
+</ul>
+<h5 id="int-batchdeletestring-entitynameobject-ids"><code>int[] batchDelete(String entityName,Object[] ids)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchDelete(String entityName,List&lt;?&gt; ids)</code>&#x76F8;&#x540C;,&#x4EC5;ids&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x4E0D;&#x540C;.</p>
+<h5 id="int-batchdeleteclass-entityclasslist-ids"><code>int[] batchDelete(Class&lt;?&gt; entityClass,List&lt;?&gt; ids)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchDelete(String entityName,List&lt;?&gt; ids)</code>&#x76F8;&#x540C;,&#x4EC5;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x7C7B;&#x4EE5;&#x7C7B;&#x5B9E;&#x4F8B;&#x7684;&#x65B9;&#x5F0F;&#x6307;&#x5B9A;.</p>
+<h5 id="int-batchdeleteclass-entityclassobject-ids"><code>int[] batchDelete(Class&lt;?&gt; entityClass,Object[] ids)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchDelete(String entityName,Object[] ids)</code>&#x76F8;&#x540C;,&#x4EC5;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x7C7B;&#x4EE5;&#x7C7B;&#x5B9E;&#x4F8B;&#x7684;&#x65B9;&#x5F0F;&#x6307;&#x5B9A;.</p>
+<h5 id="int-batchdeleteentitymapping-emlist-ids"><code>int[] batchDelete(EntityMapping em,List&lt;?&gt; ids)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchDelete(String entityName,List&lt;?&gt; ids)</code>&#x76F8;&#x540C;,&#x4EC5;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x7C7B;&#x4EE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x6307;&#x5B9A;.</p>
+<h5 id="int-batchdeleteentitymapping-emobject-ids"><code>int[] batchDelete(EntityMapping em,Object[] ids)</code></h5>
+<p>&#x6548;&#x679C;&#x4E0E;<code>int[] batchDelete(String entityName,Object[] ids)</code>&#x76F8;&#x540C;,&#x4EC5;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6620;&#x5C04;&#x7C7B;&#x4EE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x6307;&#x5B9A;.</p>
+<hr>
+<h3 id="&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;"><a id="query"></a>&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;</h3>
+<h4 id="&#x5355;&#x884C;&#x67E5;&#x8BE2;"><a id="single_query"></a>&#x5355;&#x884C;&#x67E5;&#x8BE2;</h4>
+<pre><code class="lang-java">find(Class&lt;T&gt; entityClass,Object id)
+find(String entityName,Object id)
+find(String entityName,Class&lt;T&gt; resultClass,Object id)
+find(EntityMapping em,Class&lt;T&gt; resultClass,Object id)
+findOrNull(Class&lt;T&gt; entityClass,Object id)
+findOrNull(String entityName,Object id)
+findOrNull(String entityName,Class&lt;T&gt; resultClass,Object id)
+findOrNull(EntityMapping em,Class&lt;T&gt; resultClass,Object id)
+</code></pre>
+<h5 id="t-t-findclasst-entityclassobject-id"><code>&lt;T&gt; T find(Class&lt;T&gt; entityClass,Object id)</code></h5>
+<p>&#x6839;&#x636E;id&#x4ECE;&#x5B9E;&#x4F53;entityClass&#x7C7B;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4E2D;&#x67E5;&#x8BE2;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x5B9E;&#x4F53;&#x5BF9;&#x5E94;&#x7C7B;</li>
+<li>id : &#x67E5;&#x8BE2;&#x7684;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x5BF9;&#x5E94;&#x7684;&#x5B9E;&#x4F53;&#x7C7B;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li>RecordNotFoundException : &#x67E5;&#x627E;&#x4E0D;&#x5230;&#x6307;&#x5B9A;&#x7684;id&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="entity-findstring-entitynameobject-id"><code>Entity find(String entityName,Object id)</code></h5>
+<p>&#x6839;&#x636E;&#x6307;&#x5B9A;&#x7684;id&#x4ECE;entityName&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4E2D;&#x67E5;&#x627E;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityName:&#x5BF9;&#x5E94;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x5B9E;&#x4F53;&#x7C7B;&#x540D;,&#x5FC5;&#x987B;&#x662F;&#x7B80;&#x5355;&#x7C7B;&#x540D;</li>
+<li>id : &#x9700;&#x8981;&#x67E5;&#x627E;&#x7684;&#x8BB0;&#x5F55;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x4EE5;Entity&#x7C7B;&#x5305;&#x88C5;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;,Entity&#x7684;&#x7528;&#x6CD5;&#x548C;Map&#x7C7B;&#x4F3C;,&#x53EF;&#x4EE5;&#x901A;&#x8FC7;get&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x7684;&#x5C5E;&#x6027;&#x503C;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li>RecordNotFoundException : &#x67E5;&#x627E;&#x4E0D;&#x5230;&#x6307;&#x5B9A;&#x7684;id&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-t-findstring-entitynameclasst-resultclassobject-id"><code>&lt;T&gt; T find(String entityName,Class&lt;T&gt; resultClass,Object id)</code></h5>
+<p>&#x636E;&#x6307;&#x5B9A;&#x7684;id&#x4ECE;entityName&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4E2D;&#x67E5;&#x627E;&#x8BB0;&#x5F55;,&#x5E76;&#x5305;&#x88C5;&#x6210;&#x6307;&#x5B9A;&#x7684;&#x7ED3;&#x679C;&#x7C7B;&#x578B;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityName:&#x5BF9;&#x5E94;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x5B9E;&#x4F53;&#x7C7B;&#x540D;,&#x5FC5;&#x987B;&#x662F;&#x7B80;&#x5355;&#x7C7B;&#x540D;</li>
+<li>resultClass:&#x6307;&#x5B9A;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x7C7B;&#x578B;</li>
+<li>id : &#x9700;&#x8981;&#x67E5;&#x627E;&#x7684;&#x8BB0;&#x5F55;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x4EE5;resultClass&#x5305;&#x88C5;&#x7684;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;,&#x6839;&#x636E;&#x5217;&#x540D;&#x548C;resultClass&#x7684;&#x5C5E;&#x6027;&#x540D;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li>RecordNotFoundException : &#x67E5;&#x627E;&#x4E0D;&#x5230;&#x6307;&#x5B9A;&#x7684;id&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-t-findentitymapping-emclasst-resultclassobject-id"><code>&lt;T&gt; T find(EntityMapping em,Class&lt;T&gt; resultClass,Object id)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>&lt;T&gt; T find(String entityName,Class&lt;T&gt; resultClass,Object id)</code>,&#x4F46;&#x662F;&#x4EE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x8868;</p>
+<h5 id="t-t-findornullclasst-entityclassobject-id"><code>&lt;T&gt; T findOrNull(Class&lt;T&gt; entityClass,Object id)</code></h5>
+<p>&#x6839;&#x636E;id&#x4ECE;&#x5B9E;&#x4F53;entityClass&#x7C7B;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4E2D;&#x67E5;&#x8BE2;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x5B9E;&#x4F53;&#x5BF9;&#x5E94;&#x7C7B;</li>
+<li>id : &#x67E5;&#x8BE2;&#x7684;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x5BF9;&#x5E94;&#x7684;&#x5B9E;&#x4F53;&#x7C7B;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;,&#x5982;&#x679C;&#x67E5;&#x627E;&#x4E0D;&#x5230;&#x6307;&#x5B9A;id&#x5219;&#x8FD4;&#x56DE;null</li>
+</ul>
+<h5 id="entity-findornullstring-entitynameobject-id"><code>Entity findOrNull(String entityName,Object id)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>&lt;T&gt; T findOrNull(Class&lt;T&gt; entityClass,Object id)</code>,&#x4F46;&#x662F;&#x4EE5;&#x7B80;&#x5355;&#x7C7B;&#x540D;&#x7684;&#x65B9;&#x5F0F;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x8868;</p>
+<h5 id="t-t-findornullstring-entitynameclasst-resultclassobject-id"><code>&lt;T&gt; T findOrNull(String entityName,Class&lt;T&gt; resultClass,Object id)</code></h5>
+<p>&#x636E;&#x6307;&#x5B9A;&#x7684;id&#x4ECE;entityName&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x4E2D;&#x67E5;&#x627E;&#x8BB0;&#x5F55;,&#x5E76;&#x5305;&#x88C5;&#x6210;&#x6307;&#x5B9A;&#x7684;&#x7ED3;&#x679C;&#x7C7B;&#x578B;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityName:&#x5BF9;&#x5E94;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x5B9E;&#x4F53;&#x7C7B;&#x540D;,&#x5FC5;&#x987B;&#x662F;&#x7B80;&#x5355;&#x7C7B;&#x540D;</li>
+<li>resultClass:&#x6307;&#x5B9A;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x7C7B;&#x578B;</li>
+<li>id : &#x9700;&#x8981;&#x67E5;&#x627E;&#x7684;&#x8BB0;&#x5F55;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x4EE5;resultClass&#x5305;&#x88C5;&#x7684;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;,&#x6839;&#x636E;&#x5217;&#x540D;&#x548C;resultClass&#x7684;&#x5C5E;&#x6027;&#x540D;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;,&#x67E5;&#x627E;&#x4E0D;&#x5230;&#x5219;&#x8FD4;&#x56DE;null</li>
+</ul>
+<h5 id="t-t-findornullentitymapping-emclasst-resultclassobject-id"><code>&lt;T&gt; T findOrNull(EntityMapping em,Class&lt;T&gt; resultClass,Object id)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>&lt;T&gt; T findOrNull(String entityName,Class&lt;T&gt; resultClass,Object id)</code>,&#x4F46;&#x662F;&#x4EE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x8868;</p>
+<hr>
+<h4 id="&#x591A;&#x884C;&#x67E5;&#x8BE2;"><a id="multi_query"></a>&#x591A;&#x884C;&#x67E5;&#x8BE2;</h4>
+<pre><code class="lang-java">findList(Class&lt;T&gt; entityClass,Object[] ids)
+findList(String entityName,Object[] ids)
+findList(String entityName, Class&lt;T&gt; resultClass,Object[] ids)
+findList(EntityMapping em,Class&lt;T&gt; resultClass,Object[] ids)
+findListIfExists(Class&lt;T&gt; entityClass,Object[] ids)
+findListIfExists(String entityName,Object[] ids)
+findListIfExists(String entityName, Class&lt;T&gt; resultClass,Object[] ids)
+findListIfExists(EntityMapping em,Class&lt;T&gt; resultClass,Object[] ids)
+findAll(Class&lt;T&gt; entityClass)
+findAll(String entityName,Class&lt;T&gt; resultClass)
+</code></pre>
+<h5 id="t-listt-findlistclasst-entityclassobject-ids"><code>&lt;T&gt; List&lt;T&gt; findList(Class&lt;T&gt; entityClass,Object[] ids)</code></h5>
+<p>&#x6839;&#x636E;id&#x6570;&#x7EC4;&#x67E5;&#x8BE2;&#x6307;&#x5B9A;&#x7C7B;&#x5B9E;&#x4F8B;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x8BB0;&#x5F55;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x5B9E;&#x4F8B;</li>
+<li>ids : &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;id&#x6570;&#x7EC4;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;id&#x5217;&#x8868;,&#x5982;&#x679C;&#x5B58;&#x5728;&#x67E5;&#x8BE2;&#x4E0D;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li>RecordNotFoundException : &#x5F53;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;&#x5927;&#x5C0F;&#x548C;id&#x6570;&#x7EC4;&#x7684;&#x5927;&#x5C0F;&#x4E0D;&#x5BF9;&#x5E94;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="listentity-findliststring-entitynameobject-ids"><code>List&lt;Entity&gt; findList(String entityName,Object[] ids)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>&lt;T&gt; List&lt;T&gt; findList(Class&lt;T&gt; entityClass,Object[] ids)</code>,&#x4F46;&#x662F;&#x4EE5;&#x7B80;&#x5355;&#x7C7B;&#x540D;&#x7684;&#x65B9;&#x5F0F;&#x6307;&#x5B9A;&#x6620;&#x5C04;&#x5B9E;&#x4F53;&#x7C7B;,&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x503C;&#x662F;Entity&#x5217;&#x8868;</p>
+<h5 id="t-listt-findliststring-entityname-classt-resultclassobject-ids"><code>&lt;T&gt; List&lt;T&gt; findList(String entityName, Class&lt;T&gt; resultClass,Object[] ids)</code></h5>
+<p>&#x6839;&#x636E;id&#x6570;&#x7EC4;&#x67E5;&#x8BE2;&#x6307;&#x5B9A;&#x7C7B;&#x5B9E;&#x4F8B;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x8BB0;&#x5F55;,&#x5E76;&#x5C06;&#x8FD4;&#x56DE;&#x503C;&#x89E3;&#x6790;&#x4E3A;&#x4EE5;resultClass&#x7C7B;&#x7684;&#x5217;&#x8868;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x5B9E;&#x4F8B;</li>
+<li>resultClass : &#x8FD4;&#x56DE;&#x5217;&#x8868;&#x7684;&#x7C7B;&#x578B;</li>
+<li>ids : &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;id&#x6570;&#x7EC4;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;&#x5217;&#x8868;,&#x5982;&#x679C;&#x5B58;&#x5728;&#x67E5;&#x8BE2;&#x4E0D;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li>RecordNotFoundException : &#x5F53;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;&#x5927;&#x5C0F;&#x548C;id&#x6570;&#x7EC4;&#x7684;&#x5927;&#x5C0F;&#x4E0D;&#x5BF9;&#x5E94;&#x65F6;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="t-listt-findlistentitymapping-emclasst-resultclassobject-ids"><code>&lt;T&gt; List&lt;T&gt; findList(EntityMapping em,Class&lt;T&gt; resultClass,Object[] ids)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>&lt;T&gt; List&lt;T&gt; findList(String entityName, Class&lt;T&gt; resultClass,Object[] ids)</code>,&#x4F46;&#x4EE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x5F0F;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x8868;</p>
+<h5 id="t-listt-findlistifexistsclasst-entityclassobject-ids"><code>&lt;T&gt; List&lt;T&gt; findListIfExists(Class&lt;T&gt; entityClass,Object[] ids)</code></h5>
+<p>&#x6839;&#x636E;id&#x6570;&#x7EC4;&#x67E5;&#x8BE2;&#x6307;&#x5B9A;&#x7C7B;&#x5B9E;&#x4F8B;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x8BB0;&#x5F55;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x5B9E;&#x4F8B;</li>
+<li>ids : &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;id&#x6570;&#x7EC4;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;&#x5217;&#x8868;,&#x67E5;&#x627E;&#x4E0D;&#x5230;&#x7684;&#x5219;&#x5FFD;&#x7565;</li>
+</ul>
+<h5 id="listentity-findlistifexistsstring-entitynameobject-ids"><code>List&lt;Entity&gt; findListIfExists(String entityName,Object[] ids)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>&lt;T&gt; List&lt;T&gt; findListIfExists(Class&lt;T&gt; entityClass,Object[] ids)</code>,&#x4F46;&#x4EE5;&#x7B80;&#x5355;&#x7C7B;&#x540D;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x9012;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x6570;&#x636E;&#x5E93;&#x8868;,&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x8BB0;&#x5F55;&#x4EE5;Entity&#x7C7B;&#x5305;&#x88C5;&#x6210;&#x5217;&#x8868;</p>
+<h5 id="t-listt-findlistifexistsstring-entityname-classt-resultclassobject-ids"><code>&lt;T&gt; List&lt;T&gt; findListIfExists(String entityName, Class&lt;T&gt; resultClass,Object[] ids)</code></h5>
+<p>&#x6839;&#x636E;id&#x6570;&#x7EC4;&#x67E5;&#x8BE2;&#x6307;&#x5B9A;&#x7C7B;&#x5B9E;&#x4F8B;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x8BB0;&#x5F55;,&#x5E76;&#x5C06;&#x8FD4;&#x56DE;&#x503C;&#x89E3;&#x6790;&#x4E3A;&#x4EE5;resultClass&#x7C7B;&#x7684;&#x5217;&#x8868;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x5B9E;&#x4F8B;</li>
+<li>resultClass : &#x8FD4;&#x56DE;&#x5217;&#x8868;&#x7684;&#x7C7B;&#x578B;</li>
+<li>ids : &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;id&#x6570;&#x7EC4;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;&#x5217;&#x8868;,&#x5982;&#x679C;&#x5B58;&#x5728;&#x67E5;&#x8BE2;&#x4E0D;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x5219;&#x5FFD;&#x7565;</li>
+</ul>
+<h5 id="t-listt-findlistifexistsentitymapping-emclasst-resultclassobject-ids"><code>&lt;T&gt; List&lt;T&gt; findListIfExists(EntityMapping em,Class&lt;T&gt; resultClass,Object[] ids)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>&lt;T&gt; List&lt;T&gt; findListIfExists(String entityName, Class&lt;T&gt; resultClass,Object[] ids)</code>,&#x4F46;&#x662F;&#x4EE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x5F0F;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x8868;</p>
+<h5 id="t-listt-findallclasst-entityclass"><code>&lt;T&gt; List&lt;T&gt; findAll(Class&lt;T&gt; entityClass)</code></h5>
+<p>&#x67E5;&#x8BE2;&#x6307;&#x5B9A;&#x7C7B;&#x5B9E;&#x4F8B;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x6240;&#x6709;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x5B9E;&#x4F8B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5217;&#x8868;</li>
+</ul>
+<h5 id="t-listt-findallstring-entitynameclasst-resultclass"><code>&lt;T&gt; List&lt;T&gt; findAll(String entityName,Class&lt;T&gt; resultClass)</code></h5>
+<p>&#x4EE5;entityName&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x5E76;&#x67E5;&#x8BE2;&#x6240;&#x6709;&#x8BB0;&#x5F55;,&#x7136;&#x540E;&#x5C06;&#x8BB0;&#x5F55;&#x5305;&#x88C5;&#x6210;resultClass&#x7C7B;&#x7684;&#x5217;&#x8868;&#x8FD4;&#x56DE;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityName : &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8868;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x540D;&#x79F0;,&#x5FC5;&#x987B;&#x662F;&#x7B80;&#x5355;&#x7C7B;&#x540D;</li>
+<li>resultClass : &#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x7684;&#x5217;&#x8868;&#x7C7B;&#x578B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5217;&#x8868;</li>
+</ul>
+<hr>
+<h3 id="query&#x67E5;&#x8BE2;"><a id="query_object"></a>Query&#x67E5;&#x8BE2;</h3>
+<p>Query&#x67E5;&#x8BE2;&#x662F;&#x901A;&#x8FC7;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Query&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x5F0F;&#x67E5;&#x8BE2;&#x7684;,Query&#x5BF9;&#x8C61;&#x7684;&#x4F7F;&#x7528;&#x548C;Model&#x63A5;&#x53E3;&#x4E2D;&#x7684;EntityQuery&#x5BF9;&#x8C61;&#x4F7F;&#x7528;&#x5B8C;&#x5168;&#x4E00;&#x76F4;,&#x53EF;&#x4EE5;&#x53C2;&#x8003;Model&#x63A5;&#x53E3;&#x4E2D;&#x7684;EntityQuery&#x67E5;&#x8BE2;&#x65B9;&#x6CD5;,&#x540C;&#x65F6;&#x8FD9;&#x91CC;&#x4E5F;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;CriteriaQuery&#x67E5;&#x8BE2;</p>
+<h4 id="query&#x5BF9;&#x8C61;&#x548C;entityquery&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;"><a id="entity_query"></a>Query&#x5BF9;&#x8C61;&#x548C;EntityQuery&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;</h4>
+<pre><code class="lang-java">createSqlQuery(String sql)
+createSqlQuery(Class&lt;T&gt; resultClass, String sql)
+createSqlQuery(EntityMapping em,String sql)
+createSqlQuery(EntityMapping em, Class&lt;T&gt; resultClass, String sql)
+createNamedQuery(String queryName)
+createNamedQuery(String queryName,Class&lt;T&gt; resultClass)
+createNamedQuery(Class&lt;T&gt; entityClass,String queryName)
+createNamedQuery(String entityName,String queryName)
+createNamedQuery(String entityName,Class&lt;T&gt; resultClass, String queryName)
+createNamedQuery(EntityMapping em, Class&lt;T&gt; resultClass, String queryName)
+createQuery(Class&lt;T&gt; resultClass, SqlCommand command)
+</code></pre>
+<h5 id="queryrecord-createsqlquerystring-sql"><code>Query&lt;Record&gt; createSqlQuery(String sql)</code></h5>
+<p>&#x4EE5;leapQL&#x7684;&#x53C2;&#x6570;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Query&#x5BF9;&#x8C61;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>sql : &#x9700;&#x8981;&#x89E3;&#x6790;&#x7684;leapQL</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;Query&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="t-queryt-createsqlqueryclasst-resultclass-string-sql"><code>&lt;T&gt; Query&lt;T&gt; createSqlQuery(Class&lt;T&gt; resultClass, String sql)</code></h5>
+<p>&#x4EE5;leapQL&#x7684;&#x53C2;&#x6570;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Query&#x5BF9;&#x8C61;,&#x5E76;&#x6307;&#x5B9A;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>resultClass: &#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;</li>
+<li>sql : &#x9700;&#x8981;&#x89E3;&#x6790;&#x7684;leapQL</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;Query&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="entityqueryentitybase-createsqlqueryentitymapping-emstring-sql"><code>EntityQuery&lt;EntityBase&gt; createSqlQuery(EntityMapping em,String sql)</code></h5>
+<p>&#x4EE5;leapQL&#x548C;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;EntityQuery&#x5BF9;&#x8C61;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>em : &#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;</li>
+<li>sql : &#x9700;&#x8981;&#x89E3;&#x6790;&#x6267;&#x884C;&#x7684;leapQL</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;EntityBase&#x7C7B;&#x578B;&#x7684;EntityQuery&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="t-entityqueryt-createsqlqueryentitymapping-em-classt-resultclass-string-sql"><code>&lt;T&gt; EntityQuery&lt;T&gt; createSqlQuery(EntityMapping em, Class&lt;T&gt; resultClass, String sql)</code></h5>
+<p>&#x4EE5;leapQL&#x548C;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;EntityQuery&#x5BF9;&#x8C61;,&#x5E76;&#x6307;&#x5B9A;&#x8FD4;&#x56DE;&#x7684;&#x7C7B;&#x578B;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>em : &#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;</li>
+<li>resultClass : &#x9700;&#x8981;&#x8FD4;&#x56DE;&#x7684;&#x7C7B;&#x578B;&#x7684;&#x7C7B;&#x5B9E;&#x4F8B;</li>
+<li>sql : &#x9700;&#x8981;&#x89E3;&#x6790;&#x6267;&#x884C;&#x7684;leapQL</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;resultClass&#x7C7B;&#x578B;&#x7684;EntityQuery&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="queryrecord-createnamedquerystring-queryname"><code>Query&lt;Record&gt; createNamedQuery(String queryName)</code></h5>
+<p>&#x901A;&#x8FC7;&#x6307;&#x5B9A;sqlKey&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;Query&#x5BF9;&#x8C61;.</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>queryName : xml&#x4E2D;&#x914D;&#x7F6E;&#x7684;sql&#x7684;key&#x5C5E;&#x6027;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;Record&#x7C7B;&#x578B;&#x7684;Query&#x5BF9;&#x8C61;,Record&#x662F;Map&#x7684;&#x5B50;&#x7C7B;,&#x7528;&#x6CD5;&#x548C;Map&#x4E00;&#x81F4;.</li>
+</ul>
+<h5 id="t-queryt-createnamedquerystring-querynameclasst-resultclass"><code>&lt;T&gt; Query&lt;T&gt; createNamedQuery(String queryName,Class&lt;T&gt; resultClass)</code></h5>
+<p>&#x901A;&#x8FC7;&#x6307;&#x5B9A;sqlKey&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;Query&#x5BF9;&#x8C61;,&#x5E76;&#x6307;&#x5B9A;Query&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x4E3A;resultClass</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>queryName : xml&#x4E2D;&#x914D;&#x7F6E;&#x7684;sql&#x7684;key&#x5C5E;&#x6027;</li>
+<li>resultClass : Query&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;resultClass&#x7C7B;&#x578B;&#x7684;Query&#x5BF9;&#x8C61;.</li>
+</ul>
+<h5 id="t-entityqueryt-createnamedqueryclasst-entityclassstring-queryname"><code>&lt;T&gt; EntityQuery&lt;T&gt; createNamedQuery(Class&lt;T&gt; entityClass,String queryName)</code></h5>
+<p>&#x6307;&#x5B9A;sqlKey&#x548C;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x7C7B;,&#x5E76;&#x8FD4;&#x56DE;&#x8BE5;&#x6620;&#x5C04;&#x7C7B;&#x7684;EntityQuery&#x5BF9;&#x8C61;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x5B9E;&#x4F53;&#x7C7B;&#x5B9E;&#x4F8B;</li>
+<li>queryName : xml&#x4E2D;&#x914D;&#x7F6E;&#x7684;sql&#x7684;key&#x5C5E;&#x6027;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;resultClass&#x7C7B;&#x578B;&#x7684;EntityQuery&#x5BF9;&#x8C61;.</li>
+</ul>
+<h5 id="entityqueryentitybase-createnamedquerystring-entitynamestring-queryname"><code>EntityQuery&lt;EntityBase&gt; createNamedQuery(String entityName,String queryName)</code></h5>
+<p>&#x6307;&#x5B9A;sqlKey,&#x5E76;&#x8FD4;&#x56DE;EntityBase&#x7C7B;&#x578B;&#x7684;EntityQuery&#x5BF9;&#x8C61;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityName : &#x5B9E;&#x4F53;&#x7C7B;&#x7684;&#x7B80;&#x5355;&#x7C7B;&#x540D;</li>
+<li>queryName : xml&#x4E2D;&#x914D;&#x7F6E;&#x7684;sql&#x7684;key&#x5C5E;&#x6027;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;EntityBase&#x7C7B;&#x578B;&#x7684;EntityQuery&#x5BF9;&#x8C61;.</li>
+</ul>
+<h5 id="t-entityqueryt-createnamedquerystring-entitynameclasst-resultclass-string-queryname"><code>&lt;T&gt; EntityQuery&lt;T&gt; createNamedQuery(String entityName,Class&lt;T&gt; resultClass, String queryName)</code></h5>
+<p>&#x6307;&#x5B9A;sqlKey&#x548C;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x7C7B;&#x540D;,&#x5E76;&#x6307;&#x5B9A;&#x8FD4;&#x56DE;EntityQuery&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x4E3A;resultClass</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityName : &#x5B9E;&#x4F53;&#x7C7B;&#x7684;&#x7B80;&#x5355;&#x7C7B;&#x540D;</li>
+<li>resultClass : &#x6307;&#x5B9A;EntityQuery&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;</li>
+<li>queryName : xml&#x4E2D;&#x914D;&#x7F6E;&#x7684;sql&#x7684;key&#x5C5E;&#x6027;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;resultClass&#x7C7B;&#x578B;&#x7684;EntityQuery&#x5BF9;&#x8C61;.</li>
+</ul>
+<h5 id="t-entityqueryt-createnamedqueryentitymapping-em-classt-resultclass-string-queryname"><code>&lt;T&gt; EntityQuery&lt;T&gt; createNamedQuery(EntityMapping em, Class&lt;T&gt; resultClass, String queryName)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>&lt;T&gt; EntityQuery&lt;T&gt; createNamedQuery(String entityName,Class&lt;T&gt; resultClass, String queryName)</code>,&#x4F46;&#x662F;&#x901A;&#x8FC7;&#x76F4;&#x63A5;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x8868;</p>
+<h5 id="t-queryt-createqueryclasst-resultclass-sqlcommand-command"><code>&lt;T&gt; Query&lt;T&gt; createQuery(Class&lt;T&gt; resultClass, SqlCommand command)</code></h5>
+<p>&#x4EE5;SqlCommand&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;Query&#x5BF9;&#x8C61;,&#x5E76;&#x6307;&#x5B9A;&#x8FD4;&#x56DE;&#x7684;Query&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;</p>
+<p>SqlCommand&#x5BF9;&#x8C61;&#x5728;<code>sql&#x6267;&#x884C;&#x7684;&#x5C0F;&#x8282;&#x8BE6;&#x7EC6;&#x5206;&#x6790;</code></p>
+<hr>
+<h4 id="criteriaquery&#x5BF9;&#x8C61;&#x521B;&#x5EFA;"><a id="criteria_query"></a>CriteriaQuery&#x5BF9;&#x8C61;&#x521B;&#x5EFA;</h4>
+<pre><code class="lang-java">createCriteriaQuery(Class&lt;T&gt; entityClass)
+createCriteriaQuery(EntityMapping em, Class&lt;T&gt; resultClass)
+</code></pre>
+<h5 id="t-criteriaqueryt-createcriteriaqueryclasst-entityclass"><code>&lt;T&gt; CriteriaQuery&lt;T&gt; createCriteriaQuery(Class&lt;T&gt; entityClass)</code></h5>
+<p>&#x6307;&#x5B9A;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x7C7B;&#x751F;&#x6210;CriteriaQuery&#x5BF9;&#x8C61;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x7C7B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x751F;&#x6210;&#x7684;CriteriaQuery&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="t-criteriaqueryt-createcriteriaqueryentitymapping-em-classt-resultclass"><code>&lt;T&gt; CriteriaQuery&lt;T&gt; createCriteriaQuery(EntityMapping em, Class&lt;T&gt; resultClass)</code></h5>
+<p>&#x6307;&#x5B9A;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x751F;&#x6210;CriteriaQuery,&#x5E76;&#x6307;&#x5B9A;CriteriaQuery&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x4E3A;resultClass</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>em : &#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;</li>
+<li>resultClass : &#x6CDB;&#x578B;&#x7684;&#x7C7B;&#x578B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;resultClass&#x7C7B;&#x578B;&#x7684;CriteriaQuery</li>
+</ul>
+<hr>
+<h3 id="&#x6307;&#x4EE4;&#x5BF9;&#x8C61;"><a id="cmd"></a>&#x6307;&#x4EE4;&#x5BF9;&#x8C61;</h3>
+<pre><code class="lang-java">cmdInsert(Class&lt;?&gt; entityClass)
+cmdInsert(String entityName)
+cmdInsert(EntityMapping em)
+cmdUpdate(Class&lt;?&gt; entityClass)
+cmdUpdate(String entityName)
+cmdUpdate(EntityMapping em)
+</code></pre>
+<p>&#x6307;&#x4EE4;&#x5BF9;&#x8C61;&#x4E0E;Model&#x63A5;&#x53E3;&#x4E2D;&#x7684;&#x6307;&#x4EE4;&#x5BF9;&#x8C61;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x5B8C;&#x5168;&#x76F8;&#x540C;,&#x53EF;&#x4EE5;&#x53C2;&#x8003;Model&#x63A5;&#x53E3;&#x5BF9;&#x6307;&#x4EE4;&#x5BF9;&#x8C61;&#x7684;&#x4F7F;&#x7528;&#x8BF4;&#x660E;.</p>
+<h5 id="insertcommand-cmdinsertclass-entityclass"><code>InsertCommand cmdInsert(Class&lt;?&gt; entityClass)</code></h5>
+<p>&#x901A;&#x8FC7;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x7C7B;&#x751F;&#x6210;&#x63D2;&#x5165;&#x6307;&#x4EE4;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x7C7B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x63D2;&#x5165;&#x6307;&#x4EE4;&#x5BF9;&#x8C61;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li>MappingNotFoundException:&#x5982;&#x679C;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x5219;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="insertcommand-cmdinsertstring-entityname"><code>InsertCommand cmdInsert(String entityName)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>InsertCommand cmdInsert(Class&lt;?&gt; entityClass)</code>,&#x4EC5;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x7C7B;&#x4F7F;&#x7528;&#x7B80;&#x5355;&#x7C7B;&#x540D;&#x6307;&#x5B9A;.</p>
+<h5 id="insertcommand-cmdinsertentitymapping-em"><code>InsertCommand cmdInsert(EntityMapping em)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>InsertCommand cmdInsert(Class&lt;?&gt; entityClass)</code>,&#x4EC5;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x7C7B;&#x4F7F;&#x7528;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;</p>
+<h5 id="updatecommand-cmdupdateclass-entityclass"><code>UpdateCommand cmdUpdate(Class&lt;?&gt; entityClass)</code></h5>
+<p>&#x901A;&#x8FC7;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x7C7B;&#x751F;&#x6210;&#x66F4;&#x65B0;&#x6307;&#x4EE4;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x7C7B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x66F4;&#x65B0;&#x6307;&#x4EE4;&#x5BF9;&#x8C61;</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li>MappingNotFoundException:&#x5982;&#x679C;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x5219;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="updatecommand-cmdupdatestring-entityname"><code>UpdateCommand cmdUpdate(String entityName)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>UpdateCommand cmdUpdate(Class&lt;?&gt; entityClass)</code>,&#x4EC5;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x7C7B;&#x4F7F;&#x7528;&#x7B80;&#x5355;&#x7C7B;&#x540D;&#x6307;&#x5B9A;.</p>
+<h5 id="updatecommand-cmdupdateentitymapping-em"><code>UpdateCommand cmdUpdate(EntityMapping em)</code></h5>
+<p>&#x6548;&#x679C;&#x540C;<code>UpdateCommand cmdUpdate(Class&lt;?&gt; entityClass)</code>,&#x4EC5;&#x6307;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x6620;&#x5C04;&#x7C7B;&#x4F7F;&#x7528;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;</p>
+<hr>
+<h3 id="&#x4E8B;&#x52A1;&#x63A7;&#x5236;"><a id="transaction"></a>&#x4E8B;&#x52A1;&#x63A7;&#x5236;</h3>
+<pre><code class="lang-java">doTransaction(TransactionCallback callback)
+doTransaction(TransactionCallbackWithResult&lt;T&gt; callback)
+doTransaction(TransactionCallback callback, <span class="hljs-keyword">boolean</span> requiresNew)
+doTransaction(TransactionCallbackWithResult&lt;T&gt; callback, <span class="hljs-keyword">boolean</span> requiresNew)
+</code></pre>
+<p>&#x4F7F;&#x7528;&#x63A7;&#x5236;&#x7684;&#x65B9;&#x6CD5;&#x4F7F;&#x7528;&#x548C;Model&#x63A5;&#x53E3;&#x5B8C;&#x5168;&#x4E00;&#x81F4;,&#x8BF7;&#x53C2;&#x8003;Model&#x63A5;&#x53E3;&#x7684;&#x8BF4;&#x660E;&#x6587;&#x6863;</p>
+<h3 id="&#x6821;&#x9A8C;&#x65B9;&#x6CD5;"><a id="validate"></a>&#x6821;&#x9A8C;&#x65B9;&#x6CD5;</h3>
+<pre><code class="lang-java">validate(Object entity)
+validate(Object entity, <span class="hljs-keyword">int</span> maxErrors)
+validate(EntityMapping em,Object entity)
+validate(EntityMapping em,Object entity, <span class="hljs-keyword">int</span> maxErrors)
+</code></pre>
+<h5 id="errors-validateobject-entity"><code>Errors validate(Object entity)</code></h5>
+<p>&#x6821;&#x9A8C;&#x6620;&#x5C04;&#x5B9E;&#x4F53;&#x7C7B;&#x5B9E;&#x4F8B;&#x5E76;&#x8FD4;&#x56DE;&#x6821;&#x9A8C;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entity:&#x9700;&#x8981;&#x6821;&#x9A8C;&#x7684;&#x5B9E;&#x4F53;&#x7C7B;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x6821;&#x9A8C;&#x7ED3;&#x679C;&#x7684;Error&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="errors-validateobject-entity-int-maxerrors"><code>Errors validate(Object entity, int maxErrors)</code></h5>
+<p>&#x6821;&#x9A8C;&#x6620;&#x5C04;&#x5B9E;&#x4F53;&#x7C7B;&#x5B9E;&#x4F8B;&#x5E76;&#x8FD4;&#x56DE;&#x6821;&#x9A8C;&#x7ED3;&#x679C;&#x5BF9;&#x8C61;,&#x540C;&#x65F6;&#x6307;&#x5B9A;&#x5728;&#x6821;&#x9A8C;&#x7684;&#x6700;&#x5927;&#x9519;&#x8BEF;&#x6570;,&#x5F53;&#x6821;&#x9A8C;&#x9519;&#x8BEF;&#x6570;&#x8FBE;&#x5230;&#x6700;&#x5927;&#x9519;&#x8BEF;&#x6570;&#x65F6;&#x505C;&#x6B62;&#x6821;&#x9A8C;&#x5E76;&#x8FD4;&#x56DE;&#x6821;&#x9A8C;&#x7ED3;&#x679C;,0&#x8868;&#x793A;&#x6821;&#x9A8C;&#x5168;&#x90E8;&#x9519;&#x8BEF;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entity:&#x9700;&#x8981;&#x6821;&#x9A8C;&#x7684;&#x5B9E;&#x4F53;&#x7C7B;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;</li>
+<li>maxErrors: &#x6700;&#x5927;&#x9519;&#x8BEF;&#x6570;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x6821;&#x9A8C;&#x7ED3;&#x679C;&#x7684;Error&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="errors-validateentitymapping-emobject-entity"><code>Errors validate(EntityMapping em,Object entity)</code></h5>
+<p>&#x4EE5;&#x6307;&#x5B9A;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x7684;&#x914D;&#x7F6E;&#x6821;&#x9A8C;&#x6620;&#x5C04;&#x7C7B;&#x5B9E;&#x4F8B;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>em:&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;</li>
+<li>entity: &#x9700;&#x8981;&#x6821;&#x9A8C;&#x7684;&#x5BF9;&#x8C61;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x6821;&#x9A8C;&#x7ED3;&#x679C;&#x7684;Error&#x5BF9;&#x8C61;</li>
+</ul>
+<h5 id="errors-validateentitymapping-emobject-entity-int-maxerrors"><code>Errors validate(EntityMapping em,Object entity, int maxErrors)</code></h5>
+<p>&#x4EE5;&#x6307;&#x5B9A;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x7684;&#x914D;&#x7F6E;&#x6821;&#x9A8C;&#x6620;&#x5C04;&#x7C7B;&#x5B9E;&#x4F8B;,&#x5E76;&#x6307;&#x5B9A;&#x6700;&#x5927;&#x6821;&#x9A8C;&#x5931;&#x8D25;&#x6570;&#x91CF;,&#x5F53;&#x6821;&#x9A8C;&#x9519;&#x8BEF;&#x6570;&#x8FBE;&#x5230;&#x6700;&#x5927;&#x9519;&#x8BEF;&#x6570;&#x65F6;&#x505C;&#x6B62;&#x6821;&#x9A8C;&#x5E76;&#x8FD4;&#x56DE;&#x6821;&#x9A8C;&#x7ED3;&#x679C;,0&#x8868;&#x793A;&#x6821;&#x9A8C;&#x5168;&#x90E8;&#x9519;&#x8BEF;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>em:&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;</li>
+<li>entity: &#x9700;&#x8981;&#x6821;&#x9A8C;&#x7684;&#x5BF9;&#x8C61;</li>
+<li>maxErrors : &#x6700;&#x5927;&#x9519;&#x8BEF;&#x6570;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x6821;&#x9A8C;&#x7ED3;&#x679C;&#x7684;Error&#x5BF9;&#x8C61;</li>
+</ul>
+<h3 id="sql&#x6267;&#x884C;"><a id="execute"></a>sql&#x6267;&#x884C;</h3>
+<pre><code class="lang-java">executeUpdate(SqlCommand command, Object[] args)
+executeUpdate(SqlCommand command, Object bean)
+executeUpdate(SqlCommand command, Map params)
+executeUpdate(String sql, Object bean)
+executeUpdate(String sql, Map params)
+executeNamedUpdate(String sqlKey, Object[] args)
+executeNamedUpdate(String sqlKey, Object bean)
+executeNamedUpdate(String sqlKey, Map&lt;String, Object&gt; params)
+</code></pre>
+<p>&#x5728;&#x4ECB;&#x7ECD;sql&#x6267;&#x884C;&#x7684;&#x65B9;&#x6CD5;&#x4E4B;&#x524D;,&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5148;&#x4E86;&#x89E3;SqlCommand&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x5982;&#x4F55;&#x6784;&#x9020;</p>
+<h4 id="sqlcommand&#x5BF9;&#x8C61;"><a id="sql_command"></a><code>SqlCommand</code>&#x5BF9;&#x8C61;</h4>
+<p>SqlCommand&#x5BF9;&#x8C61;&#x662F;sql&#x7684;&#x6307;&#x5B9A;&#x5BF9;&#x8C61;,&#x4E00;&#x822C;&#x901A;&#x8FC7;SqlFactory&#x7684;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;.</p>
+<p>SqlFactory&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;leap&#x7684;IOC&#x6216;&#x8005;bean&#x5BB9;&#x5668;&#x83B7;&#x53D6;,&#x6709;&#x5982;&#x4E0B;&#x51E0;&#x4E2A;&#x63A5;&#x53E3;:</p>
+<p>&#x666E;&#x901A;SqlCommand&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x63A5;&#x53E3;</p>
+<pre><code class="lang-java"><span class="hljs-function">SqlCommand <span class="hljs-title">createSqlCommand</span><span class="hljs-params">(MetadataContext context, String sql)</span>
+SqlCommand <span class="hljs-title">createSqlCommand</span><span class="hljs-params">(MetadataContext context,String source,String sql)</span>
+</span></code></pre>
+<p>&#x65B0;&#x589E;SqlCommand&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x63A5;&#x53E3;</p>
+<pre><code class="lang-java"><span class="hljs-function">SqlCommand <span class="hljs-title">createInsertCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em)</span>
+SqlCommand <span class="hljs-title">createInsertCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em,String[] fields)</span>
+</span></code></pre>
+<p>&#x66F4;&#x65B0;SqlCommand&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x63A5;&#x53E3;</p>
+<pre><code class="lang-java"><span class="hljs-function">SqlCommand <span class="hljs-title">createUpdateCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em)</span>
+SqlCommand <span class="hljs-title">createUpdateCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em,String[] fields)</span>
+</span></code></pre>
+<p>&#x5220;&#x9664;SqlCommand&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x63A5;&#x53E3;</p>
+<pre><code class="lang-java"><span class="hljs-function">SqlCommand <span class="hljs-title">createDeleteCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em)</span>
+SqlCommand <span class="hljs-title">createDeleteAllCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em)</span>
+</span></code></pre>
+<p>&#x67E5;&#x8BE2;SqlCommand&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x63A5;&#x53E3;</p>
+<pre><code class="lang-java"><span class="hljs-function">SqlCommand <span class="hljs-title">createFindCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em)</span>
+SqlCommand <span class="hljs-title">createFindListCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em)</span>
+SqlCommand <span class="hljs-title">createFindAllCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em)</span>
+</span></code></pre>
+<p>&#x63A2;&#x6D4B;SqlCommand&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x63A5;&#x53E3;</p>
+<pre><code class="lang-java"><span class="hljs-function">SqlCommand <span class="hljs-title">createExistsCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em)</span>
+SqlCommand <span class="hljs-title">createCountCommand</span><span class="hljs-params">(MetadataContext context,EntityMapping em)</span>
+</span></code></pre>
+<p>&#x4E0A;&#x8FF0;&#x6240;&#x6709;&#x65B9;&#x6CD5;&#x90FD;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x53C2;&#x6570;<code>MetadataContext</code>,&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x662F;ORM&#x5143;&#x6570;&#x636E;&#x5BF9;&#x8C61;,OrmContext&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;MetadataContext&#x7684;&#x5B50;&#x7C7B;,&#x4E00;&#x822C;&#x901A;&#x8FC7;<code>dao.getOrmContext()</code>&#x83B7;&#x53D6;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;</p>
+<p>&#x5404;&#x4E2A;&#x63A5;&#x53E3;&#x4E2D;&#x7684;<code>EntityMapping</code>&#x53C2;&#x6570;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5728;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x7528;&#x7684;&#x975E;&#x5E38;&#x591A;&#x4E86;,&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x591A;&#x505A;&#x89E3;&#x91CA;.</p>
+<p>&#x666E;&#x901A;SqlCommand&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x63A5;&#x53E3;&#x4E2D;&#x7684;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#x90FD;&#x5305;&#x542B;&#x4E86;sql&#x53C2;&#x6570;,&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x5C31;&#x662F;&#x666E;&#x901A;&#x7684;leapQL&#x7684;&#x67E5;&#x8BE2;&#x8BED;&#x53E5;</p>
+<p>&#x65B0;&#x589E;SqlCommand&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x63A5;&#x53E3;&#x548C;&#x66F4;&#x65B0;SqlCommand&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x63A5;&#x53E3;&#x4E2D;&#x5305;&#x542B;&#x7684;fields&#x53C2;&#x6570;&#x662F;&#x5C5E;&#x6027;&#x540D;&#x7684;&#x6570;&#x7EC4;,&#x8868;&#x793A;&#x9700;&#x8981;&#x63D2;&#x5165;&#x6216;&#x8005;&#x66F4;&#x65B0;&#x7684;&#x5C5E;&#x6027;&#x540D;</p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5927;&#x81F4;&#x4E86;&#x89E3;SqlCommand&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x4E86;,&#x73B0;&#x5728;&#x8BA9;&#x6211;&#x4EEC;&#x5F00;&#x59CB;&#x770B;&#x770B;sql&#x6267;&#x884C;&#x7684;&#x63A5;&#x53E3;&#x5427;.</p>
+<h4 id="sql&#x6267;&#x884C;&#x65B9;&#x6CD5;"><a id="sql_execute"></a>sql&#x6267;&#x884C;&#x65B9;&#x6CD5;</h4>
+<h5 id="sqlcommand&#x6267;&#x884C;"><code>SqlCommand</code>&#x6267;&#x884C;</h5>
+<pre><code class="lang-java">executeUpdate(SqlCommand command, Object[] args)
+executeUpdate(SqlCommand command, Object bean)
+executeUpdate(SqlCommand command, Map params)
+</code></pre>
+<p>&#x8FD9;&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x5B8C;&#x5168;&#x76F8;&#x540C;,&#x533A;&#x522B;&#x53EA;&#x5728;&#x4E8E;&#x4F20;&#x9012;&#x53C2;&#x6570;&#x7684;&#x65B9;&#x5F0F;&#x4E0D;&#x540C;&#x800C;&#x5DF2;,SqlCommand&#x89E3;&#x6790;&#x7684;&#x662F;&#x6807;&#x51C6;&#x7684;leapQL,&#x56E0;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x8BBE;&#x7F6E;&#x548C;&#x5176;&#x4ED6;&#x7684;&#x65B9;&#x5F0F;&#x5B8C;&#x5168;&#x76F8;&#x540C;.</p>
+<p>&#x5E76;&#x4E14;&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x90FD;&#x662F;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x6570;&#x636E;&#x5E93;&#x884C;&#x6570;</p>
+<h4 id="sql&#x6267;&#x884C;">sql&#x6267;&#x884C;</h4>
+<pre><code class="lang-java">executeUpdate(String sql, Object bean)
+executeUpdate(String sql, Map params)
+</code></pre>
+<p>&#x8FD9;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x6267;&#x884C;&#x7ED3;&#x679C;&#x662F;&#x5B8C;&#x5168;&#x76F8;&#x540C;&#x7684;,&#x53EA;&#x662F;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#x4E0D;&#x540C;&#x800C;&#x5DF2;,&#x53C2;&#x6570;sql&#x662F;leapQL&#x6216;&#x8005;&#x6807;&#x51C6;&#x7684;sql&#x90FD;&#x53EF;&#x4EE5;,bean&#x548C;params&#x90FD;&#x662F;sql&#x53C2;&#x6570;</p>
+<p>&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x6570;&#x636E;&#x5E93;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;</p>
+<pre><code class="lang-java">executeNamedUpdate(String sqlKey, Object[] args)
+executeNamedUpdate(String sqlKey, Object bean)
+executeNamedUpdate(String sqlKey, Map&lt;String, Object&gt; params)
+</code></pre>
+<p>&#x8FD9;&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x6307;&#x5B9A;sqlKey&#x7684;&#x65B9;&#x5F0F;&#x6267;&#x884C;sql,&#x8FD9;&#x4E9B;sql&#x90FD;&#x662F;&#x914D;&#x7F6E;&#x5728;xml&#x4E2D;&#x7684;sql,&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x6267;&#x884C;&#x7ED3;&#x679C;&#x4E5F;&#x662F;&#x76F8;&#x540C;&#x7684;,&#x4E0D;&#x540C;&#x7684;&#x53EA;&#x662F;&#x53C2;&#x6570;&#x7684;&#x4F20;&#x9012;&#x65B9;&#x5F0F;&#x800C;&#x5DF2;.</p>
+<p>&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x6570;&#x636E;&#x5E93;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;</p>
+<hr>
+<h3 id="&#x63A2;&#x6D4B;&#x65B9;&#x6CD5;"><a id="test"></a>&#x63A2;&#x6D4B;&#x65B9;&#x6CD5;</h3>
+<pre><code class="lang-java">exists(Class&lt;?&gt; entityClass,Object id)
+count(Class&lt;?&gt; entityClass)
+</code></pre>
+<h5 id="boolean-existsclass-entityclassobject-id"><code>boolean exists(Class&lt;?&gt; entityClass,Object id)</code></h5>
+<p>&#x63A2;&#x6D4B;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x7C7B;&#x5B9E;&#x4F8B;&#x662F;&#x5426;&#x5B58;&#x5728;&#x6307;&#x5B9A;&#x7684;id&#x7684;&#x8BB0;&#x5F55;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x7C7B;</li>
+<li>id : &#x9700;&#x8981;&#x63A2;&#x6D4B;&#x7684;id</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x5B58;&#x5728;&#x5219;&#x8FD4;&#x56DE;true,&#x4E0D;&#x5B58;&#x5728;&#x5219;&#x8FD4;&#x56DE;false</li>
+</ul>
+<p><strong>&#x5F02;&#x5E38;:</strong></p>
+<ul>
+<li>MappingNotFoundException:&#x627E;&#x4E0D;&#x5230;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x7C7B;&#x7684;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x5BF9;&#x8C61;&#x5219;&#x629B;&#x51FA;</li>
+</ul>
+<h5 id="long-countclass-entityclass"><code>long count(Class&lt;?&gt; entityClass)</code></h5>
+<p>&#x63A2;&#x6D4B;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x7C7B;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8BB0;&#x5F55;&#x884C;&#x6570;</p>
+<p><strong>&#x53C2;&#x6570;:</strong></p>
+<ul>
+<li>entityClass : &#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x7C7B;</li>
+</ul>
+<p><strong>&#x7ED3;&#x679C;:</strong></p>
+<ul>
+<li>&#x8FD4;&#x56DE;&#x8BE5;&#x5B9E;&#x4F53;&#x6620;&#x5C04;&#x7C7B;&#x5BF9;&#x5E94;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x884C;&#x6570;</li>
+</ul>
+<h3 id="&#x5176;&#x4ED6;&#x65B9;&#x6CD5;"><a id="other"></a>&#x5176;&#x4ED6;&#x65B9;&#x6CD5;</h3>
+<pre><code class="lang-java">getOrmContext()
+getJdbcExecutor()
+</code></pre>
+<h5 id="ormcontext-getormcontext"><code>OrmContext getOrmContext()</code></h5>
+<p>&#x83B7;&#x53D6;&#x5F53;&#x524D;ORM&#x6620;&#x5C04;&#x7684;&#x4E0A;&#x4E0B;&#x6587;</p>
+<h5 id="jdbcexecutor-getjdbcexecutor"><code>JdbcExecutor getJdbcExecutor()</code></h5>
+<p>&#x83B7;&#x53D6;JDBC&#x6267;&#x884C;&#x5668;, JDBC&#x6267;&#x884C;&#x5668;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5199;&#x539F;&#x59CB;&#x7684;jdbc&#x4EE3;&#x7801;,&#x548C;&#x5176;&#x4ED6;&#x4E0D;&#x7ECF;&#x8FC7;leapQL&#x7FFB;&#x8BD1;&#x7684;sql&#x4EE3;&#x7801;.</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../orm/model_interface.html" class="navigation navigation-prev " aria-label="Previous page: Model接口"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../orm/sql_conf.html" class="navigation navigation-next " aria-label="Next page: sql配置"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-disqus/plugin.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="../gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"disqus":{"shortName":"introducetogitbook","useIdentifier":false},"highlight":{},"search":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>
