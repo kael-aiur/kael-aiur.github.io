@@ -16,6 +16,18 @@ div.body{
 	width: 75%;
 	min-height: 1000px;
 }
+.nav{
+	height: 30px;
+}
+.nav div.pre{
+	margin-left:20px;
+	float: left;
+}
+.nav div.next{
+	margin-right:20px;
+	float: right;
+}
+
 .header{
 	float:left;
 	width: 100%;
