@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh_CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+<link rel="stylesheet" type="text/css" href="../css/base/base.css"
+	media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/common/markdown.css"
+	media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/common/common.css"
+	media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/pages/index.css"
+	media="screen" />
+<!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<title>Kael</title>
+</head>
+<body>
+	<div class="header">
+		<div class="logo">
+			<a href="http://kael-aiur.github.io/">
+  			<img src="../images/kael.jpg" alt="kael" />
+  			<span>Kael的个人网站</span>
+  			</a>
+		</div>
+	</div>
+	<div class="body">
+		<div class="author-content">
+			<div class="avatar">
+				<img src="../images/kael.jpg" alt="kael" />
+			</div>
+			<div class="avatar-name">Kael-aiur</div>
+			<div class="avatar-introduce">
+				<p>
+					&nbsp;&nbsp;我是一个java的web全栈开发人员，做这个网站主要的想法是用来转载自己在网上看到的一些自己比较喜欢的资料，当然也欢迎大家来这里看我转载的资料
+				</p>
+			</div>
+		</div>
+		<div class="body-content">
+			<div class="title">CSS模块化(七) CSS的命名</div>
+			<hr />
+			<div class="content">
+			<!-- content start -->
+			
+			<p>转载自<a href="http://blog.csdn.net/hacke2/article/details/21707943" class="uri">http://blog.csdn.net/hacke2/article/details/21707943</a></p>
+<blockquote>
+<ol>
+<li>CSS的命名<br />
+ 7.1 基本命名<br />
+ 7.2 命名风格<br />
+ 7.3 命名方案实例解析</li>
+</ol>
+</blockquote>
+<h1 id="css">7. CSS的命名</h1>
+<h2>7.1 基本命名</h2>
+<p>头：header<br />
+内容：content/container<br />
+尾：footer<br />
+导航：nav<br />
+侧栏：sidebar<br />
+栏目：column</p>
+<p>页面外围控制整体布局宽度：wrapper<br />
+左右中：left right center<br />
+登录条：loginbar<br />
+标志：logo<br />
+广告：banner<br />
+页面主体：main<br />
+热点：hot<br />
+新闻：new<br />
+下载：download<br />
+子导航：subnav<br />
+菜单：menu<br />
+子菜单：submenu<br />
+搜索：search<br />
+友情链接：friendlink<br />
+页脚：footer<br />
+版权：copyright<br />
+滚动：scroll<br />
+内容：content<br />
+标签页：tab<br />
+文章列表：list<br />
+提示信息：msg<br />
+小技巧：tips<br />
+栏目标题：title<br />
+加入：joinus<br />
+指南：guild<br />
+服务：service<br />
+注册：regsiter<br />
+状态：status<br />
+投票：vote<br />
+合作伙伴：partner</p>
+<h2>7.2命名风格</h2>
+<p>首先，CSS的命名推荐使用英语，不要使用汉语拼音。<br />
+两种常见的命名法：<br />
+骆驼命名法：从笫二个单词开始，将每个单词的首字母大写，例如dropMenu、subNavMenu；<br />
+划线命名法：将每个单词用中划线“-”或下划线“_”分隔，例如drop-menu、sub_nav_menu。<br />
+为了实现css的模块化，推荐使用两种命名法结合的方法命名。</p>
+<h2>7.3 命名方案实例解析</h2>
+<p>命名方案一：<br />
+<style type="text/CSS"><br />
+.timeList{xxxxxxx}<br />
+</style><br />
+<ul class="timeList"><br />
+ <li>2009年08月(3)</li><br />
+ <li>2009年07月(12)</li><br />
+ <li>2009年06月(3)</li><br />
+ <li>2009年05月(8)</li><br />
+ <li>2009年04月(2)</li><br />
+ <li>2009年03月(8)</li> </ul><br />
+疑问：假如每个li都有一条下划线，但最后一个没有，因为IE6不支持:last伪类，所以我们不能简单地使用.timeList li{border-bottom:×××}和.timeList li:last{border-bottom:none;)来实现样式。怎么办？<br />
+命名方案二：<br />
+<style type="text/CSS"><br />
+.timeList{xxxxxxx}<br />
+.timeList li{border-bottom:xxxx;}<br />
+.timeList .last{border-bottom:none;}<br />
+</style><br />
+<ul class="timeList"><br />
+ <li>2009年08月(3) </li><br />
+ <li>2009年07月(12) </li><br />
+ <li>2009年06月(3)</li><br />
+ <li>2009年05月(8)</li><br />
+ <li>2009年04月(2)</li><br />
+ <li class="last">2009年03月(8)</li> </ul><br />
+疑问：一个项目是由多人合作而各个工程师的风格不同，last是个过于简单且常用的命名，如果工程师A过于依赖子选择符，可能使CSS代码里出现大量类似于“.timeList .last”、“.namcList .last”、“.ageList .last&quot;这样的选择符，如果多人合作，工程师B可能习惯直接使用“.last”作为选择符，从而和“.timeList .last”等选择符设置的样式层叠，产生意料之外的影响。这不就涉及一个问题—滥用子选择符了吗？怎么办？<br />
+命名方案三：<br />
+<style type="text/CSS" ><br />
+.timeList { xxxxxxx }<br />
+.timeList li|border-bottom:xxxx; }<br />
+.timeListLastItem{border-bottom: none; }<br />
+</style><br />
+<ul class="timeList"><br />
+ <li>2009年 08月 (3)</li><br />
+ <li>2009年 07月 (12)</li><br />
+ <li>2009年 06月 (3)</li><br />
+ <li>2009年 05月 (8)</li><br />
+ <li>2009年 04月 (2)</li><br />
+ <li class="timeListLastItem">2009年 03月 (8)</li> </ul><br />
+疑问：虽然CSS没有真正意义上的“封装”功能，但如果CSS命名能够表现出从属关系，就可以相对地让模块的封装性更好。使用“.timeListLastltem”代替“.timeList .last”来作为选择符，降低了冲突隐患，但命名上怎么看出从属关系？<br />
+解决方案：如前所述，我们可以结合骆驼命名法和划线命名法来进行命名，其中骆驼命名法用于区别不同单词，划线用于表明从属关系。“.timeListLastltem”可以改进为“.timeList-lastItem&quot;，如此一来，进一步提高了CSS命名的可读性，不仅能从命名中清楚看出各个单词，还能了解到从属关系。很明显，“.timeList-lastItem&quot;是“.timeList&quot;的“.lastItem”.<br />
+既然划线用于表明从属关系，那么不推荐使用诸如“.timeListLastItem&quot;、“.time-list- first-item&quot;这些命名方式。</p>
+			
+			<!-- content end -->
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<ul>
+			<li>姓名:卡尔</li>
+			<li>QQ: 375694052</li>
+			<li>邮箱:375694052@qq.com</li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh_CN">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <link rel="stylesheet" type="text/css" href="../css/base/base.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../css/common/markdown.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../css/common/common.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../css/pages/index.css" media="screen" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Kael</title>
+  </head>
+  <body>
+  	<div class="header">
+  		<div class="logo" >
+  			<a href="http://kael-aiur.github.io/">
+  			<img src="../images/kael.jpg" alt="kael" />
+  			<span>Kael的个人网站</span>
+  			</a>
+  		</div>
+  	</div>
+  	<div class="body">
+  		<div class="author-content">
+  			<div class="avatar">
+  				<img src="../images/kael.jpg" alt="kael" />
+  			</div>
+  			<div class="avatar-name">Kael-aiur</div>
+  			<div class="avatar-introduce">
+  				<p>
+  					&nbsp;&nbsp;我是一个java的web全栈开发人员，做这个网站主要的想法是用来转载自己在网上看到的一些自己比较喜欢的资料，当然也欢迎大家来这里看我转载的资料
+  				</p>
+  			</div>
+  		</div>
+  		<div class="body-content">
+  			<div class="title">CSS模块化(二) CSS的面向对象思想</div>
+  			<hr />
+  			<div class="content">
+  			
+<p>转载自<a href="http://blog.csdn.net/hacke2/article/details/21700073" class="uri">http://blog.csdn.net/hacke2/article/details/21700073</a></p>
+<blockquote>
+<ol>
+<li>CSS的面向对象思想<br />
+2.1. 封装<br />
+2.2. 继承<br />
+2.3. 多态</li>
+</ol>
+</blockquote>
+<h1 id="css">2. CSS的面向对象思想</h1>
+<h2>2.1 封装</h2>
+<p>封装字面上理解就是包装的意思，也就是尽可能的隐藏内部细节</p>
+<p>比如我们要给一个元素添加CSS，之前在留学生教务系统里面，艾晓旭写了一个文档：留学生教务系统字体颜色规范。</p>
+<p><img src="imgs/css_model2.png" alt="css_model2" /></p>
+<p>后台开发者其实没必要每个人都在自己的页面里面加，也没有必要知道具体CSS的细节，比如怎么加字体样式，具体怎么加，<br />
+我们让艾晓旭直接就把这些字体颜色样式给封装好，我们不用知道里面具体是怎么写的，只要知道引用哪一个类就可以了</p>
+<p><img src="imgs/css_model3.png" alt="css_model3" /></p>
+<p>封装还有个要点就是不同的特性抽象到一个基于类的模块里</p>
+<p>之前你每一个样式可能会这样写</p>
+<p><img src="imgs/css_model4.png" alt="css_model4" /></p>
+<p>如果抽取出共用的样式</p>
+<p>由于一些长远考虑，我们抽象出一些公用的样式所以结果成这样：</p>
+<p><img src="imgs/css_model5.png" alt="css_model5" /></p>
+<p>下面是网上找的一些参考</p>
+<p><img src="imgs/css_model6.jpg" alt="css_model6" /></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”module-a”</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;h3&gt;</span>标题1<span class="kw">&lt;/h3&gt;</span>
+    <span class="kw">&lt;p&gt;</span>描述文字<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”module-b”</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;h3&gt;</span>标题2<span class="kw">&lt;/h3&gt;</span>
+    <span class="kw">&lt;ul&gt;</span>
+        <span class="kw">&lt;li&gt;</span>列表<span class="kw">&lt;/li&gt;</span>
+        <span class="kw">&lt;li&gt;</span>列表<span class="kw">&lt;/li&gt;</span>
+        <span class="kw">&lt;li&gt;</span>列表<span class="kw">&lt;/li&gt;</span>
+    <span class="kw">&lt;/ul&gt;</span>
+<span class="kw">&lt;/div&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css"><span class="fl">.module-a</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-a</span> h3<span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-a</span> p<span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-b</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-b</span> h3<span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-b</span> ul<span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-b</span> ul li<span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-b</span> ul li<span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-b</span> ul li<span class="kw">{</span><span class="er">.....</span><span class="kw">}</span></code></pre></div>
+<p>封装是实现CSS模块化的最基本要求，封装成的各个单元就是基本的CSS模块，可灵活用于组建页面的各种显示样式。</p>
+<h2>2.2 继承</h2>
+<p>什么是继承</p>
+<p>在《Think in java》中有这样一句话：复用代码是Java众多引人注目的功能之一。继承最大的特点就是复用代码。<br />
+DIV CSS 继承是指我们设置上级(父级)的<a href="http://www.divcss5.com/rumen/r29.shtml">CSS样式</a>，上级（父级）及以下的子级（下级）都具有此属性。<br />
+在留学生项目中的BASE.CSS</p>
+<p><img src="imgs/css_model7.png" alt="css_model7" /></p>
+<p>在这里定义后，每一次子级都继承了以上属性<br />
+如果想重写父级的CSS，根据优先级，后面定义的属性可以覆盖前面的在加一个一样的样式就可以覆盖父级的样式<br />
+可以只设置上级的<a href="http://www.divcss5.com/rumen/r29.shtml">CSS样式表</a>属性，子级（下级）不用设置，<br />
+都有此<a href="http://www.divcss5.com/rumen/r11.shtml">CSS属性</a>，可以减少<a href="http://www.divcss5.com/rumen/r95.shtml">CSS代码</a>，便于维护。</p>
+<p>下面是网上找的说明：</p>
+<p><img src="imgs/css_model8.jpg" alt="css_model8" /></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”</span><span class="ot"> module module-A module-A-a</span><span class="er">”</span><span class="kw">&gt;&lt;/div&gt;</span>
+<span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”</span><span class="ot"> module module-A module-A-b</span><span class="er">”</span><span class="kw">&gt;&lt;/div&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css"><span class="fl">.module</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-A</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-A-a</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-A-b</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-B</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-B-a</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.module-B-b</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span></code></pre></div>
+<p>继承可谓是CSS模块化的关键所在，由于html元素可以拥有多个类，而且根据优先级，后面定义的属性可以覆盖前面的，<br />
+正因为这样，继承这个特性发 挥了巨大的作用。对于某些多数样式属性相同，仅有几个不同样式属性的定义，可以用这个方法来实现。<br />
+也可以在不改变某个通用样式类的同时，用HTML调用复合类，突出局部特例。</p>
+<h2>2.3 多态</h2>
+<p><img src="imgs/css_model9.jpg" alt="css_model9" /></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”module-A”</span><span class="kw">&gt;&lt;/div&gt;</span>
+<span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”part-A</span> <span class="er">”</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”module-A”</span><span class="kw">&gt;&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”part-B</span> <span class="er">”</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”module-A”</span><span class="kw">&gt;&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”part-C</span> <span class="er">”</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">”module-A”</span><span class="kw">&gt;&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css"><span class="fl">.module-A</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.part-A</span> <span class="fl">.module-A</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.part-B</span> <span class="fl">.module-A</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.part-C</span> <span class="fl">.module-A</span> <span class="kw">{</span><span class="er">.....</span><span class="kw">}</span></code></pre></div>
+<p>多态主要用于同一模块在页面的不同部分或者不同页面之间呈现出不同的样式。对于CSS的多态，一个很经典而且常用的例子就是导航栏。<br />
+我们知道，导航 栏往往需要标识出当前页面所在的导航链接。也就是说，对于导航栏的链接，通常有两种形态，一种是常态，一种是高亮态，<br />
+比如处于主页时，主页的链接就是高亮 态的，其他导航链接是常态的。这个时候，很多人喜欢在li上加上一个current类，用来把该导航链接设置为高亮态，<br />
+但是我觉得这种方式并不理想。<br />
+为什么呢？因为对于结构一样的导航栏，后台人员在处理时，往往是抽出成一个公共结构，然后各个页面都引入这个结构。这对于后期的维护是相当有效的，<br />
+因为涉及导航栏的修改仅需修改一次即可，如果不这么做，那么修改的次数将会等于页面的个数，而且容易出错。对于这种情况，多态就可以很好地解决，<br />
+因为我们 可以在每个页面的body（或者其他地方）加上一个类来标识不同的页面（此类可以不定义任何样式）。那么，根据多态的特性，<br />
+我们就可以为不同页面的导航设置不同的形态，同时又保持了导航链接的结构一致性。举例如下：</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html">主页：
+<span class="kw">&lt;body</span><span class="ot"> class=</span><span class="st">”index”</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;ul</span><span class="ot"> class=</span><span class="st">”nav”</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">”index”</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">”#”</span><span class="kw">&gt;</span>主页<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">”page1”</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">”#”</span><span class="kw">&gt;</span>内页1<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">”page2”</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">”#”</span><span class="kw">&gt;</span>内页2<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="kw">&lt;/ul&gt;</span>
+<span class="kw">&lt;/body&gt;</span>
+内页1：
+<span class="kw">&lt;body</span><span class="ot"> class=</span><span class="st">”page1”</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;ul</span><span class="ot"> class=</span><span class="st">”nav”</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">”index”</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">”#”</span><span class="kw">&gt;</span>主页<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">”page1”</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">”#”</span><span class="kw">&gt;</span>内页1<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">”page2”</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">”#”</span><span class="kw">&gt;</span>内页2<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="kw">&lt;/ul&gt;</span>
+<span class="kw">&lt;/body&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">//定义常态
+<span class="fl">.nav</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.nav</span> <span class="fl">.index</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.nav</span> <span class="fl">.page1</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.nav</span> <span class="fl">.page2</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+//定义高亮态
+<span class="fl">.index</span> <span class="fl">.nav</span> <span class="fl">.index</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.page1</span> <span class="fl">.nav</span> <span class="fl">.page1</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.page2</span> <span class="fl">.nav</span> <span class="fl">.page2</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span></code></pre></div>
+<p>这个就是多态的经典应用之一。<br />
+补充部分<br />
+以上的这种对导航的处理办法不太好，因为导航是一个公用组件，所谓公用，就是应该结构和样式都是公用的，上面的那种方法没有做到样式上公 用，<br />
+因为很明显定义高亮态那里需要用到其他页面的样式类，而且joe哥提到可移植性的问题，如果这个导航搬到其他地方，<br />
+那么就需要为新的页面的body全 部都添加一个类（这个我真没想过导航还可以给多个网站重用，我眼光太短浅了）。那么，究竟什么做才是比较主流的呢？<br />
+加current，没错，就是加 current，这个被我一开始就否决的方法。那么又回到原来的问题，既然我们是引入同一个导航文件，那么current能加到哪里呢？<br />
+其中一个被我们都忽略了的方法，脚本！可以是js，可以是php，原来我们可以动态添加current类到导航去，惊讶吧！<br />
+好吧，我承认我有点过于兴奋了，大伙儿看例子吧~</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;ul</span><span class="ot"> class=</span><span class="st">”nav”</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">”index”</span><span class="ot"> id=</span><span class="st">&quot;index&quot;</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">”#”</span><span class="kw">&gt;</span>主页<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">”page1”</span><span class="ot"> id=</span><span class="st">&quot;page1&quot;</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">”#”</span><span class="kw">&gt;</span>内页1<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">”page2”</span><span class="ot"> id=</span><span class="st">&quot;page2&quot;</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">”#”</span><span class="kw">&gt;</span>内页2<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+<span class="kw">&lt;/ul&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">//定义导航的样式
+<span class="fl">.nav</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.nav</span> li<span class="fl">.index</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.nav</span> li<span class="fl">.page1</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+<span class="fl">.nav</span> li<span class="fl">.page2</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span>
+//定义高亮态
+<span class="fl">.nav</span> li<span class="fl">.current</span><span class="kw">{</span><span class="er">.....</span><span class="kw">}</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">addCurrent</span>(<span class="kw">class</span><span class="op">,</span>html_id)<span class="op">{</span>
+<span class="co">//class为增加的样式类名，html_id为需要增加样式类的html元素的id</span>
+<span class="va">document</span>.<span class="at">getElementById</span>(html_id).<span class="at">addClass</span>(<span class="kw">class</span>)<span class="op">;</span> 
+<span class="co">//这里的class就是‘current’，addClass方法的实现我这里就不多说了，你可以用jquery或者别的，甚至自己写</span>
+<span class="op">}</span></code></pre></div>
+<p>这种做法对于不同的页面，或者新增的页面，只需改js的一个参数即可，做到了把导航部分真正实现模块化、组件化，公用的部分就应该公用到底，不留一 点余地。<br />
+不过我还想说一点是，如果你的current（高亮态）不是单独的换个背景颜色之类的，而是用雪碧图这类的方法，每个导航链接的current类 都是不同的，<br />
+那么以上的这种方法，貌似还有待改进。<br />
+事实上应该指出，我这里讨论的只是CSS模块化的一部分，可以说是比较微观的一部分。还有一些对CSS进行比较宏观地划分模块的说法，比如按页面来划分，<br />
+一个页面或者说一个区域为一个模块，比如像“<a href="http://http/sofish.de/986">幸福收藏夹</a>”上所说的划分方法：</p>
+<p><img src="imgs/css_model10.jpg" alt="css_model10" /></p>
+<p>网站的划分标准更大一些，是以网站的专题为模块，不幸的是，很多专题的页面风格都是类似的，导致各个模块间存在大量的冗余代码，这意味着对样式的改动将会相当麻烦，<br />
+一个地方的改动需要同时修改多个css文件。<br />
+表面上看，虽然对CSS模块划分得细是一个不错的想法，但并不是越细越好。现在的一些开源系统，如dedecms（织梦——PHP开源网站内容管理系统），<br />
+甚至说YUI框架的1.0版本， 都流行一种做法，就是把CSS模块细分成单属性，比如把宽度960px定义为.w960，把清除浮动定义.clear，把字体绿色定义为.green等 等。<br />
+这样做的好处是可以对页面元素的样式进行快速组装，通过引入多个类便可以达到我们想要的效果。但是，这样的做法会导致另外一个问题。大家想，<br />
+这么做 与内联样式有什么区别？如果有一天，我们想要把多个地方的字体颜色由绿色改为红色，那么我们要做的不是改动css的color属性，<br />
+而是把这些html元 素的class都由green改为red。请注意，我们的初衷是改变的页面表现，但最终我们需要改变结构来达到我们的目的，这样就做不到结构与表现的分离 了。<br />
+究竟怎么样划分CSS模块，又怎么来用这些模块来组建页面元素才是合适，其实很难找到一个标准，这不仅需要结合具体的页面要求，还需要一定的经验。</p>
+<p>总结：面向对象是一种思路，或者说是一种方法论，给CSS重构带来一些启示，这就足够了，没有必要去纠结OO CSS的定义和严谨性</p>
+
+
+
+
+</div>
+  		</div>
+  	</div>
+  	<div class="footer">
+  		<ul>
+  			<li>姓名:卡尔</li>
+  			<li>QQ: 375694052</li>
+  			<li>邮箱:375694052@qq.com</li>
+  		</ul>
+  	</div>
+  </body>
+</html>
