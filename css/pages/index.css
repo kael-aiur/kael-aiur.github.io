@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+.author-content .avatar {
+	margin:20px;
+	text-align: center;
+}
+.author-content .avatar img{
+	width: 150px;
+	border: 2px solid #c0c0c0;
+}
+.author-content .avatar-name{
+	text-align: center;
+}
+.author-content .avatar-introduce{
+	text-align: lef;
+	border:1px solid #f0f0f0;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color:#f0f0f0;
+}
+.author-content .avatar-introduce p{
+	line-height: 1.5em;
+}
+.body-content .title{
+	line-height:2em;
+	font-size: 2em;
+	padding-left: 10px;
+}
+.body-content .content{
+	width: 98%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.body-content ul.table-of-contents{
+	line-height: 1.5em;
+}
+.body-content ul.table-of-contents li{
+	list-style: circle;
+}
