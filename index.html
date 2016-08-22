@@ -1,82 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="zh_CN">
-  <head>
-  	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <link rel="stylesheet" type="text/css" href="css/base/base.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/common/common.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/pages/index.css" media="screen" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>Kael</title>
-  </head>
+---
+layout: default
+---
 
-  <body>
-  	<div class="header">
-  		<a href="http://kael-aiur.github.io/">
-	  		<span class="logo" >
-	  			<img src="images/kael.jpg" alt="kael" />
-	  			<span>Kael的个人网站</span>
-	  		</span>
-  		</a>
-  	</div>
-  	<div class="body">
-  		<div class="author-content">
-  			<div class="avatar">
-  				<img src="images/kael.jpg" alt="kael" />
-  			</div>
-  			<div class="avatar-name">Kael-aiur</div>
-  			<div class="avatar-introduce">
-  				<p>
-  					&nbsp;&nbsp;我是一个java的web全栈开发人员，做这个网站主要的想法是用来转载自己在网上看到的一些自己比较喜欢的资料，当然也欢迎大家来这里看我转载的资料
-  				</p>
-  			</div>
-  		</div>
-  		<div class="body-content">
-  			<div class="title">目录</div>
-  			<hr />
-  			<div class="content">
-  				<ul class="table-of-contents">
-  					<li>
-						<a href="javascript:void(0);">CSS模块化</a>
-  						<ul>
-  							<li><a href="css模块化/1.html">CSS模块化(一) CSS模块化的背景</a></li>
-  							<li><a href="css模块化/2.html">CSS模块化(二) CSS的面向对象思想</a></li>
-  							<li><a href="css模块化/3.html">CSS模块化(三) CSS的组织</a></li>
-  							<li><a href="css模块化/4.html">CSS模块化(四) 如何划分模块--单一职责原则</a></li>
-  							<li><a href="css模块化/5.html">CSS模块化(五) CSS的设计模式原则之一：聚合/组合原则</a></li>
-  							<li><a href="css模块化/6.html">CSS模块化(六) 模块化设计</a></li>
-  							<li><a href="css模块化/7.html">CSS模块化(七) CSS的命名</a></li>
-  							<li><a href="css模块化/8.html">CSS模块化(八) 流行的前端框架</a></li>
-  						</ul>
-  					</li>
-  					<li>
-						<a href="javascript:void(0);">数据库分区</a>
-  						<ul>
-  							<li><a href="数据库分区/mysql_partition.html">mysql分区及实例演示</a></li>
-  							<li><a href="数据库分区/mysql_partition2.html">理解MySQL——并行数据库与分区(Partition)</a></li>
-  						</ul>
-  					</li>
-  					<li>
-						<a href="javascript:void(0);">数据库优化</a>
-  						<ul>
-  							<li><a href="数据库调优/mysql5.6.html">MySQL 5.6 my.cnf配置优化</a></li>
-  							<li><a href="数据库调优/mysqlslap.html">MySQL自带的性能压力测试工具mysqlslap详解</a></li>
-  							<li><a href="数据库调优/mysqlturning.html">运维角度浅谈MySQL数据库优化</a></li>
-  							<li><a href="数据库调优/mysqlturningtest.html">mysql优化测试</a></li>
-  						</ul>
-  					</li>
-  				</ul>
-  			</div>
-  		</div>
-  	</div>
-  	<div class="footer">
-  		<ul>
-  			<li>姓名:卡尔</li>
-  			<li>QQ: 375694052</li>
-  			<li>邮箱:375694052@qq.com</li>
-  		</ul>
-  	</div>
-  </body>
-</html>
+<div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
