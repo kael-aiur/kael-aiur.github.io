@@ -31,3 +31,14 @@ github pages的官网是[https://pages.github.com/](https://pages.github.com/)�
 jekyll其实是一个静态网页生成工具，类似的还有[gitbook](https://www.gitbook.com/)，不过比gitbook强大很多，你可以在[官网](https://jekyllrb.com/)学习相关的知识。
 
 前面已经说了，githug pages可以帮助我们托管一个静态代码的网站，jekyll可以帮我们生成一个静态网站，这两者搭配起来就天衣无缝了，实际上，github pages推荐的也是使用jekyll来写静态网站的，并且支持自动编译，只要按照jekyll的目录结构存放文件就可以了。
+
+ps:大部分官网都是英文，作为一个程序员英文阅读能力非常重要，如果你懒得读英文的话，可以在百度上找中文的文档教程(^_^)，不过我个人还是推荐读英文。
+
+## 开始
+
+首先你需要先申请一个github账号，在[github官网](https://github.com/)上，如下图：
+
+![enter description here][1]
+
+
+  [1]: ./images/sign_up_in_github.png "sign_up_in_github.png"
