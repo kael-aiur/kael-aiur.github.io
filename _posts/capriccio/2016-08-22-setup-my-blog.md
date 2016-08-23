@@ -41,4 +41,4 @@ ps:大部分官网都是英文，作为一个程序员英文阅读能力非常�
 ![enter description here][1]
 
 
-  [1]: /images/sign_up_in_github.png "sign_up_in_github.png"
+  [1]: /static/img/sign_up_in_github.png "sign_up_in_github.png"
