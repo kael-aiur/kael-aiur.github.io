@@ -2,7 +2,7 @@
 layout: post
 comments: false
 categories: 随想
-title: "开始个人博客"
+title: "使用github+jekyll搭建个人博客"
 ---
 
 ## 第一天搭建个人博客
