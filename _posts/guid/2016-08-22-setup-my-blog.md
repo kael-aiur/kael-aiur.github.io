@@ -39,3 +39,4 @@ ps:大部分官网都是英文，作为一个程序员英文阅读能力非常�
 首先你需要先申请一个github账号，在[github官网](https://github.com/)上，如下图：
 
 ![sign_up_in_github.png](/static/img/blog/setup-my-blog/sign_up_in_github.png)
+
