@@ -1,8 +1,8 @@
 ---
-layout:post
-comments:false
-categories:随想
-title: "一个面试官的思考"
+layout: post
+comments: false
+categories: 随想
+title:  "一个面试官的思考"
 ---
 
 ## 一个面试官的思考
