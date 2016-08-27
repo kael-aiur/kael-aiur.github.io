@@ -1,7 +1,7 @@
 # Site settings
 title: Kael's Blog Website
 email: penghongjie001@163.com
-description: Xizhi's Ideas & Blogs
+description: Kael's Ideas & Blogs
 # > # this means to ignore newlines until "baseurl:"
 #   Write an awesome description for your new site here. You can edit this
 #   line in _config.yml. It will appear in your document head meta (for
@@ -13,9 +13,9 @@ description: Xizhi's Ideas & Blogs
 github_username: kael-aiur
 permalink: /:year/:month/:day/:title/
 # this is the url root of the view source link on the footer page.
-viewsourceroot: https://github.com/LiXizhi/LiXizhi.github.io/blob/master/
+viewsourceroot: https://github.com/kael-aiur/kael-aiur.github.io
 # this is the url root of the create page link on the footer page.
-newsourceroot: https://github.com/LiXizhi/LiXizhi.github.io/new/master
+newsourceroot: https://github.com/kael-aiur/kael-aiur.github.io
 #########################################
 # for duoshuo.com commenting system, uncomment following line if you do not want to include duoshuo.com. 
 #duoshuo_shortname: lixizhi
