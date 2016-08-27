@@ -3,7 +3,6 @@ layout:post
 comments:false
 categories:随想
 title: "一个面试官的思考"
-grammar_cjkRuby: true
 ---
 
 ## 一个面试官的思考
