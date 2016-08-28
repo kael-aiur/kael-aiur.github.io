@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: true
+comments: false
 categories: leap笔记
 title: leap mvc的参数绑定机制和扩展
 ---
