@@ -23,6 +23,8 @@ newsourceroot: https://github.com/kael-aiur/kael-aiur.github.io
 # disqus.com commenting system. please note that it is exclusive with duoshuo.com
 disqus_shortname: kael
 disqus_url: "http://kael-aiur.github.io"
+# uyan
+uyan_url:"http://v2.uyan.cc/code/uyan.js"
 #########################################
 
 # Build settings

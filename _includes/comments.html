@@ -33,4 +33,10 @@
 		})();
 	</script>
 	{% endif %}
+	{% if site.uyan_url %}
+    <div class="post-area post comment">
+        <div id="uyan_frame"></div>
+		<script type="text/javascript" src="{{ site.uyan_url }}"></script>
+    </div>
+	{% endif %}
 {% endif %}    
