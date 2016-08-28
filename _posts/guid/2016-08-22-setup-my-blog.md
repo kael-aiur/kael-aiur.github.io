@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 categories: 入门指引
 title: "使用github+jekyll搭建个人博客"
 ---

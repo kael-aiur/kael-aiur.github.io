@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 categories: 随想
 title:  "一个面试官的思考"
 ---

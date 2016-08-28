@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 categories: 前端技术
 title: "flot的插件机制"
 ---

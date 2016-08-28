@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 categories: leap笔记
 title: "leap的开发环境搭建"
 ---
