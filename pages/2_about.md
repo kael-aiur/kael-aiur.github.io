@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 关于
-comments: true
+comments: false
 permalink: /about/
 ---
 

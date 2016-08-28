@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 简历
-comments: true
+comments: false
 permalink: /cv/
 ---
 
