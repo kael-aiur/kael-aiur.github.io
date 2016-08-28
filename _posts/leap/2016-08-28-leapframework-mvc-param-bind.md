@@ -1,0 +1,205 @@
+---
+layout: post
+comments: false
+categories: leap笔记
+title: leap mvc的参数绑定机制和扩展
+---
+
+## 基本概念
+
+今天晚上不想写代码，那还是来写写博客吧，今天来看看leap框架的mvc参数绑定机制和扩展方式。
+
+在解释leap的参数绑定机制之前，我们需要先了解leap中的几个概念。
+
+* Controller：这个概念很好理解，其实就是MVC中的控制器；
+* Action：在控制器中有很多方法，真正处理请求的都是这些方法，我们称为Action；
+* Argument：Action中的参数 
+
+了解以上几个概念之后，现在我们开始来看看leap的参数绑定机制是怎么样的。
+
+## 参数绑定机制
+
+我们先来看看leap中整个参数绑定的过程：
+
+1. 应用启动：整个leap的启动
+2. 控制器初始化：初始化控制器
+3. Action初始化：从控制器中解析Action并解析Action的Argument
+4. 参数解析器初始化：根据Argument解析对应的参数解析器并保存在Action中
+5. 等待请求：等待客户端请求
+6. 处理请求：接受请求，并使用参数解析器解析参数后传递给Action
+7. 返回结果
+
+从这个过程我们可以看到，leap的参数解析器在应用启动的时候就已经确定了，因此在运行的过程中action中的argument对应的解析器已经确定了，这一点和spring mvc不太一样，spring mvc是运行时每一次请求通过拦截器动态决定参数解析器的。
+
+这里我们真正需要关注的阶段是Action的初始化和参数解析器的初始化，这部分的初始化在`leap.web.action.DefaultActionManager`类中，初始化的过程可以从`public void prepareAction(RouteBuilder route) `这个方法开始看，代码如下：
+
+```java
+public void prepareAction(RouteBuilder route) {
+		// 省略部分代码
+		//set execution attributes
+		ExecutionAttributes eas = new ExecutionAttributes();
+    	route.setExecutionAttributes(eas);
+
+		//resolve request body argument
+    	RequestBodyArgumentInfo rbaf = resolveRequestBodyArgument(route, eas);
+		
+		//prepare argument resolvers
+		eas.executionArguments = new ExecutionArgument[route.getAction().getArguments().length];
+    	for(int i=0;i<eas.executionArguments.length;i++){
+    		ExecutionArgument ea = new ExecutionArgument();
+    		eas.executionArguments[i] = ea;
+    		
+    		prepareArgument(route, route.getAction().getArguments()[i], ea, rbaf);
+    	}
+		// 省略部分代码
+}
+```
+
+上面的源码中已经省略掉部分与我们关注的点无关的代码了。
+
+这里我们可以看到，action实际上是存放在Route对象中的，并且为每个Route对象创建了一个ExecutionAttributes对象，这个对象是用来存放action执行过程的属性的。
+
+注意到在循环中对action的每一个参数执行了`protected void prepareArgument(RouteBuilder route, Argument argument, ExecutionArgument ea, RequestBodyArgumentInfo rbaf)`方法，这个方法就是真正解析参数解析器的方法，我们来看下这个方法的源码：
+
+```java
+protected void prepareArgument(RouteBuilder route, Argument argument, ExecutionArgument ea, RequestBodyArgumentInfo rbaf) {
+		// 省去部分代码
+        resolver = wrapper ? createWrapperArgumentResolver(route, argument, rbaf) :
+                             resolveArgumentResolver(route, argument, rbaf);
+
+        ea.resolver     = resolver;
+        ea.isContextual = resolver instanceof ContextArgumentResolver;
+    }
+```
+
+这里我们可以看到，解析器有两种创建的方法，一种是`createWrapperArgumentResolver(route, argument, rbaf)`，另一种是`resolveArgumentResolver(route, argument, rbaf)`，实际上，`createWrapperArgumentResolver`最终也是调用`resolveArgumentResolver`来创建参数解析器的，这里的`createWrapperArgumentResolver`提供的是一个经过包装的参数解析器而已，真正的参数解析工作依然是由`resolveArgumentResolver`创建出来的解析器解析的，我们来看看`resolveArgumentResolver`的源码：
+
+```java
+protected ArgumentResolver resolveArgumentResolver(RouteBuilder route, Argument argument, RequestBodyArgumentInfo rbaf) {
+        //Get context resolver
+        if(ContextArgumentResolver.isContext(argument.getType())){
+            argument.setContextual(true);
+            return ContextArgumentResolver.of(argument.getType());
+        }
+
+        ArgumentResolver resolver = null;
+
+        //Get external resolver
+        for(ArgumentResolverProvider provider : argumentResolverProviders){
+            if((resolver = provider.tryGetArgumentResolver(route, route.getAction(), argument)) != null){
+                break;
+            }
+        }
+
+        if(null == resolver) {
+            ResolvedBy a = argument.getType().getAnnotation(ResolvedBy.class);
+            if(null != a) {
+                Class<ArgumentResolver> c = (Class<ArgumentResolver>)a.value();
+                resolver = app.factory().getBean(c);
+            }
+        }
+
+        if(null == resolver){
+            TypeInfo typeInfo = argument.getTypeInfo();
+            if(typeInfo.isCollectionType()){
+                //Collection type resolver
+                resolver = new CollectionArgumentResolver(app, route, argument);
+            }else if(typeInfo.isSimpleType()) {
+                //Simple type resolver
+                resolver = new SimpleArgumentResolver(app, route, argument);
+            }else if(Cookie.class.isAssignableFrom(argument.getType()) || leap.lang.http.Cookie.class.isAssignableFrom(argument.getType())) {
+                resolver = new CookieArgumentResolver(app, route, argument);
+            }else if(argument.getType().equals(Part.class) || argument.getType().equals(MultipartFile.class)) {
+                //Part resolver
+                resolver = new MultipartArgumentResolver(app, route, argument);
+            }else{
+                //Complex type resolver
+                resolver = new ComplexArgumentResolver(app, route, argument);
+            }
+        }
+
+        //Get request body resolver
+        if(argument == rbaf.argument){
+            resolver = new RequestBodyArgumentResolver(app, route.getAction(), argument, rbaf.annotation, rbaf.declared, resolver);
+        }
+
+        return resolver;
+    }
+```
+
+这个方法是参数解析器真正创建的位置，我们可以看到一共分五个阶段：
+
+* 判断Argument是否应用上下文对象，如果是，使用`ContextArgumentResolver`
+* 从ArgumentResolverProvider中获取参数解析器，如果能找到，则将这个解析器作为这个Argument的参数解析器，这个阶段是我们扩展参数解析器的阶段
+* 检查Argument是否有注解`ResolvedBy.class`，如果有，通过注解获取参数解析器，这个环节决定了我们可以在Action声明时通过注解指定该参数解析器
+* 默认参数解析器解析，这个阶段是leap提供的默认参数解析器，根据argument的类型决定使用哪个参数解析器
+* RequestBody参数解析器解析，这个也是leap提供的默认参数解析器，这个阶段主要是补充默认参数解析器中无法解析的参数类型，通过直接解析请求体来解析请求参数
+
+这里我们简单介绍一下leap默认如何决定参数解析器：
+
+```java
+TypeInfo typeInfo = argument.getTypeInfo();
+if(typeInfo.isCollectionType()){
+  	//Collection type resolver
+  	resolver = new CollectionArgumentResolver(app, route, argument);
+}else if(typeInfo.isSimpleType()) {
+  	//Simple type resolver
+  	resolver = new SimpleArgumentResolver(app, route, argument);
+}else if(Cookie.class.isAssignableFrom(argument.getType()) || leap.lang.http.Cookie.class.isAssignableFrom(argument.getType())) {
+	resolver = new CookieArgumentResolver(app, route, argument);
+}else if(argument.getType().equals(Part.class) || argument.getType().equals(MultipartFile.class)) {
+	//Part resolver
+	resolver = new MultipartArgumentResolver(app, route, argument);
+}else{
+	//Complex type resolver
+	resolver = new ComplexArgumentResolver(app, route, argument);
+}
+```
+
+1. 首先判断是否集合类，如果是则采用集合类解析器
+2. 判断是否简单类型：8种基本数据类型和String类型即是简单类型，如果是则采用简单类型解析器
+3. 判断是否Cookie类型，如果是则采用Cookie解析器
+4. 判断是否`Part.class`类型，如果是则采用`MultipartArgumentResolver`解析器，这个主要是处理文件上传的参数
+5. 最后判断是否复合类型，是则采用复合类型解析器解析
+
+这里我们不对每种类型的解析器如何解析进一步深入的介绍，有兴趣的朋友可以自己看一下对应的源码即可。
+
+这里我们看一下参数解析器的接口声明：
+
+```java
+public interface ArgumentResolver {
+	
+	/**
+	 * Resolves the value of the argument from the given {@link ActionContext}.
+	 */
+	Object resolveValue(ActionContext context,Argument argument) throws Throwable;
+
+}
+```
+
+参数解析器会接收一个ActionContext对象和Argument对象，并返回Object对象作为真正传入Action的实参。
+
+因此后续再真正执行action的时候，每个参数都会调用自己的参数解析器得到实参并传给action，这样就可以实现action的参数绑定了。
+
+## leap的参数绑定扩展
+
+虽然leap已经提供了非常强大和智能的参数解析器了，但是实际上我们有时候还会有一些特殊的需求是默认的参数解析器无法满足的，比如当参数中有一个json字符串对象时，我们希望这个参数自动绑定成json反序列化后的复合对象，而不是以一个字符串的方式接收，这种情况我们就需要自己扩展参数解析器了。
+
+在前面我们了解了leap的参数绑定机制之后，现在我们知道，leap在解析参数解析器的时候，从`ArgumentResolverProvider`中获取参数解析器的阶段就是提供我们扩展的阶段，我们看下`ArgumentResolverProvider`的接口声明：
+
+```java
+public interface ArgumentResolverProvider {
+	
+	ArgumentResolver tryGetArgumentResolver(RouteBase route, Action action, Argument argument);
+
+}
+```
+
+这里的`tryGetArgumentResolver`方法接收Route对象，Action对象和Arugment对象，并返回一个`ArgumentResolver`对象，这个对象就是真正的参数解析器，因此我们要扩展参数绑定，一般来说需要实现两个接口：
+
+```
+leap.web.action.ArgumentResolverProvider
+leap.web.action.ArgumentResolver
+```
+
+实现了上面两个接口之后，只要在`ArgumentResolverProvider`中返回我们自己的`ArgumentResolver`即可。当然，实现`ArgumentResolverProvider`之后需要在leap的IOC中配置这个bean对象，并且这个对象会自动装填到这里的参数解析器生成器的列表中，关于leap的IOC容器特性这里我们不展开讨论了，下次有时间我再专门开一篇博客来分享。
