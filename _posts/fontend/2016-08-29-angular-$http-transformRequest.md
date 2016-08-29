@@ -30,8 +30,7 @@ $http({
 
 要解释清楚$http的事情，我们至少得先了解HTTP请求的Content-Type的基础。实际上在前面那个请求中，发出去的http请求如下：
 
-```
-
+```http
 RequestURL:http://localhost:8080/test/
 Request Method:POST  
 Status Code:200 OK  
