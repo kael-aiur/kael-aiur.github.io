@@ -71,7 +71,7 @@ Request Payload
 
 如果没有显示设置`Content-Type`，那么默认的`Content-Type`为`text/plain`，这种情况下tomcat自然就不会解析请求体了。
 
-值得注意的是，jquery的ajax其实是内置设置了`Content-Type`为`application/x-www-form-urlencoded`并帮我们自动把data的对象转换成键值对了，所以jquery的请求一般后端都能解析。
+> 值得注意的是，jquery的ajax其实是内置设置了`Content-Type`为`application/x-www-form-urlencoded`并帮我们自动把data的对象转换成键值对了，所以jquery的请求一般后端都能解析。
 
 ## $http的处理
 
@@ -118,7 +118,9 @@ $http({
 });
 ```
 
-这里我们传入`transformRequest`这个参数重写了默认的序列化器，最终的效果我前面的方式是一样的，当然，angular也支持我们直接修改默认的序列化器，这里就不进一步讨论了，有兴趣的朋友可以看看angular的官网。
+这里我们传入`transformRequest`这个参数重写了默认的序列化器，最终的效果我前面的方式是一样的。
+
+> 这里实际上只对单次请求重写了序列化器，angular也支持我们直接修改默认的序列化器，这里就不进一步讨论了，有兴趣的朋友可以看看angular的官网。
 
 这里我示例的序列化器对参数的依赖比较大，就是序列化只支持`{id:id}`这样的json对象，实际使用的时候，我们一般跟jquery结合：
 
@@ -140,3 +142,7 @@ $http({
 ```
 
 使用jquery的`$.param(data)`帮我们序列化data对象即可。
+
+## 总结
+
+原本以为是angular的$http的问题，细究之后才发现原来这里设计http的基本协议和web容器的实现，看来在编程技术这方面，很多错误并不能只看表面，以后还是要多多注意。
