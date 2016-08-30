@@ -12,7 +12,7 @@ permalink: /cv/
 
 在这里简单介绍一下我参与过的项目吧。
 
-!["title.png"][2]
+!["title.jpg"][2]
 
 ## 元数据开发框架
 
@@ -105,5 +105,5 @@ API网关是一个非常大型的企业应用架构，也是现在非常火的�
 在网关这个产品中，我的身份也不只是一个开发者，我主要还负责网关的管理接口开发，认证服务器（SSO）开发，以及最终的产品交付管控等工作。
 
  [1]: /static/img/blog/cv/gw.png "gw.png"
- [2]: /static/img/blog/cv/title.png "title.png"
+ [2]: /static/img/blog/cv/title.jpg "title.jpg"
 
