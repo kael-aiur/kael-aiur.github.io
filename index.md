@@ -11,4 +11,4 @@ layout: frontpage
 
 
 
- [1]: /static/img/banner.git "当我度周末，而其他人在办公室修复问题的时候"
+ [1]: /static/img/banner.gif "当我度周末，而其他人在办公室修复问题的时候"
