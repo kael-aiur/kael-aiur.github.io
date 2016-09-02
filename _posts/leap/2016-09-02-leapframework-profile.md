@@ -505,4 +505,4 @@ ${app.profile}
 
 
 
-  [1]: /static/img/leap-profile/idea_tomcat.png "指定jvm启动参数"
+  [1]: /static/img/blog/leap-profile/idea_tomcat.png "指定jvm启动参数"
