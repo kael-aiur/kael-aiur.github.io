@@ -242,8 +242,10 @@ tomcat的启动类是`org.apache.catalina.startup.Bootstrap`，我们需要从�
 
 ```
 -Dcatalina.home=target/classes/ 
--Dcatalina.base=target/classes/ -Djava.endorsed.dirs=${catalina.base}endorsed 
--Djava.io.tmpdir=${catalina.base}temp -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager 
+-Dcatalina.base=target/classes/ 
+-Djava.endorsed.dirs=${catalina.base}endorsed 
+-Djava.io.tmpdir=${catalina.base}temp 
+-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager 
 -Djava.util.logging.config.file=${catalina.base}conf/logging.properties
 ```
 
