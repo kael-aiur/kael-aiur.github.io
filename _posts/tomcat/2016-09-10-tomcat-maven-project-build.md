@@ -241,7 +241,8 @@ tomcat的启动类是`org.apache.catalina.startup.Bootstrap`，我们需要从�
 这里特别需要注意的是VM options这项，配置的是启动参数，参数内容如下：
 
 ```
--Dcatalina.home=target/classes/ -Dcatalina.base=target/classes/ -Djava.endorsed.dirs=${catalina.base}endorsed 
+-Dcatalina.home=target/classes/ 
+-Dcatalina.base=target/classes/ -Djava.endorsed.dirs=${catalina.base}endorsed 
 -Djava.io.tmpdir=${catalina.base}temp -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager 
 -Djava.util.logging.config.file=${catalina.base}conf/logging.properties
 ```
