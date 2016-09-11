@@ -125,9 +125,9 @@ int TERMINATED; //结束状态
 
 其他属性都是常量，用来定义状态的，从源码的定义看，线程池的状态是有大小关系的，分别是:
 
-···
+```
 RUNNING < SHUTDOWN < STOP < TIDYING < TERMINATED
-···
+```
 
 各个状态表示的含义如下：
 
