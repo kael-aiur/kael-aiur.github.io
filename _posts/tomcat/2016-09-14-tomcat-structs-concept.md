@@ -1,0 +1,122 @@
+---
+layout: post
+comments: true
+categories: tomcat源码解读
+title: 2、tomcat的结构和基础概念
+tags: tomcat,架构
+grammar_cjkRuby: true
+---
+
+## 前言
+
+上一节我们已经通过maven把tomcat的开发环境搭建好了，现在我们可以开始阅读源码了。
+
+在开始之前先给这次读源码定个小目标吧，比方说我先把源码背下来。
+
+好吧开玩笑的，关于tomcat源码解读的系列博客，我准备按照从tomcat启动到处理一次完整的请求再到tomcat关闭的完整过程来读tomcat的源码，这个系列的博客也会按照这个顺序来写，尽量争取能在10月份到来之前完成这个系列的博客。
+
+在按照这个顺序读源码的过程中，可以会遇到很多问题也很多不明白的地方，这些问题可能没办法全部一一解决，首要目标是在保证不影响我们理解的前提下选择性的忽略一些问题，影响我们对源码的理解的问题一定会彻底解决。
+
+本节开始，我们先从宏观的角度上了解一下tomcat的设计模型，当然也会对tomcat中涉及的一些概念进行解释，因此暂时还不会真正涉及源码，可能看起来会比较无聊，不过是相当重要的，也有助于我们后边理解代码。
+
+## tomcat的设计模型
+
+我们先来看一下tomcat的整体架构模型，如下图：
+
+![模型架构][1]
+
+从这个图中我们可以看出，tomcat最顶层的容器是Server，一个Server下有一个或多个Service，一个service下有一个engine，一个engine下有一个或多个host，一个host下有一个或多个context。
+
+另外，整个容器通过connector组件与外界通信。
+
+我们先来了解一下上面提到的这几个概念：
+
+* server：指的是整个应用的上下文，也是最顶层的容器，tomcat中所有的东西都在这个server里边。
+* service：指的是一个服务，主要的功能是把connector组件和engine组织起来，使得通过connector组件与整个容器通讯的应用可以使用engine提供的服务。
+* engine：服务引擎，这个可以理解为一个真正的服务器，内部提供了多个虚拟主机对外服务。
+* host：虚拟主机，每一个虚拟主机相当于一台服务器，并且内部可以部署多个应用，每个虚拟主机可以绑定一个域名，并指定多个别名。
+* context：应用上下文，每一个webapp都有一个单独的context，也可以理解为每一个context代表一个webapp。
+* connector：连接器组件，可以配置多个连接器支持多种协议，如http，APJ等
+
+> **注意：** 在网上有看到其他人的博客，其中提到service下可以有一个或多个engine，这里必须明确说明一下，service和engine实际上是**一对一**的关系，一个service中只有一个engine，一个engine也只能属于一个service，这一点在官方文档中有明确说明的，另外，代码中的实现也不支持多个engine。
+
+接下来我们来看一下各个组件的实现类和它们之间的关系。
+
+### Server
+
+我们先从最顶层的Server开始，在tomcat真正使用的实现类是`org.apache.catalina.core.StandardServer`，下面是这个类的层次结构图：
+
+![org.apache.catalina.core.StandardServer][2]
+
+从这个结构图中我们可以看出，Tomcat中定义了`Server`这个接口来抽象一个server，并且最终由`StandardServer`作为实现类，同时接口`Server`继承了另一个更顶层的接口`Lifecycle`，这表明`Server`本身也有生命周期。
+
+### Service
+
+server下面包含一个或多个service，在Tomcat中，定义了一个接口`Service`来抽象这个架构中的service，并且最终使用`org.apache.catalina.core.StandardService`作为实现类，整个类的层次结构图如下：
+
+![org.apache.catalina.core.StandardService][3]
+
+这里我可以看到，`Service`接口也继承了`Lifecycle`接口，表明它是有一定生命周期的。
+
+### Engine
+
+同样的在Tomcat中也定义了`Engine`接口，用`org.apache.catalina.core.StandardEngine`作为最终的实现类，类层次结构如下：
+
+![org.apache.catalina.core.StandardEngine][4]
+
+同样的`Engine`也是有一定生命周期的，所以`Engine`继承了`Lifecycle`接口。
+
+### Host
+
+host代表一个虚拟主机，每个虚拟主机可以绑定一个域名和多个别名，Tomcat中使用`Host`接口代表一个host，最终的实现类是`org.apache.catalina.core.StandardHost`，类的结构层次如下：
+
+![org.apache.catalina.core.StandardHost][5]
+
+同样的我们可以看到，`Host`也继承了`Lifecycle`接口。
+
+### Context
+
+最后一个容器是context，在Tomcat中用`Context`接口表示，它的默认实现是`org.apache.catalina.core.StandardContext`，类的结构层次如下：
+
+![org.apache.catalina.core.StandardContext][6]
+
+`Context`也继承了`Lifecycle`。
+
+### Connector
+
+connector在Tomcat中并没有定义接口，而是直接使用实现类`org.apache.catalina.connector.Connector`来表示连接器，类的层次结构图如下：
+
+![org.apache.catalina.connector.Connector][7]
+
+这里我们依然可以看到，`org.apache.catalina.connector.Connector`也实现了`Lifecycle`接口。
+
+## tomcat组件的生命周期
+
+从前面的类层次图我们可以知道，`org.apache.catalina.Lifecycle`是一个非常重要的接口，所有的组件和容器最终都实现了这个接口。实际上这个接口定义的是Tomcat中组件的生命周期，并且定义了每个生命周期的入口方法，同时，还定义了不同生命周期组件的不同状态，我们看一下这个接口定义的所有属性和方法：
+
+![org.apache.catalina.Lifecycle][8]
+
+从这个类我们可以看到，这里主要通过抽象方法定义了四个生命周期：
+
+* init() : 初始化
+* start() : 启动阶段
+* stop() : 停止阶段
+* destory() : 销毁阶段
+
+因此所有的Tomcat组件生命周期都有这个四个阶段。
+
+另外，我们可以看到这里有很多属性，这些属性表示的是组件在生命周期变化时触发的事件，组件完整的生命周期状态在`org.apache.catalina.LifecycleState`这个枚举类中定义，一共定义了14个状态：
+
+![org.apache.catalina.LifecycleState][9]
+
+这14个状态和生命周期有密切的关系。
+
+ [1]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/tomcat_structs.png "tomcat模型架构" 
+ [2]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/standard_server.png "org.apache.catalina.core.StandardServer"
+ [3]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/standard_service.png "org.apache.catalina.core.StandardService"
+ [4]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/standard_engine.png "org.apache.catalina.core.StandardEngine"
+ [5]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/standard_host.png "org.apache.catalina.core.StandardHost"
+ [6]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/standard_context.png "org.apache.catalina.core.StandardContext"
+ [7]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/standard_connector.png "org.apache.catalina.connector.Connector"
+ [8]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/lifecycle.png "org.apache.catalina.Lifecycle"
+ [9]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/lifecycle_state.png "org.apache.catalina.LifecycleState"
