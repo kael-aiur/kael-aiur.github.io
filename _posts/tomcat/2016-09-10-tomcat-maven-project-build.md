@@ -98,6 +98,9 @@ https://github.com/kael-aiur/tomcat80-maven.git
                     <include>**/*.properties</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
         </resources>
         <plugins>
             <plugin>
