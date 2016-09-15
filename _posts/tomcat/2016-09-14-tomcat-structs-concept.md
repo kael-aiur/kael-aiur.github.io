@@ -109,7 +109,65 @@ connector在Tomcat中并没有定义接口，而是直接使用实现类`org.apa
 
 ![org.apache.catalina.LifecycleState][9]
 
-这14个状态和生命周期有密切的关系。
+实际上`MUST_STOP`和`MUST_DESTORY`这两个状态已经被废弃了，所以在整个生命周期中，只有12个状态。
+
+这12个状态和生命周期有密切的关系，我们来看一下在四个生命周期中，这12个状态是如何变化的。
+
+```
+             start()
+   ┌──────────>>───────────────┐
+   │                           │
+   │ init()                    │
+  NEW ─>>─ INITIALIZING        │
+  │ │           │              │     ┌─────────────────<<─────────────────────┐
+  │ │           │auto          │     │                                        │
+  │ │           V     start()  V     V      auto          auto         stop() │
+  │ │      INITIALIZED ──>>─ STARTING_PREP ─>>─ STARTING ─>>─ STARTED ─>>──┐  │
+  │ │         │                                                            │  │
+  │ │destroy()│                                                            │  ^
+  │ └>>─┬─<<──┘    ┌────────────────────<<─────────────────────────────────┘  ^
+  │     │          │                                                          │
+  │     │          V           auto                 auto              start() │
+  │     │     STOPPING_PREP ───>>──── STOPPING ───>>───── STOPPED ─────>>─────┘
+  │     │                               ^                   │  ^
+  │     V               stop()          │                   │  │
+  │     │       ┌──────────>>───────────┘                   │  │
+  │     │       │                                           │  │
+  │     │       │    destroy()                    destroy() │  │
+  │     │    FAILED ────>>───── DESTROYING ───────<<────────┘  │
+  │     │                        ^     │                       │
+  │     │     destroy()          │     │auto                   │
+  │     └──────>>────────────────┘     V                       │
+  │                                 DESTROYED                  │
+  │                                                            │
+  │                            stop()                          │
+  └─────────────────────────────────>>─────────────────────────┘
+ 
+  任意状态下出错都可以转换为FAILED状态.
+```
+
+从上图可以看出，四个生命周期变化的过程，伴随着12个状态的变化。
+
+## 一次请求的过程
+
+我把tomcat中对一次请求的处理划分为如下几个阶段：
+
+* 接收阶段：接收请求，将请求放入待处理队列
+* 协议解析阶段：根据请求协议解析请求，构造协议标准对象，并交给对应的Servlet
+* 请求处理阶段：Servlet处理请求
+* 结束阶段：servlet结束处理，tomcat结束本次请求
+
+## 总结
+
+读完本章，虽然我们目前还不是很了解tomcat的源码实现，不过大致上对tomcat的架构有了了解，这对我们后边理解tomcat的源码至关重要，后续的章节，我们将按照如下顺序来读源码：
+
+* tomcat的启动
+* tomcat请求接收阶段
+* tomcat请求协议解析阶段
+* tomcat请求结束阶段
+* tomcat的停止
+
+由于请求交给servlet处理的过程是应用自己写的servlet，跟tomcat的源码无关，所以这个系列的博客不会提及。
 
  [1]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/tomcat_structs.png "tomcat模型架构" 
  [2]: https://raw.githubusercontent.com/kael-aiur/image-repo1/master/tomcat_read_source/tomcat_struts/standard_server.png "org.apache.catalina.core.StandardServer"
