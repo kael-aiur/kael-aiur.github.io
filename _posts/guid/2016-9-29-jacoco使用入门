@@ -1,0 +1,77 @@
+---
+layout: post
+comments: true
+categories: 单元测试
+title: jacoco使用入门 
+tags: 单元测试覆盖率,jacoco
+grammar_cjkRuby: true
+---
+
+## 前言
+
+今天不是特别忙，所以就尝试使用了一下jacoco。
+
+当然只是简单的使用，还没有研究里边具体的机制，先记录下来以备后续使用。
+
+## 示例
+
+pom.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>kael.learn</groupId>
+    <artifactId>kael-jacoco</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <junit.version>4.11</junit.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.1.201405082137</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+</project>
+```
+
+执行命令：
+
+```
+mvn clean jacoco:prepare-agent install jacoco:report
+```
+
+这里先留个记录吧，以后有机会再来详细看看。
