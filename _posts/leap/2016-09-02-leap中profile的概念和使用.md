@@ -25,7 +25,7 @@ profile的概念其实在很多地方都有的，不同的地方也有不同的�
 
 ## maven对profile的处理
 
-maven其实可以在`pom.xml`中配置几个指定的profile，然后运行maven指令打包的时候指定profile，对应的profile即可激活生效，指定profile的方式就是同个`-P{profile}`来指定的，比如：
+maven其实可以在`pom.xml`中配置几个指定的profile，然后运行maven指令打包的时候指定profile，对应的profile即可激活生效，指定profile的方式就是通过`-P{profile}`来指定的，比如：
 
 ```
 mvn package -Pdev
