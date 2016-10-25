@@ -34,3 +34,6 @@ markdown: kramdown
 # highlighter: pygments
 # highlighter: rouge
 # highlighter: false
+
+# resource url
+image_repo1: https://raw.githubusercontent.com/kael-aiur/image-repo1/master
