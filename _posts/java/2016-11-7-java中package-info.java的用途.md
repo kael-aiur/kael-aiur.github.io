@@ -139,5 +139,7 @@ package com.company;
 
 这与包下放置package.htm没啥区别，只是package-info可以更好的在代码中维护文档的完整性，并且可以实现代码与文档同步更新，package.htm也可以做到，不争论，建议是Java1.5以上版本都使用package-info.java来注释。
 
-与package-info相关的问题在项目开发中，可以放置在包上的常用注解有：Struts的`@namespace`、Hibernate的`@FilterDef`和`@TypeDef`等等。在包下，随便一个类中的包名前加这些注解，Eclipse会提示“Package annotations must be in file package-info.java”,在该包下建立`package-info.java`文件，把注解移到这里即可。
+### 相关问题
+
+在项目开发中，可以放置在包上的常用注解有：Struts的`@namespace`、Hibernate的`@FilterDef`和`@TypeDef`等等。在包下，随便一个类中的包名前加这些注解，Eclipse会提示“Package annotations must be in file package-info.java”,在该包下建立`package-info.java`文件，把注解移到这里即可。
 使用Checkstyle插件做代码检查时，会报一个警告“Missing package-info.java file.”也是这个package-info文件惹的祸，在各个包下创建一个即可。
