@@ -7,6 +7,9 @@ tags: tomcat,maven,源码
 grammar_cjkRuby: true
 ---
 
+* content
+{:toc}
+
 ## 前言
 
 其实很早前就想读一下tomcat的源码了，无奈的是tomcat的工程一直是使用ant构建的，ant是比较早前的构建工具了，甚至可以说是古老的构建工具，我并没有用过，也不熟悉，所以一直都没办法构建一个开发环境来读tomcat的源码。

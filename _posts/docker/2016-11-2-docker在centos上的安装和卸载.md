@@ -7,6 +7,9 @@ tags: 卸载,安装,docker,CentOS
 grammar_cjkRuby: true
 ---
 
+* content
+{:toc}
+
 ## 前言
 
 docker是最近比较火的一种虚拟化技术，很早之前在window上安装和体验过了，今天在linux上安装的时候才发现，CentOS官方的源上的docker安装后并不能使用，所以看一了一下docker的官网，按照官网的指引把docker安装好了，现在顺便把官网的安装教程翻译一下。

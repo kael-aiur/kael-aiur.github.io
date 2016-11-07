@@ -7,6 +7,9 @@ tags: nodejs,npm,Linux
 grammar_cjkRuby: true
 ---
 
+* content
+{:toc}
+
 ## 前言
 
 nodejs已经火了挺长一段时间了，[官网](https://nodejs.org/en/)上现在有很多安装方式，window上的安装比较简单，mac的安装也比较简单，linux的安装在官网上没有找到安装教程，所以就记录一下。

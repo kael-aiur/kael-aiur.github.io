@@ -7,6 +7,9 @@ tags: 新建,模板,小书匠
 grammar_cjkRuby: true
 ---
 
+* content
+{:toc}
+
 ## 前言
 
 早前就用过angular，不过一直都不太喜欢它的$http服务，以前对angular的理解特别浅，所以一直都不明白为什么$http服务用如下的方式发请求:
