@@ -26,9 +26,9 @@
           {% else %}
           <li>
         {% endif %}
-        <a href="{{ site.baseurl }}/">主页</a></li>
+        <a href="{{ site.baseurl }}/">{{ site.baseurl }}主页</a></li>
+        
         {% for p in site.pages %}
-          {% if p.url != site.baseurl %}
           {% if p.title %}
             {% if p.url == page.url %}
               <li class="active">
@@ -36,7 +36,6 @@
               <li>
             {% endif %}
             <a href="{{ p.url | prepend: site.baseurl }}"><span class="glyphicon {{ p.icon }}"></span> {{ p.title }}</a></li>
-          {% endif %}
           {% endif %}
         {% endfor %}
       </ul>
