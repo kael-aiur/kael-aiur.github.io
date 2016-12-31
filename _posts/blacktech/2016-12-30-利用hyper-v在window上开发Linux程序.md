@@ -115,6 +115,43 @@ grammar_cjkRuby: true
 
 > 这里我们不设置外部网络，因为一旦设置外部网络，hyper-v会自动使用桥接方式，把物理网卡的网络和虚拟机的外部网络通过网桥连接起来，虽然我们可以使用外部网络共享给内部网络来实现虚拟机内部网络上网，但是这会导致每次重启都得手动重新共享网络，目前还不清楚原因，猜测是这里的共享存在bug导致的，有可能是外部网络连接先初始化完成，导致共享对象找不到，无法共享给内部网络导致的。
 
+#### 配置静态ip
+
+> 经过我的实际测试，使用网络共享的方式非常容易在物理机重启之后无法访问网络，因此还是建议配置静态ip，可以保证在任何时候都能连接，但是虚拟机不能上网，如果需要上网，可以先手动取消网络共享，再重新启动网络共享即可。
+
+在CentOS7下，使用vim编辑网卡配置：
+
+```
+$> vim /etc/sysconfig/network-scripts/ifcfg-eth0 
+```
+
+修改为如下配置
+
+```
+TYPE="Ethernet"
+BOOTPROTO="static" # 把原本的DCPH改成static
+DEFROUTE="yes"
+PEERDNS="yes"
+PEERROUTES="yes"
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="yes"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_PEERDNS="yes"
+IPV6_PEERROUTES="yes"
+IPV6_FAILURE_FATAL="no"
+NAME="eth0"
+UUID="352339ce-4e5a-4fc6-97ad-db2f89905613"
+DEVICE="eth0"
+ONBOOT="yes"
+DNS1=192.168.137.1 # 添加DNS配置
+IPADDR=192.168.137.10 # 指定静态ip
+NETMASK=255.255.255.0 # 指定子关掩码
+GATEWAY=192.168.137.1 # 指定默认网关
+```
+
+在上面的配置中，除了ip地址可以按照需要配置之外，其他的都是hyper的默认配置，建议不要修改。
+
 ### 安装Linux虚拟机并配置nfs服务
 
 现在我们可以在hyper-v中创建一个虚拟机并安装Linux系统了，这里我安装的是CentOS7的操作系统。
