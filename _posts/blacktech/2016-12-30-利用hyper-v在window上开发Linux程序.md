@@ -261,25 +261,18 @@ AnonymousGid
 但是我们会发现虚拟机没有ip了，所有无法连接，这个时候只要打开网络共享中心，会看到至少如下四个连接：
 
 * vEthernet(内部网络)
-* vEthernet(外部网络)
-* 网桥
 * 物理网络连接
 
-并且这里物理网络是桥接的，而外部网络是共享的，只要右键物理网络连接，选择从桥中删除：
+并且这里物理网络是共享的，只要取消物理网络共享，然后重新开启物理网络共享即可：
+
+
+现在重新挂载网络地址，为了保证每次开机自动挂载，直接打开我的电脑，右键我的电脑，选择**映射网络驱动器...**
 
 ![enter description here][8]
 
-删除之后桥接网络会消失，这个时候再回到hyper-v管理器中，选择虚拟交换机管理器，并找到我们刚刚创建好的外部网络连接，会看到已经变成内部连接了，重新改成外部网络即可。
+输入挂载信息，并勾选登陆时重新连接即可：
 
 ![enter description here][9]
-
-改回外部网络之后，要再次进入网络共享中心，设置外部网络连接为共享连接，共享给内部网络连接。
-
-现在重新挂载网络地址：
-
-```
-C:\> mount ${虚拟机ip}:/root X:
-```
 
 现在发现可以打开X盘了，右键X盘，选择属性，并打开NFS装载选项，可以看到：
 
@@ -349,8 +342,8 @@ OK，一切设置妥当，这个时候我们回到编辑区，按下`Ctrl+H`:
   [5]: {{{{site.image_repo1}}/hyper_v_linux/images/1483113364942.jpg "1483113364942.jpg"
   [6]: {{{{site.image_repo1}}/hyper_v_linux/images/1483114773713.jpg "1483114773713.jpg"
   [7]: {{{{site.image_repo1}}/hyper_v_linux/images/1483115362207.jpg "1483115362207.jpg"
-  [8]: {{{{site.image_repo1}}/hyper_v_linux/images/1483116256551.jpg "1483116256551.jpg"
-  [9]: {{{{site.image_repo1}}/hyper_v_linux/images/1483116355496.jpg "1483116355496.jpg"
+  [8]: {{{{site.image_repo1}}/hyper_v_linux/images/1483159413859.jpg "1483159413859.jpg"
+  [9]: {{{{site.image_repo1}}/hyper_v_linux/images/1483159461623.jpg "1483159461623.jpg"
   [10]: {{{{site.image_repo1}}/hyper_v_linux/images/1483116622451.jpg "1483116622451.jpg"
   [11]: {{{{site.image_repo1}}/hyper_v_linux/images/1483155110579.jpg "1483155110579.jpg"
   [12]: {{{{site.image_repo1}}/hyper_v_linux/images/1483155306022.jpg "1483155306022.jpg"
