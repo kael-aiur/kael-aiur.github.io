@@ -46,3 +46,13 @@ mvn install:install-file -Dfile={Path/to/your/ojdbc.jar} -DgroupId=com.oracle.jd
 ```
 
 上面的Maven命令会把jar文件安装到本地的Maven仓库，DgroupId和DartifactId参数分别指定安装时的groupId和artifactId，可以随便指定，但肯定最好是和jar包的版本尽量一致的，避免以后混淆。
+
+安装完成之后，在`pom.xml`中添加如下依赖即可：
+
+```xml
+<dependency>
+    <groupId>com.oracle.jdbc</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>${your jdbc version}</version>
+</dependency>
+```
