@@ -93,13 +93,13 @@ $> yum install mysql-community-server
 安装完成后启动mysql:
 
 ```
-$>  service mysqld status
+$>  systemctl start mysqld.service
 ```
 
 启动完成，查看一下mysql的运行状态：
 
 ```
-$> service mysqld status
+$> systemctl status mysqld.service
 Redirecting to /bin/systemctl status  mysqld.service
 ● mysqld.service - MySQL Server
    Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)
