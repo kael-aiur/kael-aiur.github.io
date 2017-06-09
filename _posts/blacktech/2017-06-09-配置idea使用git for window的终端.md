@@ -33,7 +33,6 @@ alias ls='ls -F --color=auto --show-control-chars' # 使用ls命令的时候加�
 export LC_ALL=zh_CN.UTF-8 # 设置终端打开的编码
 
 # 以下是maven命令简化
-
 alias mct="mvn clean test"
 alias mvn_test="mvn clean test"
 alias mis="mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
