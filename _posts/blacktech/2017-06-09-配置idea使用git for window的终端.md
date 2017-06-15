@@ -26,9 +26,11 @@ git-bash执行的一些脚本，所以我们需要手动添加设置这部分脚
 
 ## 配置bash
 
-在`${git for windows}/etc/bash.bashrc`这个文件的末位，加上我们需要执行的脚本即可，这里一般就是设置一些别名和编码，我习惯使用的配置如下：
+在`${user}/.bashrc`这个文件的末位，加上我们需要执行的脚本即可，这里一般就是设置一些别名和编码，我习惯使用的配置如下：
 
 ```
+alias httpServer_node='http-server -p 8000'
+
 alias ls='ls -F --color=auto --show-control-chars' # 使用ls命令的时候加上颜色
 export LC_ALL=zh_CN.UTF-8 # 设置终端打开的编码
 
@@ -38,9 +40,9 @@ alias mvn_test="mvn clean test"
 alias mis="mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
 alias mvn_install_skip="mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
 alias mcd="mvn clean deploy -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
-alias mvn_package_prod="mvn clean package -Dprofile=prod"
-alias mvn_package_dev="mvn clean package -Dprofile=dev"
-alias mvn_package_local="mvn clean package -Dprofile=local"
+alias mvn_package_prod="mvn clean package -Dprofile=prod -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
+alias mvn_package_dev="mvn clean package -Dprofile=dev -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
+alias mvn_package_local="mvn clean package -Dprofile=local -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
 alias mvn_dependency_tree="mvn dependency:tree"
 alias mvn_dependency_sources="mvn dependency:sources"
 ```
