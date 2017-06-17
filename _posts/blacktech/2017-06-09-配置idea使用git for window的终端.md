@@ -26,11 +26,22 @@ git-bash执行的一些脚本，所以我们需要手动添加设置这部分脚
 
 ## 配置bash
 
-在`${user}/.bashrc`这个文件的末位，加上我们需要执行的脚本即可，这里一般就是设置一些别名和编码，我习惯使用的配置如下：
+在`${user}`这目录下创建两个文件：
 
+* `.bash_profile`
+* `.bashrc`
+
+文件内容如下：
+
+**.bash_profile**
+
+```bash
+if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
 ```
-alias httpServer_node='http-server -p 8000'
 
+**.bashrc**
+
+```bash
 alias ls='ls -F --color=auto --show-control-chars' # 使用ls命令的时候加上颜色
 export LC_ALL=zh_CN.UTF-8 # 设置终端打开的编码
 
@@ -46,3 +57,5 @@ alias mvn_package_local="mvn clean package -Dprofile=local -Dmaven.test.skip=tru
 alias mvn_dependency_tree="mvn dependency:tree"
 alias mvn_dependency_sources="mvn dependency:sources"
 ```
+
+这样配置之后就可以在命令行终端使用别名了。
