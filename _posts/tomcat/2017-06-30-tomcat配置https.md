@@ -22,7 +22,7 @@ author: KAEL
 这个工具在`${JAVA_HOME}/bin/keytool`，使用命令行创建证书：
 
 ```text
-$> "c:\Program Files\Java\jdk1.8.0_66\bin\keytool.exe" -genkey -alias tomcat -keyalg RSA -keystore d:\tomcat.keystore
+$> keytool -genkeypair -alias "tomcat" -keyalg "RSA" -keystore "tomcat.keystore"
 
 输入密钥库口令: #输入密码，这里我输入的是tomcat
 再次输入新口令: #再次输入密码tomcat
@@ -72,11 +72,3 @@ tomcat.keystore
             keystoreFile="conf\tomcat.keystore"  
             keystorePass="tomcat"/>
 ```
-
-配置完成后，启动tomcat，访问：
-
-```
-https://localhost:8443
-```
-
-即可。
