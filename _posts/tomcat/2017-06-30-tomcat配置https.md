@@ -73,3 +73,10 @@ tomcat.keystore
             keystorePass="tomcat"/>
 ```
 
+配置完成后，启动tomcat，访问：
+
+```
+https://localhost:8443
+```
+
+即可。
