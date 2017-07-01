@@ -58,7 +58,7 @@ set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.authenticate=f
 
 ### 验证用户身份监控
 
-有些时候我们需要长期打开JMX监控，为了安全起见，必须是经过验证的用户才运行连接，这个时候配置稍微麻烦点。
+有些时候我们需要长期打开JMX监控，为了安全起见，必须是经过验证的用户才允许连接，这个时候配置稍微麻烦点。
 
 将`setenv.sh|.bat`修改为如下：
 
