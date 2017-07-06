@@ -123,8 +123,8 @@ mvn package -Pdev
                             <exclude>conf_*/</exclude>
                             <exclude>profile_local</exclude>
                         </excludes>
+                        <filtering>true</filtering>
                     </resource>
-                    <filtering>true</filtering>
                 </resources>
                 <testResources>
                     <testResource>
