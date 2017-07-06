@@ -56,6 +56,9 @@ alias mvn_package_dev="mvn clean package -Pdev -Dmaven.test.skip=true -Dmaven.ja
 alias mvn_package_local="mvn clean package -Plocal -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
 alias mvn_dependency_tree="mvn dependency:tree"
 alias mvn_dependency_sources="mvn dependency:sources"
+# 以下是两个发布命令，需要按实际情况修改变量
+alias mvn_deploy_${profile}_snapshot="mvn clean deploy -DaltDeploymentRepository=bingo-maven-repository-snapshots::default::${snapshot_url} -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
+alias mvn_deploy_${profile}_release="mvn clean deploy -DaltDeploymentRepository=bingo-maven-repository-releases::default::${release_url} -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
 ```
 
 这样配置之后就可以在命令行终端使用别名了。
