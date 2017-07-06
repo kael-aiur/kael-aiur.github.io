@@ -124,6 +124,7 @@ mvn package -Pdev
                             <exclude>profile_local</exclude>
                         </excludes>
                     </resource>
+                    <filtering>true</filtering>
                 </resources>
                 <testResources>
                     <testResource>
