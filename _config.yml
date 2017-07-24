@@ -33,7 +33,7 @@ gems:
   - jekyll-mermaid
 
 mermaid:
-  src: /static/js/mermaid.js
+  src: '/static/js/mermaid.js'
 # highlight
 # highlighter: pygments
 # highlighter: rouge
