@@ -29,7 +29,8 @@ uyan_url: "http://v2.uyan.cc/code/uyan.js?uid=2118374"
 
 # Build settings
 markdown: kramdown
-gems: [jekyll-mermaid]
+gems: 
+  - jekyll-mermaid
 
 mermaid:
   src: /static/js/mermaid.js
