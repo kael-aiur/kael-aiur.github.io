@@ -67,7 +67,6 @@ set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.port=10001
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.ssl=false
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.authenticate=true
-set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.authenticate=true
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.password.file=../conf/jmxremote.password
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.access.file=../conf/jmxremote.access
 ```
