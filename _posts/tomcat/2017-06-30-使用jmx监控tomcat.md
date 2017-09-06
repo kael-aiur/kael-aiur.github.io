@@ -39,12 +39,31 @@ JConsole和jvisualvm在JDK中都已经自带了，两者关系是jvisualvm可以
 
 建议在`${tomcat}/bin`目录下添加`setenv.sh`(windows系统则添加`setenv.bat`)：
 
+**setenv.bat**
+
 ```bash
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.port=10001
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.ssl=false
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.authenticate=false
 ```
+
+**setenv.sh**
+
+```bash
+CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote"
+CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote.port=10001"
+CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote.ssl=false"
+CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote.authenticate=false"
+# Linux下需要特殊指定的参数，window下会自动计算
+CATALINA_OPTS="$CATALINA_OPTS -Djava.rmi.server.hostname=${ip}"
+```
+
+> **注意:** 在linux下的服务，还需要增加`-Djava.rmi.server.hostname`这个参数。
+> 因为在jconsole/jvisualvm连接远程服务的时候，如果没有指定这个参数，会通过linux的`hostname -i`命令获取到远程服务的名称或地址，
+> 然后进行连接，一般情况下这个命令会返回127.0.0.1，此时jconsole/jvisualvm会连接到本地，解决会被拒绝，设置了这个参数后，服务端会
+> 返回这个地址，所以会直接连接到这台服务器。
+
 
 重启tomcat即可。
 
@@ -62,6 +81,8 @@ set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.authenticate=f
 
 将`setenv.sh|.bat`修改为如下：
 
+**setenv.bat**
+
 ```bash
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.port=10001
@@ -69,6 +90,18 @@ set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.ssl=false
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.authenticate=true
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.password.file=../conf/jmxremote.password
 set CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.access.file=../conf/jmxremote.access
+```
+
+**setenv.sh**
+
+```bash
+CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote"
+CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote.port=10001"
+CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote.ssl=false"
+CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote.authenticate=true"
+CATALINA_OPTS="$CATALINA_OPTS -Djava.rmi.server.hostname=${ip}"
+CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.password.file=../conf/jmxremote.password
+CATALINA_OPTS= %CATALINA_OPTS% -Dcom.sun.management.jmxremote.access.file=../conf/jmxremote.access
 ```
 
 然后在`%{tomcat}/conf`目录下添加两个文件：
