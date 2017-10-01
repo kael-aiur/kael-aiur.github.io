@@ -40,7 +40,7 @@ grammar_cjkRuby: true
 
 我们来建立一个项目演示这三个作用，建立一个package-info的**Java Project**，在`com.company`包三个类:`package-info.java` 是我们重点关注的，`PkgAnnotation.java`是一个标注在包上的注解定义，`Client.java`模拟业务操作类。其结构如下图：
 
-![工程目录]({{{{site.image_repo1}}/java_package-info/package-info.java1.png)
+![工程目录]({{site.image_repo1}}/java_package-info/package-info.java1.png)
 
 #### 包注解
 
@@ -135,7 +135,7 @@ package com.company;
 
 通过javadoc生成的API文档如下：
 
-![生成文档]({{{{site.image_repo1}}/java_package-info/package-info.java2.png)
+![生成文档]({{site.image_repo1}}/java_package-info/package-info.java2.png)
 
 这与包下放置package.htm没啥区别，只是package-info可以更好的在代码中维护文档的完整性，并且可以实现代码与文档同步更新，package.htm也可以做到，不争论，建议是Java1.5以上版本都使用package-info.java来注释。
 
