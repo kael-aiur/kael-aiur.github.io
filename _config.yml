@@ -30,8 +30,8 @@ newsourceroot: https://github.com/kael-aiur/kael-aiur.github.io
 # Build settings
 markdown: kramdown
 
-gems:
-  - jekyll-mermaid
+#gems:
+#  - jekyll-mermaid
 
 mermaid:
   src: '/static/js/mermaid.js'
