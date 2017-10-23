@@ -143,7 +143,7 @@ $> docker stop ${容器id}
 现在重新启动docker的redis镜像，同时指定主机端口映射容器端口：
 
 ```
-$> docker run -p 6379:6379 --name port-map-redis2 -d redis
+$> docker run -p 6379:6379 --name port-map-redis -d redis
 ```
 
 现在使用redis-cli直接连接本地：
