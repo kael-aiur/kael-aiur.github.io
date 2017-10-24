@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-categories: redis
+categories: docker
 title: 使用docker的redis镜像
 tags: docker,redis,镜像
 grammar_cjkRuby: true
