@@ -15,6 +15,8 @@ author: kael
 
 docker的官方镜像提供了redis的镜像，为了方便自己随时随地需要的使用，就学习一下，顺便记录下来。
 
+参考[Docker官方Redis镜像](https://hub.docker.com/_/redis/)
+
 ## 准备工作
 
 * 一台linux机器（我用windows10自带的hyper-v装了个虚拟机）

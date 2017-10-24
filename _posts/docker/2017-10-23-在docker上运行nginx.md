@@ -3,7 +3,7 @@ layout: post
 comments: true
 categories: docker
 title: 在docker上运行nginx
-tags: tag1,tag2,tag3
+tags: nginx,docker,容器
 grammar_cjkRuby: true
 author: KAEL
 ---
@@ -16,6 +16,8 @@ author: KAEL
 出于测试目的，偶尔会突然需要使用nginx,但是测试完之后又不想让nginx一直运行，这时候就可以使用docker官方提供的nginx镜像，然后写几份配置保存下来即可。
 
 我在自己的电脑装了虚拟机，在虚拟机中安装CentOS 7的操作系统，本文基于这样的环境，在虚拟机中运行nginx的docker镜像。
+
+参考[Docker官方Nginx镜像](https://hub.docker.com/_/nginx/)
 
 ## 下载nginx镜像
 
