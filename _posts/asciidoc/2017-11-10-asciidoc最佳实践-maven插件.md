@@ -70,6 +70,12 @@ AsciiDoc是一种轻量型的标记语言，语法简单易用，兼容Markdown�
     <build>
         <!-- 默认命令，配置后可以直接使用mvn编译 -->
         <defaultGoal>process-resources</defaultGoal>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>${project.build.directory}/book</targetPath>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.asciidoctor</groupId>
