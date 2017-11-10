@@ -118,6 +118,13 @@ AsciiDoc是一种轻量型的标记语言，语法简单易用，兼容Markdown�
                     <requires>
                         <require>asciidoctor-diagram</require>
                     </requires>
+                    <attributes>
+                        <toc>left</toc>
+                        <icons>font</icons>
+                        <sectanchors>true</sectanchors>
+                        <!-- set the idprefix to blank -->
+                        <idprefix/>
+                    </attributes>
                 </configuration>
             </plugin>
         </plugins>
