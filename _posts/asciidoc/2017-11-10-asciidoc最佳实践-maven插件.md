@@ -133,7 +133,7 @@ AsciiDoc是一种轻量型的标记语言，语法简单易用，兼容Markdown�
 </project>
 ```
 
-## 编写规范
+## 编写建议
 
 编写AsciiDoc文本推荐使用idea/WebStorm，安装AsciiDoc插件即可实施预览：
 
@@ -183,3 +183,17 @@ $> http-server target/book -p 4001 -e html
 
 每次修改完需要查看的时候，只需要使用`mvn clean process-resources`编译一次，就可以直接在浏览器预览整体效果了。
 
+## 标题建议
+
+asciidoc有很多属性可以设置，一般建议的电子书中声明如下属性：
+
+````
+电子书标题
+==========
+卡尔 <kael.peng@gmail.com>
+v2, 2017-11-02
+:source-highlighter: prettify
+:data-uri:
+````
+
+这里`source-highlighter`是语法高亮，`data-uri`是将图片内嵌到html页面中。
