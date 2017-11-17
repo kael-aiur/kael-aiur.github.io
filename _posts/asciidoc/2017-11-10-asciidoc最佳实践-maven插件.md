@@ -133,7 +133,7 @@ AsciiDoc是一种轻量型的标记语言，语法简单易用，兼容Markdown�
 </project>
 ```
 
-## 编写规范
+## 编写建议
 
 编写AsciiDoc文本推荐使用idea/WebStorm，安装AsciiDoc插件即可实施预览：
 
@@ -145,7 +145,7 @@ AsciiDoc是一种轻量型的标记语言，语法简单易用，兼容Markdown�
 
 * 在个源码文件的顶部定义图片根目录相对当前目录的相对路径
 * 每个目录的图片在图片根目录下创建一个同名目录
-* 每个源码文件引用的图片命名按照{源码文件名}_{序号递增}.png|...
+* 每个源码文件引用的图片命名按照{源码文件名}_{序号递增}.png
 
 如上面提到的目录结构，在`src/main/asciidoc/index.adoc`顶部定义图片根目录：
 
@@ -183,3 +183,17 @@ $> http-server target/book -p 4001 -e html
 
 每次修改完需要查看的时候，只需要使用`mvn clean process-resources`编译一次，就可以直接在浏览器预览整体效果了。
 
+## 标题建议
+
+asciidoc有很多属性可以设置，一般建议的电子书中声明如下属性：
+
+````
+电子书标题
+==========
+卡尔 <kael.peng@gmail.com>
+v2, 2017-11-02
+:source-highlighter: prettify
+:data-uri:
+````
+
+这里`source-highlighter`是语法高亮，`data-uri`是将图片内嵌到html页面中。
