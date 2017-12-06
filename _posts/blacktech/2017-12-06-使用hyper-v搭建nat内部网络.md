@@ -27,6 +27,8 @@ author: kael
 
 如果使用VMWare的话，这个NAT网络几乎是完全自动搭建的，不用多说，因此本文主要介绍在hyper-v上如何搭建这套完整的基于NAT内部局域网。
 
+本文参考：[设置NAT网络](https://docs.microsoft.com/zh-cn/virtualization/hyper-v-on-windows/user-guide/setup-nat-network)
+
 ## 网络拓扑结构
 
 最终实现的网络拓扑结构如下：
