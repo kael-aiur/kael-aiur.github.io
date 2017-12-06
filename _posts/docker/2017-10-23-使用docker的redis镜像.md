@@ -100,16 +100,20 @@ not connected> exit
 
 现在我们需要知道docker中的redis的IP地址：
 
+{% raw %} 
 ```
 $> docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${容器id}
 ```
+{% endraw %}
 
 > 容器id我们前面已经用`docker ps`看到了，拷贝过来替换掉`${容器id}`。
 
+{% raw %} 
 ```
 $> docker inspect --format '{{ .NetworkSettings.IPAddress }}' 7dabbc56e351
 172.17.0.2
 ```
+{% endraw %}
 
 连接：
 
