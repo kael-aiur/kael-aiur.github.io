@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-categories: cate
+categories: linux
 title: CentOS7 更新vim为vim8
 tags: Cent OS 7,vim8,update vim
 grammar_cjkRuby: true
