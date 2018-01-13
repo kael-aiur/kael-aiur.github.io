@@ -37,7 +37,7 @@ Linux localhost.localdomain 3.10.0-327.el7.x86_64 #1 SMP Thu Nov 19 22:10:57 UTC
 * 下载安装包
 
 ```
-$> wget https://repo.mysql.com//mysql57-community-release-el7-9.noarch.rpm
+$> wget https://repo.mysql.com/mysql57-community-release-el7-9.noarch.rpm
 ```
 
 * 安装源
