@@ -203,7 +203,7 @@ PS> New-NetNat -Name <NATOutsideName> -InternalIPInterfaceAddressPrefix <NAT sub
 对于我们的示例，运行以下命令以设置 NAT 网络：
 
 ```
-PS> New-NetNat -Name MyNATnetwork -InternalIPInterfaceAddressPrefix 192.168.0.0/24
+PS> New-NetNat -Name MyNATnetwork -InternalIPInterfaceAddressPrefix 192.168.10.0/24
 ```
 
 到这里，一个可用的虚拟NAT网络已经配置完成。
