@@ -249,11 +249,13 @@ wrapper.syslog.loglevel=NONE
 可以在classpath目录下创建`logback-spring.xml`文件，这个文件logback不会加载，会由springboot进行加载，spring加载的过程会对配置文件进行配置增强，扩展支持了几个属性：
 
 ```xml
-<springProperty scope="context" name="CONSOLE_APPENDER" 
-    source="logging.appender.console" defaultValue="true"/>
-<springProperty name="test,prod">
-    <appender-ref ref="ERROR_FILE"/>
-</springProperty>
+<configuration>
+    <springProperty scope="context" name="CONSOLE_APPENDER" 
+        source="logging.appender.console" defaultValue="true"/>
+    <springProperty name="test,prod">
+        <appender-ref ref="ERROR_FILE"/>
+    </springProperty>
+</configuration>
 ```
 
 这里`<springProperty>`标签可以使用spring的`application.yml`中配置的属性，source即属性的key，并且可以指定`defaultVale`默认值。  
@@ -418,4 +420,4 @@ logging:
 一般情况下不建议对日志最大容量进行限制，以防出现问题时无法找到日志，如果在某些磁盘空间比较小的测试环境，日志不是特别重要，可以设置日志容量限制。
 注意日志容量限制需要同时配置`logging.rolling.maxFileSize`和`logging.rolling.totalSizeCap`两个属性，`totalSizeCap`的值不能小于`maxFileSize`。
 
-这样的配置即可达到[需求](#需求)中要求的全部需求。
+这样的配置即可达到[日志需求](#日志需求)中要求的全部需求。
