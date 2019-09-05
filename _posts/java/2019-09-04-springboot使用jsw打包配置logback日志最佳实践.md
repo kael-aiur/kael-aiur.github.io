@@ -126,7 +126,7 @@ wrapper.syslog.loglevel=NONE
                             </property>
                             <property>
                                 <name>wrapper.console.loglevel</name>
-                                <value>DEBUG</value>
+                                <value>INFO</value>
                             </property>
                             <property>
                                 <name>wrapper.console.format</name>
