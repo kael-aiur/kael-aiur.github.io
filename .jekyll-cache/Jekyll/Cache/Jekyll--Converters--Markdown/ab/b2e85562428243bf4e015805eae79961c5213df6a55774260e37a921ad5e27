@@ -1,0 +1,90 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#连接" id="markdown-toc-连接">连接</a></li>
+  <li><a href="#目录跳转" id="markdown-toc-目录跳转">目录跳转</a></li>
+  <li><a href="#上传下载" id="markdown-toc-上传下载">上传下载</a></li>
+</ul>
+
+<h2 id="连接">连接</h2>
+
+<p>在命令行终端可以使用如下命令连接ftp服务器：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:&gt;ftp 192.168.58.128
+连接到 192.168.58.128。
+220 (vsFTPd 3.0.2)
+用户(192.168.58.128:(none)): kael
+331 Please specify the password.
+密码:
+230 Login successful.
+</code></pre></div></div>
+
+<p>也可以使用如下方式连接：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:&gt; ftp
+ftp&gt; open 192.168.58.128
+连接到 192.168.58.128。
+220 (vsFTPd 3.0.2)
+用户(192.168.58.128:(none)): kael
+331 Please specify the password.
+密码:
+230 Login successful.
+</code></pre></div></div>
+
+<p>想断开连接可以使用如下命令：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp&gt; close
+221 Goodbye.
+</code></pre></div></div>
+
+<p>如果想退出ftp命令行，可以使用：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp&gt; bye
+C:&gt; 
+</code></pre></div></div>
+
+<h2 id="目录跳转">目录跳转</h2>
+
+<p>本地目录跳转：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp&gt; lcd C:\Users
+目前的本地目录 C:\Users。
+</code></pre></div></div>
+
+<p>服务端目录跳转根据实际的服务端操作系统决定，如：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp&gt; cd ..
+</code></pre></div></div>
+
+<p>执行本地命令，在命令前加<code class="highlighter-rouge">!</code>即可：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp&gt; !dir
+ 驱动器 C 中的卷是 系统
+ 卷的序列号是 0001-22B9
+
+ C:\Users 的目录
+
+2017/03/13  11:48    &lt;DIR&gt;          .
+2017/03/13  11:48    &lt;DIR&gt;          ..
+2017/03/09  10:42    &lt;DIR&gt;          Administrator
+2017/03/10  17:31    &lt;DIR&gt;          idcadmin
+2017/03/13  14:27    &lt;DIR&gt;          Public
+               0 个文件              0 字节
+               6 个目录 63,309,078,528 可用字节
+</code></pre></div></div>
+
+<h2 id="上传下载">上传下载</h2>
+
+<p>上传命令：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp&gt; put file.txt
+</code></pre></div></div>
+
+<p>下载命令：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp&gt; get file.txt
+</code></pre></div></div>
+
+<p>删除服务器文件：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp&gt; delete file.txt
+</code></pre></div></div>
+:ET

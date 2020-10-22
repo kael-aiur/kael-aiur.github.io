@@ -1,0 +1,81 @@
+I"<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#python" id="markdown-toc-python">Python</a></li>
+  <li><a href="#ruby" id="markdown-toc-ruby">Ruby</a></li>
+  <li><a href="#nodejs" id="markdown-toc-nodejs">Node.js</a></li>
+  <li><a href="#总结" id="markdown-toc-总结">总结</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>在开发的过程中，经常会下载到某些开源框架的静态文档，这些文档有时候需要部署到http服务器才能方便查看，使用tomcat感觉部署有些笨重，这里介绍几种简单的方式。</p>
+
+<h2 id="python">Python</h2>
+
+<blockquote>
+  <p>需要安装Pyhton</p>
+</blockquote>
+
+<p>如果已经安装了Python的话，可以在静态页面的目录下使用如下指令：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># python 2</span>
+python <span class="nt">-m</span> SimpleHTTPServer 8000
+<span class="c"># python 3</span>
+python3 <span class="nt">-m</span> http.server 8000
+</code></pre></div></div>
+
+<p>然后访问<code class="highlighter-rouge">http://localhost:8000</code>即可。</p>
+
+<p>可以在脚本中加别名：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias </span><span class="nv">httpServer_python</span><span class="o">=</span><span class="s1">'python -m SimpleHTTPServer 8000'</span>
+</code></pre></div></div>
+
+<p>以后使用</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>httpServer_python
+</code></pre></div></div>
+
+<p>即可。</p>
+
+<h2 id="ruby">Ruby</h2>
+
+<blockquote>
+  <p>需要安装Ruby</p>
+</blockquote>
+
+<p>Ruby也有同样的http服务器可以使用，命令如下：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby <span class="nt">-run</span> <span class="nt">-ehttpd</span> <span class="nb">.</span> <span class="nt">-p8000</span>
+</code></pre></div></div>
+
+<p>也可以设置别名：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias </span><span class="nv">httpServer_ruby</span><span class="o">=</span><span class="s1">'ruby -run -ehttpd . -p8000'</span>
+</code></pre></div></div>
+
+<h2 id="nodejs">Node.js</h2>
+
+<blockquote>
+  <p>需要安装Node.js</p>
+</blockquote>
+
+<p>Node.js也有一个简单的http服务模块，首先全局安装：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>npm <span class="nb">install </span>http-server <span class="nt">-g</span>
+</code></pre></div></div>
+
+<p>安装完成后，在静态页面根目录执行：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http-server <span class="nt">-p</span> 8000
+</code></pre></div></div>
+
+<p>也可以设置别名</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias </span><span class="nv">httpServer_node</span><span class="o">=</span><span class="s1">'http-server -p 8000'</span>
+</code></pre></div></div>
+
+<h2 id="总结">总结</h2>
+
+<p>这里提供了几种简单的方式来实现快速搭建http静态页面服务，选择哪种方式完全看个人喜好，当然，大多数人应该不会愿意安装很多不常用的软件，但是对于开发人员，python,ruby,node三者应该至少会使用其中一个。</p>
+:ET

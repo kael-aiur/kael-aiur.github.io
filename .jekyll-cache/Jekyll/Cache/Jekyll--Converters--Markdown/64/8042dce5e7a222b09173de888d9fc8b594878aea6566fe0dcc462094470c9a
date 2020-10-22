@@ -1,0 +1,105 @@
+I"1<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#显示当前分支" id="markdown-toc-显示当前分支">显示当前分支</a></li>
+  <li><a href="#配置git自动完成" id="markdown-toc-配置git自动完成">配置git自动完成</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>在Linux下使用git，一般通过终端指令，默认情况下，git在终端是不显示当前分支的，同样也没有自动完成功能，因此使用起来并不是很方便，因此我们需要对git做一些简单的初始化配置，以便更方便的使用git。</p>
+
+<h2 id="显示当前分支">显示当前分支</h2>
+
+<p>1 . 进入你的home目录</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~
+</code></pre></div></div>
+
+<p>2 . 编辑<code class="highlighter-rouge">.bashrc</code>文件</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ vim .bashrc
+</code></pre></div></div>
+
+<p>3 . 将下面的代码加入到文件的最后处</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function git_branch {
+  branch="`git branch 2&gt;/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
+  if [ "${branch}" != "" ];then
+      if [ "${branch}" = "(no branch)" ];then
+          branch="(`git rev-parse --short HEAD`...)"
+      fi
+      echo " ($branch)"
+  fi
+}
+
+export PS1='\u@\h \[\033[01;36m\]\W\[\033[01;32m\]$(git_branch)\[\033[00m\] \$ '
+</code></pre></div></div>
+
+<p>4 . 保存退出</p>
+
+<p>5 . 执行加载命令</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ source ./.bashrc
+</code></pre></div></div>
+
+<h2 id="配置git自动完成">配置git自动完成</h2>
+
+<blockquote>
+  <p>centOS7的系统，可以直接安装自动补全脚本：</p>
+
+  <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; yum -y install bash-completion
+</code></pre></div>  </div>
+</blockquote>
+
+<p>git的源码工程中提供了自动完成的脚本，需要使用bash。</p>
+
+<p>git的源码工程地址<a href=""></a></p>
+
+<p>我们可以在源码工程的``中找到这几个文件：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git-completion.bash
+git-completion.tcsh
+git-completion.zsh
+git-prompt.sh
+</code></pre></div></div>
+
+<p>这里我们只需要使用<code class="highlighter-rouge">git-completion.bash</code>就可以了，其他类型的终端自行选择合适的脚本。</p>
+
+<p>现在我们直接使用指令按照步骤一步步完成即可。</p>
+
+<p>1 . 进入用户文件夹</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~
+</code></pre></div></div>
+
+<p>2 . 下载脚本</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+</code></pre></div></div>
+
+<p>3 . 修改文件名</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mv git-completion.bash .git-completion.bash
+</code></pre></div></div>
+
+<p>4 . 将脚本加入登录自动执行</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ vim ~/.bashrc
+</code></pre></div></div>
+
+<p>在脚本最后加入如下脚本：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source ~/.git-completion.bash
+</code></pre></div></div>
+
+<p>5 . 退出保存</p>
+
+<p>6 . 使脚本生效</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ source ~/.bashrc
+</code></pre></div></div>
+
+<p>7 . 现在可以试试了。</p>
+
+<p>到这里我们对git的初始化就完成了，可以愉快的使用git命令了。</p>
+:ET

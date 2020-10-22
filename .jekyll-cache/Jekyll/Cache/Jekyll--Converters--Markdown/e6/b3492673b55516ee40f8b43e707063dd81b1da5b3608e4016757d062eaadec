@@ -1,0 +1,93 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#说明" id="markdown-toc-说明">说明</a></li>
+  <li><a href="#文档" id="markdown-toc-文档">文档</a></li>
+</ul>
+
+<h2 id="说明">说明</h2>
+
+<p>OAuth2协议是目前广泛使用的安全认证协议，本文主要记录整个协议体系中包含的规范文档，以便查阅。</p>
+
+<h2 id="文档">文档</h2>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc6749">OAuth2.0协议文档[RFC6749]</a></li>
+</ul>
+
+<p>这个文档完整描述了OAuth2协议的过程。</p>
+
+<p>OAuth2协议文档描述了OAuth2的验证过程，定义了三个对象Client,ResourceServer, AuthorizationServer。</p>
+
+<p>但是没有定义ResourceServer获取到Client的AccessToken如何验证的过程。</p>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc7662">OAuth 2.0 Token Introspection[RFC7662]</a></li>
+</ul>
+
+<p>这个文档定义了ResourceServer获取到Client的AccessToken如何验证的过程。</p>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)[RFC7519]</a></li>
+</ul>
+
+<p>这个文档定义了OAuth2中一个包含用户信息的访问令牌如何验证和存储信息。</p>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc7009">OAuth 2.0 Token Revocation[RFC7009]</a></li>
+</ul>
+
+<p>这个文档定义了OAuth2中颁发一个访问令牌和刷新令牌后，如何注销这个令牌。</p>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc7523">JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants[RFC7523]</a></li>
+</ul>
+
+<p>这个文档定义了JWT获取access token和用于客户端认证的规范，这个规范允许client在不传递client_secret的情况下完成客户端身份认证</p>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc7521">Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants[RFC7521]</a></li>
+</ul>
+
+<p>OAuth2的扩展，定义了客户端认证和授权的断言框架。</p>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc7522">Security Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants[RFC7522]</a></li>
+</ul>
+
+<p><a href="https://tools.ietf.org/html/rfc7521">RFC75121</a>中使用的标记语言规范。</p>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations[RFC6819]</a></li>
+</ul>
+
+<p>定义了OAuth2的威胁模型和安全注意事项。</p>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc6750">Bearer Token Usage[RFC6750]</a></li>
+</ul>
+
+<p>定义了Bearer Token如何使用，存储和传输以防止滥用。</p>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc7591">OAuth 2.0 Dynamic Client Registration Protocol[RFC7591]</a></li>
+</ul>
+
+<p>OAuth2扩展协议，主要定义Client的动态注册接口。</p>
+
+<ul>
+  <li><a href="http://openid.net/specs/openid-connect-registration-1_0.html">OpenID Connect Dynamic Client Registration 1.0</a></li>
+</ul>
+
+<p>OIDC协议扩展定义，包含应用注册和查询接口定义。</p>
+
+<ul>
+  <li><a href="https://tools.ietf.org/html/rfc7592">OAuth 2.0 Dynamic Client Registration Management Protocol[RFC7592]</a></li>
+</ul>
+
+<p>OAuth2扩展协议，主要定义Client的读改删接口。</p>
+
+<ul>
+  <li><a href="https://connect2id.com/products/nimbus-oauth-openid-connect-sdk">Nimbus OAuth 2.0 SDK with OpenID Connect extensions</a></li>
+</ul>
+
+<p>目前已有开源的SDK支持应用动态注册功能。</p>
+:ET

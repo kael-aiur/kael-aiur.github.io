@@ -1,0 +1,308 @@
+I"2<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#安装依赖" id="markdown-toc-安装依赖">安装依赖</a>    <ul>
+      <li><a href="#安装git" id="markdown-toc-安装git">安装git</a></li>
+      <li><a href="#安装jdk" id="markdown-toc-安装jdk">安装jdk</a></li>
+      <li><a href="#安装jekyll" id="markdown-toc-安装jekyll">安装jekyll</a>        <ul>
+          <li><a href="#安装ruby" id="markdown-toc-安装ruby">安装ruby</a></li>
+          <li><a href="#安装nodejs" id="markdown-toc-安装nodejs">安装nodejs</a></li>
+          <li><a href="#安装python" id="markdown-toc-安装python">安装Python</a></li>
+          <li><a href="#安装jekyll-1" id="markdown-toc-安装jekyll-1">安装jekyll</a></li>
+        </ul>
+      </li>
+      <li><a href="#安装gitbook" id="markdown-toc-安装gitbook">安装gitbook</a></li>
+      <li><a href="#安装自动部署服务" id="markdown-toc-安装自动部署服务">安装自动部署服务</a>        <ul>
+          <li><a href="#安装maven" id="markdown-toc-安装maven">安装maven</a></li>
+          <li><a href="#编译部署服务" id="markdown-toc-编译部署服务">编译部署服务</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>使用jekyll和gitbook有一段时间了，最近用来更新leap框架的官网，发现有一点使用上比较麻烦， 那就是gitbook和github都是墙外，访问速度略慢略慢，于是就想利用jekyll和gitbook编译得到的静态网页组合在公司内部搭建一个官网，但是这样做相当麻烦每次修改完都得重新build然后覆盖旧的编译结果，所以就自己做了一个自动编译服务，先上github地址：</p>
+
+<p><a href="https://github.com/kael-aiur/jekyll-gitbook-builder">https://github.com/kael-aiur/jekyll-gitbook-builder</a></p>
+
+<p>这个自动编译服务依赖的软件如下：</p>
+
+<ul>
+  <li>git服务(github或gitlab)</li>
+  <li>git</li>
+  <li>jdk</li>
+  <li>jekyll</li>
+  <li>gitbook</li>
+</ul>
+
+<p>整个自动编译的原理比较简单：</p>
+
+<ol>
+  <li>将gitbook和jekyll的源码push到github上</li>
+  <li>利用github的webhooks推送通知到自动编译服务</li>
+  <li>自动编译服务调用git指令更新到最新的代码</li>
+  <li>自动编译服务调用jekyll和gitbook的指令编译出静态文件</li>
+  <li>自动编译服务将静态文件拷贝到指定目录</li>
+  <li>利用web容器将静态文件的目录以网站的方式运行</li>
+</ol>
+
+<p>整个原理比较简单，技术也没什么难度，但是比较麻烦的是安装整个依赖环境，本文就是为了记录这个依赖环境的安装过程写的。</p>
+
+<p>本文使用的操作系统是centos7</p>
+
+<h2 id="安装依赖">安装依赖</h2>
+
+<p>首先，git服务直接用已有的就行了，github或者公司内部安装的gitlab都行，就不需要安装了。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> 以下的安装为了避免出现问题，强烈建议使用root用户进行安装。</p>
+</blockquote>
+
+<h3 id="安装git">安装git</h3>
+
+<p>安装git之前先看看是否已经安装了：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; git --version
+-bash: git: command not found
+</code></pre></div></div>
+
+<p>说明还没有安装，如果出现版本号：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; git --version
+git version 2.8.4.windows.1
+</code></pre></div></div>
+
+<p>则说明已经安装了。</p>
+
+<p>git的安装比较简单，一个指令搞定：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; yum install git
+</code></pre></div></div>
+
+<p>等待依赖解析完成输入y确认安装即可。</p>
+
+<p>安装完之后我们再确认一下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; git --version
+git version 1.8.3.1
+</code></pre></div></div>
+
+<p>ok，安装成功。</p>
+
+<h3 id="安装jdk">安装jdk</h3>
+
+<p>安装jdk的方式也比较简单，先检查一下是否已经安装：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; java -version
+-bash: java: command not found
+</code></pre></div></div>
+
+<p>这里安装jdk有两种，一种是Oracle官方的jdk，另一种是linux平台的open jdk，装哪种都行，不过要求jdk8或以上的版本，这里为了简单起见，我们安装open jdk就好了。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; yum install java-1.8.0-openjdk
+</code></pre></div></div>
+
+<p>等待解析依赖，输入y确认安装即可。</p>
+
+<p>安装完成后我们确认一下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; java -version
+openjdk version "1.8.0_111"
+OpenJDK Runtime Environment (build 1.8.0_111-b15)
+OpenJDK 64-Bit Server VM (build 25.111-b15, mixed mode)
+</code></pre></div></div>
+
+<p>安装成功！</p>
+
+<h3 id="安装jekyll">安装jekyll</h3>
+
+<p>从这里开始，安装起来会比较麻烦，jekyll本身依赖的内容也很多：</p>
+
+<ul>
+  <li>Ruby(对j需要包含开发包，对jekyll 2需要v1.9.3以上版本，对jekyll 3需要v2以上版本)</li>
+  <li>RubyGems</li>
+  <li>只能在Linux，Unix或macOS操作系统上（注意，这里经过我实验，其实在window上安装了git的shell之后也能在git的shell中使用）</li>
+  <li>NodeJs</li>
+  <li>Python 2.7</li>
+</ul>
+
+<p>每一个依赖都得安装。</p>
+
+<h4 id="安装ruby">安装ruby</h4>
+
+<p>先检查一下ruby是否已经安装：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; ruby -v
+-bash: ruby: command not found
+</code></pre></div></div>
+
+<p>没安装，使用如下指令安装：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; yum install ruby-devel
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>注意：</strong> 这里必须安装<code class="highlighter-rouge">ruby-devel</code>，如果使用<code class="highlighter-rouge">yum install ruby</code>也能安装但是不是开发包，会缺少jekyll需要的组件。</p>
+</blockquote>
+
+<p>安装完成之后再检查一下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; ruby -v
+ruby 2.0.0p648 (2015-12-16) [x86_64-linux]
+</code></pre></div></div>
+
+<p>安装成功！</p>
+
+<p>另外说明一下，<code class="highlighter-rouge">ruby-devel</code>安装完成之后，RubyGems也自动安装了。所以我们不用单独安装RubyGems，</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; gem -v
+2.0.14.1
+</code></pre></div></div>
+
+<p>如果没有安装的话，可以看下<a href="https://rubygems.org/pages/download">官网的安装教程</a></p>
+
+<h4 id="安装nodejs">安装nodejs</h4>
+
+<p>先检查有没有安装：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node --version
+-bash: node: command not found
+</code></pre></div></div>
+
+<p>linux上安装nodejs感觉挺麻烦的，不明白为什么nodejs这么火不做成源，可以参考另一篇博客<a href="/nodejs/CentOS安装nodejs.html">CentOS安装nodejs</a></p>
+
+<h4 id="安装python">安装Python</h4>
+
+<p>其实在安装git的时候，由于git依赖Python，因此我们的Python已经安装好了，直接检查一下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; python --version
+Python 2.7.5
+</code></pre></div></div>
+
+<h4 id="安装jekyll-1">安装jekyll</h4>
+
+<p>终于把jekyll的依赖全部安装好了，开始安装我们的正主jekyll。</p>
+
+<p>当然，安装前按惯例检查一下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; jekyll -v
+-bash: jekyll: command not found
+</code></pre></div></div>
+
+<p>没有安装，那么我们安装一下，jekyll的安装其实很简单：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; gem install jekyll
+</code></pre></div></div>
+
+<p>由于墙的问题，这个安装过程也会等很久，耐心等待吧。</p>
+
+<p>安装完成之后，检查一下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; jekyll -v
+jekyll 3.1.6
+</code></pre></div></div>
+
+<p>安装成功。</p>
+
+<p>但是现在还不能直接使用jekyll的功能，需要构建网站还需要jekyll的两个插件：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; gem install jekyll-sitemap
+$&gt; gem install jekyll-feed
+</code></pre></div></div>
+
+<p>这两个插件的安装也需要等比较长的时间，安装完成之后jekyll就可以使用了。</p>
+
+<h3 id="安装gitbook">安装gitbook</h3>
+
+<p>先检查一下gitbook是否已经安装：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; gitbook --version
+-bash: gitbook: command not found
+</code></pre></div></div>
+
+<p>前面已经安装好jekyll之后，gitbook相关的依赖其实也全部安装好了，现在我们只需要一个命令即可安装gitbook:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; npm install gitbook-cli -g
+</code></pre></div></div>
+
+<blockquote>
+  <p>这里同样强烈建议使用root用户进行安装。</p>
+</blockquote>
+
+<p>同样的，墙的问题，需要比较漫长的等待。</p>
+
+<p>完成之后再检查一下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; gitbook --version
+CLI version: 2.3.0
+GitBook version: 3.2.2
+</code></pre></div></div>
+
+<p>安装成功。</p>
+
+<h3 id="安装自动部署服务">安装自动部署服务</h3>
+
+<p>到这里gitbook和jekyll都已经安装完成，在这里我们顺便把自动部署服务也安装了吧。</p>
+
+<h4 id="安装maven">安装maven</h4>
+
+<p>由于自动部署服务需要maven编译打包，所以我们先安装maven吧。</p>
+
+<p>首先检查是否已经安装：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; mvn -v
+-bash: mvn: command not found
+</code></pre></div></div>
+
+<p>没有安装，那么安装一下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; yum install maven
+</code></pre></div></div>
+
+<p>安装完成之后在检查一下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@localhost node-v6.9.1]# mvn -v            
+Apache Maven 3.0.5 (Red Hat 3.0.5-17)
+Maven home: /usr/share/maven
+Java version: 1.8.0_111, vendor: Oracle Corporation
+Java home: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-2.b15.el7_3.x86_64/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "3.10.0-327.el7.x86_64", arch: "amd64", family: "unix"
+</code></pre></div></div>
+
+<p>安装成功。</p>
+
+<h4 id="编译部署服务">编译部署服务</h4>
+
+<p>首先使用git命令把服务的源码下载到本地。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; git clone https://github.com/kael-aiur/jekyll-gitbook-builder.git
+</code></pre></div></div>
+
+<p>进入源码目录并用maven打包服务：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; cd jekyll-gitbook-builder
+$&gt; mvn clean package
+</code></pre></div></div>
+
+<p>打包完成之后，将编译的结果拷贝到/opt目录下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; mv target/jsw/jekyll-gitbook /opt/
+</code></pre></div></div>
+
+<p>现在我们先用git把jekyll的工程和gitbook的工程从git服务上拉到本地，并且切换到我们需要用来构建网站的分支上。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; git clone ${jekyll_repo}
+$&gt; git clone ${gitbook_repo}
+</code></pre></div></div>
+
+<p>工程复制完成之后，把本地的两个目录都切换到我们准备用来构建网站的分支。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; git checkout ${branch}
+</code></pre></div></div>
+
+<p>然后根据自动编译服务的源码中的<code class="highlighter-rouge">README.md</code>说明修改自动编译服务的配置即可。</p>
+
+<p>最后，在git服务上给工程添加webhook，使得我们push代码到git服务上之后自动构建服务可以收到git服务的推送消息即可。</p>
+:ET

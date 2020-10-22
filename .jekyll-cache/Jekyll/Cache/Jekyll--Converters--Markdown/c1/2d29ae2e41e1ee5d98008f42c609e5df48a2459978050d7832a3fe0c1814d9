@@ -1,0 +1,128 @@
+I"E<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#jvm开启远程调试" id="markdown-toc-jvm开启远程调试">JVM开启远程调试</a></li>
+  <li><a href="#maven开启远程调试" id="markdown-toc-maven开启远程调试">maven开启远程调试</a></li>
+  <li><a href="#idea连接远程调试" id="markdown-toc-idea连接远程调试">idea连接远程调试</a>    <ul>
+      <li><a href="#本地连接调试" id="markdown-toc-本地连接调试">本地连接调试</a></li>
+      <li><a href="#远程连接调试" id="markdown-toc-远程连接调试">远程连接调试</a></li>
+    </ul>
+  </li>
+  <li><a href="#附录" id="markdown-toc-附录">附录</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>在开发过程中，我们经常遇到这样的情况：</p>
+
+<ul>
+  <li>在开发环境中运行的时候没有出现问题，打包运行就有问题了</li>
+  <li>在特定的场景下，生产环境运行发生异常，在开发环境则是正常的</li>
+</ul>
+
+<p>这两种情况下，要调试定位问题非常困难，需要增加很多日志来协助定位，但是再无法判断bug发生的位置的情况下，日志也未必能帮助我们定位问题，这种情况下，我们就可以借助远程调试机制来定位问题。</p>
+
+<h2 id="jvm开启远程调试">JVM开启远程调试</h2>
+
+<p>要开启JVM的远程调试功能，只需要增加JVM启动参数即可：</p>
+
+<p>对于JDK1.5及以上版本（到JDK8），使用如下启动参数：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044
+</code></pre></div></div>
+
+<p>参数说明如下：</p>
+
+<ul>
+  <li><code class="highlighter-rouge">transport=dt_socket</code>：表示远程连接的方式，一般是<code class="highlighter-rouge">socket</code>，还有<code class="highlighter-rouge">dt_shmem</code>共享内存模式，一般建议使用<code class="highlighter-rouge">socket</code>模式</li>
+  <li><code class="highlighter-rouge">address=1044</code>：表示socket监听的端口</li>
+  <li><code class="highlighter-rouge">suspend=n</code>：表示是否等待客户端连接后才启动，<code class="highlighter-rouge">n</code>表示正常启动，<code class="highlighter-rouge">y</code>表示等待客户端连接后再启动，如果需要调试启动过程则设置为<code class="highlighter-rouge">y</code></li>
+</ul>
+
+<blockquote>
+  <p>注意：不同的JDK版本，开启远程调试的参数不一样，目前最广泛使用的版本是JDK5-8，其他版本请参考<strong>附录</strong>。</p>
+</blockquote>
+
+<h2 id="maven开启远程调试">maven开启远程调试</h2>
+
+<p>如果使用maven运行单元测试或者启动应用，想要开启远程调试可以增加如下参数：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-Dmaven.surefire.debug
+</code></pre></div></div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt;  mvn clean test -Dmaven.surefire.debug
+</code></pre></div></div>
+
+<p>启动后maven运行到测试开始前会阻塞，等待远程调试连接后继续：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Listening for transport dt_socket at address: 5005
+</code></pre></div></div>
+
+<p>此时只要使用调试工具连上即可进行远程调试。</p>
+
+<h2 id="idea连接远程调试">idea连接远程调试</h2>
+
+<p>Intellij Idea对远程调试的支持非常好，可以支持本地连接调试和远程连接调试。</p>
+
+<h3 id="本地连接调试">本地连接调试</h3>
+
+<p>本地连接调试，在顶部菜单中打开，<code class="highlighter-rouge">Run -&gt; Attach To Process...</code>，如下图：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/java_remote_debug/remote_debug_1.png" alt="" /></p>
+
+<p>打开之后，会列出本机中目前允许远程调试的进程：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/java_remote_debug/remote_debug_2.png" alt="" /></p>
+
+<p>此时只要选择自己想要远程调试的进程即可。</p>
+
+<h3 id="远程连接调试">远程连接调试</h3>
+
+<p>远程连接调试，需要配置远程连接，在顶部菜单中打开<code class="highlighter-rouge">Run -&gt; Edit Configurations...</code>，如下图：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/java_remote_debug/remote_debug_3.png" alt="" /></p>
+
+<p>打开后，点击右上角的<code class="highlighter-rouge">+</code>号，增加一个<code class="highlighter-rouge">Remote</code>的启动配置：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/java_remote_debug/remote_debug_4.png" alt="" /></p>
+
+<p>填写好对应的配置参数，点击确定保存即可：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/java_remote_debug/remote_debug_5.png" alt="" /></p>
+
+<p>保存后，运行远程调试，即可连接远程运行的服务进行调试了。</p>
+
+<h2 id="附录">附录</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>版本</th>
+      <th>命令</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>JDK3及以下</td>
+      <td><code class="highlighter-rouge">-Xnoagent -Djava.compiler=NONE -Xdebug </code><br /><code class="highlighter-rouge">-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044</code></td>
+    </tr>
+    <tr>
+      <td>JDK4</td>
+      <td><code class="highlighter-rouge">-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044</code></td>
+    </tr>
+    <tr>
+      <td>JDK5~8</td>
+      <td><code class="highlighter-rouge">-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044</code></td>
+    </tr>
+    <tr>
+      <td>JDK9以上</td>
+      <td><code class="highlighter-rouge">-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:1044</code></td>
+    </tr>
+  </tbody>
+</table>
+:ET

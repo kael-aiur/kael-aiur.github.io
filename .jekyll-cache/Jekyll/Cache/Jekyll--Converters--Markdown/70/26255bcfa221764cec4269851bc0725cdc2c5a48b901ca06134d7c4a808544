@@ -1,0 +1,33 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#原文转载" id="markdown-toc-原文转载">原文转载</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>在使用jekyll的时候，如果本地的文件是中文，在预览的时候会无法预览，这是因为文件路径的编码问题导致找不到文件，这里我在谷歌找到了解决方法，原文连接:</p>
+
+<p><a href="http://blog.leiyinchun.com/2016-05/jekyll_local_chines_filename.html">http://blog.leiyinchun.com/2016-05/jekyll_local_chines_filename.html</a></p>
+
+<h2 id="原文转载">原文转载</h2>
+
+<p>jekyll 目前支持 _post 目录下多级目录和中文路径，但本地预览时，如果markdown文件名是中文的，会导致无法无法访问。</p>
+
+<p>解决办法：</p>
+
+<p>修改安装目录<code class="highlighter-rouge">\Ruby22-x64\lib\ruby\2.2.0\webrick\httpservlet</code>下的<code class="highlighter-rouge">filehandler.rb</code>文件，建议先备份。</p>
+
+<p>找到下列两处，添加一句（ + 的一行为添加部分）</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>path = req.path_info.dup.force_encoding(Encoding.find("filesystem"))
++ path.force_encoding("UTF-8") # 加入编码
+if trailing_pathsep?(req.path_info)
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>break if base == "/"
++ base.force_encoding("UTF-8") # 加入編碼
+break unless File.directory?(File.expand_path(res.filename + base))
+</code></pre></div></div>
+
+<p>然后重启服务器即可<code class="highlighter-rouge">jekyll clean &amp;&amp; jekyll s</code></p>
+:ET

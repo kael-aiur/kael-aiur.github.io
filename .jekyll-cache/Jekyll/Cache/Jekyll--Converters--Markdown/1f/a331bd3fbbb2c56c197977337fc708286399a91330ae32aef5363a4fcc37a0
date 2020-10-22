@@ -1,0 +1,85 @@
+I"X!<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#url编码规范" id="markdown-toc-url编码规范">URL编码规范</a></li>
+  <li><a href="#url安全的base64编码" id="markdown-toc-url安全的base64编码">url安全的base64编码</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>在OpenID Connect协议中，如果登录的时候指定了<code class="highlighter-rouge">response_type=id_token</code>的话，
+在重定向回到第三方应用时，会将id_token的值作为queryString参数放在url中，这里
+就涉及一个问题：</p>
+
+<p><strong>如何避免id_token和url的特殊字符冲突？</strong></p>
+
+<h2 id="url编码规范">URL编码规范</h2>
+
+<p>关于URL编码的详细规范，可以查看<a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>,
+这里只对我们会涉及的信息做简要说明。</p>
+
+<p><a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a>中有如下两个重要规定：</p>
+
+<ul>
+  <li>Url中只允许包含英文字母（a-zA-Z）、数字（0-9）、<code class="highlighter-rouge">-</code> <code class="highlighter-rouge">_</code> <code class="highlighter-rouge">.</code> <code class="highlighter-rouge">~</code>4个特殊字符以及所有保留字符。</li>
+  <li>保留字符包括：<code class="highlighter-rouge">!</code> <code class="highlighter-rouge">*</code> <code class="highlighter-rouge">'</code> <code class="highlighter-rouge">(</code> <code class="highlighter-rouge">)</code> <code class="highlighter-rouge">;</code> <code class="highlighter-rouge">:</code> <code class="highlighter-rouge">@</code> <code class="highlighter-rouge">&amp;</code> <code class="highlighter-rouge">=</code> <code class="highlighter-rouge">+</code> <code class="highlighter-rouge">$</code> <code class="highlighter-rouge">,</code> <code class="highlighter-rouge">/</code> <code class="highlighter-rouge">?</code> <code class="highlighter-rouge">#</code> <code class="highlighter-rouge">[</code> <code class="highlighter-rouge">]</code></li>
+</ul>
+
+<p>另外，还有很多字符，当它们直接放在Url中的时候，可能会引起解析程序的歧义。</p>
+
+<p>这些字符被视为不安全字符，原因有很多。</p>
+
+<ul>
+  <li><strong>空格</strong>：Url在传输的过程，或者用户在排版的过程，或者文本处理程序在处理Url的过程，都有可能引入无关紧要的空格，或者将那些有意义的空格给去掉；</li>
+  <li><strong>引号以及&lt;&gt;</strong>：引号和尖括号通常用于在普通文本中起到分隔Url的作用；</li>
+  <li><strong>#</strong>：通常用于表示书签或者锚点；</li>
+  <li><strong>%</strong>：百分号本身用作对不安全字符进行编码时使用的特殊字符，因此本身需要编码；</li>
+  <li><code class="highlighter-rouge">{</code> <code class="highlighter-rouge">}</code> <code class="highlighter-rouge">|</code> <code class="highlighter-rouge">\</code> <code class="highlighter-rouge">^</code> <code class="highlighter-rouge">[</code> <code class="highlighter-rouge">]</code> <code class="highlighter-rouge">`</code> <code class="highlighter-rouge">~</code>：某一些网关或者传输代理会篡改这些字符。</li>
+</ul>
+
+<h2 id="url安全的base64编码">url安全的base64编码</h2>
+
+<p>在实际的应用中，id_token是一个jwt字符串，字符串的载体是一个base64编码的json字符串，这就可能出现不符合url编码规范的结果，
+因为base64编码会出现<code class="highlighter-rouge">+</code>，<code class="highlighter-rouge">/</code>，<code class="highlighter-rouge">=</code>这些被url转码的特殊字符，一旦这个结果被转码了，第三方应用获取到的base64字符串和服务端
+签名生成的就不一致了，因此对id_token的编码必须是url安全的base64编码。</p>
+
+<p>url安全的base64编码规范一般采用如下方式：</p>
+
+<ul>
+  <li>将base64中的<code class="highlighter-rouge">+</code>号换成<code class="highlighter-rouge">-</code>号</li>
+  <li>将base64中的<code class="highlighter-rouge">/</code>号换成<code class="highlighter-rouge">_</code>号</li>
+  <li>将base64中的<code class="highlighter-rouge">=</code>号换成空字符串，即删除<code class="highlighter-rouge">=</code>号</li>
+</ul>
+
+<p>对应的，url安全的base64解码过程要反过来：</p>
+
+<ul>
+  <li>将base64中的<code class="highlighter-rouge">-</code>号换成<code class="highlighter-rouge">+</code>号</li>
+  <li>将base64中的<code class="highlighter-rouge">_</code>号换成<code class="highlighter-rouge">/</code>号</li>
+  <li>在base64中末位补齐<code class="highlighter-rouge">=</code>号，使得base64的字符数量可以被4整除</li>
+</ul>
+
+<p>java编码示例代码如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">safeUrlBase64Encode</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span><span class="o">){</span>
+		<span class="nc">String</span> <span class="n">encodeBase64</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BASE64Encoder</span><span class="o">().</span><span class="na">encode</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+		<span class="nc">String</span> <span class="n">safeBase64Str</span> <span class="o">=</span> <span class="n">encodeBase64</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="sc">'+'</span><span class="o">,</span> <span class="sc">'-'</span><span class="o">);</span>
+		<span class="n">safeBase64Str</span> <span class="o">=</span> <span class="n">safeBase64Str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="sc">'/'</span><span class="o">,</span> <span class="sc">'_'</span><span class="o">);</span>
+		<span class="n">safeBase64Str</span> <span class="o">=</span> <span class="n">safeBase64Str</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"="</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+		<span class="k">return</span> <span class="n">safeBase64Str</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>java解码示例代码如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">safeUrlBase64Decode</span><span class="o">(</span><span class="kd">final</span> <span class="nc">String</span> <span class="n">safeBase64Str</span><span class="o">){</span>
+		<span class="nc">String</span> <span class="n">base64Str</span> <span class="o">=</span> <span class="n">safeBase64Str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="sc">'-'</span><span class="o">,</span> <span class="sc">'+'</span><span class="o">);</span>
+		<span class="n">base64Str</span> <span class="o">=</span> <span class="n">base64Str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="sc">'_'</span><span class="o">,</span> <span class="sc">'/'</span><span class="o">);</span>
+		<span class="kt">int</span> <span class="n">mod4</span> <span class="o">=</span> <span class="n">base64Str</span><span class="o">.</span><span class="na">length</span><span class="o">()%</span><span class="mi">4</span><span class="o">;</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">mod4</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">){</span>
+			<span class="n">base64Str</span> <span class="o">=</span> <span class="n">base64Str</span> <span class="o">+</span> <span class="s">"===="</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">mod4</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">BASE64Decoder</span><span class="o">().</span><span class="na">decodeBuffer</span><span class="o">(</span><span class="n">base64Str</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+:ET

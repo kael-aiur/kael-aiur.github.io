@@ -1,0 +1,246 @@
+I"&:<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#java-util-logging" id="markdown-toc-java-util-logging">Java util logging</a>    <ul>
+      <li><a href="#创建日志对象" id="markdown-toc-创建日志对象">创建日志对象</a></li>
+      <li><a href="#日志等级" id="markdown-toc-日志等级">日志等级</a></li>
+      <li><a href="#handler" id="markdown-toc-handler">Handler</a></li>
+      <li><a href="#formatter" id="markdown-toc-formatter">Formatter</a></li>
+      <li><a href="#log-manager" id="markdown-toc-log-manager">Log Manager</a></li>
+      <li><a href="#configure" id="markdown-toc-configure">Configure</a></li>
+    </ul>
+  </li>
+  <li><a href="#外部使用slf4j重定向jul的日志输出到slf4j" id="markdown-toc-外部使用slf4j重定向jul的日志输出到slf4j">外部使用slf4j重定向jul的日志输出到slf4j</a>    <ul>
+      <li><a href="#增加maven依赖" id="markdown-toc-增加maven依赖">增加maven依赖：</a></li>
+      <li><a href="#启用jul重定向到slf4j" id="markdown-toc-启用jul重定向到slf4j">启用jul重定向到slf4j</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>目前java世界里的日志框架很多，占主流的是下面四个：</p>
+
+<ul>
+  <li>Log4j/Log4j2: Apache Log4j是一个基于Java的日志记录工具。它是由Ceki Gülcü首创的，现在则是Apache软件基金会的一个项目。 Log4j是几种Java日志框架之一。</li>
+  <li>Commons Logging: Apache基金会所属的项目，是一套Java日志接口，之前叫Jakarta Commons Logging，后更名为Commons Logging。</li>
+  <li>Slf4j:类似于Commons Logging，是一套简易Java日志门面，本身并无日志的实现。（Simple Logging Facade for Java，缩写Slf4j）。</li>
+  <li>Jul:(Java Util Logging),自Java1.4以来的官方日志实现。</li>
+</ul>
+
+<p>事实上这造成了一种java日志系统混乱，没有标准的现状，不过从目前的市场情况上看，slf4j应用更加广泛，因此更加建议在新项目中使用slf4j作为统一日志标准。</p>
+
+<p>在实际选择日志框架的时候，我比较建议按照如下两种场景选择：</p>
+
+<ul>
+  <li>开发公共模块包：使用jul，由于是jdk自带的日志框架，使用这个日志框架的最大好处在于不用引入新的依赖，不会对依赖这个模块包的程序使用的日志框架有限制，另外，外部如果使用slf4j日志框架的话，还能在外边做桥接，在不改代码的情况下让日志自动输出到slf4j上。</li>
+  <li>开发项目：开发项目的时候，建议使用slf4j作为日志标准，使用logback作为实现。</li>
+</ul>
+
+<p>本文主要介绍如何使用jul,并附上如何在外部将jul桥接到slf4j上。</p>
+
+<h2 id="java-util-logging">Java util logging</h2>
+
+<p>jul是jdk1.4版本以后的日志框架，放在<code class="highlighter-rouge">java.util.logging</code>包中。</p>
+
+<h3 id="创建日志对象">创建日志对象</h3>
+
+<p>获取一个日志对象：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.logging.Logger</span><span class="o">;</span>
+<span class="c1">// 假设我们定义了一个类MyLogger.java</span>
+<span class="kd">private</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">Logger</span> <span class="no">LOGGER</span> <span class="o">=</span> <span class="nc">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="nc">MyLogger</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>这里创建的日志对象实际上是一个有层级的日志对象，通过<code class="highlighter-rouge">.</code>划分层级。</p>
+
+<p>假设创建了一个<code class="highlighter-rouge">name</code>为<code class="highlighter-rouge">com.example</code>的logger，那么这个logger是<code class="highlighter-rouge">com</code>这个logger的子，而<code class="highlighter-rouge">com</code>是空字符串<code class="highlighter-rouge">""</code>的子。</p>
+
+<p>我们可以通过设置父logger的属性来让子logger自动继承。</p>
+
+<blockquote>
+  <p>如果想要设置全局的属性，一般设置名为空字符串的logger即可。</p>
+</blockquote>
+
+<h3 id="日志等级">日志等级</h3>
+
+<p>jul中定义了如下几个等级的日志（从上到下等级递减）：</p>
+
+<ul>
+  <li>SEVERE (最高级)</li>
+  <li>WARNING</li>
+  <li>INFO</li>
+  <li>CONFIG</li>
+  <li>FINE</li>
+  <li>FINER</li>
+  <li>FINEST</li>
+</ul>
+
+<p>另外，jul还定义了<code class="highlighter-rouge">OFF</code>和<code class="highlighter-rouge">ALL</code>两个等级，分别表示全部关闭和全部打开。</p>
+
+<blockquote>
+  <p>在slf4j中，只有五个等级：TRACE, DEBUG, INFO, WARN, ERROR</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>slf4j等级</th>
+        <th>jul等级</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>TRACE</td>
+        <td>FINER,FINEST</td>
+      </tr>
+      <tr>
+        <td>DEBUG</td>
+        <td>FINE，CONFIG</td>
+      </tr>
+      <tr>
+        <td>INFO</td>
+        <td>INFO</td>
+      </tr>
+      <tr>
+        <td>WARN</td>
+        <td>WARNING</td>
+      </tr>
+      <tr>
+        <td>ERROR</td>
+        <td>SEVERE</td>
+      </tr>
+    </tbody>
+  </table>
+
+</blockquote>
+
+<p>设置日志等级方式如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">LOGGER</span><span class="o">.</span><span class="na">setLevel</span><span class="o">(</span><span class="nc">Level</span><span class="o">.</span><span class="na">INFO</span><span class="o">);</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>这里设置的等级会被子日志对象继承。</p>
+</blockquote>
+
+<h3 id="handler">Handler</h3>
+
+<p>每一个日志对象都可以设置多个处理器<code class="highlighter-rouge">java.util.logging.Handler</code>。</p>
+
+<p>每一个<code class="highlighter-rouge">handler</code>都会收到日志消息，并将日志写到对应的目标，比如控制台或者文件，当然也能定制写到网络或者其他地方。</p>
+
+<p>每个<code class="highlighter-rouge">handler</code>可以通过<code class="highlighter-rouge">getLevel()</code>和<code class="highlighter-rouge">setLevel(Level)</code>来设置自己处理的日志级别。</p>
+
+<p>在jdk中已经默认实现了两个<code class="highlighter-rouge">handler</code>:</p>
+
+<ul>
+  <li>ConsoleHandler: 写到控制台</li>
+  <li>FileHandler: 写到文件</li>
+</ul>
+
+<blockquote>
+  <p>日志的jdk默认配置会将INFO级别的日志交给ConsoleHandler处理。</p>
+</blockquote>
+
+<h3 id="formatter">Formatter</h3>
+
+<p>每一个<code class="highlighter-rouge">handler</code>可以设置一个格式化器，将日志内容格式化输出(如转换成html格式，或者增加时间信息等)。</p>
+
+<p>jdk默认提供了两个格式化器：</p>
+
+<ul>
+  <li>SimpleFormatter: 普通文本输出</li>
+  <li>XMLFormatter: 格式化成xml输出</li>
+</ul>
+
+<p>当然我们可以实现自己的格式化器，只要继承抽象类<code class="highlighter-rouge">java.util.logging.Formatter</code>并实现抽象接口<code class="highlighter-rouge">String format(LogRecord record)</code>，然后设置为<code class="highlighter-rouge">handler</code>的格式化器即可,如：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ConsoleHandler</span> <span class="n">h</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ConsoleHandler</span><span class="o">();</span>
+<span class="nc">Formatter</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Formatter</span><span class="o">(){</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">format</span><span class="o">(</span><span class="nc">LogRecord</span> <span class="n">record</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">record</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">};</span>
+<span class="n">handler</span><span class="o">.</span><span class="na">setFormatter</span><span class="o">(</span><span class="n">f</span><span class="o">);</span>
+<span class="no">LOGGER</span><span class="o">.</span><span class="na">addHandler</span><span class="o">(</span><span class="n">h</span><span class="o">);</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="highlighter-rouge">java.util.logging.LogRecord</code>是日志信息的封装对象。</p>
+</blockquote>
+
+<h3 id="log-manager">Log Manager</h3>
+
+<p>jul中，有一个重要的类<code class="highlighter-rouge">java.util.logging.LogManager</code>,它主管logger对象的创建和配置管理。</p>
+
+<p>我们可以通过这个类来设置所有logger的配置，如：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 设置`com.example`的logger的等级为FINE，则所有对应的子logger的等级都会变成FINE</span>
+<span class="nc">LogManager</span><span class="o">.</span><span class="na">getLogManager</span><span class="o">().</span><span class="na">getLogger</span><span class="o">(</span><span class="s">""</span><span class="o">).</span><span class="na">setLevel</span><span class="o">(</span><span class="nc">Level</span><span class="o">.</span><span class="na">FINE</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>LogManager对象还能读取配置文件的信息（一般在程序启动时执行）完成对生成的日志对象的配置，使用如下两个接口：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">LogManager</span><span class="o">.</span><span class="na">getLogManager</span><span class="o">().</span><span class="na">readConfiguration</span><span class="o">();</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="nc">LogManager</span><span class="o">.</span><span class="na">getLogManager</span><span class="o">().</span><span class="na">readConfiguration</span><span class="o">(</span><span class="nc">InputStream</span> <span class="n">is</span><span class="o">);</span> <span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>(1)</li>
+</ul>
+
+<p>默认情况下，先检查系统参数<code class="highlighter-rouge">java.util.logging.config.file</code>指定的文件作为配置文件，如果没有知道，则读取<code class="highlighter-rouge">{JAVA_HOME}/lib/logging.properties</code>作为配置文件。</p>
+
+<ul>
+  <li>(2)</li>
+</ul>
+
+<p>使用自己指定的输入流作为配置文件。</p>
+
+<h3 id="configure">Configure</h3>
+
+<p>jul的配置文件是一个properties文件，这里简单介绍几个常用的配置项：</p>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 默认的handler，多个的话用逗号分隔
+</span><span class="py">handlers</span><span class="p">=</span> <span class="s">java.util.logging.ConsoleHandler</span>
+<span class="c"># 全局默认的日志等级
+</span><span class="py">.level</span><span class="p">=</span> <span class="s">INFO</span>
+<span class="c"># 前面指定的handler的处理日志等级和格式化器
+</span><span class="py">java.util.logging.ConsoleHandler.level</span> <span class="p">=</span> <span class="s">ALL</span>
+<span class="py">java.util.logging.ConsoleHandler.formatter</span> <span class="p">=</span> <span class="s">java.util.logging.SimpleFormatter</span>
+</code></pre></div></div>
+
+<h2 id="外部使用slf4j重定向jul的日志输出到slf4j">外部使用slf4j重定向jul的日志输出到slf4j</h2>
+
+<p>当我们使用的依赖包使用jul来输入日志时，我们可以通过slf4j的外部配置，来将日志全部重定向到slf4j的接口，以便统一日志。</p>
+
+<h3 id="增加maven依赖">增加maven依赖：</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- slf4j的接口 --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>slf4j-api<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.7.25<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="c">&lt;!-- jul桥接包 --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>jul-to-slf4j<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.7.25<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<h3 id="启用jul重定向到slf4j">启用jul重定向到slf4j</h3>
+
+<p>需要使用如下代码：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 重置所有配置，使得依赖包内部代码对日志的配置失效。</span>
+<span class="nc">LogManager</span><span class="o">.</span><span class="na">getLogManager</span><span class="o">().</span><span class="na">reset</span><span class="o">();</span>
+<span class="c1">// 清理所有jul的handler</span>
+<span class="nc">SLF4JBridgeHandler</span><span class="o">.</span><span class="na">removeHandlersForRootLogger</span><span class="o">();</span>
+<span class="c1">// 安装slf4j的handler</span>
+<span class="nc">SLF4JBridgeHandler</span><span class="o">.</span><span class="na">install</span><span class="o">();</span>
+<span class="c1">// 非必需：设置jul的日志级别，如果不设置的话，内部代码日志级别低于INFO的都默认不会输出</span>
+<span class="nc">LogManager</span><span class="o">.</span><span class="na">getLogManager</span><span class="o">().</span><span class="na">getLogger</span><span class="o">(</span><span class="s">""</span><span class="o">).</span><span class="na">setLevel</span><span class="o">(</span><span class="nc">Level</span><span class="o">.</span><span class="na">FINEST</span><span class="o">);</span>
+</code></pre></div></div>
+:ET

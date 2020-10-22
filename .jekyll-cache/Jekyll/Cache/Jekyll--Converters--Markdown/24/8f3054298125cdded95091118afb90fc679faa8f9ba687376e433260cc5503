@@ -1,0 +1,67 @@
+I"E<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#安装桌面环境" id="markdown-toc-安装桌面环境">安装桌面环境</a></li>
+  <li><a href="#安装mate" id="markdown-toc-安装mate">安装MATE</a></li>
+  <li><a href="#安装xfce" id="markdown-toc-安装xfce">安装XFCE</a></li>
+  <li><a href="#安装xrdp" id="markdown-toc-安装xrdp">安装XRDP</a></li>
+  <li><a href="#xrdp无法启动" id="markdown-toc-xrdp无法启动">XRDP无法启动</a></li>
+  <li><a href="#安装远程桌面环境" id="markdown-toc-安装远程桌面环境">安装远程桌面环境</a></li>
+  <li><a href="#参考博客" id="markdown-toc-参考博客">参考博客</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>本文基于最小版CentOS 7安装</p>
+
+<h2 id="安装桌面环境">安装桌面环境</h2>
+
+<blockquote>
+  <p>如果只需要远程访问的话，也可以不安装桌面环境，只安装远程桌面环境</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; yum -y update # 更新包
+$&gt; yum -y groupinstall "GNOME Desktop" # 安装桌面环境
+$&gt; ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target # 配置系统启动时自动启动桌面服务
+</code></pre></div></div>
+
+<h2 id="安装mate">安装MATE</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; yum -y install epel-release # 安装epel-release源
+$&gt; yum -y update # 更新yum
+$&gt; yum clean all # 清理yum缓存
+$&gt; yum -y groupinstall "X Window system" # 安装窗口工具包
+$&gt; yum -y groupinstall "MATE Desktop" # 安装MATE
+$&gt; systemctl set-default graphical.target # 设置GUI或MATE desktop跟随系统启动
+</code></pre></div></div>
+
+<h2 id="安装xfce">安装XFCE</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; yum -y groupinstall xfce # 安装XFCE
+$&gt; systemctl set-default graphical.target # 设置GUI或MATE desktop跟随系统启动
+</code></pre></div></div>
+
+<h2 id="安装xrdp">安装XRDP</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; yum -y install xrdp tigervnc-server
+$&gt; chcon --type=bin_t /usr/sbin/xrdp
+$&gt; chcon --type=bin_t /usr/sbin/xrdp-sesman
+$&gt; systemctl start xrdp # 启动xrdp服务
+$&gt; systemctl enable xrdp # 设置开机自启动
+$&gt; systemctl status xrdp # 查看XRDP启动状况
+</code></pre></div></div>
+
+<h2 id="xrdp无法启动">XRDP无法启动</h2>
+
+<p>如果XRDP无法启动可以参考<a href="https://yc999.wordpress.com/2015/04/04/centos-7-%E6%9B%B4%E6%96%B0%E5%BE%8Cxrdp-service%E7%84%A1%E6%B3%95%E5%95%9F%E5%8B%95/">CentOS 7 更新後xrdp.service無法啟動</a></p>
+
+<h2 id="安装远程桌面环境">安装远程桌面环境</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; yum groupinstall "Server with GUI" //it's installed gnome and all staff include gnome-session
+</code></pre></div></div>
+
+<p>参考<a href="https://stackoverflow.com/questions/43812257/xrdp-on-centos7-cant-connect">xrdp on centos7 can’t connect</a></p>
+
+<h2 id="参考博客">参考博客</h2>
+
+<p><a href="https://hostpresto.com/community/tutorials/using-a-desktop-environment-on-a-centos-7-vps/">Using a Desktop Environment on a CentOS 7 VPS</a></p>
+:ET

@@ -1,0 +1,195 @@
+I":<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#依赖配置" id="markdown-toc-依赖配置">依赖配置</a></li>
+  <li><a href="#打包配置" id="markdown-toc-打包配置">打包配置</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>在使用maven构建多模块工程的时候，有些模块会打成jar包，有时候我们会依赖一些没有发布在maven仓库的第三方jar包，这个时候
+打包就会比较麻烦了，因为其他使用这个模块的包不一定能找到这些没有发布在maven仓库的第三方jar包，当然我们可以将这些包发布到
+本地仓库，不过这不利于多人协作开发，最好的方式还是将这些第三方jar包直接打包到这个模块中一起发布。</p>
+
+<h2 id="依赖配置">依赖配置</h2>
+
+<p>要依赖没有发布到maven仓库的jar包，一般使用如下配置：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>dk.depencency<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>jradius-dictionary<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="c">&lt;!-- jar包所在目录 --&gt;</span>
+    <span class="nt">&lt;systemPath&gt;</span>${project.basedir}/src/lib/jradius-dictionary.jar<span class="nt">&lt;/systemPath&gt;</span>
+    <span class="c">&lt;!-- jar包的scope --&gt;</span>
+    <span class="nt">&lt;scope&gt;</span>system<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${project.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>这里scope为<code class="highlighter-rouge">system</code>的时候必须指定<code class="highlighter-rouge">systemPath</code></p>
+</blockquote>
+
+<p>按照以上配置配置好之后，就可以正常编译开发了。</p>
+
+<h2 id="打包配置">打包配置</h2>
+
+<p>按照依赖配置完成之后，打包发布的时候只能打包我们编写的源码，不会将依赖一起打包，现在我们需要配置打包的时候将依赖一起打
+包到jar包中。</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+        <span class="c">&lt;!-- 打包插件 --&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>maven-assembly-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.4<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;executions&gt;</span>
+                <span class="nt">&lt;execution&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>make-assembly<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+                    <span class="nt">&lt;goals&gt;</span>
+                        <span class="nt">&lt;goal&gt;</span>single<span class="nt">&lt;/goal&gt;</span>
+                    <span class="nt">&lt;/goals&gt;</span>
+                <span class="nt">&lt;/execution&gt;</span>
+            <span class="nt">&lt;/executions&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                <span class="nt">&lt;descriptors&gt;</span>
+                    <span class="c">&lt;!-- 打包配置：必须在对应目录下创建repack.xml的打包配置文件 --&gt;</span>
+                    <span class="nt">&lt;descriptor&gt;</span>src/main/resources/assemblies/repack.xml<span class="nt">&lt;/descriptor&gt;</span>
+                <span class="nt">&lt;/descriptors&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+        <span class="c">&lt;!-- install插件，定制在mvn install过程使用哪个jar包安装到本地 --&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>maven-install-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.5.2<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;executions&gt;</span>
+                <span class="nt">&lt;execution&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>install-file<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;goals&gt;</span>
+                        <span class="nt">&lt;goal&gt;</span>install-file<span class="nt">&lt;/goal&gt;</span>
+                    <span class="nt">&lt;/goals&gt;</span>
+                    <span class="nt">&lt;phase&gt;</span>install<span class="nt">&lt;/phase&gt;</span>
+                <span class="nt">&lt;/execution&gt;</span>
+            <span class="nt">&lt;/executions&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                <span class="c">&lt;!-- install配置，指定将哪个目录下的jar包install为这个工程的jar --&gt;</span>
+                <span class="nt">&lt;file&gt;</span>${project.build.directory}/${project.build.finalName}-repack.jar<span class="nt">&lt;/file&gt;</span>
+                <span class="c">&lt;!-- 
+                install配置，指定将install的jar打包使用的pom.xml文件，
+                即其他依赖这个jar包的工程按照哪个pom.xml文件来解析依赖 
+                --&gt;</span>
+                <span class="nt">&lt;pomFile&gt;</span>src/main/resources/install-pom.xml<span class="nt">&lt;/pomFile&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+        <span class="c">&lt;!-- deploy插件，定制在mvn deploy过程使用哪个jar包发布到仓库 --&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>maven-deploy-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.8.2<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;executions&gt;</span>
+                <span class="nt">&lt;execution&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>deploy-file<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;goals&gt;</span>
+                        <span class="nt">&lt;goal&gt;</span>deploy-file<span class="nt">&lt;/goal&gt;</span>
+                    <span class="nt">&lt;/goals&gt;</span>
+                    <span class="c">&lt;!-- 跳过默认的发布包 --&gt;</span>
+                    <span class="nt">&lt;phase&gt;</span>none<span class="nt">&lt;/phase&gt;</span>
+                <span class="nt">&lt;/execution&gt;</span>
+            <span class="nt">&lt;/executions&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                <span class="c">&lt;!-- deploy配置，指定将哪个目录下的jar包发布为这个工程的jar --&gt;</span>
+                <span class="nt">&lt;file&gt;</span>${project.build.directory}/${project.build.finalName}-repack.jar<span class="nt">&lt;/file&gt;</span>
+                <span class="c">&lt;!-- 发布地址 --&gt;</span>
+                <span class="nt">&lt;url&gt;</span>${maven仓库的地址}<span class="nt">&lt;/url&gt;</span>
+                <span class="nt">&lt;repositoryId&gt;</span>maven-repository-snapshots<span class="nt">&lt;/repositoryId&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>${project.groupId}<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>${project.artifactId}<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>${project.version}<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+                <span class="c">&lt;!-- 
+                deploy配置，指定将deploy的jar打包使用的pom.xml文件，
+                即其他依赖这个jar包的工程按照哪个pom.xml文件来解析依赖 
+                --&gt;</span>
+                <span class="nt">&lt;pomFile&gt;</span>src/main/resources/install-pom.xml<span class="nt">&lt;/pomFile&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</code></pre></div></div>
+
+<p>以上配置完成之后，在<code class="highlighter-rouge">mvn install</code>和<code class="highlighter-rouge">mvn deploy</code>的过程会进行如下处理：</p>
+
+<ul>
+  <li>解析所有依赖，编译打包成{artifactId}-{version}.jar包</li>
+  <li>解压指定依赖的jar包和编译打包后的{artifactId}-{version}.jar包，按照<code class="highlighter-rouge">repack.xml</code>的配置重新打包成{artifactId}-{version}-repack.jar包，并将<code class="highlighter-rouge">install-pom.xml</code>作为这个jar包的依赖配置</li>
+  <li>将{artifactId}-{version}-repack.jar安装到本地仓库或者发布到maven仓库</li>
+</ul>
+
+<p>现在我们看一下<code class="highlighter-rouge">repack.xml</code>的配置：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;assembly</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/ASSEMBLY/2.0.0"</span>
+          <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+          <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;id&gt;</span>repack<span class="nt">&lt;/id&gt;</span>
+    <span class="nt">&lt;formats&gt;</span>
+        <span class="nt">&lt;format&gt;</span>jar<span class="nt">&lt;/format&gt;</span>
+    <span class="nt">&lt;/formats&gt;</span>
+    
+    <span class="nt">&lt;includeBaseDirectory&gt;</span>false<span class="nt">&lt;/includeBaseDirectory&gt;</span>
+    <span class="nt">&lt;dependencySets&gt;</span>
+        <span class="nt">&lt;dependencySet&gt;</span>
+            <span class="c">&lt;!-- 
+            重新打包需要包含的jar包,这个过程会解压所有的jar包并按照jar的规则重新组合成一个jar包
+            这里需要包含当前这个工程 ，格式是{groupId}:{artifactId}
+            --&gt;</span>
+            <span class="nt">&lt;includes&gt;</span>
+                <span class="c">&lt;!-- 包含项目自己 --&gt;</span>
+                <span class="nt">&lt;include&gt;</span>kael.demo:include-dependencies<span class="nt">&lt;/include&gt;</span>
+                <span class="nt">&lt;include&gt;</span>dk.depencency:jradius-dictionary<span class="nt">&lt;/include&gt;</span>
+            <span class="nt">&lt;/includes&gt;</span>
+            <span class="c">&lt;!-- 打包结果目录：/ 表示target/ --&gt;</span>
+            <span class="nt">&lt;outputDirectory&gt;</span>/<span class="nt">&lt;/outputDirectory&gt;</span>
+            <span class="c">&lt;!-- 是否解压依赖 --&gt;</span>
+            <span class="nt">&lt;unpack&gt;</span>true<span class="nt">&lt;/unpack&gt;</span>
+            <span class="c">&lt;!-- 打包的scope --&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>system<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependencySet&gt;</span>
+    <span class="nt">&lt;/dependencySets&gt;</span>
+<span class="nt">&lt;/assembly&gt;</span>
+</code></pre></div></div>
+
+<p>repack.xml的配置表示如何打包这个jar，这里配置了需要先解压kael.demo:include-dependencies这个项目的打包结果和dk.depencency:jradius-dictionary这个依赖的jar包，并重新合并打包成jar包，打包后的jar包名为工程原本的jar包名加上<code class="highlighter-rouge">-{id}</code>这个后缀。</p>
+
+<p>再看<code class="highlighter-rouge">install-pom.xml</code>：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span>
+		 <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+		 <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>kael.demo<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>include-dependencies<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+	<span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+	<span class="nt">&lt;dependencies&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>commons-logging<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>commons-logging-api<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>1.1<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>commons-logging<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>commons-logging<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>1.1.3<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+	<span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>一般为项目原始的pom.xml文件，去掉scope为system的依赖(即在repack.xml中已经配置合并的相应依赖)和maven-assembly-plugin，maven-install-plugin，maven-deploy-plugin
+这几个插件即可。</p>
+</blockquote>
+:ET

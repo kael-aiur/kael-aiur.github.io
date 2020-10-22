@@ -1,0 +1,103 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#修改绑定的ip地址" id="markdown-toc-修改绑定的ip地址">修改绑定的IP地址</a></li>
+  <li><a href="#解决启动错误" id="markdown-toc-解决启动错误">解决启动错误</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>部署完成ES之后，如果我们不修改配置，那么默认只有本机可以访问ES的api接口，如果需要给外部机器访问，那么就需要修改ES的配置了。</p>
+
+<p>本文使用ES 5.0的版本。</p>
+
+<h2 id="修改绑定的ip地址">修改绑定的IP地址</h2>
+
+<p>在默认情况下，ES只允许本地访问api接口，如果我们希望在另外一台机器上访问ES的接口的话，需要配置主机地址：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost bin]$ vim elasticsearch-5.0.0/config/elasticsearch.yml
+</code></pre></div></div>
+
+<p>找到如下行：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Set the bind address to a specific IP (IPv4 or IPv6):
+#
+# network.host: 192.168.1.1
+</code></pre></div></div>
+
+<p>去掉<code class="highlighter-rouge">network.host</code>的注释，改成<code class="highlighter-rouge">0.0.0.0</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Set the bind address to a specific IP (IPv4 or IPv6):
+#
+network.host: 0.0.0.0
+</code></pre></div></div>
+
+<p>保存退出，重新启动es：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost bin]$ ./elasticsearch
+.....// 省略部分日志
+
+[2016-11-07T22:36:55,504][INFO ][o.e.b.BootstrapCheck     ] [OI7LKLJ] bound or publishing to a non-loopback or non-link-local address, enforcing bootstrap checks
+ERROR: bootstrap checks failed
+max file descriptors [4096] for elasticsearch process likely too low, increase to at least [65536]
+max virtual memory areas vm.max_map_count [65530] likely too low, increase to at least [262144]
+
+[2016-11-07T22:36:55,523][INFO ][o.e.n.Node               ] [OI7LKLJ] stopping ...
+[2016-11-07T22:36:55,546][INFO ][o.e.n.Node               ] [OI7LKLJ] stopped
+[2016-11-07T22:36:55,547][INFO ][o.e.n.Node               ] [OI7LKLJ] closing ...
+[2016-11-07T22:36:55,566][INFO ][o.e.n.Node               ] [OI7LKLJ] closed
+</code></pre></div></div>
+
+<p>这里我们看到启动报错了。</p>
+
+<p>这个错误并不是因为我们改了主机地址造成的，实际上一直都存在的错误，但是在只允许本地连接的情况下，ES没有做检查，所以没有报错，可以正常运行，但是当我们配置了运行外部地址访问的时候，ES就会强制检查，所以就报错了。</p>
+
+<h2 id="解决启动错误">解决启动错误</h2>
+
+<p>这里一共两个错误，先解决：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>max file descriptors [4096] for elasticsearch process likely too low, increase to at least [65536]
+</code></pre></div></div>
+
+<p>这个是linux下常见的错误，主要是因为linux会限制进程的最大打开文件数，只需要简单配置一下即可解决，在ES的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/setting-system-settings.html#ulimit">官方文档</a>中提供了两种解决方案。</p>
+
+<p>这里我们只看系统基本的配置这种方式。</p>
+
+<ul>
+  <li>打开<code class="highlighter-rouge">/etc/security/limits.conf</code></li>
+  <li>添加如下配置</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#*               soft    core            0
+#*               hard    rss             10000
+#@student        hard    nproc           20
+#@faculty        soft    nproc           20
+#@faculty        hard    nproc           50
+#ftp             hard    nproc           0
+#@student        -       maxlogins       4
+kael             -       nofile          65536 # add this line
+# End of file
+</code></pre></div></div>
+
+<p>保存即可。</p>
+
+<p>这里的kael是用户名，表明这个配置只对<code class="highlighter-rouge">kael</code>用户生效，如果你用来启动elasticsearch的用户名不是这个，那么你需要按你实际的用户名修改</p>
+
+<p>第二个问题：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>max virtual memory areas vm.max_map_count [65530] likely too low, increase to at least [262144]
+</code></pre></div></div>
+
+<p>这个是ES使用的虚拟内存，<a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/vm-max-map-count.html">官方文档</a>给出了解决方案：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost bin]$ sudo sysctl -w vm.max_map_count=262144
+</code></pre></div></div>
+
+<p>调大虚拟内存即可。</p>
+
+<p>重新启动，就可以正常访问了，现在我们可以在任何机器上访问ES了。</p>
+
+<p>也可以用后台进程的方式启动：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost bin]$ ./elasticsearch -d -p pid
+</code></pre></div></div>
+:ET

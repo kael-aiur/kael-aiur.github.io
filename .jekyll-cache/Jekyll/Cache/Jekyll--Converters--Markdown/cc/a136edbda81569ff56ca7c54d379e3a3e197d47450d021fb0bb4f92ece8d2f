@@ -1,0 +1,638 @@
+I"F�<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#单例启动" id="markdown-toc-单例启动">单例启动</a>    <ul>
+      <li><a href="#配置读取和解析" id="markdown-toc-配置读取和解析">配置读取和解析</a>        <ul>
+          <li><a href="#加载配置前后的扩展" id="markdown-toc-加载配置前后的扩展">加载配置前后的扩展</a></li>
+          <li><a href="#加载property过程的扩展" id="markdown-toc-加载property过程的扩展">加载property过程的扩展</a></li>
+          <li><a href="#加载其他配置的扩展过程" id="markdown-toc-加载其他配置的扩展过程">加载其他配置的扩展过程</a></li>
+        </ul>
+      </li>
+      <li><a href="#类加载和字节码增强" id="markdown-toc-类加载和字节码增强">类加载和字节码增强</a></li>
+      <li><a href="#加载所有bean对象" id="markdown-toc-加载所有bean对象">加载所有Bean对象</a>        <ul>
+          <li><a href="#扩展ioc注入器" id="markdown-toc-扩展ioc注入器">扩展IOC注入器</a></li>
+          <li><a href="#扩展bean处理器" id="markdown-toc-扩展bean处理器">扩展bean处理器</a></li>
+          <li><a href="#扩展bean工程初始化能力" id="markdown-toc-扩展bean工程初始化能力">扩展bean工程初始化能力</a></li>
+          <li><a href="#创建property提供器" id="markdown-toc-创建property提供器">创建Property提供器</a></li>
+          <li><a href="#创建所有非懒加载的bean对象" id="markdown-toc-创建所有非懒加载的bean对象">创建所有非懒加载的bean对象</a></li>
+        </ul>
+      </li>
+      <li><a href="#bean的创建过程" id="markdown-toc-bean的创建过程">bean的创建过程</a>        <ul>
+          <li><a href="#bean本身的创建后处理" id="markdown-toc-bean本身的创建后处理">bean本身的创建后处理</a></li>
+          <li><a href="#执行bean的初始化" id="markdown-toc-执行bean的初始化">执行bean的初始化</a></li>
+          <li><a href="#执行bean的加载操作" id="markdown-toc-执行bean的加载操作">执行bean的加载操作</a></li>
+        </ul>
+      </li>
+      <li><a href="#启动完成" id="markdown-toc-启动完成">启动完成</a></li>
+    </ul>
+  </li>
+  <li><a href="#web启动" id="markdown-toc-web启动">web启动</a></li>
+  <li><a href="#总结" id="markdown-toc-总结">总结</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>leap的启动过程是一个比较复杂的过程在开始之前，我们需要先大致了解一下leap的启动需要做些什么事情。</p>
+
+<p>实际上，leap的启动分为两大类:</p>
+
+<ul>
+  <li>单例启动</li>
+  <li>外部启动</li>
+</ul>
+
+<p>所谓单例启动，就是leap自己以一个进程的方式启动，这种启动一般用于普通的java应用。
+外部启动，就是通过外部的应用来启动leap，这种方式启动就比较多种多样了，一般来说我们需要做一个web应用的话，会由tomcat来启动leap，当然也可以已其他的容器比如netty来启动leap。</p>
+
+<p>多数情况我们还是用tomcat或者其他web容器来启动leap，并且作为一个web应用对外提供http服务，目前在品高的api网关中，也使用netty来启动leap，同样可以对外利用netty的能力对外提供http服务。</p>
+
+<p>本文我们会以leap的单例启动为主分析leap的整个启动过程和提供的扩展接口，另外简单分析以web的方式在外部启动leap的过程。</p>
+
+<p>限于篇幅，本文不具体说明每个扩展接口如何使用，需要扩展的话可以找到扩展点对应的源码简单读一下。</p>
+
+<h2 id="单例启动">单例启动</h2>
+
+<p>单例启动leap我们一般用如下代码：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">AppContext</span><span class="o">.</span><span class="na">initStandalone</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>这行代码会直接启动leap，启动过程首先检查是否已经启动过，如果已经启动过是不能再启动的。</p>
+
+<p>然后按照如下三个阶段开始启动leap：</p>
+
+<ul>
+  <li>配置读取和解析</li>
+  <li>类加载和类的字节码增强</li>
+  <li>加载所有Bean对象</li>
+  <li>启动完成</li>
+</ul>
+
+<p>这里的每个阶段都有自己要做的事情，也提供了扩展接口。</p>
+
+<hr />
+
+<h3 id="配置读取和解析">配置读取和解析</h3>
+
+<p>leap中加载配置的代码如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">AppConfigSource</span> <span class="n">cs</span> <span class="o">=</span> <span class="nc">Factory</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="nc">AppConfigSource</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="na">loadConfig</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>加载配置分四步：</p>
+
+<ul>
+  <li>加载配置前</li>
+  <li>加载property
+    <ul>
+      <li>加载内部property</li>
+      <li>加载外部proporty</li>
+      <li>property预处理</li>
+    </ul>
+  </li>
+  <li>加载其他配置</li>
+  <li>加载配置后</li>
+</ul>
+
+<h4 id="加载配置前后的扩展">加载配置前后的扩展</h4>
+
+<p>这里加载配置前和加载配置后预留了接口提供扩展：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">leap</span><span class="p">.</span><span class="n">core</span><span class="p">.</span><span class="n">config</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="n">interface</span> <span class="n">AppConfigInitializable</span> <span class="p">{</span>
+    <span class="n">default</span> <span class="n">void</span> <span class="n">preLoadConfig</span><span class="p">(</span><span class="n">AppConfigContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">AppResources</span> <span class="n">appResources</span><span class="p">){}</span>
+    <span class="n">default</span> <span class="n">void</span> <span class="n">postLoadConfig</span><span class="p">(</span><span class="n">AppConfigContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">AppResources</span> <span class="n">appResources</span><span class="p">){}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>只需要实现这个接口，自行决定加载前需要做什么事情，加载后需要做什么事情即可。</p>
+
+<p><strong>注：</strong> 在加载配置的阶段，所有bean都没有初始化，因此不能使用注解的方式得到bean对象，leap支持使用服务加载机制(ServiceLoader)来初始化我们的类。在工程的<code class="highlighter-rouge">resources</code>目录下创建<code class="highlighter-rouge">META-INF</code>文件夹，再在<code class="highlighter-rouge">META-INF</code>目录下创建<code class="highlighter-rouge">services</code>目录，然后创建一个文本文件，文件名为要扩展的接口全名，文件内容为<code class="highlighter-rouge">class=${实现类全名}</code></p>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/main
+    - java
+        - app.initializable
+                - MyClass.java
+    - resources
+        - META-INF
+            - services
+                leap.core.config.AppConfigInitializable
+</code></pre></div></div>
+
+<p>其中<code class="highlighter-rouge">leap.core.config.AppConfigInitializable</code>文件的内容为：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class=app.initializable.MyClass
+</code></pre></div></div>
+
+<p>这样配置之后leap就会在启动的时候自动初始化这个bean了，然后在对应的阶段执行这个方法了。</p>
+
+<h4 id="加载property过程的扩展">加载property过程的扩展</h4>
+
+<p>在加载property的过程，分为本地property和外部property，这两个阶段是有区别的:</p>
+
+<ul>
+  <li>加载本地property的时候，可能需要对本地的配置做一些变动</li>
+  <li>加载外部property的时候，property的来源是不限制的，可以从数据库或者网络等其他地方读取</li>
+</ul>
+
+<p>加载本地配置，leap提供了相同的扩展接口<code class="highlighter-rouge">leap.core.config.AppPropertyReader</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.core.config</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">leap.lang.resource.Resource</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AppPropertyReader</span> <span class="o">{</span>
+    <span class="kt">boolean</span> <span class="nf">readProperties</span><span class="o">(</span><span class="nc">AppPropertyContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">Resource</span> <span class="n">resource</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>实现这个接口之后，同样需要使用服务加载机制来初始化扩展类。</p>
+
+<p>加载外部配置，leap提供了扩展接口:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.core.config</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AppPropertyLoader</span> <span class="o">{</span>
+
+    <span class="kt">void</span> <span class="nf">loadProperties</span><span class="o">(</span><span class="nc">AppPropertySetter</span> <span class="n">props</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>外部配置加载可以使用xml配置的方式配置外部加载器，如：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;config</span> <span class="na">xmlns=</span><span class="s">"http://www.leapframework.org/schema/config"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;loader</span> <span class="na">class=</span><span class="s">"leap.core.config.loader.JdbcPropertyLoader"</span> <span class="na">sort-order=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"driverClassName"</span> <span class="na">value=</span><span class="s">"${h2.driverClassName}"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"jdbcUrl"</span>         <span class="na">value=</span><span class="s">"${h2.jdbcUrl}"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"username"</span>        <span class="na">value=</span><span class="s">"sa"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"sql"</span><span class="nt">&gt;</span>
+            select key_ key, value_ value from sys_config
+        <span class="nt">&lt;/property&gt;</span>
+    <span class="nt">&lt;/loader&gt;</span>
+<span class="nt">&lt;/config&gt;</span>
+</code></pre></div></div>
+
+<p>property加载完成之后，leap还预留了property预处理的扩展接口：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">leap</span><span class="p">.</span><span class="n">core</span><span class="p">.</span><span class="n">config</span><span class="p">;</span>
+
+<span class="n">import</span> <span class="n">leap</span><span class="p">.</span><span class="n">lang</span><span class="p">.</span><span class="n">Out</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="n">interface</span> <span class="n">AppPropertyProcessor</span> <span class="p">{</span>
+	<span class="k">boolean</span> <span class="n">process</span><span class="p">(</span><span class="k">String</span> <span class="n">name</span><span class="p">,</span> <span class="k">String</span> <span class="n">value</span><span class="p">,</span> <span class="n">Out</span><span class="p">&lt;</span><span class="k">String</span><span class="p">&gt;</span> <span class="n">newValue</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>这个处理器可以在读取完全部的配置之后，对property进行使用前的预处理，比如你配置的可以是一个加密的字符串，防止明文配置被人看到数据库密码一类的，可以在这里进行解密。</p>
+
+<h4 id="加载其他配置的扩展过程">加载其他配置的扩展过程</h4>
+
+<p>加载其他配置的过程，leap提供了扩展接口：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.core.config</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">leap.lang.resource.Resource</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AppConfigReader</span> <span class="o">{</span>
+
+    <span class="kt">boolean</span> <span class="nf">readConfig</span><span class="o">(</span><span class="nc">AppConfigContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">Resource</span> <span class="n">resource</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>同样，这个扩展需要使用服务加载机制来配置。</p>
+
+<hr />
+
+<h3 id="类加载和字节码增强">类加载和字节码增强</h3>
+
+<p>这个过程是leap的启动的核心过程主要包含：</p>
+
+<ul>
+  <li>Model类字节码增强(提供数据库操作能力)</li>
+  <li>事务注解的方法和类的字节码增强(提供事务控制能力)</li>
+  <li>监控注解的字节码增强(提供监控能力)</li>
+</ul>
+
+<p>可以实现自己的字节码增强处理器额外扩展增强能力：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.core.instrument</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">leap.core.AppConfig</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">leap.lang.resource.Resource</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AppInstrumentProcessor</span> <span class="o">{</span>
+
+    <span class="k">default</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(</span><span class="nc">AppConfig</span> <span class="n">config</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * Returns true if the processor changes the method body only.
+     */</span>
+    <span class="k">default</span> <span class="kt">boolean</span> <span class="nf">isMethodBodyOnly</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * Returns true if the processor supports change the method body only.
+     */</span>
+    <span class="k">default</span> <span class="kt">boolean</span> <span class="nf">supportsMethodBodyOnly</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * Returns true if the instrumented class should be redefined if define by class loader failed.
+     */</span>
+    <span class="k">default</span> <span class="kt">boolean</span> <span class="nf">shouldRedefine</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * Returns true if the instrumented class should be redefined if define by same class loader.
+     */</span>
+    <span class="k">default</span> <span class="kt">boolean</span> <span class="nf">shouldRedefineInSameClassLoader</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * Instrument the class.
+     *
+     * @param context the {@link AppInstrumentContext}.
+     * @param resource the resource of the instrument class.
+     * @param bytes the byte codes of the instrument class.
+     * @param methodBodyOnly if true, the processor must use a mechanism which changes the method body only.
+     */</span>
+    <span class="kt">void</span> <span class="nf">instrument</span><span class="o">(</span><span class="nc">AppInstrumentContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">Resource</span> <span class="n">resource</span><span class="o">,</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">methodBodyOnly</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>不过没有必要的情况下非常不建议自己实现字节码增强处理器。</p>
+
+<p>这个扩展需要使用服务加载机制配置。</p>
+
+<hr />
+
+<h3 id="加载所有bean对象">加载所有Bean对象</h3>
+
+<p>在这个阶段开始，我们需要bean的时候已经不用再通过服务加载的方式配置了，可以直接使用IOC的依赖注入来获得bean对象了。</p>
+
+<p>加载所有bean对象是一个复杂的过程，分为如下的环节：</p>
+
+<ul>
+  <li>初始化操作</li>
+  <li>创建所有需要的bean
+    <ul>
+      <li>创建所有<code class="highlighter-rouge">leap.core.ioc.BeanInjector</code></li>
+      <li>创建所有<code class="highlighter-rouge">leap.core.ioc.BeanProcessor</code></li>
+      <li>创建所有<code class="highlighter-rouge">leap.core.BeanFactoryInitializable</code></li>
+      <li>创建所有<code class="highlighter-rouge">leap.core.ioc.FactoryBean</code></li>
+      <li>执行所有<code class="highlighter-rouge">leap.core.ioc.BeanProcessor</code>的创建后处理</li>
+      <li>对所有定义好的bean执行<code class="highlighter-rouge">leap.core.ioc.BeanProcessor</code>的<code class="highlighter-rouge">postInitBean</code>方法</li>
+      <li>执行所有<code class="highlighter-rouge">leap.core.BeanFactoryInitializable</code>的后初始化方法</li>
+      <li>创建所有<code class="highlighter-rouge">leap.core.config.dyna.PropertyProvider</code>对象</li>
+      <li>创建所有非懒加载的bean对象</li>
+    </ul>
+  </li>
+  <li>bean工厂完成初始化</li>
+</ul>
+
+<p>在leap中，所有的bean默认都是懒加载的，只有特定配置指明非懒加载的才会在启动的时候直接加载。</p>
+
+<p>上面的过程是leap整体的bean创建顺序，在上面的过程中，没有创建的bean会在这个bean第一次被使用的时候创建，比如在代码中获取，或者将这个bean注入到另一个bean中，leap都会先创建这个bean，因此，leap对bean的创建，本身也有一个过程：</p>
+
+<ul>
+  <li>创建bean对象</li>
+  <li>检查bean对象所有依赖对象</li>
+  <li>依次创建bean的依赖对象</li>
+  <li>将bean的依赖对象注入到bean中</li>
+  <li>返回创建的bean</li>
+</ul>
+
+<p>这个过程是递归的，当bean的依赖对象也有依赖对象时，会再进一步先创建依赖对象的依赖对象，一直到最顶级无依赖的对象创建后逐层返回。</p>
+
+<h4 id="扩展ioc注入器">扩展IOC注入器</h4>
+
+<p>从上面的过程我们可以看出来，我们可以创建自己的依赖注入器来做一些扩展的依赖注入：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.core.ioc</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">leap.lang.Out</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">leap.lang.reflect.ReflectValued</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.annotation.Annotation</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">BeanInjector</span> <span class="o">{</span>
+    <span class="k">default</span> <span class="kt">boolean</span> <span class="nf">resolveInjectValue</span><span class="o">(</span><span class="nc">BeanDefinition</span> <span class="n">bd</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">bean</span><span class="o">,</span> <span class="nc">ReflectValued</span> <span class="n">v</span><span class="o">,</span> <span class="nc">Annotation</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Out</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>要使用这个扩展，必须在xml中指定type，如：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"leap.core.ioc.BeanInjector"</span> <span class="na">class=</span><span class="s">"leap.orm.dao.DaoCommandInjector"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>一般情况下我们是不建议做这个扩展的，因为leap本身的IOC依赖注入已经足够强大，正常的需求都不需要自己做这个扩展。</p>
+
+<h4 id="扩展bean处理器">扩展bean处理器</h4>
+
+<p>在所有的bean配置加载完成之后，我们可以创建一个bean处理器来对所有未创建的bean对象进行定义修改：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.core.ioc</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">leap.core.AppContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">leap.core.BeanFactory</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">BeanProcessor</span> <span class="o">{</span>
+
+    <span class="k">default</span> <span class="kt">void</span> <span class="nf">postCreateProcessors</span><span class="o">(</span><span class="nc">AppContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">BeanFactory</span> <span class="n">factory</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">postInitBean</span><span class="o">(</span><span class="nc">AppContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">BeanFactory</span> <span class="n">factory</span><span class="o">,</span> <span class="nc">BeanDefinitionConfigurator</span> <span class="n">c</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+        
+    <span class="o">}</span>
+    
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">postCreateBean</span><span class="o">(</span><span class="nc">AppContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">BeanFactory</span> <span class="n">factory</span><span class="o">,</span> <span class="nc">BeanDefinition</span> <span class="n">def</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">bean</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>我们可以实现这个接口，然后在xml中配置我们的bean，leap即会在所有的bean定义加载完成之后，先创建这个处理器的bean对象，然后执行处理器的创建后处理：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">postCreateProcessors</span><span class="o">(</span><span class="nc">AppContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">BeanFactory</span> <span class="n">factory</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>所有的处理器创建完成之后，就会可以开始用bean处理器对未创建的bean对象的定义进行修改或扩展了：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">postInitBean</span><span class="o">(</span><span class="nc">AppContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">BeanFactory</span> <span class="n">factory</span><span class="o">,</span> <span class="nc">BeanDefinitionConfigurator</span> <span class="n">c</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p><strong>注意：</strong> 处理器虽然能对bean定义进行修改，但是如果这个时候bean对象已经创建了，那么处理器修改了bean定义也是无效的，因此对于我们需要通过扩展的处理器进行bean定义修改的，必须保证bean不会在处理器之前创建，所以bean处理器中不要依赖我们会修改定义的bean。</p>
+
+<p>最后，当我们的bean创建完成之后，处理器如果也需要做一些处理的话，会执行:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">postCreateBean</span><span class="o">(</span><span class="nc">AppContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">BeanFactory</span> <span class="n">factory</span><span class="o">,</span> <span class="nc">BeanDefinition</span> <span class="n">def</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">bean</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>这里是所有的bean创建的时候都会进行处理的扩展，后面我们还会看到，如果只有某个特定的bean需要后处理的话，预留了另外一个扩展。</p>
+
+<p>要使用这个扩展，必须在xml中指定type，如：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"leap.core.ioc.BeanProcessor"</span> <span class="na">class=</span><span class="s">"leap.core.jmx.JmxBeanProcessor"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h4 id="扩展bean工程初始化能力">扩展bean工程初始化能力</h4>
+
+<p>在bean处理器完成对bean定义的处理之后，bean工厂会来说执行初始化扩展，我们可以在这个时候进行扩展，对整个bean工程的配置和bean定义做一些检查或者其他处理：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.core</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">leap.core.ioc.BeanDefinitions</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">BeanFactoryInitializable</span> <span class="o">{</span>
+
+    <span class="kt">void</span> <span class="nf">postInit</span><span class="o">(</span><span class="nc">AppConfig</span> <span class="n">config</span><span class="o">,</span> <span class="nc">BeanFactory</span> <span class="n">factory</span><span class="o">,</span> <span class="nc">BeanDefinitions</span> <span class="n">definitions</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span><span class="o">;</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>实现这个接口即会在所有bean处理器处理定义之后，所有非懒加载的bean创建之前做一些处理。</p>
+
+<p>要使用这个扩展，必须在xml中指定type，如：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"leap.core.BeanFactoryInitializable"</span>          <span class="na">class=</span><span class="s">"tested.init.TestingBeanFactoryInitializable"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h4 id="创建property提供器">创建Property提供器</h4>
+
+<p>这个阶段会创建所有的<code class="highlighter-rouge">leap.core.config.dyna.PropertyProvider</code>，这个提供器可以让我们在获取配置的property之前先做一些处理，比如某些需要动态获取的属性，无法写在配置文件中，就可以使用这个提供器来处理，这个扩展其实并不是启动时的扩展，但是这类bean的依赖对象会在这个时候被创建，因此还是需要提一下，当然，这个bean的创建需要在xml中指定type，如：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"leap.core.config.dyna.PropertyProvider"</span> <span class="na">class=</span><span class="s">"leap.core.event.DefaultEventRegisterImpl"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h4 id="创建所有非懒加载的bean对象">创建所有非懒加载的bean对象</h4>
+
+<p>这个阶段会创建所有指定了非懒加载的对象，这个过程的扩展就是在一个bean被创建过程的扩展了。</p>
+
+<p>到这里整个bean工程的初始化就完成了。</p>
+
+<hr />
+
+<h3 id="bean的创建过程">bean的创建过程</h3>
+
+<p>在加载所有bean对象的过程，每个bean被加载之后都会有一个创建过程，因此，如果我们清楚某两个bean的创建先后顺序，也可以通过对这两个bean创建过程的扩展来实现启动过程的扩展，我们已经知道bean的创建过程：</p>
+
+<ul>
+  <li>创建bean对象</li>
+  <li>检查bean对象所有依赖对象</li>
+  <li>依次创建bean的依赖对象</li>
+  <li>将bean的依赖对象注入到bean中</li>
+  <li><strong>执行bean处理器的创建后处理</strong></li>
+  <li><strong>执行bean本身的创建后处理</strong></li>
+  <li><strong>执行bean的初始化</strong></li>
+  <li><strong>执行bean的加载操作</strong></li>
+  <li>返回创建的bean</li>
+</ul>
+
+<p>这个过程中，提供了bean创建的后处理扩展接口。</p>
+
+<p>这里我们能扩展的是上述黑体的四个阶段，处理器的后处理阶段我们已经知道了，现在我们看一下后续三个阶段：</p>
+
+<h4 id="bean本身的创建后处理">bean本身的创建后处理</h4>
+
+<p>leap提供了接口：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.core.ioc</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">leap.core.BeanFactory</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PostCreateBean</span> <span class="o">{</span>
+
+	<span class="kt">void</span> <span class="nf">postCreate</span><span class="o">(</span><span class="nc">BeanFactory</span> <span class="n">factory</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span><span class="o">;</span> 
+	
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>如果某个bean需要执行创建后处理的话，只要实现这个接口即可。</p>
+
+<h4 id="执行bean的初始化">执行bean的初始化</h4>
+
+<p>leap提供了接口：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.lang</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Initializable</span> <span class="o">{</span>
+
+    <span class="kt">void</span> <span class="nf">init</span><span class="o">();</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>如果bean需要在后处理完成后执行初始化的话，可以用在这个方法执行，比如这个bean作为启动某个模块的启动类的时候，可以在init中完成对模块的启动。</p>
+
+<h4 id="执行bean的加载操作">执行bean的加载操作</h4>
+
+<p>bean的加载操作，主要是考虑到某些模块初始化完成之后，还需要做一些其他的操作，比如数据源，在bean对象创建成功之后，需要加载数据库驱动类的话，可以在这个阶段预先加载，不用等到使用的时候再加载，实现如下接口：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.core.ioc</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">leap.core.BeanFactory</span><span class="o">;</span>
+
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">LoadableBean</span> <span class="o">{</span>
+
+	<span class="kt">boolean</span> <span class="nf">load</span><span class="o">(</span><span class="nc">BeanFactory</span> <span class="n">factory</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">;</span> 
+	
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>到这里bean的创建就完成了。</p>
+
+<p>在使用这个扩展的过程可以不在配置中指定type。</p>
+
+<h3 id="启动完成">启动完成</h3>
+
+<p>bean工程初始化完成之后，leap会执行最后的启动后处理完成应用的启动，这个阶段leap提供了接口：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.core</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AppContextInitializable</span> <span class="o">{</span>
+	
+	<span class="kt">void</span> <span class="nf">postInit</span><span class="o">(</span><span class="nc">AppContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span><span class="o">;</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>只要实现这个接口，leap就会在启动完成后执行<code class="highlighter-rouge">postInit</code>方法做后处理，当然，实现这个接口之后，需要在xml中配置bean对象，并且指定type是<code class="highlighter-rouge">leap.core.AppContextInitializable</code>才行，如：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">type=</span><span class="s">"leap.core.AppContextInitializable"</span> <span class="na">class=</span><span class="s">"leap.core.event.DefaultEventRegister"</span><span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="web启动">web启动</h2>
+
+<p>web的启动比leap单例启动稍复杂一些，具体的过程如下：</p>
+
+<ul>
+  <li>启动web容器</li>
+  <li>启动leap内核</li>
+  <li>初始化web应用</li>
+  <li>启动leap的web应用</li>
+</ul>
+
+<p>这里web容器可以是tomcat一类的容器，然后由容器启动leap，leap启动完成之后，才真正开始启动web应用，因此我们主要看web应用的初始化和启动过程:</p>
+
+<ul>
+  <li>web应用配置预处理</li>
+  <li>web应用配置</li>
+  <li>web应用配置后处理</li>
+  <li>web应用初始化预处理</li>
+  <li>web应用初始化</li>
+  <li>web应用初始化扩展处理</li>
+  <li>web应用初始化后处理</li>
+  <li>web应用初始化完成</li>
+  <li>web应用启动预处理</li>
+  <li>web应用启动</li>
+  <li>web应用启动后处理</li>
+  <li>web应用停止预处理</li>
+  <li>web应用停止</li>
+  <li>web应用停止后处理</li>
+  <li>web应用销毁</li>
+</ul>
+
+<p>整个启动到停止的过程，所有的预处理和后处理都是通过监听器实现的，leap提供了扩展接口：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.web</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">leap.web.config.WebConfig</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">leap.web.config.WebConfigurator</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AppListener</span> <span class="o">{</span>
+	
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">preAppConfigure</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">,</span> <span class="nc">WebConfigurator</span> <span class="n">c</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+		
+	<span class="o">}</span>
+	
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">postAppConfigure</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">,</span> <span class="nc">WebConfig</span> <span class="n">c</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+		
+	<span class="o">}</span>
+	
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">preAppInit</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+		
+	<span class="o">}</span>
+	
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">postAppInit</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+		
+	<span class="o">}</span>
+	
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">preAppStart</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+		
+	<span class="o">}</span>
+	
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">postAppStart</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+		
+	<span class="o">}</span>
+	
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">preAppStop</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+		
+	<span class="o">}</span>
+	
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">postAppStop</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+		
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>只要实现这个接口，并在xml中配置这个bean即可。</p>
+
+<p>另外，在初始化后，初始化后处理前，还提供了初始化扩展接口：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.web</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AppInitializable</span> <span class="o">{</span>
+
+    <span class="kt">void</span> <span class="nf">postAppInit</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span><span class="o">;</span>
+    
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>只要实现这个接口，并在xml中定义这个bean即可，注意type必须是这个接口的子类才行。</p>
+
+<p>web初始化全部完成之后，在启动之前，leap还预留了另一个接口：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">leap.web</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletContext</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AppBootable</span> <span class="o">{</span>
+
+    <span class="cm">/**
+     * Called on booting the web application.
+     */</span>
+	<span class="kt">void</span> <span class="nf">onAppBooting</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">,</span> <span class="nc">ServletContext</span> <span class="n">sc</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * Called after stopping the web application.
+     */</span>
+    <span class="k">default</span> <span class="kt">void</span> <span class="nf">onAppStopped</span><span class="o">(</span><span class="nc">App</span> <span class="n">app</span><span class="o">,</span> <span class="nc">ServletContext</span> <span class="n">sc</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>这个接口扩展比较少用，只在两个阶段生效，即初始化完成和应用最后销毁，需要扩展这个接口，可以实现这个接口并在xml中配置type为<code class="highlighter-rouge">leap.web.AppBootable</code>的子类的bean。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>leap的启动过程是一个非常繁琐和复杂的过程，在这个过程中提供了相当多的扩展接口，需要仔细理解每个阶段需要做的时候才能帮助我们理解整个启动过程的扩展。</p>
+:ET

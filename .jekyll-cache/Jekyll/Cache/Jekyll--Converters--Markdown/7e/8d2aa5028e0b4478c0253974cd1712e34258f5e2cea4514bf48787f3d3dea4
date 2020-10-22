@@ -1,0 +1,197 @@
+I"�2<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#目录结构" id="markdown-toc-目录结构">目录结构</a></li>
+  <li><a href="#pomxml配置" id="markdown-toc-pomxml配置">pom.xml配置</a></li>
+  <li><a href="#编写建议" id="markdown-toc-编写建议">编写建议</a></li>
+  <li><a href="#预览" id="markdown-toc-预览">预览</a></li>
+  <li><a href="#标题建议" id="markdown-toc-标题建议">标题建议</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>AsciiDoc是一种轻量型的标记语言，语法简单易用，兼容Markdown的同时，提供了更丰富的标记功能，非常适用于写电子文档，使用AsciiDoc
+的时候，为了编写和维护方便，经常需要按照一定的规范组织目录结构，而发布的目录结构不一定和编写过程一致，因此本文主要是讨论我自己
+在尝试使用AsciiDoc编写文档时的最佳实践。</p>
+
+<p>目前只讨论使用maven插件搭建目录结构和发布的方式。</p>
+
+<h2 id="目录结构">目录结构</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- root
+    -src
+        - main
+            - asciidoc
+                - ask
+                    ask.adoc
+                - index.adoc
+            - resources
+                - images
+                    - ask
+                        - ask_1.png
+    - target
+        - book
+    - pom.xml
+</code></pre></div></div>
+
+<ul>
+  <li>根目录是<code class="highlighter-rouge">root</code>;</li>
+  <li>使用<code class="highlighter-rouge">src/main/asciidoc</code>作为源码目录，即<code class="highlighter-rouge">asciidoctor-maven-plugin</code>插件的默认源码目录;</li>
+  <li>将所有的资源文件放到<code class="highlighter-rouge">src/main/resources</code>目录下，如：图片的目录在<code class="highlighter-rouge">src/main/resources/images</code>目录下;</li>
+  <li><code class="highlighter-rouge">target</code>目录是默认输出目录，并配置将asciidoc编译的结果输出到<code class="highlighter-rouge">target/book</code>目录下;</li>
+</ul>
+
+<h2 id="pomxml配置">pom.xml配置</h2>
+
+<p>如下配置即可完全按照上面的目录结构生成最终的电子书。</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span>
+         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+         <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+
+    <span class="nt">&lt;groupId&gt;</span>kael.demo<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>asciidoc<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+
+    <span class="nt">&lt;properties&gt;</span>
+        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+        <span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
+        <span class="nt">&lt;maven.compiler.encoding&gt;</span>UTF-8<span class="nt">&lt;/maven.compiler.encoding&gt;</span>
+        
+        <span class="nt">&lt;asciidoctorj.version&gt;</span>1.5.6<span class="nt">&lt;/asciidoctorj.version&gt;</span>
+        <span class="nt">&lt;asciidoctorj.diagram.version&gt;</span>1.5.4.1<span class="nt">&lt;/asciidoctorj.diagram.version&gt;</span>
+        <span class="nt">&lt;jruby.version&gt;</span>1.7.26<span class="nt">&lt;/jruby.version&gt;</span>
+    <span class="nt">&lt;/properties&gt;</span>
+    <span class="nt">&lt;build&gt;</span>
+        <span class="c">&lt;!-- 默认命令，配置后可以直接使用mvn编译 --&gt;</span>
+        <span class="nt">&lt;defaultGoal&gt;</span>process-resources<span class="nt">&lt;/defaultGoal&gt;</span>
+        <span class="nt">&lt;resources&gt;</span>
+            <span class="nt">&lt;resource&gt;</span>
+                <span class="nt">&lt;directory&gt;</span>src/main/resources<span class="nt">&lt;/directory&gt;</span>
+                <span class="nt">&lt;targetPath&gt;</span>${project.build.directory}/book<span class="nt">&lt;/targetPath&gt;</span>
+            <span class="nt">&lt;/resource&gt;</span>
+        <span class="nt">&lt;/resources&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.asciidoctor<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>asciidoctor-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>1.5.5<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;executions&gt;</span>
+                    <span class="nt">&lt;execution&gt;</span>
+                        <span class="nt">&lt;id&gt;</span>output-html<span class="nt">&lt;/id&gt;</span>
+                        <span class="nt">&lt;phase&gt;</span>generate-resources<span class="nt">&lt;/phase&gt;</span>
+                        <span class="nt">&lt;goals&gt;</span>
+                            <span class="nt">&lt;goal&gt;</span>process-asciidoc<span class="nt">&lt;/goal&gt;</span>
+                        <span class="nt">&lt;/goals&gt;</span>
+                    <span class="nt">&lt;/execution&gt;</span>
+                <span class="nt">&lt;/executions&gt;</span>
+                <span class="nt">&lt;dependencies&gt;</span>
+                    <span class="c">&lt;!-- Comment this section to use the default jruby artifact provided by the plugin --&gt;</span>
+                    <span class="nt">&lt;dependency&gt;</span>
+                        <span class="nt">&lt;groupId&gt;</span>org.jruby<span class="nt">&lt;/groupId&gt;</span>
+                        <span class="nt">&lt;artifactId&gt;</span>jruby-complete<span class="nt">&lt;/artifactId&gt;</span>
+                        <span class="nt">&lt;version&gt;</span>${jruby.version}<span class="nt">&lt;/version&gt;</span>
+                    <span class="nt">&lt;/dependency&gt;</span>
+                    <span class="c">&lt;!-- Comment this section to use the default AsciidoctorJ artifact provided by the plugin --&gt;</span>
+                    <span class="nt">&lt;dependency&gt;</span>
+                        <span class="nt">&lt;groupId&gt;</span>org.asciidoctor<span class="nt">&lt;/groupId&gt;</span>
+                        <span class="nt">&lt;artifactId&gt;</span>asciidoctorj<span class="nt">&lt;/artifactId&gt;</span>
+                        <span class="nt">&lt;version&gt;</span>${asciidoctorj.version}<span class="nt">&lt;/version&gt;</span>
+                    <span class="nt">&lt;/dependency&gt;</span>
+                    <span class="nt">&lt;dependency&gt;</span>
+                        <span class="nt">&lt;groupId&gt;</span>org.asciidoctor<span class="nt">&lt;/groupId&gt;</span>
+                        <span class="nt">&lt;artifactId&gt;</span>asciidoctorj-diagram<span class="nt">&lt;/artifactId&gt;</span>
+                        <span class="nt">&lt;version&gt;</span>${asciidoctorj.diagram.version}<span class="nt">&lt;/version&gt;</span>
+                    <span class="nt">&lt;/dependency&gt;</span>
+                <span class="nt">&lt;/dependencies&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;outputDirectory&gt;</span>${project.build.directory}/book<span class="nt">&lt;/outputDirectory&gt;</span>
+                    <span class="nt">&lt;sourceDocumentName&gt;</span>index.adoc<span class="nt">&lt;/sourceDocumentName&gt;</span>
+                    <span class="nt">&lt;sourceHighlighter&gt;</span>prettify<span class="nt">&lt;/sourceHighlighter&gt;</span>
+                    <span class="nt">&lt;backend&gt;</span>html<span class="nt">&lt;/backend&gt;</span>
+                    <span class="nt">&lt;preserveDirectories&gt;</span>false<span class="nt">&lt;/preserveDirectories&gt;</span>
+                    <span class="nt">&lt;requires&gt;</span>
+                        <span class="nt">&lt;require&gt;</span>asciidoctor-diagram<span class="nt">&lt;/require&gt;</span>
+                    <span class="nt">&lt;/requires&gt;</span>
+                    <span class="nt">&lt;attributes&gt;</span>
+                        <span class="nt">&lt;toc&gt;</span>left<span class="nt">&lt;/toc&gt;</span>
+                        <span class="nt">&lt;icons&gt;</span>font<span class="nt">&lt;/icons&gt;</span>
+                        <span class="nt">&lt;sectanchors&gt;</span>true<span class="nt">&lt;/sectanchors&gt;</span>
+                        <span class="c">&lt;!-- set the idprefix to blank --&gt;</span>
+                        <span class="nt">&lt;idprefix/&gt;</span>
+                    <span class="nt">&lt;/attributes&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div></div>
+
+<h2 id="编写建议">编写建议</h2>
+
+<p>编写AsciiDoc文本推荐使用idea/WebStorm，安装AsciiDoc插件即可实施预览：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/asciidoc_maven/AsciiDoc_1.png" alt="" /></p>
+
+<p>在编写时，所有的源码文档使用<code class="highlighter-rouge">.adoc</code>作为扩展名。</p>
+
+<p>在文档中引用图片时，遵循如下规范：</p>
+
+<ul>
+  <li>在个源码文件的顶部定义图片根目录相对当前目录的相对路径</li>
+  <li>每个目录的图片在图片根目录下创建一个同名目录</li>
+  <li>每个源码文件引用的图片命名按照{源码文件名}_{序号递增}.png</li>
+</ul>
+
+<p>如上面提到的目录结构，在<code class="highlighter-rouge">src/main/asciidoc/index.adoc</code>顶部定义图片根目录：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifndef::imagesdir[:imagesdir: ../resources/images]
+</code></pre></div></div>
+
+<p>在<code class="highlighter-rouge">src/main/asciidoc/ask/index.adoc</code>顶部定义图片根目录：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifndef::imagesdir[:imagesdir: ../../resources/images]
+</code></pre></div></div>
+
+<p>那么在引用图片的时候，可以按照如下方式：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>image::ask/ask_1.png
+</code></pre></div></div>
+
+<blockquote>
+  <p>在<code class="highlighter-rouge">src/main/asciidoc/index.adoc</code>中尽量不直接写内容，使用<code class="highlighter-rouge">include</code>指令组合各个章节即可。
+这样定义的好处有几点：</p>
+
+  <ul>
+    <li>无论是AsciiDoc的预览工具，还是最终编译发布的电子书，都可以完美看到图片，不会出现为了保证发布时图片不缺失，而放弃预览时看到图片的情况。</li>
+    <li>各个目录的图片文件路径清晰，一旦需要做比较大的调整的时候，可以准确的找到所有文件对应的图片路径</li>
+  </ul>
+</blockquote>
+
+<h2 id="预览">预览</h2>
+
+<p>编写的过程，经常需要预览整个文档，这种情况推荐使用一个简单的静态http服务器，如<code class="highlighter-rouge">http-server</code>。</p>
+
+<p>指定监听<code class="highlighter-rouge">target/book</code>目录即可，</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$&gt; http-server target/book -p 4001 -e html
+</code></pre></div></div>
+
+<p>每次修改完需要查看的时候，只需要使用<code class="highlighter-rouge">mvn clean process-resources</code>编译一次，就可以直接在浏览器预览整体效果了。</p>
+
+<h2 id="标题建议">标题建议</h2>
+
+<p>asciidoc有很多属性可以设置，一般建议的电子书中声明如下属性：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>电子书标题
+==========
+卡尔 &lt;kael.peng@gmail.com&gt;
+v2, 2017-11-02
+:source-highlighter: prettify
+:data-uri:
+</code></pre></div></div>
+
+<p>这里<code class="highlighter-rouge">source-highlighter</code>是语法高亮，<code class="highlighter-rouge">data-uri</code>是将图片内嵌到html页面中。</p>
+:ET

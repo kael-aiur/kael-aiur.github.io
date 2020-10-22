@@ -1,0 +1,22 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#快捷键" id="markdown-toc-快捷键">快捷键</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>在使用idea的过程中，需要按自己的习惯修改快捷键，本文用来记录自己习惯使用的方式，作为备忘以及每次重新安装后的配置参考。</p>
+
+<h2 id="快捷键">快捷键</h2>
+
+<p>在<code class="highlighter-rouge">File &gt; Settings... &gt; Keymap</code>中配置：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Main menu &gt; Code &gt; Completion &gt; Basic : Alt + /
+Main menu &gt; Tools &gt; Start SSH session... : Ctrl + H
+Tool Windows &gt; Database : Alt + D
+Plug-ins &gt; Markdown support &gt; Show editor and preview : Alt + P
+Plug-ins &gt; Markdown support &gt; Show editor only : Alt + L
+Plug-ins &gt; Maven Integration &gt; Reimport : Alt + R
+Other &gt; Show in Explorer : Alt + E
+</code></pre></div></div>
+:ET

@@ -1,0 +1,156 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#开发者环境的组件" id="markdown-toc-开发者环境的组件">开发者环境的组件</a></li>
+  <li><a href="#安装开发者环境" id="markdown-toc-安装开发者环境">安装开发者环境</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>一般来说，在安装linux的时候，我们就需要根据需求决定安装哪个发行版，centos一般有三种版本：</p>
+
+<ul>
+  <li>工作站(workstation)</li>
+  <li>服务器版本(server)</li>
+  <li>最小安装版(minimal)</li>
+</ul>
+
+<p>工作站版本一般包含桌面环境，可以用于做开发和日常办公，服务器版本一般没有桌面环境，但是自动安装了大部分服务器需要的软件，因此体积比较大，最小安装版只安装了linux运行需要的基本环境，其他软件都没有，甚至连网卡都没启用，全部需要自己配置。</p>
+
+<p>因为我习惯使用自己定制的linux，只安装自己需要的软件，所以一般会选择最小安装版自己做软件定制。</p>
+
+<p>本文主要讲讲作为一个开发者，如何给最小安装版安装开发者的环境。</p>
+
+<h2 id="开发者环境的组件">开发者环境的组件</h2>
+
+<p>红帽系的linux，需要的开发者组件有如下几种：</p>
+
+<ul>
+  <li>autoconf</li>
+  <li>automake</li>
+  <li>binutils</li>
+  <li>bison</li>
+  <li>flex</li>
+  <li>gcc</li>
+  <li>gcc-c++</li>
+  <li>gettext</li>
+  <li>libtool</li>
+  <li>make</li>
+  <li>patch</li>
+  <li>pkgconfig</li>
+  <li>redhat-rpm-config</li>
+  <li>rpm-build</li>
+  <li>rpm-sign</li>
+</ul>
+
+<p>一个一个去源上找并且安装是一件非常费时费力的工作，不过好在，yum管理器提供了一个很简便的方式供我们安装。</p>
+
+<h2 id="安装开发者环境">安装开发者环境</h2>
+
+<ul>
+  <li><strong>列出组件组</strong></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># yum group list
+</code></pre></div></div>
+
+<p>或</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># sudo yum group list
+</code></pre></div></div>
+
+<p>这个命令可以列出源上所有已经打包成组的组件组：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost Download]$ yum group list
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: ftp.sjtu.edu.cn
+ * extras: ftp.sjtu.edu.cn
+ * updates: mirrors.zju.edu.cn
+Available Environment Groups:
+   Minimal Install
+   Compute Node
+   Infrastructure Server
+   File and Print Server
+   Basic Web Server
+   Virtualization Host
+   Server with GUI
+   GNOME Desktop
+   KDE Plasma Workspaces
+   Development and Creative Workstation
+Installed Groups:
+   Development Tools
+Available Groups:
+   Compatibility Libraries
+   Console Internet Tools
+   Graphical Administration Tools
+   Legacy UNIX Compatibility
+   Scientific Support
+   Security Tools
+   Smart Card Support
+   System Administration Tools
+   System Management
+Done
+</code></pre></div></div>
+
+<p>这里我们可以看到，有一个组件组名叫<code class="highlighter-rouge">Development Tools</code>。我这里已经安装了，如果还没有安装的话，这个组会被分类在<code class="highlighter-rouge">Available Groups</code>中。</p>
+
+<p>如果没有安装的话，执行如下命令安装：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># yum group install "Development Tools"
+</code></pre></div></div>
+
+<p>或</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># sudo yum group install "Development Tools"
+</code></pre></div></div>
+
+<blockquote>
+  <p>注：某些发行版可能没有上述命令，可以改成<code class="highlighter-rouge">yum groupinstall "Development Tools"</code></p>
+</blockquote>
+
+<p>安装完成之后，验证一下是否安装成功：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost Download]$ whereis gcc 
+gcc: /usr/bin/gcc /usr/lib/gcc /usr/libexec/gcc /usr/share/man/man1/gcc.1.gz
+[kael@localhost Download]$ gcc --version
+gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-4)
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+[kael@localhost Download]$ 
+</code></pre></div></div>
+
+<p>这说明已经安装成功了。</p>
+
+<p>写个小程序来试一下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost Download]$ vim hello.c
+</code></pre></div></div>
+
+<p>写入</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include&lt;stdio.h&gt;
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hello World!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>编译</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost Download]$ gcc hello.c -o hello
+</code></pre></div></div>
+
+<p>运行</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost Download]$ ./hello 
+Hello World!
+</code></pre></div></div>
+
+<p>ok！安装成功！</p>
+
+<blockquote>
+  <p>注：实际上，如果只是用来编译的话，只安装gcc组件也是可以的，不需要把整个开发者组件都安装，不过如果在安装其他开源软件的时候，需要使用源码编译安装，那么还是得把开发者组件包安装下来。</p>
+</blockquote>
+:ET

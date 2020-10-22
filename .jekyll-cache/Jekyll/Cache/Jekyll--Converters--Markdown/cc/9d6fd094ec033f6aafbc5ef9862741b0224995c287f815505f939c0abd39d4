@@ -1,0 +1,266 @@
+I",9<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#什么是elk" id="markdown-toc-什么是elk">什么是ELK</a></li>
+  <li><a href="#部署elk" id="markdown-toc-部署elk">部署ELK</a>    <ul>
+      <li><a href="#部署es" id="markdown-toc-部署es">部署ES</a></li>
+    </ul>
+  </li>
+  <li><a href="#部署logstash" id="markdown-toc-部署logstash">部署Logstash</a></li>
+  <li><a href="#部署kibana" id="markdown-toc-部署kibana">部署Kibana</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>随着互联网的发展，分布式的集群环境越来越多被应用，这同时也带来了另一个问题，在分布式的环境中，各个节点的信息被分散到不同的物理机器上，这导致问题的排查也越来越困难，平时我们跟踪问题使用最多的方式就是查询日志，但是在分布式的环境中，要在成百上千的节点中找出错误日志也是非常困难的，ELK的出现解决了这个问题。</p>
+
+<h2 id="什么是elk">什么是ELK</h2>
+
+<p>ELK是Elasticsearch、Logstash、Kibana三个工具的简称：</p>
+
+<ul>
+  <li>Elasticsearch(ES)是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。</li>
+  <li>Logstash是一个完全开源的工具，他可以对你的日志进行收集、分析，并将其存储供以后使用（如，搜索）。</li>
+  <li>Kibana也是一个开源和免费的工具，他Kibana可以为 Logstash 和 ElasticSearch 提供的日志分析友好的 Web 界面，可以帮助您汇总、分析和搜索重要数据日志。</li>
+</ul>
+
+<p>想要了解一个系统，必须想了解系统的架构，我们先来看一下ELK的部署架构：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/elk.png" alt="elk部署图" /></p>
+
+<p>这个图说明，我们的应用节点把日志数据写入到Logstash之后，Logstash再将日志写入到ES中，然后由Kibana从ES中取出日志数据并进行统计分析，最后展示给用户浏览器。</p>
+
+<p>在这个过程中，Logstash担任日志收集，ES负责存储，Kibana负责展示。</p>
+
+<p>顺便说明一下，在ELK系统中，用来解决了分布式的日志收集存储和分析的问题。实际上ES是可以单独使用的，并且可以用来作为存储和搜索引擎，ES本身也提供了非常强大的rest api和查询语法。</p>
+
+<h2 id="部署elk">部署ELK</h2>
+
+<p>本文使用的是最新的5.0.0-rc1版本，部署在fedora 24 64位操作系统上，下载链接：</p>
+
+<ul>
+  <li>Elasticsearch: <a href="">https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.0-rc1.tar.gz</a></li>
+  <li>Logstash: <a href="">https://artifacts.elastic.co/downloads/logstash/logstash-5.0.0-rc1.tar.gz</a></li>
+  <li>Kibana: <a href="">https://artifacts.elastic.co/downloads/kibana/kibana-5.0.0-rc1-linux-x86_64.tar.gz</a></li>
+</ul>
+
+<p>现在我们开始部署ELK，从架构图中我们知道，ES是最基础的功能，因此必须先部署ES，ES依赖于JAVA，所以需要想安装jdk，建议使用jdk8或以上的版本，本文使用jdk8。</p>
+
+<h3 id="部署es">部署ES</h3>
+
+<p>先下载好ES的部署包，然后解压：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost ~]$ tar -xvf elasticsearch-5.0.0-rc1.tar.gz
+</code></pre></div></div>
+
+<p>解压，然后进入文件夹，查看一下文件：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/es1.png" alt="es的文件结构" /></p>
+
+<p>es的部署十分简单，作为实验性的部署，我们不用改任何配置，直接进入bin目前，启动es即可：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost ~]$ cd bin/
+[kael@localhost ~]$ ./elasticsearch
+</code></pre></div></div>
+
+<p>可以看到如下启动日志：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/es2.png" alt="es启动日志" /></p>
+
+<p>这样就启动完成了，如果要停止的话直接按下<code class="highlighter-rouge">ctrl+c</code>即可。</p>
+
+<blockquote>
+  <p><strong>注：</strong>这里es有一个启动异常，从错误信息看应该是某个功能在Linux的内核中没有，先不管他，不影响我们部署和查看效果，之后学习在解决这个问题。</p>
+</blockquote>
+
+<p>es默认监听端口是9200，我们可以重新打开一个终端，输入：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost ~]$ curl http://localhost:9200
+</code></pre></div></div>
+
+<p>可以看到</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost ~]$ curl http://localhost:9200
+{
+  "name" : "VBGdn28",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "1dnn9vtxRpmcnyLqV4vn9g",
+  "version" : {
+    "number" : "5.0.0-rc1",
+    "build_hash" : "13e62e1",
+    "build_date" : "2016-10-07T16:52:58.798Z",
+    "build_snapshot" : false,
+    "lucene_version" : "6.2.0"
+  },
+  "tagline" : "You Know, for Search"
+}
+</code></pre></div></div>
+
+<p>展示了配置的cluster_name和name，以及安装的ES的版本等信息，这说明es已经启动完成。</p>
+
+<h2 id="部署logstash">部署Logstash</h2>
+
+<p>接下来我们部署Logstash，同样将部署包下载好，解压：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost Downloads]$ tar -xvf logstash-5.0.0-rc1.tar.gz
+</code></pre></div></div>
+
+<p>进入Logstash的目录：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/logstash1.png" alt="logstash目录结构" /></p>
+
+<p>这里我们需要做些配置，首先自己创建一个目录，建议将我们的配置文件放在config目录下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost logstash-5.0.0-rc1]$ vim config/log4j_to_es.conf
+</code></pre></div></div>
+
+<p>这里我们直接创建<code class="highlighter-rouge">log4j_to_es.conf</code>文件，并编辑这个文件，内容如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># For detail structure of this file
+# Set: https://www.elastic.co/guide/en/logstash/current/configuration-file-structure.html
+input {
+  # For detail config for log4j as input, 
+  # See: https://www.elastic.co/guide/en/logstash/current/plugins-inputs-log4j.html
+  log4j {
+    mode =&gt; "server"
+    host =&gt; "0.0.0.0" #allow all ip to connect
+    port =&gt; 4567
+  }
+}
+filter {
+  #Only matched data are send to output.
+}
+output {
+  # For detail config for elasticsearch as output, 
+  # See: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html
+  elasticsearch {
+    action =&gt; "index"          #The operation on ES
+    hosts  =&gt; "localhost:9200" #ElasticSearch host, can be array.
+    index  =&gt; "applog"         #The index to write data to.
+  }
+}
+</code></pre></div></div>
+
+<p>注意，这里配置了input和output两大块，input表示的是logstash收集日志的入口，也表示我们需要收集日志的应用请求的地址，output表示logstash写出的服务器，这里配置成es的地址。</p>
+
+<p>编辑完成之后保存，使用如下命令启动logstash:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost logstash-5.0.0-rc1]$ ./bin/logstash -f config/log4j_to_es.conf 
+</code></pre></div></div>
+
+<p>可以看到如下启动日志：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/logstash2.png" alt="logstash启动日志" /></p>
+
+<p>为了测试logstash是否启动成功，我们写一个简单的java程序来测试，使用log4j，因为log4j可以很方便的支持远程写日志。</p>
+
+<p>我们先创建好一个maven的java工程：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/logstash3.png" alt="java工程结构" /></p>
+
+<p>然后加入log4j的依赖：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>log4j<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>log4j<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.2.17<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<p>接下来写一个简单的Main函数：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">elk.demo</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.log4j.Logger</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Created by KAEL on 2016/10/24.
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Logger</span> <span class="no">LOGGER</span> <span class="o">=</span> <span class="nc">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="nc">Main</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="no">LOGGER</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Info log ["</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">"]."</span><span class="o">);</span>
+            <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>只是直接通过log4j打10行错误日志而已，但是要把这个结果写入logstash，所以要配置一下log4j:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log4j.rootLogger=INFO,console
+
+# for package com.demo.elk, log would be sent to socket appender.
+log4j.logger.com.demo.elk=DEBUG, socket
+
+# appender socket
+log4j.appender.socket=org.apache.log4j.net.SocketAppender
+log4j.appender.socket.Port=4567
+log4j.appender.socket.RemoteHost=localhost
+log4j.appender.socket.layout=org.apache.log4j.PatternLayout
+log4j.appender.socket.layout.ConversionPattern=%d [%-5p] [%l] %m%n
+log4j.appender.socket.ReconnectionDelay=10000
+
+# appender console
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.target=System.out
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%d [%-5p] [%l] %m%n
+</code></pre></div></div>
+
+<p>要注意这里的<code class="highlighter-rouge">log4j.appender.socket.Port</code>和<code class="highlighter-rouge">log4j.appender.socket.RemoteHost</code>需要配置logstash服务的ip和端口，然后我们运行 一下main函数：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/logstash4.png" alt="写日志" /></p>
+
+<p>没有报错说明我们日志写入成功，如果出现如下错误：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log4j:ERROR Could not connect to remote log4j server at [localhost]. We will try again later.
+</code></pre></div></div>
+
+<p>可以尝试关闭logstash服务器的防火墙，保证网络联通再试试。</p>
+
+<h2 id="部署kibana">部署Kibana</h2>
+
+<p>下载好Kibana的部署包并解压：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost Downloads]$ tar -xvf kibana-5.0.0-rc1-linux-x86_64.tar.gz
+</code></pre></div></div>
+
+<p>进入Kibana的目录：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/kibana1.png" alt="Kibana目录结构" /></p>
+
+<p>启动Kibana之前我们需要一些配置，这个配置文件在<code class="highlighter-rouge">config/kibana.yml</code>中:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost kibana-5.0.0-rc1-linux-x86_64]$ vim config/kibana.yml
+</code></pre></div></div>
+
+<p>将一下几行的注释去掉：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server.port: 5601
+server.host: "localhost"
+elasticsearch.url: "http://localhost:9200"
+kibana.index: ".kibana"
+</code></pre></div></div>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/kibana2.png" alt="Kibana配置" /></p>
+
+<p>注意，这里的<code class="highlighter-rouge">server.host</code>最好是kibana所在的服务器ip，这样才能在其他的机器上访问。</p>
+
+<p>修改完成后保存即可。</p>
+
+<p>启动Kibana:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[kael@localhost kibana-5.0.0-rc1-linux-x86_64]$ ./bin/kibana
+</code></pre></div></div>
+
+<p>可以看到如下启动日志：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/kibana3.png" alt="Kibana启动日志" /></p>
+
+<p>现在我们可以通过kibana服务器的ip和端口访问kibana了：</p>
+
+<p><img src="https://raw.githubusercontent.com/kael-aiur/image-repo1/master/elk/kibana4.png" alt="Kibana启动日志" /></p>
+
+<p>到这里我们就把完整的ELK环境部署好了，可以做进一步的学习和开发了。</p>
+:ET

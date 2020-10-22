@@ -1,0 +1,190 @@
+I"u0<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#打包成单独的jar包" id="markdown-toc-打包成单独的jar包">打包成单独的jar包</a></li>
+  <li><a href="#打包成特定的目录结构" id="markdown-toc-打包成特定的目录结构">打包成特定的目录结构</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>在java开发的过程中，我们经常会需要打包一个可执行的jar包，同时，开发的过程也会希望能够使用maven来管理依赖，因此，将maven工程打包成一个可执行的jar包就成了一个常见的需求。</p>
+
+<h2 id="打包成单独的jar包">打包成单独的jar包</h2>
+
+<p>如果依赖的包不多，并且希望只打包成一个单独的jar包，可以使用如下配置：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>maven-assembly-plugin<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;configuration&gt;</span>
+        <span class="nt">&lt;archive&gt;</span>
+            <span class="nt">&lt;manifest&gt;</span>
+                <span class="c">&lt;!--这里要替换成jar包main方法所在类 --&gt;</span>
+                <span class="nt">&lt;mainClass&gt;</span>${MainClass}<span class="nt">&lt;/mainClass&gt;</span>
+            <span class="nt">&lt;/manifest&gt;</span>
+        <span class="nt">&lt;/archive&gt;</span>
+        <span class="nt">&lt;descriptorRefs&gt;</span>
+            <span class="nt">&lt;descriptorRef&gt;</span>jar-with-dependencies<span class="nt">&lt;/descriptorRef&gt;</span>
+        <span class="nt">&lt;/descriptorRefs&gt;</span>
+    <span class="nt">&lt;/configuration&gt;</span>
+    <span class="nt">&lt;executions&gt;</span>
+        <span class="nt">&lt;execution&gt;</span>
+            <span class="nt">&lt;id&gt;</span>make-assembly<span class="nt">&lt;/id&gt;</span> <span class="c">&lt;!-- this is used for inheritance merges --&gt;</span>
+            <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span> <span class="c">&lt;!-- 指定在打包节点执行jar包合并操作 --&gt;</span>
+            <span class="nt">&lt;goals&gt;</span>
+                <span class="nt">&lt;goal&gt;</span>single<span class="nt">&lt;/goal&gt;</span>
+            <span class="nt">&lt;/goals&gt;</span>
+        <span class="nt">&lt;/execution&gt;</span>
+    <span class="nt">&lt;/executions&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div></div>
+
+<p>这样配置完成之后，使用：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn package
+</code></pre></div></div>
+
+<p>在<code class="highlighter-rouge">target/</code>目录下会多出来一个以<code class="highlighter-rouge">-jar-with-dependencies</code>结尾的jar包，这个jar包会包含所有的依赖。</p>
+
+<h2 id="打包成特定的目录结构">打包成特定的目录结构</h2>
+
+<p>使用maven打包成可执行jar包需要两个插件：</p>
+
+<ul>
+  <li>maven-jar-plugin</li>
+  <li>maven-assembly-plugin</li>
+</ul>
+
+<p><strong>maven-jar-plugin</strong>的作用是将我们的代码打成jar包并指定main函数，<strong>maven-assembly-plugin</strong>的作用是将依赖的第三方包和配置文件按照指定的目录结构存放。</p>
+
+<p>将如下这段插件配置添加到<code class="highlighter-rouge">pom.xml</code>中：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>maven-jar-plugin<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.4<span class="nt">&lt;/version&gt;</span>
+    <span class="c">&lt;!-- The configuration of the plugin --&gt;</span>
+    <span class="nt">&lt;configuration&gt;</span>
+        <span class="c">&lt;!-- Configuration of the archiver --&gt;</span>
+        <span class="nt">&lt;archive&gt;</span>
+            <span class="c">&lt;!--生成的jar中，不要包含pom.xml和pom.properties这两个文件--&gt;</span>
+            <span class="nt">&lt;addMavenDescriptor&gt;</span>false<span class="nt">&lt;/addMavenDescriptor&gt;</span>
+            <span class="c">&lt;!-- Manifest specific configuration --&gt;</span>
+            <span class="nt">&lt;manifest&gt;</span>
+                <span class="c">&lt;!--是否要把第三方jar放到manifest的classpath中--&gt;</span>
+                <span class="nt">&lt;addClasspath&gt;</span>true<span class="nt">&lt;/addClasspath&gt;</span>
+                <span class="c">&lt;!--生成的manifest中classpath的前缀，因为要把第三方jar放到lib目录下，所以classpath的前缀是lib/--&gt;</span>
+                <span class="nt">&lt;classpathPrefix&gt;</span>lib/<span class="nt">&lt;/classpathPrefix&gt;</span>
+                <span class="c">&lt;!--应用的main class--&gt;</span>
+                <span class="nt">&lt;mainClass&gt;</span>${mainClass}<span class="nt">&lt;/mainClass&gt;</span>
+            <span class="nt">&lt;/manifest&gt;</span>
+        <span class="nt">&lt;/archive&gt;</span>
+        <span class="c">&lt;!--过滤掉不希望包含在jar中的文件
+        &lt;excludes&gt;
+            &lt;exclude&gt;${project.basedir}/xml/*&lt;/exclude&gt;
+        &lt;/excludes&gt;
+        --&gt;</span>
+    <span class="nt">&lt;/configuration&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+<span class="c">&lt;!-- The configuration of maven-assembly-plugin --&gt;</span>
+<span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>maven-assembly-plugin<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.4<span class="nt">&lt;/version&gt;</span>
+    <span class="c">&lt;!-- The configuration of the plugin --&gt;</span>
+    <span class="nt">&lt;configuration&gt;</span>
+        <span class="c">&lt;!-- Specifies the configuration file of the assembly plugin --&gt;</span>
+        <span class="nt">&lt;descriptors&gt;</span>
+            <span class="nt">&lt;descriptor&gt;</span>${package.xml.path}<span class="nt">&lt;/descriptor&gt;</span>
+        <span class="nt">&lt;/descriptors&gt;</span>
+    <span class="nt">&lt;/configuration&gt;</span>
+    <span class="nt">&lt;executions&gt;</span>
+        <span class="nt">&lt;execution&gt;</span>
+            <span class="nt">&lt;id&gt;</span>make-assembly<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+            <span class="nt">&lt;goals&gt;</span>
+                <span class="nt">&lt;goal&gt;</span>single<span class="nt">&lt;/goal&gt;</span>
+            <span class="nt">&lt;/goals&gt;</span>
+        <span class="nt">&lt;/execution&gt;</span>
+    <span class="nt">&lt;/executions&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div></div>
+
+<p>这里有两个变量：</p>
+
+<ul>
+  <li>mainClass: 指启动的main函数。</li>
+  <li>package.xml.path： 指打包描述文件的路径。</li>
+</ul>
+
+<p>assembly插件需要通过一个xml来描述如何打包各种资源文件，因此需要指定打包描述文件，如<code class="highlighter-rouge">src/main/assembly/package.xml</code></p>
+
+<p>在工程的<code class="highlighter-rouge">src/main/assembly</code>目录下（没有就手动创建）添加<code class="highlighter-rouge">package.xml</code>，内容如下：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;assembly&gt;</span>
+    <span class="nt">&lt;id&gt;</span>bin<span class="nt">&lt;/id&gt;</span>
+    <span class="c">&lt;!-- 最终打包成一个用于发布的zip文件 --&gt;</span>
+    <span class="nt">&lt;formats&gt;</span>
+        <span class="nt">&lt;format&gt;</span>zip<span class="nt">&lt;/format&gt;</span>
+    <span class="nt">&lt;/formats&gt;</span>
+
+    <span class="c">&lt;!-- Adds dependencies to zip package under lib directory --&gt;</span>
+    <span class="nt">&lt;dependencySets&gt;</span>
+        <span class="nt">&lt;dependencySet&gt;</span>
+            <span class="c">&lt;!-- 不使用项目的artifact，第三方jar不要解压，打包进zip文件的lib目录 --&gt;</span>
+            <span class="nt">&lt;useProjectArtifact&gt;</span>false<span class="nt">&lt;/useProjectArtifact&gt;</span>
+            <span class="nt">&lt;outputDirectory&gt;</span>lib<span class="nt">&lt;/outputDirectory&gt;</span>
+            <span class="nt">&lt;unpack&gt;</span>false<span class="nt">&lt;/unpack&gt;</span>
+        <span class="nt">&lt;/dependencySet&gt;</span>
+    <span class="nt">&lt;/dependencySets&gt;</span>
+
+    <span class="nt">&lt;fileSets&gt;</span>
+        <span class="c">&lt;!-- 把项目相关的说明文件，打包进zip文件的根目录 --&gt;</span>
+        <span class="nt">&lt;fileSet&gt;</span>
+            <span class="nt">&lt;directory&gt;</span>${project.basedir}<span class="nt">&lt;/directory&gt;</span>
+            <span class="nt">&lt;outputDirectory&gt;</span>/<span class="nt">&lt;/outputDirectory&gt;</span>
+            <span class="nt">&lt;includes&gt;</span>
+                <span class="nt">&lt;include&gt;</span>README*<span class="nt">&lt;/include&gt;</span>
+                <span class="nt">&lt;include&gt;</span>LICENSE*<span class="nt">&lt;/include&gt;</span>
+                <span class="nt">&lt;include&gt;</span>NOTICE*<span class="nt">&lt;/include&gt;</span>
+            <span class="nt">&lt;/includes&gt;</span>
+        <span class="nt">&lt;/fileSet&gt;</span>
+
+        <span class="c">&lt;!-- 把项目的配置文件，打包进zip文件的config目录 --&gt;</span>
+        <span class="nt">&lt;fileSet&gt;</span>
+            <span class="nt">&lt;directory&gt;</span>${project.basedir}\src\main\config<span class="nt">&lt;/directory&gt;</span>
+            <span class="nt">&lt;outputDirectory&gt;</span>config<span class="nt">&lt;/outputDirectory&gt;</span>
+            <span class="nt">&lt;includes&gt;</span>
+                <span class="nt">&lt;include&gt;</span>*.xml<span class="nt">&lt;/include&gt;</span>
+                <span class="nt">&lt;include&gt;</span>*.properties<span class="nt">&lt;/include&gt;</span>
+            <span class="nt">&lt;/includes&gt;</span>
+        <span class="nt">&lt;/fileSet&gt;</span>
+
+        <span class="c">&lt;!-- 把项目的脚本文件目录（ src/main/scripts ）中的启动脚本文件，打包进zip文件的跟目录 --&gt;</span>
+        <span class="nt">&lt;fileSet&gt;</span>
+            <span class="nt">&lt;directory&gt;</span>${project.build.scriptSourceDirectory}<span class="nt">&lt;/directory&gt;</span>
+            <span class="nt">&lt;outputDirectory&gt;&lt;/outputDirectory&gt;</span>
+            <span class="nt">&lt;includes&gt;</span>
+                <span class="nt">&lt;include&gt;</span>startup.*<span class="nt">&lt;/include&gt;</span>
+            <span class="nt">&lt;/includes&gt;</span>
+        <span class="nt">&lt;/fileSet&gt;</span>
+
+
+        <span class="c">&lt;!-- 把项目自己编译出来的jar文件，打包进zip文件的根目录 --&gt;</span>
+        <span class="nt">&lt;fileSet&gt;</span>
+            <span class="nt">&lt;directory&gt;</span>${project.build.directory}<span class="nt">&lt;/directory&gt;</span>
+            <span class="nt">&lt;outputDirectory&gt;&lt;/outputDirectory&gt;</span>
+            <span class="nt">&lt;includes&gt;</span>
+                <span class="nt">&lt;include&gt;</span>*.jar<span class="nt">&lt;/include&gt;</span>
+            <span class="nt">&lt;/includes&gt;</span>
+        <span class="nt">&lt;/fileSet&gt;</span>
+    <span class="nt">&lt;/fileSets&gt;</span>
+<span class="nt">&lt;/assembly&gt;</span>
+</code></pre></div></div>
+
+<p>这样配置完成之后，使用：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn package
+</code></pre></div></div>
+
+<p>即可打包一个zip文件，解压后双击jar包即可运行。</p>
+
+:ET

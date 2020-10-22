@@ -1,0 +1,66 @@
+I"_<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#测试servlet" id="markdown-toc-测试servlet">测试Servlet</a></li>
+  <li><a href="#测试调用" id="markdown-toc-测试调用">测试调用</a>    <ul>
+      <li><a href="#wiremock" id="markdown-toc-wiremock">wiremock</a></li>
+      <li><a href="#mockserver" id="markdown-toc-mockserver">mockserver</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>在写java代码时，经常需要补充单元测试，对于http的单元测试直接用junit是比较麻烦的，这里介绍几个比较好用的http单元测试框架。</p>
+
+<h2 id="测试servlet">测试Servlet</h2>
+
+<p>测试Servlet指的是我们自己写了一个Servlet，需要对Servlet进行测试的情况，这种情况模拟的是客户端请求，测试的是服务端代码，使用httpunit即可。</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>httpunit<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>httpunit<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.7<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<p>官网：<a href="http://httpunit.sourceforge.net/index.html">http://httpunit.sourceforge.net/index.html</a></p>
+
+<h2 id="测试调用">测试调用</h2>
+
+<p>测试调用指的是我们写了一个客户端代码，需要对客户端代码进行测试，这种情况模拟的是服务端响应，测试的是客户端代码。</p>
+
+<h3 id="wiremock">wiremock</h3>
+
+<p>官网：<a href="http://wiremock.org">http://wiremock.org</a></p>
+
+<p>单元测试：</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.github.tomakehurst<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>wiremock<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.8.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<p>独立运行</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.github.tomakehurst<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>wiremock-standalone<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.8.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<h3 id="mockserver">mockserver</h3>
+
+<p>官网：<a href="http://www.mock-server.com/">http://www.mock-server.com/</a></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.mock-server<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>mockserver-netty<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>3.10.8<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+:ET

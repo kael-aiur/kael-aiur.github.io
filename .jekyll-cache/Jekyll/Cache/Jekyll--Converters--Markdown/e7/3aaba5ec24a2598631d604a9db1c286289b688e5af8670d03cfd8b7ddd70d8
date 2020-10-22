@@ -1,0 +1,69 @@
+I"u
+<ul id="markdown-toc">
+  <li><a href="#添加右键菜单" id="markdown-toc-添加右键菜单">添加右键菜单</a></li>
+</ul>
+
+<h2 id="添加右键菜单">添加右键菜单</h2>
+
+<p>主要是如下几个地方：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\cmd_here]
+@="打开命令行"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\cmd_here\command]
+@="\"C:\\Windows\\System32\\cmd.exe\""
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\cmdPrompt]
+@="打开命令行"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\cmdPrompt\command]
+@="\"C:\\Windows\\System32\\cmd.exe\" \"cd %1\""
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\cmd_here]
+@="打开命令行"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\cmd_here\command]
+@="\"C:\\Windows\\System32\\cmd.exe\""
+</code></pre></div></div>
+
+<p>可以做一个.reg结尾的文件，双击导入即可，内容如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\cmd_here]
+@="打开命令行"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\cmd_here\command]
+@="\"C:\\Windows\\System32\\cmd.exe\""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\cmdPrompt]
+@="打开命令行"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\cmdPrompt\command]
+@="\"C:\\Windows\\System32\\cmd.exe\" \"cd %1\""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\cmd_here]
+@="打开命令行"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\cmd_here\command]
+@="\"C:\\Windows\\System32\\cmd.exe\""
+</code></pre></div></div>
+
+<p>如果是安装了win10的Ubuntu子系统的话，也可以用如下脚本，在右键菜单生成用Unix打开当前目录的菜单：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\bash_here]
+@="Unix终端"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\bash_here\command]
+@="\"C:\\Windows\\System32\\bash.exe\""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\cmdPrompt]
+@="Unix终端"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\cmdPrompt\command]
+@="\"C:\\Windows\\System32\\bash.exe\" \"cd %1\""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\bash_here]
+@="Unix终端"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\bash_here\command]
+@="\"C:\\Windows\\System32\\bash.exe\""
+</code></pre></div></div>
+:ET

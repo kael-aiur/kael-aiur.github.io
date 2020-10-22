@@ -1,0 +1,237 @@
+I"�%<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#三次握手" id="markdown-toc-三次握手">三次握手</a></li>
+  <li><a href="#四次挥手" id="markdown-toc-四次挥手">四次挥手</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>在了解TCP/IP协议的三次握手前，我们需要先了解TCP报文的格式：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0       4           10          16              24            31
++-------------------------------+------------------------------+
+|                (1)            |              (2)             |
++-------------------------------+------------------------------+
+|                              (3)                             |
++--------------------------------------------------------------+
+|                              (4)                             |
++----------+-------+------------+------------------------------+
+|   (5)    |  (6)  |    (7)     |              (8)             |
++----------+-------+-------------------------------------------+
+|             (9)               |             (10)             |
++-------------------------------+------------------+-----------+
+|                     (11)                         |    (12)   |
++--------------------------------------------------+-----------+
+|                            (13)                              |
++--------------------------------------------------------------+
+|                            ...                               |
++--------------------------------------------------------------+
+</code></pre></div></div>
+
+<p>上述各个数字代表的含义如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>数字</th>
+      <th>含义</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>(1)</td>
+      <td>源端口</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>(2)</td>
+      <td>目的端口</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>(3)</td>
+      <td>序号</td>
+      <td>Seq序号，占32位，用来标识从TCP源端向目的端发送的字节流，发起方发送数<br />据时对此进行标记。</td>
+    </tr>
+    <tr>
+      <td>(4)</td>
+      <td>确认号</td>
+      <td>Ack序号，占32位，只有ACK标志位为1时，确认序号字段才有效，Ack=Seq+1。</td>
+    </tr>
+    <tr>
+      <td>(5)</td>
+      <td>首部长度</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>(6)</td>
+      <td>保留</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>(7)</td>
+      <td>标志位</td>
+      <td>共6个，即URG、ACK、PSH、RST、SYN、FIN等，各个标志位的含义请看下表。</td>
+    </tr>
+    <tr>
+      <td>(8)</td>
+      <td>窗口</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>(9)</td>
+      <td>校验和</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>(10)</td>
+      <td>紧急指针</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>(11)</td>
+      <td>选项（可选）</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>(12)</td>
+      <td>填充</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>(13)</td>
+      <td>数据</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>标志位取值及含义</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>取值</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>URG</td>
+      <td>紧急指针（urgent pointer）有效。</td>
+    </tr>
+    <tr>
+      <td>ACK</td>
+      <td>确认序号有效。</td>
+    </tr>
+    <tr>
+      <td>PSH</td>
+      <td>接收方应该尽快将这个报文交给应用层。</td>
+    </tr>
+    <tr>
+      <td>RST</td>
+      <td>重置连接。</td>
+    </tr>
+    <tr>
+      <td>SYN</td>
+      <td>发起一个新连接。</td>
+    </tr>
+    <tr>
+      <td>FIN</td>
+      <td>释放一个连接。</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>需要注意的是：</p>
+
+  <ul>
+    <li>不要将确认序号Ack与标志位中的ACK搞混了。</li>
+    <li>确认方Ack=发起方Req+1，两端配对。</li>
+  </ul>
+</blockquote>
+
+<h2 id="三次握手">三次握手</h2>
+
+<p>所谓三次握手（Three-Way Handshake）即建立TCP连接，就是指建立一个TCP连接时，需要客户端和服务端总共发送3个包以确认连接的建立。在socket编程中，这一过程由客户端执行connect来触发，整个流程如下图所示：</p>
+
+<div class="mermaid">
+sequenceDiagram
+    participant Client
+    participant Server
+    Note left of Client: Client status: SYN_SENT
+    Client-&gt;&gt;Server: SYN=1 seq=J
+    Note right of Server: Server status: SYN_RCVD
+    Server-&gt;&gt;Client: SYN=1,ACK=1 ack=J+1,seq=K
+    Note left of Client: Client status: ESTABLISHED
+    Client-&gt;&gt;Server: ACK=1 ack=K+1
+    Note right of Server: Server status: ESTABLISHED
+</div>
+
+<ul>
+  <li><strong>第一次握手</strong>：Client将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给Server，Client进入SYN_SENT状态，等待Server确认。</li>
+  <li><strong>第二次握手</strong>：Server收到数据包后由标志位SYN=1知道Client请求建立连接，Server将标志位SYN和ACK都置为1，ack=J+1，随机产生一个值seq=K，并将该数据包发送给Client以确认连接请求，Server进入SYN_RCVD状态。</li>
+  <li><strong>第三次握手</strong>：Client收到确认后，检查ack是否为J+1，ACK是否为1，如果正确则将标志位ACK置为1，ack=K+1，并将该数据包发送给Server，Server检查ack是否为K+1，ACK是否为1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，完成三次握手，随后Client与Server之间可以开始传输数据了。</li>
+</ul>
+
+<p>SYN攻击：
+在三次握手过程中，Server发送SYN-ACK之后，收到Client的ACK之前的TCP连接称为半连接（half-open connect），此时Server处于SYN_RCVD状态，当收到ACK后，Server转入ESTABLISHED状态。</p>
+
+<p>SYN攻击就是Client在短时间内伪造大量不存在的IP地址，并向Server不断地发送SYN包，Server回复确认包，并等待Client的确认，
+由于源地址是不存在的，因此，Server需要不断重发直至超时，这些伪造的SYN包将产时间占用未连接队列，导致正常的SYN请求因为队
+列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。SYN攻击时一种典型的DDOS攻击，检测SYN攻击的方式非常简单，即当Server上有大
+量半连接状态且源IP地址是随机的，则可以断定遭到SYN攻击了，使用如下命令可以让之现行：</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#netstat -nap | grep SYN_RECV
+</code></pre></div></div>
+
+<h2 id="四次挥手">四次挥手</h2>
+
+<p>所谓四次挥手（Four-Way Wavehand）即终止TCP连接，就是指断开一个TCP连接时，需要客户端和服务端总共发送4个包以确认连接的断开。在socket编程中，这一过程由客户端或服务端任一方执行close来触发，整个流程如下图所示：</p>
+
+<div class="mermaid">
+sequenceDiagram
+    participant Client
+    participant Server
+    Note left of Client: Client status: FIN_WAIT_1
+    Client-&gt;&gt;Server: FIN M
+    Note right of Server: Server status: CLOSE_WAIT
+    Server-&gt;&gt;Client: ack M+1
+    Note left of Client: Client status: FIN_WAIT_2
+    Server-&gt;&gt;Client: FIN N
+    Note left of Client: Client status: TIME_WAIT
+    Client-&gt;&gt;Server: ACK=1 ack=K+1
+    Note right of Server: Server status: CLOSED
+</div>
+
+<p>由于TCP连接时全双工的，因此，每个方向都必须要单独进行关闭，这一原则是当一方完成数据发送任务后，发送一个FIN来终止这一方向的连接，收到一个FIN只是意味着这一方向上没有数据流动了，即不会再收到数据了，但是在这个TCP连接上仍然能够发送数据，直到这一方向也发送了FIN。首先进行关闭的一方将执行主动关闭，而另一方则执行被动关闭，上图描述的即是如此。</p>
+
+<ul>
+  <li><strong>第一次挥手</strong>：Client发送一个FIN，用来关闭Client到Server的数据传送，Client进入FIN_WAIT_1状态。</li>
+  <li><strong>第二次挥手</strong>：Server收到FIN后，发送一个ACK给Client，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号），Server进入CLOSE_WAIT状态。</li>
+  <li><strong>第三次挥手</strong>：Server发送一个FIN，用来关闭Server到Client的数据传送，Server进入LAST_ACK状态。</li>
+  <li><strong>第四次挥手</strong>：Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为收到序号+1，Server进入CLOSED状态，完成四次挥手。</li>
+</ul>
+
+<p>上面是一方主动关闭，另一方被动关闭的情况，实际中还会出现同时发起主动关闭的情况，具体流程如下图：</p>
+
+<div class="mermaid">
+sequenceDiagram
+    participant Client
+    participant Server
+    Note left of Client: Client status: FIN_WAIT_1
+    Note right of Server: Server status: FIN_WAIT_1
+    Client-&gt;&gt;Server: FIN J
+    Server--&gt;&gt;Client: FIN K
+    Note left of Client: Client status: CLOSING
+    Note right of Server: Server status: CLOSING
+    Server-&gt;&gt;Client: ACK=1 ack=J+1
+    Client--&gt;&gt;Server: ACK=1 ack=K+1
+    Note left of Client: Client status: TIME_WAIT
+    Note right of Server: Server status: TIME_WAIT
+</div>
+
+<p>流程和状态在上图中已经很明了了，在此不再赘述，可以参考前面的四次挥手解析步骤。</p>
+:ET

@@ -1,0 +1,62 @@
+I"n<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#安装" id="markdown-toc-安装">安装</a></li>
+  <li><a href="#转载连接" id="markdown-toc-转载连接">转载连接</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>Centos 6.5默认安装的是git 1.7.X 版本，使用过程中会有一些奇怪的问题，对于用户名、密码支持不是很友好。
+将Centos6.5上的git更新到2.0.5。</p>
+
+<h2 id="安装">安装</h2>
+
+<ul>
+  <li>安装编译git时需要的包</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel
+# yum install  gcc perl-ExtUtils-MakeMaker
+</code></pre></div></div>
+
+<ul>
+  <li>删除已有的git</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># yum remove git
+</code></pre></div></div>
+
+<ul>
+  <li>下载git源码</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># cd /usr/src
+# wget https://www.kernel.org/pub/software/scm/git/git-2.0.5.tar.gz
+# tar xzf git-2.0.5.tar.gz
+</code></pre></div></div>
+
+<ul>
+  <li>编译安装</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># cd git-2.0.5
+# make prefix=/usr/local/git all
+# make prefix=/usr/local/git install
+# echo "export PATH=$PATH:/usr/local/git/bin" &gt;&gt; /etc/bashrc
+# source /etc/bashrc
+</code></pre></div></div>
+
+<ul>
+  <li>检查一下版本号</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># git --version
+git version 2.0.5
+</code></pre></div></div>
+
+<h2 id="转载连接">转载连接</h2>
+
+<p>本文转载自：</p>
+
+<p><a href="http://blog.sina.com.cn/s/blog_3fe961ae0102w9ui.html">http://blog.sina.com.cn/s/blog_3fe961ae0102w9ui.html</a></p>
+:ET
