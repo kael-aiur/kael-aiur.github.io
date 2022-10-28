@@ -53,7 +53,7 @@ ok，到这里我们的前期准备已经完成。
 password-replace.user.sh is executed to get a string to replace a password before it is passed to OpenVPN.
 ```
 
-我们可以使用脚本**password-replace.user.sh**在登陆前对输入的密码进行替换，替换成我们自动计算的动态密码即可，需要实现如下两部：
+我们可以使用脚本**password-replace.user.sh**在登录前对输入的密码进行替换，替换成我们自动计算的动态密码即可，需要实现如下两部：
 
 * 生成谷歌验证码
 * 使用password-replace.user.sh脚本将谷歌验证码返回给tunnelblick替换前面记住的密码
