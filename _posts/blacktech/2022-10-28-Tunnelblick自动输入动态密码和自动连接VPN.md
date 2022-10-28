@@ -103,7 +103,11 @@ $> python3 tunnelblick.py
 
 ### 替换输入密码
 
-**password-replace.user.sh**脚本要放在对应的VPN设置目录下，默认是`/Library/Application Support/Tunnelblick/Users/{user}/{config_name}.tblk/Contents/Resources`
+**password-replace.user.sh**脚本要放在对应的VPN设置目录下，默认是:
+
+```
+/Library/Application Support/Tunnelblick/Users/{user}/{config_name}.tblk/Contents/Resources
+```
 
 这个目录必须使用root权限创建和修改脚本，参考官网[File Locations](https://tunnelblick.net/cFileLocations.html)。
 
