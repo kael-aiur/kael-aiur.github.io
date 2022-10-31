@@ -123,6 +123,9 @@ echo "$PASSWORD"
 
 `echo`输出的结果tunnelblick会作为返回值，替换原来记住的密码，可以根据需要处理即可。
 
+> * password-replace.user.sh脚本的权限必须是0755，否则tunnelblick会识别为不安全脚本无法连接
+> * google_auth.py的目录建议不要放在自己的目录下，否则权限也必须是0755
+
 ### 重新加载配置
 
 增加这个脚本后，相当于修改了当前vpn连接的配置，Tunnelblick会扫描并发现配置变更了，此时连接会出现警告：
@@ -136,6 +139,8 @@ echo "$PASSWORD"
 * **Cancel**: 取消，暂时不处理，也不连接VPN
 
 这里我们选择**Revert to the Last Secured Copy**保存配置即可。
+
+> 有可能不会每次都弹出这个提醒，如果没有弹出这个提醒,并且连接一直失败的话，请重启tunnelblick，并检查2.1.2中的脚本权限是否正确
 
 现在已经可以自动填写动态密码并连接VPN了。
 
