@@ -1,0 +1,31 @@
+# Jekyll theme gem selected by the `minima` profile.
+theme: minima
+
+show_excerpts: true
+
+minima:
+  date_format: "%Y/%m/%d"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Minima reads project-specific includes from this adapter directory.
+includes_dir: _themes/minima/includes
+
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - _tabs
+  - _themes/chirpy.yml
+  - assets/css/jekyll-theme-chirpy.scss
+  - docs
+  - scripts
+  - tools
+  - README.md
+  - LICENSE
+  - purgecss.js
+  - "*.config.js"
+  - "package*.json"
+  - IFLOW.md
+  - keystore

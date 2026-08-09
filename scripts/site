@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "rbconfig"
+require "yaml"
+
+$stdout.sync = true
+
+ROOT = File.expand_path("..", __dir__)
+BASE_CONFIG = File.join(ROOT, "_config.yml")
+THEMES_DIR = File.join(ROOT, "_themes")
+SUPPORTED_THEMES = %w[chirpy minima].freeze
+
+site_config = YAML.safe_load_file(BASE_CONFIG, aliases: true)
+theme_profile = site_config.fetch("theme")
+
+unless SUPPORTED_THEMES.include?(theme_profile)
+  warn "Unsupported theme '#{theme_profile}'. Choose one of: #{SUPPORTED_THEMES.join(', ')}"
+  exit 1
+end
+
+theme_config = File.join(THEMES_DIR, "#{theme_profile}.yml")
+unless File.file?(theme_config)
+  warn "Theme adapter is missing: #{theme_config}"
+  exit 1
+end
+
+if ARGV.empty?
+  warn "Usage: bundle exec ruby scripts/site <build|serve> [Jekyll options]"
+  exit 1
+end
+
+if ARGV.any? { |argument| argument == "--config" || argument.start_with?("--config=") }
+  warn "The theme selector manages --config automatically; remove the custom --config option."
+  exit 1
+end
+
+jekyll_executable = Gem.bin_path("jekyll", "jekyll")
+config_files = [BASE_CONFIG, theme_config].join(",")
+
+puts "Using site theme: #{theme_profile}"
+exec RbConfig.ruby, jekyll_executable, *ARGV, "--config", config_files

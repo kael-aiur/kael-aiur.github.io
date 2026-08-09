@@ -1,0 +1,109 @@
+# Jekyll theme gem selected by the `chirpy` profile.
+theme: jekyll-theme-chirpy
+
+github:
+  username: kael-aiur
+
+social:
+  name: Kael
+  email: kael.peng@gmail.com
+  links:
+    - https://github.com/kael-aiur
+
+webmaster_verifications:
+  baidu: code-5K59wbb9as
+
+analytics:
+  google:
+    id:
+
+pageviews:
+  provider:
+
+# Empty means following the reader's system preference.
+theme_mode:
+
+cdn:
+avatar: /static/img/title.png
+social_preview_image:
+
+toc: true
+
+actions:
+  edit_post:
+    enabled: true
+    url: "https://github.com/kael-aiur/kael-aiur.github.io/edit/master"
+    static_url: false
+
+comments:
+  provider:
+
+assets:
+  self_host:
+    enabled: false
+
+pwa:
+  enabled: true
+  cache:
+    enabled: true
+    deny_paths:
+
+paginate: 10
+
+collections:
+  tabs:
+    output: true
+    sort_by: order
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: false
+      toc: true
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ""
+      type: tabs
+    values:
+      layout: page
+      permalink: /:title/
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
+
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/
+
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - _themes
+  - docs
+  - scripts
+  - tools
+  - README.md
+  - LICENSE
+  - purgecss.js
+  - "*.config.js"
+  - "package*.json"
+  - IFLOW.md
+  - keystore
+  - assets/css/minima-overrides.css
