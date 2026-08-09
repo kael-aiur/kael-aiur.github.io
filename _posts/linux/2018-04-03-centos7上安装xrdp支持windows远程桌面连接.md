@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: linux
+categories: [linux]
 title: centos7上安装xrdp支持windows远程桌面连接
-tags: 标签1,标签2,标签3
+tags: [标签1,标签2,标签3]
 grammar_cjkRuby: true
 author: kael
 ---
 
-* content
-{:toc}
 
 ## 前言
 

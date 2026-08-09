@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: MySQLWorkbench
+categories: [MySQLWorkbench]
 title: MySQLWorkbench数据库在线复制
-tags: MySQLWorkbench,schema copy, 数据库复制
+tags: [MySQLWorkbench,schema copy, 数据库复制]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

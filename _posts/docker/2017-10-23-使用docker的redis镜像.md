@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: docker
+categories: [docker]
 title: 使用docker的redis镜像
-tags: docker,redis,镜像
+tags: [docker,redis,镜像]
 grammar_cjkRuby: true
 author: kael
 ---
 
-* content
-{:toc}
 
 ## 前言
 

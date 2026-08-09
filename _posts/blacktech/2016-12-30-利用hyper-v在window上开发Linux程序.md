@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: 黑科技
+categories: [黑科技]
 title: 利用hyper-v在window上开发Linux程序 
-tags: Linux,hyper-v,nfs
+tags: [Linux,hyper-v,nfs]
 author: Kael
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

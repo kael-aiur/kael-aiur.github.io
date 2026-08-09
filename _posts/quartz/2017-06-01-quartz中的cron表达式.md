@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: quartz
+categories: [quartz]
 title: quartz中的cron表达式
-tags: cron,quartz
+tags: [cron,quartz]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 # 语法说明
 

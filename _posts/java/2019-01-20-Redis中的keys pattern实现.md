@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: java
+categories: [java]
 title: Redis中的keys pattern实现
-tags: redis,java,keys pattern
+tags: [redis,java,keys pattern]
 grammar_cjkRuby: true
 author: kael
 ---
 
-* content
-{:toc}
 
 ## 前言
 

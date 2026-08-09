@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: 工具使用
+categories: [工具使用]
 title: CentOS源码安装git
-tags: git,Linux,CentOS
+tags: [git,Linux,CentOS]
 author: Kael
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: leap笔记
+categories: [leap笔记]
 title: leap的单元测试中的instrument问题
-tags: instrument,leap,单元测试
+tags: [instrument,leap,单元测试]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

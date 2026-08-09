@@ -1,44 +1,135 @@
-# Site settings
+# Site configuration
+theme: jekyll-theme-chirpy
+
+lang: zh-CN
+timezone: Asia/Shanghai
+
 title: 九千万代码的梦想
-email: kael.peng@gmail.com
-description: 这个是卡尔的个人博客站，仅用来发表卡尔的个人博客，有技术有非技术的博客，欢迎大家有空来逛逛。
-# > # this means to ignore newlines until "baseurl:"
-#   Write an awesome description for your new site here. You can edit this
-#   line in _config.yml. It will appear in your document head meta (for
-#   Google search results) and in your feed.xml site description.
+tagline: Kael 的个人技术博客
+description: >-
+  Kael 的个人技术博客，记录 AI 编程、Java、云原生、基础设施和开发工具等技术实践。
 
-# baseurl: "" # the subpath of your site, e.g. /blog/
-# url: "http://yourdomain.com" # the base hostname & protocol for your site
-# twitter_username: jekyllrb
-github_username: kael-aiur
+url: "https://kael-aiur.com"
+baseurl: ""
+
+# Preserve every historical article URL while changing the theme.
 permalink: /:categories/:title.html
-# this is the url root of the view source link on the footer page.
-viewsourceroot: https://github.com/kael-aiur/kael-aiur.github.io
-# this is the url root of the create page link on the footer page.
-newsourceroot: https://github.com/kael-aiur/kael-aiur.github.io
-#########################################
-# for duoshuo.com commenting system, uncomment following line if you do not want to include duoshuo.com. 
-#duoshuo_shortname: lixizhi
-#duoshuo_url: "http://lixizhi.github.io"
-# disqus.com commenting system. please note that it is exclusive with duoshuo.com
-# disqus_shortname: kael
-# disqus_url: "http://kael-aiur.github.io"
-# uyan
-# uyan_url: "http://v2.uyan.cc/code/uyan.js?uid=2118374"
-#########################################
 
-# Build settings
-markdown: kramdown
+github:
+  username: kael-aiur
 
-#gems:
-#  - jekyll-mermaid
+social:
+  name: Kael
+  email: kael.peng@gmail.com
+  links:
+    - https://github.com/kael-aiur
 
-mermaid:
-  src: '/static/js/mermaid.js'
-# highlight
-# highlighter: pygments
-# highlighter: rouge
-# highlighter: false
+webmaster_verifications:
+  baidu: code-5K59wbb9as
 
-# resource url
-image_repo1: https://raw.githubusercontent.com/kael-aiur/image-repo1/master
+analytics:
+  google:
+    id:
+
+pageviews:
+  provider:
+
+# Empty means following the reader's system preference. The sidebar switch
+# can still force light or dark mode.
+theme_mode:
+
+cdn:
+avatar: /static/img/title.png
+social_preview_image:
+
+toc: true
+
+actions:
+  edit_post:
+    enabled: true
+    url: "https://github.com/kael-aiur/kael-aiur.github.io/edit/master"
+    static_url: false
+
+comments:
+  provider:
+
+assets:
+  self_host:
+    enabled: false
+
+pwa:
+  enabled: true
+  cache:
+    enabled: true
+    deny_paths:
+
+paginate: 10
+
+kramdown:
+  footnote_backlink: "&#8617;&#xfe0e;"
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+collections:
+  tabs:
+    output: true
+    sort_by: order
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: false
+      toc: true
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ""
+      type: tabs
+    values:
+      layout: page
+      permalink: /:title/
+
+sass:
+  style: compressed
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
+
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/
+
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - docs
+  - tools
+  - README.md
+  - LICENSE
+  - purgecss.js
+  - "*.config.js"
+  - "package*.json"
+  - IFLOW.md
+  - keystore

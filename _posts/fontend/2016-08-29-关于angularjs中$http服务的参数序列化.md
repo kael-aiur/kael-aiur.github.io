@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: 前端技术
+categories: [前端技术]
 title: 关于angularjs中$http服务的参数序列化
-tags: 新建,模板,小书匠
+tags: [新建,模板,小书匠]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

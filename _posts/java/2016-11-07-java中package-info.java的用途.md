@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: java
+categories: [java]
 title: java中package-info.java的用途
-tags: java,特性,package-info
+tags: [java,特性,package-info]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

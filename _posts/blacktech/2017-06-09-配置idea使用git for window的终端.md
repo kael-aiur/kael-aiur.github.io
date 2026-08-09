@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: 黑科技
+categories: [黑科技]
 title: 配置idea使用git for window的终端
-tags: 标签1,标签2,标签3
+tags: [标签1,标签2,标签3]
 grammar_cjkRuby: true
 author: kael
 ---
 
-* content
-{:toc}
 
 ## 前言
 

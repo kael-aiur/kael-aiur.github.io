@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: docker
+categories: [docker]
 title: docker在centos7上的安装和卸载
-tags: 卸载,安装,docker,CentOS
+tags: [卸载,安装,docker,CentOS]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

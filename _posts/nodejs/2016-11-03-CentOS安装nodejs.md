@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: nodejs
+categories: [nodejs]
 title: CentOS上安装nodejs
-tags: nodejs,npm,Linux
+tags: [nodejs,npm,Linux]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

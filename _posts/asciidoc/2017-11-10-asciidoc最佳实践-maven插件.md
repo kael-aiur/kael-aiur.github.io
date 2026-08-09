@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: AsciiDoc
+categories: [AsciiDoc]
 title: asciidoc最佳实践-maven插件
-tags: asciidoc,maven,最佳实践
+tags: [asciidoc,maven,最佳实践]
 grammar_cjkRuby: true
 author: kael
 ---
 
-* content
-{:toc}
 
 ## 前言
 

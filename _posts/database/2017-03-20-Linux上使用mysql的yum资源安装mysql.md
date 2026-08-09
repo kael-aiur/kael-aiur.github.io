@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: 数据库
+categories: [数据库]
 title: Linux上使用mysql的yum资源安装mysql
-tags: mysql,yum,linux
+tags: [mysql, yum, Linux]
 grammar_cjkRuby: true
 author: Kael
 ---
 
-* content
-{:toc}
 
 ## 前言
 

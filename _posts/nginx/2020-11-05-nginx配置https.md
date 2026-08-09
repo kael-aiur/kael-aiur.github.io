@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: nginx
+categories: [nginx]
 title: nginx配置https
-tags: nginx,https
+tags: [nginx,https]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

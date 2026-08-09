@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: java
+categories: [java]
 title: java中volatile关键字 
-tags: volatile,java,并发,多线程
+tags: [volatile,java,并发,多线程]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

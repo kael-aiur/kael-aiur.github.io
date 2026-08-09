@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: tomcat
+categories: [tomcat]
 title: tomcat配置https
-tags: tomcat,ssl,https
+tags: [tomcat,ssl,https]
 grammar_cjkRuby: true
 author: KAEL
 ---
     
-* content
-{:toc}
 
 ## 前言
 

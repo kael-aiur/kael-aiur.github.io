@@ -1,8 +1,25 @@
-_site
-.sass-cache
+# Bundler
+.bundle
+vendor
+Gemfile.lock
+
+# Jekyll
 .jekyll-cache
+.jekyll-metadata
+_site
 
-.idea/
-*.iml
+# RubyGems and Node
+*.gem
+node_modules
+package-lock.json
 
-bash.exe.stackdump
+# Theme build output
+_sass/vendors
+assets/js/dist
+
+# Editors and operating systems
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+*~

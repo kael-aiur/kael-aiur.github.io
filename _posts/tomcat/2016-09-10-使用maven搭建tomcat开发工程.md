@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: tomcat源码解读
+categories: [tomcat源码解读]
 title: 1、使用maven搭建tomcat开发工程
-tags: tomcat,maven,源码
+tags: [tomcat,maven,源码]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

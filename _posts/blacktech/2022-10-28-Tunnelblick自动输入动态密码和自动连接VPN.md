@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: 黑科技
+categories: [黑科技]
 title: Tunnelblick自动输入动态密码和自动连接
-tags: VPN,动态密码
+tags: [VPN,动态密码]
 author: Kael
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

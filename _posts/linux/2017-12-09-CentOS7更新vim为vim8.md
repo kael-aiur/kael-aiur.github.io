@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: linux
+categories: [linux]
 title: CentOS7 更新vim为vim8
-tags: Cent OS 7,vim8,update vim
+tags: [Cent OS 7,vim8,update vim]
 grammar_cjkRuby: true
 author: KAEL
 ---
 
-* content
-{:toc}
 
 ## 添加VIM最新仓库
 

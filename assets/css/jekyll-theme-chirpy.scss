@@ -1,0 +1,38 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* Chinese long-form technical writing benefits from a slightly looser rhythm. */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC",
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.content {
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.content :is(h2, h3, h4) {
+  scroll-margin-top: 5rem;
+}
+
+.content table {
+  font-size: 0.92rem;
+}
+
+code,
+pre {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+

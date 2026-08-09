@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: leap笔记
+categories: [leap笔记]
 title: leap中profile的概念和使用
-tags: leap,profile,config
+tags: [leap,profile,config]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

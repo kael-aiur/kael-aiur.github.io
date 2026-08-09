@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: docker
+categories: [docker]
 title: 在docker上运行elasticsearch
-tags: elasticsearch,docker,容器
+tags: [elasticsearch,docker,容器]
 grammar_cjkRuby: true
 author: KAEL
 ---
 
-* content
-{:toc}
 
 ## 前言
 

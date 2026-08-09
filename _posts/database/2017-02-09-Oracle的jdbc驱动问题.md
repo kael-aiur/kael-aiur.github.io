@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: 数据库
+categories: [数据库]
 title: Oracle的jdbc驱动问题
-tags: Oracle,JDBC,maven
+tags: [Oracle,JDBC,maven]
 author: Kael
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

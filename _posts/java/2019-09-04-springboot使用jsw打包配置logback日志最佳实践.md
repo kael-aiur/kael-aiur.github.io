@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: java
+categories: [java]
 title: springboot使用jsw打包配置logback日志最佳实践
-tags: springboot,logback,jsw,日志
+tags: [springboot,logback,jsw,日志]
 grammar_cjkRuby: true
 author: kael
 ---
 
-* content
-{:toc}
 
 ## 前言
 

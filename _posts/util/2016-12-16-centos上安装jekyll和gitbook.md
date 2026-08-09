@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: 工具使用
+categories: [工具使用]
 title: centos上安装jekyll和gitbook
-tags: linux,jekyll,gitbook
+tags: [Linux, jekyll, gitbook]
 author: Kael
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

@@ -1,14 +1,12 @@
 ---
 layout: post
 comments: true
-categories: java
+categories: [java]
 title: jdk的线程池实现-ThreadPoolExecutor
-tags: 并发,线程池,ThreadPoolExecutor,jdk8
+tags: [并发,线程池,ThreadPoolExecutor,jdk8]
 grammar_cjkRuby: true
 ---
 
-* content
-{:toc}
 
 ## 前言
 

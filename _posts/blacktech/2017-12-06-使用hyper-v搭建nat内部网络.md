@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: 黑科技
+categories: [黑科技]
 title: 使用hyper-v搭建nat内部网络
-tags: hyper-v,nat网络,内部局域网
+tags: [hyper-v,nat网络,内部局域网]
 grammar_cjkRuby: true
 author: kael
 ---
 
-* content
-{:toc}
 
 ## 前言
 

@@ -1,12 +1,10 @@
 ---
 layout: post
 comments: true
-categories: 入门指引
+categories: [入门指引]
 title: "使用github+jekyll搭建个人博客"
 ---
 
-* content
-{:toc}
 
 ## 前言
 

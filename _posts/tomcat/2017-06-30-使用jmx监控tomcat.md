@@ -1,15 +1,13 @@
 ---
 layout: post
 comments: true
-categories: tomcat
+categories: [tomcat]
 title: 使用jmx监控tomcat
-tags: jvisualvm,tomcat,jmx
+tags: [jvisualvm,tomcat,jmx]
 grammar_cjkRuby: true
 author: KAEL
 ---
     
-* content
-{:toc}
 
 ## 前言
 
